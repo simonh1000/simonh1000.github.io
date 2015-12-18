@@ -1,0 +1,58 @@
+---
+---
+
+html, body, #elm {
+    min-height: 100%;
+    height: 100%;
+    margin: 0;
+}
+.container {
+}
+/* Carousel */
+#portfolio {
+    $carousel-size: 400px;
+    .item {
+        max-height: $carousel-size;
+        // width: auto;
+    }
+    img {
+        max-height: $carousel-size;
+        display: block;
+        margin: 0 auto;
+    }
+    .carousel-caption {
+        background-color: rgba(0,0,0,0.8);
+        color: rgb(255,255,255);
+    }
+}
+
+#blog {
+    ul {
+        list-style-type: none;
+        padding: 0;
+    }
+}
+#elm {
+    height: 100%;
+    font-family: sans-serif;
+}
+
+#elm p {
+    margin: 0;
+}
+/* MAP BLOG*/
+#map {
+    width: 200px;
+    height: 200px;
+    background-color: grey;
+}
+
+img[src$='#counter'] {
+    border: 2px solid #ccc;
+}
+
+@media (min-width: 768px) {
+    .navbar {
+        margin-bottom: 0;
+    }
+}

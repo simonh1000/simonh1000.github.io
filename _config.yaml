@@ -1,0 +1,16 @@
+name: "Simon Hampton"
+description: "Portfolio and blog"
+
+url: "simonh1000.github.io"
+
+markdown: rdiscount
+permalink: /:year/:month/:title/
+
+highlighter: pygments
+github: [Repository metadata]
+
+safe: true
+lsi: false
+
+defaults:
+  layout: "default"
