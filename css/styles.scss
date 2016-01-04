@@ -19,6 +19,7 @@ html, body, #elm {
 /* Carousel */
 #portfolio {
     $carousel-size: 400px;
+    cursor: pointer;
     .item {
         max-height: $carousel-size;
         // width: auto;
