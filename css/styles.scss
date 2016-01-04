@@ -7,6 +7,14 @@ html, body, #elm {
     margin: 0;
 }
 .container {
+    max-width: 970px;
+    p img {
+        float:right;
+        padding-left: 30px;
+    }
+    h2 {
+        clear: both;
+    }
 }
 /* Carousel */
 #portfolio {
@@ -38,7 +46,7 @@ html, body, #elm {
 }
 
 #elm p {
-    margin: 0;
+    // margin: 0;
 }
 /* MAP BLOG*/
 #map {
