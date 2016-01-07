@@ -1,5 +1,5 @@
 ---
-title: Angular 2 - in defence of one-way data binding
+title: Angular 2&#58; one-way data flow with Redux
 layout: post
 category: web
 tags: Angular, Elm
@@ -7,9 +7,9 @@ tags: Angular, Elm
 
 Horrified! That seemed to be the collective reaction when the Angular team announced two-way data binding would _not_ be directly present in Angular2. Since then, the team have worked hard to reassure the community.
 
-However, one-way binding is attracting ever more devotees. This pattern has been popularised by [React](https://facebook.github.io/react/) / [Redux](http://redux.js.org/), and is epitomised by [Elm](http://elm-lang.org/). One-way binding, coupled with a single (immutable) source of state truth, is increasingly seen as a route to faster, [hot reloadable](https://www.youtube.com/watch?v=xsSnOQynTHs), testable code, while enabling stunning (time-travelling) debug tools.
+However, one-way data flows are attracting ever more devotees. This pattern has been popularised by [React](https://facebook.github.io/react/) / [Redux](http://redux.js.org/), and is epitomised by [Elm](http://elm-lang.org/). One-way binding, coupled with a single (immutable) source of state truth, is increasingly seen as a route to faster, [hot reloadable](https://www.youtube.com/watch?v=xsSnOQynTHs), testable code, while enabling stunning (time-travelling) debug tools.
 
-What would a one-way, single state pattern look like in Angular2? This post seeks to emulate the basic patterns in first four examples from [The Elm Architecture](https://github.com/evancz/elm-architecture-tutorial/). I don't know whether this is the one-way pattern envisaged by the Angular team, so this may be more charicature than model code.
+What would a one-way, single state pattern look like in Angular2? This post seeks to emulate the basic patterns in the first four examples from [The Elm Architecture](https://github.com/evancz/elm-architecture-tutorial/).
 
 ## The basic pattern
 
@@ -182,13 +182,9 @@ premove(idx) {
 }
 {% endhighlight %}
 
-## Conclusions
+## Using Redux & immutable for state management
 
-We have seen a succession of examples that added functionality while retaining a single source of state truth. Rendering was effectively 'pure' and actions were transmitted to the parent to maintain the state. The Angular loop is still quite different from Elm's but we have achieved some of the core elements on the one-way data binding pattern.
-
-## Postscript: Using Redux & immutable for state management
-
-As a little exercise for myself, I decided to do away with the mutable state in the examples above. As the focus here is on Angular I won't present all of the Redux and immutable data handling code, but just show my Angular code's redux calls. You can find the full code in the repo.
+So far, we have used mutable state, but it straightforward to add in calls to redux by the parent node of our Angular 2 app.As the focus here is on Angular I won't present all of the Redux and immutable data handling code, but just show my Angular code's redux calls. You can find the full code in the repo.
 
 {% highlight js %}
 export class CountersComponent {
@@ -212,8 +208,11 @@ export class CountersComponent {
   }
 
   pupdate(idx) {
-    // return (newVal => this.model[idx] = newVal);
     return (newVal => this.store.dispatch({ type: UPD_COUNTER, index:idx, value:newVal}));
   }
 }
 {% endhighlight %}
+
+## Conclusions
+
+We have seen a succession of examples that added functionality while retaining a single source of state truth. Rendering was effectively 'pure' and actions were transmitted to the parent to maintain the state. The Angular loop is still quite different from Elm's but we have achieved some of the core elements on the one-way data binding pattern.

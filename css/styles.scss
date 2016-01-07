@@ -36,6 +36,12 @@ html, body, #elm {
 }
 
 #blog {
+    h3 {
+        span {
+            font-size: 14px;
+            font-weight: normal;
+        }
+    }
     ul {
         list-style-type: none;
         padding: 0;
