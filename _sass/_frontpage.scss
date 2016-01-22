@@ -86,11 +86,14 @@
             bottom: 50px;
         }
     }
-    $carousel-large: 400px;
-    .item {
-        img {
-            height: $carousel-large;
-            max-height: $carousel-large;
+    $carousel-large: 600px;
+    #portfolio {
+        .item {
+            img {
+                height: $carousel-large;
+                max-height: $carousel-large;
+            }
         }
+
     }
 }
