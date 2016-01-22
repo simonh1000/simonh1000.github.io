@@ -4,9 +4,6 @@ layout: post
 category: web
 ---
 
-Monads and Javascript
----------------------
-
 A Monad is a collection that obeys two laws.
 
 https://en.wikipedia.org/wiki/Monad_(functional_programming)#The_Writer_monad

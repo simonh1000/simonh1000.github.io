@@ -13,7 +13,7 @@ What would a one-way, single state pattern look like in Angular2? This post seek
 
 ## The basic pattern
 
-Throughout these examples, we will keep state in a parent component. The parent will inform the children of the state they need to render, and the children will send action events back to the parent to cause state updates. After each update, the parent will cause the children to re-render with new values. All the code is in Typescript and can be found [here, and see the different branches corresponding to each example](https://github.com/simonh1000/angular-one-way-binding/).
+Throughout these examples, we will keep state in a parent component. The parent will inform the children of the state they need to render, and the children will send action events back to the parent to cause state updates. After each update, the parent will cause the children to re-render with new values. All the code is in Typescript and can be found [here, and see the different branches corresponding to each example](https://github.com/simonh1000/angular-one-way-binding/) and an updated to Angular2-beta of the final Redux version is [here](https://github.com/simonh1000/angular2-beta-redux-systemjs).
 
 ## Example 1: A counter
 
@@ -146,7 +146,7 @@ This time our model has become an array, and we need a method to add elements to
 {% highlight html %}
 <button (click)="addCounter()">Add counter</button>
 <counter
-	*ng-for="#val of model; #i=index"
+	\*ng-for="#val of model; #i=index"
 	[count]="val"
 	(updater)="pupdate(i)($event)">
 </counter>
@@ -167,7 +167,7 @@ remove() {
 
 {% highlight html %}
 <counter
-	*ng-for="#val of model; #i=index"
+	\*ng-for="#val of model; #i=index"
 	[count]="val"
 	(updater)="pupdate(i)($event)"
 	(remover)="premove(i)($event)">

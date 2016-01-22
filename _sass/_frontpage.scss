@@ -1,0 +1,96 @@
+
+.banner {
+    height: calc(100% - 52px);  // ??
+    padding: 25px 15px 15px 15px;
+    position: relative;
+
+    h1, h2 {
+        color: $darkorange;
+    }
+    h1 {
+        margin: 0 0 20px 0;
+    }
+    ul {
+        list-style: none;
+        padding-left: 1.2em;
+        text-indent: -1.2em;
+        li {
+            font-weight: bold;
+            margin-bottom: 15px;
+            &:before {
+                content: "★";
+                display: block;
+                float: left;
+                width: 1.2em;
+                // color: #ff0000;
+            }
+        }
+    }
+    .contact-button {
+        position: absolute;
+        bottom: 20px;
+    }
+    .btn-primary {
+        border-color: $darkblue;
+        background-color: inherit;
+        color: $darkblue;
+        transition: background-color 0.5s ease;
+        transition: color 0.5s ease;
+        &:hover {
+            border-color: lighten($darkblue, 25%);
+            color: lighten($darkblue, 25%);
+        }
+    }
+
+    background: rgba(75,90,133,1);
+    background: -moz-linear-gradient(top, rgba(75,90,133,1) 0%, rgba(212,224,247,1) 74%, rgba(247,229,183,1) 92%, rgba(240,172,88,1) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(75,90,133,1)), color-stop(74%, rgba(212,224,247,1)), color-stop(92%, rgba(247,229,183,1)), color-stop(100%, rgba(240,172,88,1)));
+    background: -webkit-linear-gradient(top, rgba(75,90,133,1) 0%, rgba(212,224,247,1) 74%, rgba(247,229,183,1) 92%, rgba(240,172,88,1) 100%);
+    background: -o-linear-gradient(top, rgba(75,90,133,1) 0%, rgba(212,224,247,1) 74%, rgba(247,229,183,1) 92%, rgba(240,172,88,1) 100%);
+    background: -ms-linear-gradient(top, rgba(75,90,133,1) 0%, rgba(212,224,247,1) 74%, rgba(247,229,183,1) 92%, rgba(240,172,88,1) 100%);
+    background: linear-gradient(to bottom, rgba(75,90,133,1) 0%, rgba(212,224,247,1) 74%, rgba(247,229,183,1) 92%, rgba(240,172,88,1) 100%);
+    filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#4b5a85', endColorstr='#f0ac58', GradientType=0 );
+}
+
+.portfolio {
+    padding-bottom: 40px;
+
+}
+/* Carousel */
+#portfolio {
+    $carousel-size: 200px;
+    // height: $carousel-size;
+    cursor: pointer;
+    .item {
+        // max-height: $carousel-size;
+        // width: auto;
+        img {
+            // max-height: $carousel-size;
+            display: block;
+            margin: 0 auto;
+            width: auto;
+            height: $carousel-size;
+            max-height: $carousel-size;
+        }
+    }
+    .carousel-caption {
+        background-color: rgba(0,0,0,0.8);
+        color: rgb(255,255,255);
+    }
+}
+
+@media (min-width: 768px) {
+    .banner {
+        height: calc(100% - 78px);
+        .contact-button {
+            bottom: 50px;
+        }
+    }
+    $carousel-large: 400px;
+    .item {
+        img {
+            height: $carousel-large;
+            max-height: $carousel-large;
+        }
+    }
+}
