@@ -1,22 +1,26 @@
 
 .banner {
     height: calc(100% - 52px);  // ??
-    padding: 25px 15px 15px 15px;
+    padding: 25px 15px 30px 15px;
     position: relative;
 
-    h1, h2 {
-        color: $darkorange;
-    }
     h1 {
+        color: $darkorange;
         margin: 0 0 20px 0;
     }
     ul {
+        height: calc(100% - 100px);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+
         list-style: none;
         padding-left: 1.2em;
         text-indent: -1.2em;
+        font-size: 1.2em;
         li {
             font-weight: bold;
-            margin-bottom: 15px;
+            // margin-bottom: 15px;
             &:before {
                 content: "★";
                 display: block;
@@ -54,11 +58,14 @@
 
 .portfolio {
     padding-bottom: 40px;
-
+    h2 {
+        color: #333;
+    }
 }
+
 /* Carousel */
 #portfolio {
-    $carousel-size: 200px;
+    $carousel-size: 250px;
     // height: $carousel-size;
     cursor: pointer;
     .item {
@@ -82,10 +89,15 @@
 @media (min-width: 768px) {
     .banner {
         height: calc(100% - 78px);
+        padding-bottom: 50px;
         .contact-button {
-            bottom: 50px;
+            bottom: 30px;
+        }
+        ul {
+            font-size: 1.6em;
         }
     }
+    
     $carousel-large: 600px;
     #portfolio {
         .item {
