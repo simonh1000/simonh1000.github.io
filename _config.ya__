@@ -1,10 +1,12 @@
 name: "Simon Hampton"
 description: "Portfolio and blog"
 
-url: "http://simonh1000.github.io"
+url: "simonh1000.github.io"
 
+markdown: rdiscount
 permalink: /:year/:month/:title/
 
+highlighter: pygments
 github: [Repository metadata]
 
 safe: true
