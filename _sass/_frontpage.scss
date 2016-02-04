@@ -8,6 +8,9 @@
         color: $darkorange;
         margin: 0 0 20px 0;
     }
+    // .list-container {
+    // }
+
     ul {
         height: calc(100% - 100px);
         display: flex;
@@ -88,13 +91,16 @@
 
 @media (min-width: 768px) {
     .banner {
-        height: calc(100% - 78px);
         padding-bottom: 50px;
-        .contact-button {
-            bottom: 30px;
+        padding-left: 150px;
+        .list-container {
         }
         ul {
+            height: calc(100% - 78px);
             font-size: 1.6em;
+        }
+        .contact-button {
+            bottom: 30px;
         }
     }
     
@@ -106,6 +112,5 @@
                 max-height: $carousel-large;
             }
         }
-
     }
 }

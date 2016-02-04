@@ -48,12 +48,5 @@ img[src$='#counter'] {
     border: 2px solid #ccc;
 }
 @media (min-width: 768px) {
-    .banner {
-        height: calc(100% - 52px);
-        padding: 20px 15px 15px 15%;
-        ul li {
-            font-weight: bold;
-            margin-bottom: 5%;
-        }
-    }
+
 }
