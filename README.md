@@ -2,3 +2,4 @@
 
 Start development with `bundle exec jekyll serve`
 Then commit and push
+bundle exec jekyll serve --drafts

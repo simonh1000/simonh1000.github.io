@@ -1,6 +1,10451 @@
-function F2(t){function e(e){return function(n){return t(e,n)}}return e.arity=2,e.func=t,e}function F3(t){function e(e){return function(n){return function(r){return t(e,n,r)}}}return e.arity=3,e.func=t,e}function F4(t){function e(e){return function(n){return function(r){return function(i){return t(e,n,r,i)}}}}return e.arity=4,e.func=t,e}function F5(t){function e(e){return function(n){return function(r){return function(i){return function(o){return t(e,n,r,i,o)}}}}}return e.arity=5,e.func=t,e}function F6(t){function e(e){return function(n){return function(r){return function(i){return function(o){return function(a){return t(e,n,r,i,o,a)}}}}}}return e.arity=6,e.func=t,e}function F7(t){function e(e){return function(n){return function(r){return function(i){return function(o){return function(a){return function(u){return t(e,n,r,i,o,a,u)}}}}}}}return e.arity=7,e.func=t,e}function F8(t){function e(e){return function(n){return function(r){return function(i){return function(o){return function(a){return function(u){return function(l){return t(e,n,r,i,o,a,u,l)}}}}}}}}return e.arity=8,e.func=t,e}function F9(t){function e(e){return function(n){return function(r){return function(i){return function(o){return function(a){return function(u){return function(l){return function(c){return t(e,n,r,i,o,a,u,l,c)}}}}}}}}}return e.arity=9,e.func=t,e}function A2(t,e,n){return 2===t.arity?t.func(e,n):t(e)(n)}function A3(t,e,n,r){return 3===t.arity?t.func(e,n,r):t(e)(n)(r)}function A4(t,e,n,r,i){return 4===t.arity?t.func(e,n,r,i):t(e)(n)(r)(i)}function A5(t,e,n,r,i,o){return 5===t.arity?t.func(e,n,r,i,o):t(e)(n)(r)(i)(o)}function A6(t,e,n,r,i,o,a){return 6===t.arity?t.func(e,n,r,i,o,a):t(e)(n)(r)(i)(o)(a)}function A7(t,e,n,r,i,o,a,u){return 7===t.arity?t.func(e,n,r,i,o,a,u):t(e)(n)(r)(i)(o)(a)(u)}function A8(t,e,n,r,i,o,a,u,l){return 8===t.arity?t.func(e,n,r,i,o,a,u,l):t(e)(n)(r)(i)(o)(a)(u)(l)}function A9(t,e,n,r,i,o,a,u,l,c){return 9===t.arity?t.func(e,n,r,i,o,a,u,l,c):t(e)(n)(r)(i)(o)(a)(u)(l)(c)}var Elm=Elm||{Native:{}};Elm.Native.Basics={},Elm.Native.Basics.make=function(t){function e(t,e){return t/e|0}function n(t,e){return t%e}function r(t,e){if(0===e)throw new Error("Cannot perform mod 0. Division by zero error.");var n=t%e,i=0===t?0:e>0?t>=0?n:n+e:-r(-t,-e);return i===e?0:i}function i(t,e){return Math.log(e)/Math.log(t)}function o(t){return-t}function a(t){return 0>t?-t:t}function u(t,e){return g.cmp(t,e)<0?t:e}function l(t,e){return g.cmp(t,e)>0?t:e}function c(t,e,n){return g.cmp(n,t)<0?t:g.cmp(n,e)>0?e:n}function s(t,e){return t!==e}function f(t){return!t}function m(t){return t===1/0||t===-(1/0)}function p(t){return 0|t}function h(t){return t*Math.PI/180}function _(t){return 2*Math.PI*t}function d(t){var e=t._0,n=t._1;return g.Tuple2(e*Math.cos(n),e*Math.sin(n))}function v(t){var e=t._0,n=t._1;return g.Tuple2(Math.sqrt(e*e+n*n),Math.atan2(n,e))}if(t.Native=t.Native||{},t.Native.Basics=t.Native.Basics||{},t.Native.Basics.values)return t.Native.Basics.values;var g=Elm.Native.Utils.make(t);return t.Native.Basics.values={div:F2(e),rem:F2(n),mod:F2(r),pi:Math.PI,e:Math.E,cos:Math.cos,sin:Math.sin,tan:Math.tan,acos:Math.acos,asin:Math.asin,atan:Math.atan,atan2:F2(Math.atan2),degrees:h,turns:_,fromPolar:d,toPolar:v,sqrt:Math.sqrt,logBase:F2(i),negate:o,abs:a,min:F2(u),max:F2(l),clamp:F3(c),compare:g.compare,xor:F2(s),not:f,truncate:p,ceiling:Math.ceil,floor:Math.floor,round:Math.round,toFloat:function(t){return t},isNaN:isNaN,isInfinite:m}},Elm.Native.Port={},Elm.Native.Port.make=function(t){function e(e,n,i){if(!t.argsTracker[e])throw new Error("Port Error:\nNo argument was given for the port named '"+e+"' with type:\n\n    "+n.split("\n").join("\n        ")+"\n\nYou need to provide an initial value!\n\nFind out more about ports here <http://elm-lang.org/learn/Ports.elm>");var o=t.argsTracker[e];return o.used=!0,r(e,n,i,o.value)}function n(n,i,o){function u(e){var a=r(n,i,o,e);setTimeout(function(){t.notify(c.id,a)},0)}var l=e(n,i,o);a||(a=Elm.Native.Signal.make(t));var c=a.input("inbound-port-"+n,l);return t.ports[n]={send:u},c}function r(t,e,n,r){try{return n(r)}catch(i){throw new Error("Port Error:\nRegarding the port named '"+t+"' with type:\n\n    "+e.split("\n").join("\n        ")+"\n\nYou just sent the value:\n\n    "+JSON.stringify(r)+"\n\nbut it cannot be converted to the necessary type.\n"+i.message)}}function i(e,n,r){t.ports[e]=n(r)}function o(e,n,r){function i(t){l.push(t)}function o(t){l.pop(l.indexOf(t))}function u(t){for(var e=n(t),r=l.length,i=0;r>i;++i)l[i](e)}var l=[];return a||(a=Elm.Native.Signal.make(t)),a.output("outbound-port-"+e,u,r),t.ports[e]={subscribe:i,unsubscribe:o},r}if(t.Native=t.Native||{},t.Native.Port=t.Native.Port||{},t.Native.Port.values)return t.Native.Port.values;var a;return t.Native.Port.values={inbound:e,outbound:i,inboundSignal:n,outboundSignal:o}},Elm.fullscreen||!function(){"use strict";function t(c,f,m,p,h){function _(t,e){if(y)throw new Error("The notify function has been called synchronously!\nThis can lead to frames being dropped.\nDefinitely report this to <https://github.com/elm-lang/Elm/issues>\n");y=!0;for(var n=b.now(),r=k.length;r--;)k[r].notify(n,t,e);y=!1}function d(t,e){return window.setTimeout(t,e)}function v(t,e,n,r){e.addEventListener(n,r);var i={relevantInputs:t,domNode:e,eventName:n,func:r};E.push(i)}function g(e){i(E);var n=document.createElement("div"),r=t(c,n,e,p,F);return k=[],r}function A(){i(E),k=[]}var k=[],b={programStart:Date.now(),now:function(){return Date.now()}},y=!1,E=[],N={};for(var T in p)N[T]={value:p[T],used:!1};var F={notify:_,setTimeout:d,node:f,addListener:v,inputs:k,timer:b,argsTracker:N,ports:{},isFullscreen:function(){return c===s.FULLSCREEN},isEmbed:function(){return c===s.COMPONENT},isWorker:function(){return c===s.NONE}},x={};try{x=m.make(F),e(F)}catch(w){throw"function"==typeof f.appendChild?f.appendChild(n(w.message)):console.error(w.message),w}if(c!==s.NONE)var C=u(F,x);var S={kids:k};return a(S),k=S.kids,r(k,E),o(F.ports),"undefined"!=typeof h&&(l(h,F),"undefined"!=typeof C&&C.notify(0,!0,0)),{swap:g,ports:F.ports,dispose:A}}function e(t){var e=t.argsTracker;for(var n in e)if(!e[n].used)throw new Error("Port Error:\nYou provided an argument named '"+n+"' but there is no corresponding port!\n\nMaybe add a port '"+n+"' to your Elm module?\nMaybe remove the '"+n+"' argument from your initialization code in JS?")}function n(t){var e=document.createElement("code"),n=t.split("\n");e.appendChild(document.createTextNode(n[0])),e.appendChild(document.createElement("br")),e.appendChild(document.createElement("br"));for(var r=1;r<n.length;++r)e.appendChild(document.createTextNode("    "+n[r].replace(/  /g,"  "))),e.appendChild(document.createElement("br"));return e.appendChild(document.createElement("br")),e.appendChild(document.createTextNode("Open the developer console for more details.")),e}function r(t,e){t:for(var n=e.length;n--;){for(var r=e[n],i=t.length;i--;)if(r.relevantInputs.indexOf(t[i].id)>=0)continue t;r.domNode.removeEventListener(r.eventName,r.func)}}function i(t){for(var e=t.length;e--;){var n=t[e];n.domNode.removeEventListener(n.eventName,n.func)}}function o(t){"title"in t&&("string"==typeof t.title?document.title=t.title:t.title.subscribe(function(t){document.title=t})),"redirect"in t&&t.redirect.subscribe(function(t){t.length>0&&(window.location=t)})}function a(t){if(t.isOutput)return!0;for(var e=[],n=t.kids.length;n--;){var r=t.kids[n];a(r)&&e.push(r)}return t.kids=e,e.length>0}function u(t,e){function n(t){switch(A=t,v){case h:return p(r),void(v=_);case _:return void(v=_);case d:return void(v=_)}}function r(){switch(v){case h:throw new Error("Unexpected draw callback.\nPlease report this to <https://github.com/elm-lang/core/issues>.");case _:return p(r),v=d,void i();case d:return void(v=h)}}function i(){u(t.node.firstChild,g,A),t.Native.Window&&t.Native.Window.values.resizeIfNeeded(),g=A}if(!("main"in e))throw new Error("'main' is missing! What do I display?!");var o=e.main;"notify"in o||(o=Elm.Signal.make(t).constant(o));var a,u,l=o.value;if("Element_elm_builtin"===l.ctor){var c=Elm.Native.Graphics.Element.make(t);a=c.render,u=c.updateAndReplace}else{var s=Elm.Native.VirtualDom.make(t);a=s.render,u=s.updateAndReplace}for(var f=t.node,m=a(l);f.firstChild;)f.removeChild(f.firstChild);f.appendChild(m);var p="undefined"!=typeof requestAnimationFrame?requestAnimationFrame:function(t){setTimeout(t,1e3/60)},h=0,_=1,d=2,v=h,g=l,A=l,k=Elm.Native.Signal.make(t).output("main",n,o);return t.Native.Window&&t.Native.Window.values.resizeIfNeeded(),k}function l(t,e){function n(t,e){return t.id!==e.id?!1:t.isOutput?e.isOutput:t.kids.length===e.kids.length}function r(t,e){return e.value=t.value,!0}var i=c(n,t.inputs,e.inputs);return i&&c(r,t.inputs,e.inputs),t.node.parentNode.replaceChild(e.node,t.node),i}function c(t,e,n){if(e.length!==n.length)return!1;e=e.slice(0),n=n.slice(0);for(var r=[];e.length>0&&n.length>0;){var i=e.pop(),o=n.pop();if(r.indexOf(i.id)<0){if(!t(i,o))return!1;e=e.concat(i.kids||[]),n=n.concat(o.kids||[]),r.push(i.id)}}return!0}var s={FULLSCREEN:0,COMPONENT:1,NONE:2};Elm.fullscreen=function(e,n){var r=document.createElement("div");return document.body.appendChild(r),t(s.FULLSCREEN,r,e,n||{})},Elm.embed=function(e,n,r){var i=n.tagName;if("DIV"!==i)throw new Error("Elm.node must be given a DIV, not a "+i+".");return t(s.COMPONENT,n,e,r||{})},Elm.worker=function(e,n){return t(s.NONE,{},e,n||{})}}(),Elm.Native=Elm.Native||{},Elm.Native.Utils={},Elm.Native.Utils.make=function(t){function e(t,e){for(var n=[{x:t,y:e}];n.length>0;){var r=n.pop(),i=r.x,o=r.y;if(i!==o){if("object"!=typeof i){if("function"==typeof i)throw new Error("Equality error: general function equality is undecidable, and therefore, unsupported");return!1}var a=0;for(var u in i){if(++a,!(u in o))return!1;"ctor"!==u&&n.push({x:i[u],y:o[u]})}if("ctor"in i&&n.push({x:i.ctor,y:o.ctor}),a!==Object.keys(o).length)return!1}}return!0}function n(t,e){return{ctor:F[r(t,e)+1]}}function r(t,e){var n;if("object"!=typeof t)return t===e?N:e>t?E:T;if(t.isChar){var i=t.toString(),o=e.toString();return i===o?N:o>i?E:T}if("::"!==t.ctor&&"[]"!==t.ctor){if("_Tuple"===t.ctor.slice(0,6)){var a=t.ctor.slice(6)-0,u="cannot compare tuples with more than 6 elements.";if(0===a)return N;if(a>=1){if(n=r(t._0,e._0),n!==N)return n;if(a>=2){if(n=r(t._1,e._1),n!==N)return n;if(a>=3){if(n=r(t._2,e._2),n!==N)return n;if(a>=4){if(n=r(t._3,e._3),n!==N)return n;if(a>=5){if(n=r(t._4,e._4),n!==N)return n;if(a>=6){if(n=r(t._5,e._5),n!==N)return n;if(a>=7)throw new Error("Comparison error: "+u)}}}}}}return N}throw new Error("Comparison error: comparison is only defined on ints, floats, times, chars, strings, lists of comparable values, and tuples of comparable values.")}for(;;){if("[]"===t.ctor&&"[]"===e.ctor)return N;if(t.ctor!==e.ctor)return"[]"===t.ctor?E:T;if(n=r(t._0,e._0),n!==N)return n;t=t._1,e=e._1}}function i(t,e){return{ctor:"_Tuple2",_0:t,_1:e}}function o(t){var e=new String(t);return e.isChar=!0,e}function a(t){var e=new String(t);return e.text=!0,e}function u(t){return w++}function l(t,e){var n={};for(var r in t){var i=r in e?e[r]:t[r];n[r]=i}return n}function c(e){var n=0,r=0;if(e.pageX||e.pageY?(n=e.pageX,r=e.pageY):(e.clientX||e.clientY)&&(n=e.clientX+document.body.scrollLeft+document.documentElement.scrollLeft,r=e.clientY+document.body.scrollTop+document.documentElement.scrollTop),t.isEmbed()){var o=t.node.getBoundingClientRect(),a=o.left+document.body.scrollLeft+document.documentElement.scrollLeft,u=o.top+document.body.scrollTop+document.documentElement.scrollTop;n=n-Math.round(a)-t.node.clientLeft,r=r-Math.round(u)-t.node.clientTop}return i(n,r)}function s(t,e){return{ctor:"::",_0:t,_1:e}}function f(t){for(var e=C,n=t.length;n--;)e=s(t[n],e);return e}function m(t,e){var n=C;if(e>=t)do n=s(e,n);while(e-- >t);return n}function p(t,e){if("string"==typeof t)return t+e;if("Text:"===t.ctor.slice(0,5))return{ctor:"Text:Append",_0:t,_1:e};if("[]"===t.ctor)return e;var n=s(t._0,C),r=n;for(t=t._1;"[]"!==t.ctor;)r._1=s(t._0,C),t=t._1,r=r._1;return r._1=e,n}function h(t,e){return function(n){throw new Error("Ran into a `Debug.crash` in module `"+t+"` "+d(e)+"\nThe message provided by the code author is:\n\n    "+n)}}function _(t,e,n){return function(r){throw new Error("Ran into a `Debug.crash` in module `"+t+"`\n\nThis was caused by the `case` expression "+d(e)+".\nOne of the branches ended with a crash and the following value got through:\n\n    "+S(n)+"\n\nThe message provided by the code author is:\n\n    "+r)}}function d(t){return t.start.line==t.end.line?"on line "+t.start.line:"between lines "+t.start.line+" and "+t.end.line}function v(t,e){throw new Error("Runtime error when sending values through a port.\n\nExpecting "+t+" but was given "+g(e))}function g(t){return void 0===t?"undefined":JSON.stringify(t)}function A(t,e){var n=t.replace(/\\/g,"\\\\").replace(/\n/g,"\\n").replace(/\t/g,"\\t").replace(/\r/g,"\\r").replace(/\v/g,"\\v").replace(/\0/g,"\\0");return e?n.replace(/\'/g,"\\'"):n.replace(/\"/g,'\\"')}if(t.Native=t.Native||{},t.Native.Utils=t.Native.Utils||{},t.Native.Utils.values)return t.Native.Utils.values;var k,b,y,E=-1,N=0,T=1,F=["LT","EQ","GT"],x={ctor:"_Tuple0"},w=0,C={ctor:"[]"},S=function(e){var n=typeof e;if("function"===n){var r=e.func?e.func.name:e.name;return"<function"+(""===r?"":": ")+r+">"}if("boolean"===n)return e?"True":"False";if("number"===n)return e+"";if(e instanceof String&&e.isChar)return"'"+A(e,!0)+"'";if("string"===n)return'"'+A(e,!1)+'"';if("object"===n&&"ctor"in e){if("_Tuple"===e.ctor.substring(0,6)){var i=[];for(var o in e)"ctor"!==o&&i.push(S(e[o]));return"("+i.join(",")+")"}if("_Array"===e.ctor){k||(k=Elm.Array.make(t));var a=k.toList(e);return"Array.fromList "+S(a)}if("::"===e.ctor){var i="["+S(e._0);for(e=e._1;"::"===e.ctor;)i+=","+S(e._0),e=e._1;return i+"]"}if("[]"===e.ctor)return"[]";if("RBNode_elm_builtin"===e.ctor||"RBEmpty_elm_builtin"===e.ctor||"Set_elm_builtin"===e.ctor){b||(b=Elm.Dict.make(t));var a,r;return"Set_elm_builtin"===e.ctor?(y||(y=Elm.List.make(t)),r="Set",a=A2(y.map,function(t){return t._0},b.toList(e._0))):(r="Dict",a=b.toList(e)),r+".fromList "+S(a)}if("Text:"===e.ctor.slice(0,5))return"<text>";if("Element_elm_builtin"===e.ctor)return"<element>";if("Form_elm_builtin"===e.ctor)return"<form>";var i="";for(var u in e)if("ctor"!==u){var l=S(e[u]),c="{"===l[0]||"<"===l[0]||l.indexOf(" ")<0;i+=" "+(c?l:"("+l+")")}return e.ctor+i}if("object"===n&&"notify"in e&&"id"in e)return"<signal>";if("object"===n){var i=[];for(var o in e)i.push(o+" = "+S(e[o]));return 0===i.length?"{}":"{ "+i.join(", ")+" }"}return"<internal structure>"};return t.Native.Utils.values={eq:e,cmp:r,compare:F2(n),Tuple0:x,Tuple2:i,chr:o,txt:a,update:l,guid:u,getXY:c,Nil:C,Cons:s,list:f,range:m,append:F2(p),crash:h,crashCase:_,badPort:v,toString:S}},Elm.Basics=Elm.Basics||{},Elm.Basics.make=function(t){"use strict";if(t.Basics=t.Basics||{},t.Basics.values)return t.Basics.values;var e=(Elm.Native.Utils.make(t),Elm.Native.Basics.make(t)),n=Elm.Native.Utils.make(t),r={},i=F2(function(t,e){var n=e;return A2(t,n._0,n._1)}),o=F3(function(t,e,n){return t({ctor:"_Tuple2",_0:e,_1:n})}),a=F3(function(t,e,n){return A2(t,n,e)}),u=function(t){var e=t;return e._1},l=function(t){var e=t;return e._0},c=F2(function(t,e){return t}),s=function(t){return t};r["<|"]=F2(function(t,e){return t(e)}),r["|>"]=F2(function(t,e){return e(t)}),r[">>"]=F3(function(t,e,n){return e(t(n))}),r["<<"]=F3(function(t,e,n){return t(e(n))}),r["++"]=n.append;var f=n.toString,m=e.isInfinite,p=e.isNaN,h=e.toFloat,_=e.ceiling,d=e.floor,v=e.truncate,g=e.round,A=e.not,k=e.xor;r["||"]=e.or,r["&&"]=e.and;var b=e.max,y=e.min,E={ctor:"GT"},N={ctor:"EQ"},T={ctor:"LT"},F=e.compare;r[">="]=e.ge,r["<="]=e.le,r[">"]=e.gt,r["<"]=e.lt,r["/="]=e.neq,r["=="]=e.eq;var x=e.e,w=e.pi,C=e.clamp,S=e.logBase,L=e.abs,R=e.negate,D=e.sqrt,M=e.atan2,O=e.atan,B=e.asin,j=e.acos,P=e.tan,J=e.sin,z=e.cos;r["^"]=e.exp,r["%"]=e.mod;var U=e.rem;r["//"]=e.div,r["/"]=e.floatDiv,r["*"]=e.mul,r["-"]=e.sub,r["+"]=e.add;var I=e.toPolar,H=e.fromPolar,G=e.turns,q=e.degrees,V=function(t){return t};return t.Basics.values={_op:r,max:b,min:y,compare:F,not:A,xor:k,rem:U,negate:R,abs:L,sqrt:D,clamp:C,logBase:S,e:x,pi:w,cos:z,sin:J,tan:P,acos:j,asin:B,atan:O,atan2:M,round:g,floor:d,ceiling:_,truncate:v,toFloat:h,degrees:q,radians:V,turns:G,toPolar:I,fromPolar:H,isNaN:p,isInfinite:m,toString:f,fst:l,snd:u,identity:s,always:c,flip:a,curry:o,uncurry:i,LT:T,EQ:N,GT:E}},Elm.Maybe=Elm.Maybe||{},Elm.Maybe.make=function(t){"use strict";if(t.Maybe=t.Maybe||{},t.Maybe.values)return t.Maybe.values;var e=(Elm.Native.Utils.make(t),{}),n=F2(function(t,e){var n=e;return"Just"===n.ctor?n._0:t}),r={ctor:"Nothing"},i=function(t){for(;;){var e=t;if("[]"===e.ctor)return r;var n=e._0,i=n;{if("Nothing"!==i.ctor)return n;var o=e._1;t=o}}},o=F2(function(t,e){var n=t;return"Just"===n.ctor?e(n._0):r}),a=function(t){return{ctor:"Just",_0:t}},u=F2(function(t,e){var n=e;return"Just"===n.ctor?a(t(n._0)):r}),l=F3(function(t,e,n){var i={ctor:"_Tuple2",_0:e,_1:n};return"_Tuple2"===i.ctor&&"Just"===i._0.ctor&&"Just"===i._1.ctor?a(A2(t,i._0._0,i._1._0)):r}),c=F4(function(t,e,n,i){var o={ctor:"_Tuple3",_0:e,_1:n,_2:i};return"_Tuple3"===o.ctor&&"Just"===o._0.ctor&&"Just"===o._1.ctor&&"Just"===o._2.ctor?a(A3(t,o._0._0,o._1._0,o._2._0)):r}),s=F5(function(t,e,n,i,o){var u={ctor:"_Tuple4",_0:e,_1:n,_2:i,_3:o};return"_Tuple4"===u.ctor&&"Just"===u._0.ctor&&"Just"===u._1.ctor&&"Just"===u._2.ctor&&"Just"===u._3.ctor?a(A4(t,u._0._0,u._1._0,u._2._0,u._3._0)):r}),f=F6(function(t,e,n,i,o,u){var l={ctor:"_Tuple5",_0:e,_1:n,_2:i,_3:o,_4:u};return"_Tuple5"===l.ctor&&"Just"===l._0.ctor&&"Just"===l._1.ctor&&"Just"===l._2.ctor&&"Just"===l._3.ctor&&"Just"===l._4.ctor?a(A5(t,l._0._0,l._1._0,l._2._0,l._3._0,l._4._0)):r});return t.Maybe.values={_op:e,andThen:o,map:u,map2:l,map3:c,map4:s,map5:f,withDefault:n,oneOf:i,Just:a,Nothing:r}},Elm.Native.List={},Elm.Native.List.make=function(t){function e(t){for(var e=[];"[]"!==t.ctor;)e.push(t._0),t=t._1;return e}function n(t,e,n){for(var r=e;"[]"!==n.ctor;)r=A2(t,n._0,r),n=n._1;return r}function r(t,n,r){for(var i=e(r),o=n,a=i.length;a--;)o=A2(t,i[a],o);return o}function i(t,e,n){for(var r=[];"[]"!==e.ctor&&"[]"!==n.ctor;)r.push(A2(t,e._0,n._0)),e=e._1,n=n._1;return h(r)}function o(t,e,n,r){for(var i=[];"[]"!==e.ctor&&"[]"!==n.ctor&&"[]"!==r.ctor;)i.push(A3(t,e._0,n._0,r._0)),e=e._1,n=n._1,r=r._1;return h(i)}function a(t,e,n,r,i){for(var o=[];"[]"!==e.ctor&&"[]"!==n.ctor&&"[]"!==r.ctor&&"[]"!==i.ctor;)o.push(A4(t,e._0,n._0,r._0,i._0)),e=e._1,n=n._1,r=r._1,i=i._1;return h(o)}function u(t,e,n,r,i,o){for(var a=[];"[]"!==e.ctor&&"[]"!==n.ctor&&"[]"!==r.ctor&&"[]"!==i.ctor&&"[]"!==o.ctor;)a.push(A5(t,e._0,n._0,r._0,i._0,o._0)),e=e._1,n=n._1,r=r._1,i=i._1,o=o._1;return h(a)}function l(t,n){return h(e(n).sort(function(e,n){return f.cmp(t(e),t(n))}))}function c(t,n){return h(e(n).sort(function(e,n){var r=t(e)(n).ctor;return"EQ"===r?0:"LT"===r?-1:1}))}function s(t,e){for(var n=[];"[]"!==e.ctor&&t>0;)n.push(e._0),e=e._1,--t;return h(n)}if(t.Native=t.Native||{},t.Native.List=t.Native.List||{},t.Native.List.values)return t.Native.List.values;if("values"in Elm.Native.List)return t.Native.List.values=Elm.Native.List.values;var f=Elm.Native.Utils.make(t),m=f.Nil,p=f.Cons,h=f.list;return Elm.Native.List.values={Nil:m,Cons:p,cons:F2(p),toArray:e,fromArray:h,foldl:F3(n),foldr:F3(r),map2:F3(i),map3:F4(o),map4:F5(a),map5:F6(u),sortBy:F2(l),sortWith:F2(c),take:F2(s)},t.Native.List.values=Elm.Native.List.values},Elm.List=Elm.List||{},Elm.List.make=function(t){"use strict";if(t.List=t.List||{},t.List.values)return t.List.values;var e=Elm.Native.Utils.make(t),n=Elm.Basics.make(t),r=Elm.Maybe.make(t),i=Elm.Native.List.make(t),o={},a=i.sortWith,u=i.sortBy,l=function(t){return A2(u,n.identity,t)},c=F2(function(t,n){t:for(;;){if(e.cmp(t,0)<1)return n;var r=n;if("[]"===r.ctor)return n;var i=t-1,o=r._1;t=i,n=o;continue t}}),s=i.take,f=i.map5,m=i.map4,p=i.map3,h=i.map2,_=F2(function(t,e){for(;;){var n=e;if("[]"===n.ctor)return!1;if(t(n._0))return!0;var r=t,i=n._1;t=r,e=i}}),d=F2(function(t,e){return n.not(A2(_,function(e){return n.not(t(e))},e))}),v=i.foldr,g=i.foldl,A=function(t){return A3(g,F2(function(t,e){return e+1}),0,t)},k=function(t){return A3(g,F2(function(t,e){return t+e}),0,t)},b=function(t){return A3(g,F2(function(t,e){return t*e}),1,t)},y=function(t){var e=t;return"::"===e.ctor?r.Just(A3(g,n.max,e._0,e._1)):r.Nothing},E=function(t){var e=t;return"::"===e.ctor?r.Just(A3(g,n.min,e._0,e._1)):r.Nothing},N=F2(function(t,n){return A3(h,t,e.range(0,A(n)-1),n)}),T=F2(function(t,n){return A2(_,function(n){return e.eq(n,t)},n)}),F=function(t){var e=t;return"[]"===e.ctor?!0:!1},x=function(t){var e=t;return"::"===e.ctor?r.Just(e._1):r.Nothing},w=function(t){var e=t;return"::"===e.ctor?r.Just(e._0):r.Nothing};o["::"]=i.cons;var C=F2(function(t,n){return A3(v,F2(function(e,n){return A2(o["::"],t(e),n)}),e.list([]),n)}),S=F2(function(t,n){var r=F2(function(e,n){return t(e)?A2(o["::"],e,n):n});return A3(v,r,e.list([]),n)}),L=F3(function(t,e,n){var r=t(e);return"Just"===r.ctor?A2(o["::"],r._0,n):n}),R=F2(function(t,n){return A3(v,L(t),e.list([]),n)}),D=function(t){return A3(g,F2(function(t,e){return A2(o["::"],t,e)}),e.list([]),t)},M=F3(function(t,n,r){var i=F2(function(n,r){var i=r;return"::"===i.ctor?A2(o["::"],A2(t,n,i._0),r):e.list([])});return D(A3(g,i,e.list([n]),r))}),O=F2(function(t,e){var n=e;return"[]"===n.ctor?t:A3(v,F2(function(t,e){return A2(o["::"],t,e)}),e,t)}),B=function(t){return A3(v,O,e.list([]),t)},j=F2(function(t,e){return B(A2(C,t,e))}),P=F2(function(t,n){var r=F2(function(e,n){var r=n,i=r._0,a=r._1;return t(e)?{ctor:"_Tuple2",_0:A2(o["::"],e,i),_1:a}:{ctor:"_Tuple2",_0:i,_1:A2(o["::"],e,a)}});return A3(v,r,{ctor:"_Tuple2",_0:e.list([]),_1:e.list([])},n)}),J=function(t){var n=F2(function(t,e){var n=t,r=e;return{ctor:"_Tuple2",_0:A2(o["::"],n._0,r._0),_1:A2(o["::"],n._1,r._1)}});return A3(v,n,{ctor:"_Tuple2",_0:e.list([]),_1:e.list([])},t)},z=F2(function(t,n){var r=n;if("[]"===r.ctor)return e.list([]);var i=F2(function(e,n){return A2(o["::"],t,A2(o["::"],e,n))}),a=A3(v,i,e.list([]),r._1);return A2(o["::"],r._0,a)}),U=F3(function(t,n,r){t:for(;;){if(e.cmp(n,0)<1)return t;var i=A2(o["::"],r,t),a=n-1,u=r;t=i,n=a,r=u;continue t}}),I=F2(function(t,n){return A3(U,e.list([]),t,n)});return t.List.values={_op:o,isEmpty:F,length:A,reverse:D,member:T,head:w,tail:x,filter:S,take:s,drop:c,repeat:I,append:O,concat:B,intersperse:z,partition:P,unzip:J,map:C,map2:h,map3:p,map4:m,map5:f,filterMap:R,concatMap:j,indexedMap:N,foldr:v,foldl:g,sum:k,product:b,maximum:y,minimum:E,all:d,any:_,scanl:M,sort:l,sortBy:u,sortWith:a}},Elm.Native.Transform2D={},Elm.Native.Transform2D.make=function(t){function e(t,e,n,r,o,a){return new i([t,e,o,n,r,a])}function n(t){var e=Math.cos(t),n=Math.sin(t);return new i([e,-n,0,n,e,0])}function r(t,e){var n=t[0],r=t[1],o=t[3],a=t[4],u=t[2],l=t[5],c=e[0],s=e[1],f=e[3],m=e[4],p=e[2],h=e[5];return new i([n*c+r*f,n*s+r*m,n*p+r*h+u,o*c+a*f,o*s+a*m,o*p+a*h+l])}if(t.Native=t.Native||{},t.Native.Transform2D=t.Native.Transform2D||{},t.Native.Transform2D.values)return t.Native.Transform2D.values;var i;i="undefined"==typeof Float32Array?function(t){this.length=t.length,this[0]=t[0],this[1]=t[1],this[2]=t[2],this[3]=t[3],this[4]=t[4],this[5]=t[5]}:Float32Array;var o=new i([1,0,0,0,1,0]);return t.Native.Transform2D.values={identity:o,matrix:F6(e),rotation:n,multiply:F2(r)}},Elm.Transform2D=Elm.Transform2D||{},Elm.Transform2D.make=function(t){"use strict";if(t.Transform2D=t.Transform2D||{},t.Transform2D.values)return t.Transform2D.values;var e=(Elm.Native.Utils.make(t),Elm.Native.Transform2D.make(t)),n={},r=e.multiply,i=e.rotation,o=e.matrix,a=F2(function(t,e){return A6(o,1,0,0,1,t,e)}),u=function(t){return A6(o,t,0,0,t,0,0)},l=function(t){return A6(o,t,0,0,1,0,0)},c=function(t){return A6(o,1,0,0,t,0,0)},s=e.identity;return t.Transform2D.values={_op:n,identity:s,matrix:o,multiply:r,rotation:i,translation:a,scale:u,scaleX:l,scaleY:c}},Elm.Native=Elm.Native||{},Elm.Native.Graphics=Elm.Native.Graphics||{},Elm.Native.Graphics.Collage=Elm.Native.Graphics.Collage||{},Elm.Native.Graphics.Collage.make=function(t){"use strict";function e(t,e){t.lineWidth=e.width;var n=e.cap.ctor;t.lineCap="Flat"===n?"butt":"Round"===n?"round":"square";var r=e.join.ctor;t.lineJoin="Smooth"===r?"round":"Sharp"===r?"miter":"bevel",t.miterLimit=e.join._0||10,t.strokeStyle=w.toCss(e.color)}function n(t,e,n){var r=n.ctor;e.fillStyle="Solid"===r?w.toCss(n._0):"Texture"===r?u(t,e,n._0):l(e,n._0)}function r(t,e){var n=C.toArray(e),r=n.length-1;if(!(0>=r)){for(t.moveTo(n[r]._0,n[r]._1);r--;)t.lineTo(n[r]._0,n[r]._1);e.closed&&(r=n.length-1,t.lineTo(n[r]._0,n[r]._1))}}function i(t,e,n){"[]"===e.dashing.ctor?r(t,n):o(t,e,n),t.scale(1,-1),t.stroke()}function o(t,e,n){var r=C.toArray(n);n.closed&&r.push(r[0]);var i=C.toArray(e.dashing),o=r.length-1;if(!(0>=o)){var a=r[o]._0,u=r[o]._1,l=0,c=0,s=0,f=0,m=0,p=0,h=i.length,_=!0,d=i[0];for(t.moveTo(a,u);o--;){for(l=r[o]._0,c=r[o]._1,s=l-a,f=c-u,m=Math.sqrt(s*s+f*f);m>=d;)a+=s*d/m,u+=f*d/m,t[_?"lineTo":"moveTo"](a,u),s=l-a,f=c-u,m=Math.sqrt(s*s+f*f),_=!_,p=(p+1)%h,d=i[p];m>0&&(t[_?"lineTo":"moveTo"](l,c),d-=m),a=l,u=c}}}function a(t,n,r){return e(t,n),i(t,n,r)}function u(t,e,n){var r=new Image;return r.src=n,r.onload=t,e.createPattern(r,"repeat")}function l(t,e){var n,r=[];if("Linear"===e.ctor){var i=e._0,o=e._1;n=t.createLinearGradient(i._0,-i._1,o._0,-o._1),r=C.toArray(e._2)}else{var i=e._0,a=e._2;n=t.createRadialGradient(i._0,-i._1,e._1,a._0,-a._1,e._3),r=C.toArray(e._4)}for(var u=r.length,l=0;u>l;++l){var c=r[l];n.addColorStop(c._0,w.toCss(c._1))}return n}function c(t,e,i,o){r(e,o),n(t,e,i),e.scale(1,-1),e.fill()}function s(t,e,n){m(e,n,e.fillText)}function f(t,n,r,i){if(e(n,r),"[]"!==r.dashing.ctor&&n.setLineDash){var o=C.toArray(r.dashing);n.setLineDash(o)}m(n,i,n.strokeText)}function m(t,e,n){var r=h(R,e),i=0,o=0,a=r.length;t.scale(1,-1);for(var u=a;u--;){var l=r[u];t.font=l.font;var c=t.measureText(l.text);l.width=c.width,i+=l.width,l.height>o&&(o=l.height)}for(var s=-i/2,u=0;a>u;++u){var l=r[u];t.font=l.font,t.fillStyle=l.color,n.call(t,l.text,s,o/2),s+=l.width}}function p(t){return[t["font-style"],t["font-variant"],t["font-weight"],t["font-size"],t["font-family"]].join(" ")}function h(t,e){var n=e.ctor;if("Text:Append"===n){var r=h(t,e._0),i=h(t,e._1);return r.concat(i)}if("Text:Text"===n)return[{text:e._0,color:t.color,height:0|t["font-size"].slice(0,-2),font:p(t)}];if("Text:Meta"===n){var o=_(e._0,t);return h(o,e._1)}}function _(t,e){return{"font-style":t["font-style"]||e["font-style"],"font-variant":t["font-variant"]||e["font-variant"],"font-weight":t["font-weight"]||e["font-weight"],"font-size":t["font-size"]||e["font-size"],"font-family":t["font-family"]||e["font-family"],color:t.color||e.color}}function d(t,e,n){var r=new Image;r.onload=t,r.src=n._3;var i=n._0,o=n._1,a=n._2,u=a._0,l=a._1,c=i,s=o,f=-i/2,m=-o/2,p=i,h=o;e.scale(1,-1),e.drawImage(r,u,l,c,s,f,m,p,h)}function v(t,e,n){e.save();var r=n.x,i=n.y,o=n.theta,u=n.scale;(0!==r||0!==i)&&e.translate(r,i),0!==o&&e.rotate(o%(2*Math.PI)),1!==u&&e.scale(u,u),1!==n.alpha&&(e.globalAlpha=e.globalAlpha*n.alpha),e.beginPath();var l=n.form;switch(l.ctor){case"FPath":a(e,l._0,l._1);break;case"FImage":d(t,e,l);break;case"FShape":"Line"===l._0.ctor?(l._1.closed=!0,a(e,l._0._0,l._1)):c(t,e,l._0._0,l._1);break;case"FText":s(t,e,l._0);break;case"FOutlinedText":f(t,e,l._0,l._1)}e.restore()}function g(t){var e=t.scale,n=A6(L.matrix,e,0,0,e,t.x,t.y),r=t.theta;return 0!==r&&(n=A2(L.multiply,n,L.rotation(r))),n}function A(t){return 1e-5>t&&t>-1e-5?0:t}function k(t,e,n,r){for(var i=n.form._0._0.props,o=A6(L.matrix,1,0,0,-1,(t-i.width)/2,(e-i.height)/2),a=r.length,u=0;a>u;++u)o=A2(L.multiply,o,r[u]);return o=A2(L.multiply,o,g(n)),"matrix("+A(o[0])+", "+A(o[3])+", "+A(-o[1])+", "+A(-o[4])+", "+A(o[2])+", "+A(o[5])+")"}function b(t){function e(){return i<r.length?r[i]._0.form.ctor:""}function n(){var t=r[i]._0;return++i,t}var r=C.toArray(t),i=0;return{peekNext:e,next:n}}function y(t){function e(){for(var t=o.length,e="",n=0;t>n;++n)if(e=o[n].peekNext())return e;return""}function n(t){for(;!o[0].peekNext();)o.shift(),a.pop(),u.shift(),t&&t.restore();var e=o[0].next(),n=e.form;if("FGroup"===n.ctor){o.unshift(b(n._1));var r=A2(L.multiply,n._0,g(e));t.save(),t.transform(r[0],r[3],r[1],r[4],r[2],r[5]),a.push(r);var i=(u[0]||1)*e.alpha;u.unshift(i),t.globalAlpha=i}return e}function r(){return a}function i(){return u[0]||1}var o=[b(t)],a=[],u=[];return{peekNext:e,next:n,transforms:r,alpha:i}}function E(t,e){var n=S.createNode("canvas");n.style.width=t+"px",n.style.height=e+"px",n.style.display="block",n.style.position="absolute";var r=window.devicePixelRatio||1;return n.width=t*r,n.height=e*r,n}function N(t){var e=S.createNode("div");return e.style.overflow="hidden",e.style.position="relative",F(e,t,t),e}function T(t,e,n){function r(n,r){r.translate(t/2*c,e/2*c),r.scale(c,-c);for(var i=n.length,o=0;i>o;++o){var a=n[o];r.save(),r.transform(a[0],a[3],a[1],a[4],a[2],a[5])}return r}function i(i){for(;l<u.length;){var o=u[l];if(o.getContext)return o.width=t*c,o.height=e*c,o.style.width=t+"px",o.style.height=e+"px",++l,r(i,o.getContext("2d"));n.removeChild(o)}var a=E(t,e);return n.appendChild(a),++l,r(i,a.getContext("2d"))}function o(r,i,o){var a=u[l],c=o.form._0,s=!a||a.getContext?S.render(c):S.update(a,a.oldElement,c);s.style.position="absolute",s.style.opacity=i*o.alpha*c._0.props.opacity,S.addTransform(s.style,k(t,e,o,r)),s.oldElement=c,++l,a?n.insertBefore(s,a):n.appendChild(s)}function a(){for(;l<u.length;)n.removeChild(u[l])}var u=n.childNodes,l=0,c=window.devicePixelRatio||1;return{nextContext:i,addElement:o,clearRest:a}}function F(t,e,n){for(var r=n.w,i=n.h,o=y(n.forms),a=T(r,i,t),u=null,l="";l=o.peekNext();){null===u&&"FElement"!==l&&(u=a.nextContext(o.transforms()),u.globalAlpha=o.alpha());var c=o.next(u);"FElement"===l?(a.addElement(o.transforms(),o.alpha(),c),u=null):"FGroup"!==l&&v(function(){F(t,n,n)},u,c)}return a.clearRest(),t}function x(t,e,n){return A3(S.newElement,t,e,{ctor:"Custom",type:"Collage",render:N,update:F,model:{w:t,h:e,forms:n}})}if(t.Native=t.Native||{},t.Native.Graphics=t.Native.Graphics||{},t.Native.Graphics.Collage=t.Native.Graphics.Collage||{},"values"in t.Native.Graphics.Collage)return t.Native.Graphics.Collage.values;var w=Elm.Native.Color.make(t),C=Elm.Native.List.make(t),S=Elm.Native.Graphics.Element.make(t),L=Elm.Transform2D.make(t),R=(Elm.Native.Utils.make(t),{"font-style":"normal","font-variant":"normal","font-weight":"normal","font-size":"12px","font-family":"sans-serif",color:"black"});return t.Native.Graphics.Collage.values={collage:F3(x)}},Elm.Native.Color={},Elm.Native.Color.make=function(t){function e(t){var e="",n="";return"RGBA"===t.ctor?(e="rgb",n=t._0+", "+t._1+", "+t._2):(e="hsl",n=180*t._0/Math.PI+", "+100*t._1+"%, "+100*t._2+"%"),1===t._3?e+"("+n+")":e+"a("+n+", "+t._3+")"}return t.Native=t.Native||{},t.Native.Color=t.Native.Color||{},t.Native.Color.values?t.Native.Color.values:t.Native.Color.values={toCss:e}},Elm.Color=Elm.Color||{},Elm.Color.make=function(t){"use strict";if(t.Color=t.Color||{},t.Color.values)return t.Color.values;var e=Elm.Native.Utils.make(t),n=Elm.Basics.make(t),r={},i=F5(function(t,e,n,r,i){return{ctor:"Radial",_0:t,_1:e,_2:n,_3:r,_4:i}}),o=i,a=F3(function(t,e,n){return{ctor:"Linear",_0:t,_1:e,_2:n}}),u=a,l=F2(function(t,e){var r=n.floor(t);return n.toFloat(A2(n._op["%"],r,e))+t-n.toFloat(r)}),c=F3(function(t,r,i){var o=n.toFloat(i)/255,a=n.toFloat(r)/255,u=n.toFloat(t)/255,c=A2(n.max,A2(n.max,u,a),o),s=A2(n.min,A2(n.min,u,a),o),f=c-s,m=(c+s)/2,p=e.eq(m,0)?0:f/(1-n.abs(2*m-1)),h=n.degrees(60)*(e.eq(c,u)?A2(l,(a-o)/f,6):e.eq(c,a)?(o-u)/f+2:(u-a)/f+4);return{ctor:"_Tuple3",_0:h,_1:p,_2:m}}),s=F3(function(t,r,i){var o=t/n.degrees(60),a=(1-n.abs(2*i-1))*r,u=a*(1-n.abs(A2(l,o,2)-1)),c=e.cmp(o,0)<0?{
-ctor:"_Tuple3",_0:0,_1:0,_2:0}:e.cmp(o,1)<0?{ctor:"_Tuple3",_0:a,_1:u,_2:0}:e.cmp(o,2)<0?{ctor:"_Tuple3",_0:u,_1:a,_2:0}:e.cmp(o,3)<0?{ctor:"_Tuple3",_0:0,_1:a,_2:u}:e.cmp(o,4)<0?{ctor:"_Tuple3",_0:0,_1:u,_2:a}:e.cmp(o,5)<0?{ctor:"_Tuple3",_0:u,_1:0,_2:a}:e.cmp(o,6)<0?{ctor:"_Tuple3",_0:a,_1:0,_2:u}:{ctor:"_Tuple3",_0:0,_1:0,_2:0},s=c._0,f=c._1,m=c._2,p=i-a/2;return{ctor:"_Tuple3",_0:s+p,_1:f+p,_2:m+p}}),f=function(t){var e=t;if("RGBA"===e.ctor)return{red:e._0,green:e._1,blue:e._2,alpha:e._3};var r=A3(s,e._0,e._1,e._2),i=r._0,o=r._1,a=r._2;return{red:n.round(255*i),green:n.round(255*o),blue:n.round(255*a),alpha:e._3}},m=function(t){var e=t;if("HSLA"===e.ctor)return{hue:e._0,saturation:e._1,lightness:e._2,alpha:e._3};var n=A3(c,e._0,e._1,e._2),r=n._0,i=n._1,o=n._2;return{hue:r,saturation:i,lightness:o,alpha:e._3}},p=F4(function(t,e,n,r){return{ctor:"HSLA",_0:t,_1:e,_2:n,_3:r}}),h=F4(function(t,e,r,i){return A4(p,t-n.turns(n.toFloat(n.floor(t/(2*n.pi)))),e,r,i)}),_=F3(function(t,e,n){return A4(h,t,e,n,1)}),d=function(t){var e=t;if("HSLA"===e.ctor)return A4(h,e._0+n.degrees(180),e._1,e._2,e._3);var r=A3(c,e._0,e._1,e._2),i=r._0,o=r._1,a=r._2;return A4(h,i+n.degrees(180),o,a,e._3)},v=function(t){return A4(p,0,0,1-t,1)},g=function(t){return A4(p,0,0,1-t,1)},A=F4(function(t,e,n,r){return{ctor:"RGBA",_0:t,_1:e,_2:n,_3:r}}),k=A,b=F3(function(t,e,n){return A4(A,t,e,n,1)}),y=A4(A,239,41,41,1),E=A4(A,204,0,0,1),N=A4(A,164,0,0,1),T=A4(A,252,175,62,1),F=A4(A,245,121,0,1),x=A4(A,206,92,0,1),w=A4(A,255,233,79,1),C=A4(A,237,212,0,1),S=A4(A,196,160,0,1),L=A4(A,138,226,52,1),R=A4(A,115,210,22,1),D=A4(A,78,154,6,1),M=A4(A,114,159,207,1),O=A4(A,52,101,164,1),B=A4(A,32,74,135,1),j=A4(A,173,127,168,1),P=A4(A,117,80,123,1),J=A4(A,92,53,102,1),z=A4(A,233,185,110,1),U=A4(A,193,125,17,1),I=A4(A,143,89,2,1),H=A4(A,0,0,0,1),G=A4(A,255,255,255,1),q=A4(A,238,238,236,1),V=A4(A,211,215,207,1),$=A4(A,186,189,182,1),W=A4(A,238,238,236,1),K=A4(A,211,215,207,1),Y=A4(A,186,189,182,1),X=A4(A,136,138,133,1),Q=A4(A,85,87,83,1),Z=A4(A,46,52,54,1);return t.Color.values={_op:r,rgb:b,rgba:k,hsl:_,hsla:h,greyscale:g,grayscale:v,complement:d,linear:u,radial:o,toRgb:f,toHsl:m,red:E,orange:F,yellow:C,green:R,blue:O,purple:P,brown:U,lightRed:y,lightOrange:T,lightYellow:w,lightGreen:L,lightBlue:M,lightPurple:j,lightBrown:z,darkRed:N,darkOrange:x,darkYellow:S,darkGreen:D,darkBlue:B,darkPurple:J,darkBrown:I,white:G,lightGrey:q,grey:V,darkGrey:$,lightCharcoal:X,charcoal:Q,darkCharcoal:Z,black:H,lightGray:W,gray:K,darkGray:Y}},Elm.Native=Elm.Native||{},Elm.Native.Graphics=Elm.Native.Graphics||{},Elm.Native.Graphics.Element=Elm.Native.Graphics.Element||{},Elm.Native.Graphics.Element.make=function(t){"use strict";function e(t,e,n){return{ctor:"Element_elm_builtin",_0:{element:n,props:{id:M.guid(),width:t,height:e,opacity:1,color:R.Nothing,href:"",tag:"",hover:M.Tuple0,click:M.Tuple0}}}}function n(t,e){var n=t.props,i=t.element,a=n.width-(i.adjustWidth||0),u=n.height-(i.adjustHeight||0);if(e.style.width=(0|a)+"px",e.style.height=(0|u)+"px",1!==n.opacity&&(e.style.opacity=n.opacity),"Just"===n.color.ctor&&(e.style.backgroundColor=S.toCss(n.color._0)),""!==n.tag&&(e.id=n.tag),"_Tuple0"!==n.hover.ctor&&o(e,n.hover),"_Tuple0"!==n.click.ctor&&r(e,n.click),""!==n.href){var l=O("a");l.href=n.href,l.style.display="block",l.style.pointerEvents="auto",l.appendChild(e),e=l}return e}function r(t,e){function n(e){t.elm_click_handler(M.Tuple0),e.stopPropagation()}t.style.pointerEvents="auto",t.elm_click_handler=e,t.elm_click_trigger=n,t.addEventListener("click",n)}function i(t,e){t.elm_click_trigger&&(t.removeEventListener("click",t.elm_click_trigger),t.elm_click_trigger=null,t.elm_click_handler=null)}function o(t,e){function n(e){t.elm_hover_count++>0||(t.elm_hover_handler(!0),e.stopPropagation())}function r(e){t.contains(e.toElement||e.relatedTarget)||(t.elm_hover_count=0,t.elm_hover_handler(!1),e.stopPropagation())}t.style.pointerEvents="auto",t.elm_hover_handler=e,t.elm_hover_count=0,t.elm_hover_over=n,t.elm_hover_out=r,t.addEventListener("mouseover",n),t.addEventListener("mouseout",r)}function a(t){t.elm_hover_handler=null,t.elm_hover_over&&(t.removeEventListener("mouseover",t.elm_hover_over),t.elm_hover_over=null),t.elm_hover_out&&(t.removeEventListener("mouseout",t.elm_hover_out),t.elm_hover_out=null)}function u(t,e){switch(e._0.ctor){case"Plain":return l(e._3);case"Fitted":return s(t.width,t.height,e._3);case"Cropped":return f(e,t.width,t.height,e._3);case"Tiled":return c(e._3)}}function l(t){var e=O("img");return e.src=t,e.name=t,e.style.display="block",e}function c(t){var e=O("div");return e.style.backgroundImage="url("+t+")",e}function s(t,e,n){var r=O("div");return r.style.background="url("+n+") no-repeat center",r.style.webkitBackgroundSize="cover",r.style.MozBackgroundSize="cover",r.style.OBackgroundSize="cover",r.style.backgroundSize="cover",r}function f(t,e,n,r){var i=t._0._0,o=O("div");o.style.overflow="hidden";var a=O("img");return a.onload=function(){var r=e/t._1,o=n/t._2;a.style.width=(this.width*r|0)+"px",a.style.height=(this.height*o|0)+"px",a.style.marginLeft=(-i._0*r|0)+"px",a.style.marginTop=(-i._1*o|0)+"px"},a.src=r,a.name=r,o.appendChild(a),o}function m(t){return t.style.position="absolute",t}function p(t){return t}function h(t){return t.style.styleFloat="left",t.style.cssFloat="left",t}function _(t){return"DUp"===t||"DLeft"===t||"DIn"===t}function d(t,e){var n=L.toArray(e),r=O("div"),i=B[t];i===m&&(r.style.pointerEvents="none"),_(t)&&n.reverse();for(var o=n.length,a=0;o>a;++a)r.appendChild(i(y(n[a])));return r}function v(t){return"Absolute"===t.ctor?t._0+"px":100*t._0+"%"}function g(t,e,n){var r=e._0,i=r.element,o=r.props,a=o.width+(i.adjustWidth?i.adjustWidth:0),u=o.height+(i.adjustHeight?i.adjustHeight:0);n.style.position="absolute",n.style.margin="auto";var l="";switch(t.horizontal.ctor){case"P":n.style.right=v(t.x),n.style.removeProperty("left");break;case"Z":l="translateX("+(-a/2|0)+"px) ";case"N":n.style.left=v(t.x),n.style.removeProperty("right")}switch(t.vertical.ctor){case"N":n.style.bottom=v(t.y),n.style.removeProperty("top");break;case"Z":l+="translateY("+(-u/2|0)+"px)";case"P":n.style.top=v(t.y),n.style.removeProperty("bottom")}return""!==l&&A(n.style,l),n}function A(t,e){t.transform=e,t.msTransform=e,t.MozTransform=e,t.webkitTransform=e,t.OTransform=e}function k(t,e){var n=y(e);g(t,e,n);var r=O("div");return r.style.position="relative",r.style.overflow="hidden",r.appendChild(n),r}function b(t){var e=t.html,n=t.align,r=O("div");return r.innerHTML=e,r.style.visibility="hidden",n&&(r.style.textAlign=n),r.style.visibility="visible",r.style.pointerEvents="auto",r}function y(t){var e=t._0;return n(e,E(e))}function E(t){var e=t.element;switch(e.ctor){case"Image":return u(t.props,e);case"Flow":return d(e._0.ctor,e._1);case"Container":return k(e._0,e._1);case"Spacer":return O("div");case"RawHtml":return b(e);case"Custom":return e.render(e.model)}}function N(t,e,n){var r=T(t,e,n);return r!==t&&t.parentNode.replaceChild(r,t),r}function T(t,e,n){var r=e._0,i=n._0,o=t;if("A"===t.tagName&&(t=t.firstChild),r.props.id===i.props.id)return F(t,r,i),o;if(r.element.ctor!==i.element.ctor)return y(n);var a=i.element,u=r.element;switch(a.ctor){case"Spacer":return F(t,r,i),o;case"RawHtml":return u.html.valueOf()!==a.html.valueOf()&&(t.innerHTML=a.html),F(t,r,i),o;case"Image":if("Plain"===a._0.ctor)a._3!==u._3&&(t.src=a._3);else if(!M.eq(a,u)||i.props.width!==r.props.width||i.props.height!==r.props.height)return y(n);return F(t,r,i),o;case"Flow":for(var l=L.toArray(a._1),c=l.length;c--;)l[c]=l[c]._0.element.ctor;if(a._0.ctor!==u._0.ctor)return y(n);var s=L.toArray(a._1),f=t.childNodes;if(s.length!==f.length)return y(n);for(var m=L.toArray(u._1),p=a._0.ctor,h=B[p],d=_(p),v=f.length,c=v;c--;){var A=f[d?v-c-1:c];h(N(A,m[c],s[c]))}return F(t,r,i),o;case"Container":var A=t.firstChild,k=N(A,u._1,a._1);return g(a._0,a._1,k),F(t,r,i),o;case"Custom":if(u.type===a.type){var b=a.update(t,u.model,a.model);return F(b,r,i),b}return y(n)}}function F(t,e,n){var u=n.props,l=e.props,c=n.element,s=u.width-(c.adjustWidth||0),f=u.height-(c.adjustHeight||0);s!==l.width&&(t.style.width=(0|s)+"px"),f!==l.height&&(t.style.height=(0|f)+"px"),u.opacity!==l.opacity&&(t.style.opacity=u.opacity);var m="Just"===u.color.ctor?S.toCss(u.color._0):"";if(t.style.backgroundColor!==m&&(t.style.backgroundColor=m),u.tag!==l.tag&&(t.id=u.tag),u.href!==l.href)if(""===l.href){var p=O("a");p.href=u.href,p.style.display="block",p.style.pointerEvents="auto",t.parentNode.replaceChild(p,t),p.appendChild(t)}else if(""===u.href){var p=t.parentNode;p.parentNode.replaceChild(t,p)}else t.parentNode.href=u.href;var h=!1;"_Tuple0"===l.hover.ctor?"_Tuple0"!==u.hover.ctor&&o(t,u.hover):"_Tuple0"===u.hover.ctor?(h=!0,a(t)):t.elm_hover_handler=u.hover,"_Tuple0"===l.click.ctor?"_Tuple0"!==u.click.ctor&&r(t,u.click):"_Tuple0"===u.click.ctor?(h=!0,i(t)):t.elm_click_handler=u.click,h&&"_Tuple0"===u.hover.ctor&&"_Tuple0"===u.click.ctor&&(t.style.pointerEvents="none")}function x(t){return function(n){var r={ctor:"RawHtml",html:D.renderHtml(n),align:t},i=j(0,r);return e(i._0,i._1,r)}}function w(t){var n={ctor:"RawHtml",html:t,align:null},r=j(0,n);return e(r._0,r._1,n)}function C(t,e){var n=document.createElement("div");n.innerHTML=e.html,t>0&&(n.style.width=t+"px"),n.style.visibility="hidden",n.style.styleFloat="left",n.style.cssFloat="left",document.body.appendChild(n);var r=window.getComputedStyle(n,null),i=Math.ceil(r.getPropertyValue("width").slice(0,-2)-0),o=Math.ceil(r.getPropertyValue("height").slice(0,-2)-0);return document.body.removeChild(n),M.Tuple2(i,o)}if(t.Native=t.Native||{},t.Native.Graphics=t.Native.Graphics||{},t.Native.Graphics.Element=t.Native.Graphics.Element||{},"values"in t.Native.Graphics.Element)return t.Native.Graphics.Element.values;var S=Elm.Native.Color.make(t),L=Elm.Native.List.make(t),R=Elm.Maybe.make(t),D=Elm.Native.Text.make(t),M=Elm.Native.Utils.make(t),O="undefined"==typeof document?function(t){return{style:{},appendChild:function(){}}}:function(t){var e=document.createElement(t);return e.style.padding="0",e.style.margin="0",e},B={DUp:p,DDown:p,DLeft:h,DRight:h,DIn:m,DOut:m},j="undefined"!=typeof document?C:function(t,e){return M.Tuple2(0,0)};return t.Native.Graphics.Element.values={render:y,update:T,updateAndReplace:N,createNode:O,newElement:F3(e),addTransform:A,htmlHeight:F2(j),guid:M.guid,block:x,markdown:w}},Elm.Native.Text={},Elm.Native.Text.make=function(t){function e(t){return{ctor:"Text:Text",_0:t}}function n(t,e){return{ctor:"Text:Append",_0:t,_1:e}}function r(t,e,n){var r={},i={ctor:"Text:Meta",_0:r,_1:n};if("Text:Meta"===n.ctor){i._1=n._1;for(var o=n._0,a=b.length;a--;){var u=b[a],l=o[u];l&&(r[u]=l)}}return r[t]=e,i}function i(t){for(var e=k.toArray(t),n=e.length;n--;){var r=e[n];r.indexOf(" ")>-1&&(e[n]="'"+r+"'")}return e.join(",")}function o(t){var e=t.ctor;return"Under"===e?"underline":"Over"===e?"overline":"line-through"}function a(t,e){var n=r("color",A(t.color),e),a=n._0;return"[]"!==t.typeface.ctor&&(a["font-family"]=i(t.typeface)),"Nothing"!==t.height.ctor&&(a["font-size"]=t.height._0+"px"),t.bold&&(a["font-weight"]="bold"),t.italic&&(a["font-style"]="italic"),"Nothing"!==t.line.ctor&&(a["text-decoration"]=o(t.line._0)),n}function u(t,e){return r("font-size",t+"px",e)}function l(t,e){return r("font-family",i(t),e)}function c(t){return r("font-family","monospace",t)}function s(t){return r("font-style","italic",t)}function f(t){return r("font-weight","bold",t)}function m(t,e){return r("href",t,e)}function p(t,e){return r("text-decoration",o(t),e)}function h(t,e){return r("color",A(t),e)}function _(t){var e=t.ctor;return"Text:Append"===e?_(t._0)+_(t._1):"Text:Text"===e?v(t._0):"Text:Meta"===e?d(t._0,_(t._1)):void 0}function d(t,e){var n=t.href;n&&(e='<a href="'+n+'">'+e+"</a>");var r="";for(var i in t)"href"!==i&&(r+=i+":"+t[i]+";");return r&&(e='<span style="'+r+'">'+e+"</span>"),e}function v(t){if(0===t.length)return t;t=t.replace(/"/g,"&#34;").replace(/'/g,"&#39;").replace(/</g,"&#60;").replace(/>/g,"&#62;");for(var e=t.split("\n"),n=e.length;n--;)e[n]=g(e[n]);return e.join("<br/>")}function g(t){if(0===t.length)return t;var e=t.split("");" "===e[0]&&(e[0]="&nbsp;");for(var n=e.length;--n;)" "===e[n][0]&&" "===e[n-1]&&(e[n-1]=e[n-1]+e[n],e[n]="");for(var n=e.length;n--;)if(e[n].length>1&&" "===e[n][0]){for(var r=e[n].split(""),i=r.length-2;i>=0;i-=2)r[i]="&nbsp;";e[n]=r.join("")}return e=e.join("")," "===e[e.length-1]?e.slice(0,-1)+"&nbsp;":e}if(t.Native=t.Native||{},t.Native.Text=t.Native.Text||{},t.Native.Text.values)return t.Native.Text.values;var A=Elm.Native.Color.make(t).toCss,k=Elm.Native.List.make(t),b=["font-size","font-family","font-style","font-weight","href","text-decoration","color"];return t.Native.Text.values={fromString:e,append:F2(n),height:F2(u),italic:s,bold:f,line:F2(p),monospace:c,typeface:F2(l),color:F2(h),link:F2(m),style:F2(a),toTypefaces:i,toLine:o,renderHtml:_}},Elm.Text=Elm.Text||{},Elm.Text.make=function(t){"use strict";if(t.Text=t.Text||{},t.Text.values)return t.Text.values;var e=Elm.Native.Utils.make(t),n=Elm.Color.make(t),r=Elm.List.make(t),i=Elm.Maybe.make(t),o=Elm.Native.Text.make(t),a={},u=o.line,l=o.italic,c=o.bold,s=o.color,f=o.height,m=o.link,p=o.monospace,h=o.typeface,_=o.style,d=o.append,v=o.fromString,g=v(""),A=function(t){return A3(r.foldr,d,g,t)},k=F2(function(t,e){return A(A2(r.intersperse,t,e))}),b={typeface:e.list([]),height:i.Nothing,color:n.black,bold:!1,italic:!1,line:i.Nothing},y=F6(function(t,e,n,r,i,o){return{typeface:t,height:e,color:n,bold:r,italic:i,line:o}}),E={ctor:"Through"},N={ctor:"Over"},T={ctor:"Under"};return t.Text.values={_op:a,fromString:v,empty:g,append:d,concat:A,join:k,link:m,style:_,defaultStyle:b,typeface:h,monospace:p,height:f,color:s,bold:c,italic:l,line:u,Style:y,Under:T,Over:N,Through:E}},Elm.Graphics=Elm.Graphics||{},Elm.Graphics.Element=Elm.Graphics.Element||{},Elm.Graphics.Element.make=function(t){"use strict";if(t.Graphics=t.Graphics||{},t.Graphics.Element=t.Graphics.Element||{},t.Graphics.Element.values)return t.Graphics.Element.values;var e=Elm.Native.Utils.make(t),n=Elm.Basics.make(t),r=(Elm.Color.make(t),Elm.List.make(t)),i=Elm.Maybe.make(t),o=Elm.Native.Graphics.Element.make(t),a=Elm.Text.make(t),u={},l={ctor:"DOut"},c=l,s={ctor:"DIn"},f=s,m={ctor:"DRight"},p=m,h={ctor:"DLeft"},_=h,d={ctor:"DDown"},v=d,g={ctor:"DUp"},A=g,k=(F4(function(t,e,n,r){return{horizontal:t,vertical:e,x:n,y:r}}),function(t){return{ctor:"Position",_0:t}}),b=function(t){return{ctor:"Relative",_0:t}},y=b,E=function(t){return{ctor:"Absolute",_0:t}},N=E,T={ctor:"N"},F=k({horizontal:T,vertical:T,x:E(0),y:E(0)}),x=F2(function(t,e){return k({horizontal:T,vertical:T,x:t,y:e})}),w={ctor:"Z"},C=k({horizontal:w,vertical:w,x:b(.5),y:b(.5)}),S=k({horizontal:T,vertical:w,x:E(0),y:b(.5)}),L=k({horizontal:w,vertical:T,x:b(.5),y:E(0)}),R=F2(function(t,e){return k({horizontal:w,vertical:w,x:t,y:e})}),D=F2(function(t,e){return k({horizontal:T,vertical:w,x:t,y:e})}),M=F2(function(t,e){return k({horizontal:w,vertical:T,x:t,y:e})}),O={ctor:"P"},B=k({horizontal:T,vertical:O,x:E(0),y:E(0)}),j=k({horizontal:O,vertical:O,x:E(0),y:E(0)}),P=k({horizontal:O,vertical:T,x:E(0),y:E(0)}),J=k({horizontal:O,vertical:w,x:E(0),y:b(.5)}),z=k({horizontal:w,vertical:O,x:b(.5),y:E(0)}),U=F2(function(t,e){return k({horizontal:T,vertical:O,x:t,y:e})}),I=F2(function(t,e){return k({horizontal:O,vertical:O,x:t,y:e})}),H=F2(function(t,e){return k({horizontal:O,vertical:T,x:t,y:e})}),G=F2(function(t,e){return k({horizontal:O,vertical:w,x:t,y:e})}),q=F2(function(t,e){return k({horizontal:w,vertical:O,x:t,y:e})}),V=o.block("justify"),$=o.block("center"),W=o.block("right"),K=o.block("left"),Y=function(t){return K(a.monospace(a.fromString(n.toString(t))))},X={ctor:"Tiled"},Q=function(t){return{ctor:"Cropped",_0:t}},Z={ctor:"Fitted"},tt={ctor:"Plain"},et={ctor:"Spacer"},nt=F2(function(t,e){return{ctor:"Flow",_0:t,_1:e}}),rt=F2(function(t,e){return{ctor:"Container",_0:t,_1:e}}),it=F4(function(t,e,n,r){return{ctor:"Image",_0:t,_1:e,_2:n,_3:r}}),ot=o.newElement,at=F3(function(t,e,n){return A3(ot,t,e,A4(it,tt,t,e,n))}),ut=F3(function(t,e,n){return A3(ot,t,e,A4(it,Z,t,e,n))}),lt=F4(function(t,e,n,r){return A3(ot,e,n,A4(it,Q(t),e,n,r))}),ct=F3(function(t,e,n){return A3(ot,t,e,A4(it,X,t,e,n))}),st=F4(function(t,e,n,r){var i=n;return A3(ot,t,e,A2(rt,i._0,r))}),ft=F2(function(t,e){return A3(ot,t,e,et)}),mt=function(t){var e=t,n=e._0;return{ctor:"_Tuple2",_0:n.props.width,_1:n.props.height}},pt=function(t){var e=t;return e._0.props.height},ht=function(t){var e=t;return e._0.props.width},_t=F2(function(t,r){return A3(ot,A2(n.max,ht(t),ht(r)),pt(t)+pt(r),A2(nt,d,e.list([t,r])))}),dt=F2(function(t,r){return A3(ot,A2(n.max,ht(r),ht(t)),pt(r)+pt(t),A2(nt,d,e.list([r,t])))}),vt=F2(function(t,r){return A3(ot,ht(t)+ht(r),A2(n.max,pt(t),pt(r)),A2(nt,p,e.list([t,r])))}),gt=function(t){var e=A2(r.map,pt,t),n=A2(r.map,ht,t);return A3(ot,A2(i.withDefault,0,r.maximum(n)),A2(i.withDefault,0,r.maximum(e)),A2(nt,l,t))},At=A2(ft,0,0),kt=F2(function(t,n){var o=F2(function(e,r){return A3(ot,e,r,A2(nt,t,n))}),a=function(t){return A2(i.withDefault,0,r.maximum(t))},u=A2(r.map,pt,n),l=A2(r.map,ht,n);if(e.eq(n,e.list([])))return At;var c=t;switch(c.ctor){case"DUp":return A2(o,a(l),r.sum(u));case"DDown":return A2(o,a(l),r.sum(u));case"DLeft":return A2(o,r.sum(l),a(u));case"DRight":return A2(o,r.sum(l),a(u));case"DIn":return A2(o,a(l),a(u));default:return A2(o,a(l),a(u))}}),bt=(F9(function(t,e,n,r,i,o,a,u,l){return{id:t,width:e,height:n,opacity:r,color:i,href:o,tag:a,hover:u,click:l}}),function(t){return{ctor:"Element_elm_builtin",_0:t}}),yt=F2(function(t,r){var i=r,a=i._0.props,u=i._0.element,l=function(){var e=u;switch(e.ctor){case"Image":return n.round(n.toFloat(e._2)/n.toFloat(e._1)*n.toFloat(t));case"RawHtml":return n.snd(A2(o.htmlHeight,t,u));default:return a.height}}();return bt({element:u,props:e.update(a,{width:t,height:l})})}),Et=F2(function(t,n){var r=n;return bt({element:r._0.element,props:e.update(r._0.props,{height:t})})}),Nt=F3(function(t,e,n){return A2(Et,e,A2(yt,t,n))}),Tt=F2(function(t,n){var r=n;return bt({element:r._0.element,props:e.update(r._0.props,{opacity:t})})}),Ft=F2(function(t,n){var r=n;return bt({element:r._0.element,props:e.update(r._0.props,{color:i.Just(t)})})}),xt=F2(function(t,n){var r=n;return bt({element:r._0.element,props:e.update(r._0.props,{tag:t})})}),wt=F2(function(t,n){var r=n;return bt({element:r._0.element,props:e.update(r._0.props,{href:t})})});return t.Graphics.Element.values={_op:u,image:at,fittedImage:ut,croppedImage:lt,tiledImage:ct,leftAligned:K,rightAligned:W,centered:$,justified:V,show:Y,width:yt,height:Et,size:Nt,color:Ft,opacity:Tt,link:wt,tag:xt,widthOf:ht,heightOf:pt,sizeOf:mt,flow:kt,up:A,down:v,left:_,right:p,inward:f,outward:c,layers:gt,above:_t,below:dt,beside:vt,empty:At,spacer:ft,container:st,middle:C,midTop:z,midBottom:L,midLeft:S,midRight:J,topLeft:B,topRight:j,bottomLeft:F,bottomRight:P,absolute:N,relative:y,middleAt:R,midTopAt:q,midBottomAt:M,midLeftAt:D,midRightAt:G,topLeftAt:U,topRightAt:I,bottomLeftAt:x,bottomRightAt:H}},Elm.Graphics=Elm.Graphics||{},Elm.Graphics.Collage=Elm.Graphics.Collage||{},Elm.Graphics.Collage.make=function(t){"use strict";if(t.Graphics=t.Graphics||{},t.Graphics.Collage=t.Graphics.Collage||{},t.Graphics.Collage.values)return t.Graphics.Collage.values;var e=Elm.Native.Utils.make(t),n=Elm.Basics.make(t),r=Elm.Color.make(t),i=(Elm.Graphics.Element.make(t),Elm.List.make(t)),o=Elm.Native.Graphics.Collage.make(t),a=(Elm.Text.make(t),Elm.Transform2D.make(t)),u={},l=function(t){return{ctor:"Shape",_0:t}},c=function(t){return l(t)},s=F2(function(t,n){var r=n/2,i=t/2;return l(e.list([{ctor:"_Tuple2",_0:0-i,_1:0-r},{ctor:"_Tuple2",_0:0-i,_1:r},{ctor:"_Tuple2",_0:i,_1:r},{ctor:"_Tuple2",_0:i,_1:0-r}]))}),f=function(t){return A2(s,t,t)},m=F2(function(t,r){var o=r/2,a=t/2,u=50,c=2*n.pi/u,s=function(t){return{ctor:"_Tuple2",_0:a*n.cos(c*t),_1:o*n.sin(c*t)}};return l(A2(i.map,s,e.range(0,u-1)))}),p=function(t){return A2(m,2*t,2*t)},h=F2(function(t,r){var o=n.toFloat(t),a=2*n.pi/o,u=function(t){return{ctor:"_Tuple2",_0:r*n.cos(a*t),_1:r*n.sin(a*t)}};return l(A2(i.map,u,e.range(0,o-1)))}),_=function(t){return{ctor:"Path",_0:t}},d=function(t){return _(t)},v=F2(function(t,n){return _(e.list([t,n]))}),g=o.collage,A=function(t){return{ctor:"Fill",_0:t}},k=function(t){return{ctor:"Line",_0:t}},b=F2(function(t,e){return{ctor:"FGroup",_0:t,_1:e}}),y=function(t){return{ctor:"FElement",_0:t}},E=F4(function(t,e,n,r){return{ctor:"FImage",_0:t,_1:e,_2:n,_3:r}}),N=function(t){return{ctor:"FText",_0:t}},T=F2(function(t,e){return{ctor:"FOutlinedText",_0:t,_1:e}}),F=F2(function(t,e){return{ctor:"FShape",_0:t,_1:e}}),x=F2(function(t,e){return{ctor:"FPath",_0:t,_1:e}}),w=F6(function(t,e,n,r,i,o){return{color:t,width:e,cap:n,join:r,dashing:i,dashOffset:o}}),C={ctor:"Clipped"},S=function(t){return{ctor:"Sharp",_0:t}},L={ctor:"Smooth"},R={ctor:"Padded"},D={ctor:"Round"},M={ctor:"Flat"},O={color:r.black,width:1,cap:M,join:S(10),dashing:e.list([]),dashOffset:0},B=function(t){return e.update(O,{color:t})},j=function(t){return e.update(O,{color:t,dashing:e.list([8,4])})},P=function(t){return e.update(O,{color:t,dashing:e.list([3,3])})},J=function(t){return{ctor:"Grad",_0:t}},z=function(t){return{ctor:"Texture",_0:t}},U=function(t){return{ctor:"Solid",_0:t}},I=function(t){return{ctor:"Form_elm_builtin",_0:t}},H=function(t){return I({theta:0,scale:1,x:0,y:0,alpha:1,form:t})},G=F2(function(t,e){var n=e;return H(A2(F,A(t),n._0))}),q=F2(function(t,e){return A2(G,U(t),e)}),V=F2(function(t,e){return A2(G,z(t),e)}),$=F2(function(t,e){return A2(G,J(t),e)}),W=F2(function(t,e){var n=e;return H(A2(F,k(t),n._0))}),K=F2(function(t,e){var n=e;return H(A2(x,t,n._0))}),Y=(F4(function(t,e,n,r){return H(A4(E,t,e,n,r))}),function(t){return H(y(t))}),X=function(t){return H(A2(b,a.identity,t))},Q=F2(function(t,e){return H(A2(b,t,e))}),Z=function(t){return H(N(t))},tt=F2(function(t,e){return H(A2(T,t,e))}),et=F2(function(t,n){var r=t,i=n,o=i._0;return I(e.update(o,{x:o.x+r._0,y:o.y+r._1}))}),nt=F2(function(t,n){var r=n,i=r._0;return I(e.update(i,{x:i.x+t}))}),rt=F2(function(t,n){var r=n,i=r._0;return I(e.update(i,{y:i.y+t}))}),it=F2(function(t,n){var r=n,i=r._0;return I(e.update(i,{scale:i.scale*t}))}),ot=F2(function(t,n){var r=n,i=r._0;return I(e.update(i,{theta:i.theta+t}))}),at=F2(function(t,n){var r=n;return I(e.update(r._0,{alpha:t}))});return t.Graphics.Collage.values={_op:u,collage:g,toForm:Y,filled:q,textured:V,gradient:$,outlined:W,traced:K,text:Z,outlinedText:tt,move:et,moveX:nt,moveY:rt,scale:it,rotate:ot,alpha:at,group:X,groupTransform:Q,rect:s,oval:m,square:f,circle:p,ngon:h,polygon:c,segment:v,path:d,solid:B,dashed:j,dotted:P,defaultLine:O,LineStyle:w,Flat:M,Round:D,Padded:R,Smooth:L,Sharp:S,Clipped:C}},Elm.Native.Debug={},Elm.Native.Debug.make=function(t){function e(t,e){var n=t+": "+a(e),r=r||{};return r.stdout?r.stdout.write(n):console.log(n),e}function n(t){throw new Error(t)}function r(e,n){return t.debug?t.debug.trace(e,n):n}function i(e,n){return t.debug&&t.debug.watch(e,n),n}function o(e,n,r){return t.debug&&t.debug.watch(e,n(r)),r}if(t.Native=t.Native||{},t.Native.Debug=t.Native.Debug||{},t.Native.Debug.values)return t.Native.Debug.values;var a=Elm.Native.Utils.make(t).toString;return t.Native.Debug.values={crash:n,tracePath:F2(r),log:F2(e),watch:F2(i),watchSummary:F3(o)}},Elm.Debug=Elm.Debug||{},Elm.Debug.make=function(t){"use strict";if(t.Debug=t.Debug||{},t.Debug.values)return t.Debug.values;var e=(Elm.Native.Utils.make(t),Elm.Graphics.Collage.make(t),Elm.Native.Debug.make(t)),n={},r=e.tracePath,i=e.watchSummary,o=e.watch,a=e.crash,u=e.log;return t.Debug.values={_op:n,log:u,crash:a,watch:o,watchSummary:i,trace:r}},Elm.Result=Elm.Result||{},Elm.Result.make=function(t){"use strict";if(t.Result=t.Result||{},t.Result.values)return t.Result.values;var e=(Elm.Native.Utils.make(t),Elm.Maybe.make(t)),n={},r=function(t){var n=t;return"Ok"===n.ctor?e.Just(n._0):e.Nothing},i=F2(function(t,e){var n=e;return"Ok"===n.ctor?n._0:t}),o=function(t){return{ctor:"Err",_0:t}},a=F2(function(t,e){var n=t;return"Ok"===n.ctor?e(n._0):o(n._0)}),u=function(t){return{ctor:"Ok",_0:t}},l=F2(function(t,e){var n=e;return"Ok"===n.ctor?u(t(n._0)):o(n._0)}),c=F3(function(t,e,n){var r={ctor:"_Tuple2",_0:e,_1:n};return"Ok"===r._0.ctor?"Ok"===r._1.ctor?u(A2(t,r._0._0,r._1._0)):o(r._1._0):o(r._0._0)}),s=F4(function(t,e,n,r){var i={ctor:"_Tuple3",_0:e,_1:n,_2:r};return"Ok"===i._0.ctor?"Ok"===i._1.ctor?"Ok"===i._2.ctor?u(A3(t,i._0._0,i._1._0,i._2._0)):o(i._2._0):o(i._1._0):o(i._0._0)}),f=F5(function(t,e,n,r,i){var a={ctor:"_Tuple4",_0:e,_1:n,_2:r,_3:i};return"Ok"===a._0.ctor?"Ok"===a._1.ctor?"Ok"===a._2.ctor?"Ok"===a._3.ctor?u(A4(t,a._0._0,a._1._0,a._2._0,a._3._0)):o(a._3._0):o(a._2._0):o(a._1._0):o(a._0._0)}),m=F6(function(t,e,n,r,i,a){var l={ctor:"_Tuple5",_0:e,_1:n,_2:r,_3:i,_4:a};return"Ok"===l._0.ctor?"Ok"===l._1.ctor?"Ok"===l._2.ctor?"Ok"===l._3.ctor?"Ok"===l._4.ctor?u(A5(t,l._0._0,l._1._0,l._2._0,l._3._0,l._4._0)):o(l._4._0):o(l._3._0):o(l._2._0):o(l._1._0):o(l._0._0)}),p=F2(function(t,e){var n=e;return"Ok"===n.ctor?u(n._0):o(t(n._0))}),h=F2(function(t,e){var n=e;return"Just"===n.ctor?u(n._0):o(t)});return t.Result.values={_op:n,withDefault:i,map:l,map2:c,map3:s,map4:f,map5:m,andThen:a,toMaybe:r,fromMaybe:h,formatError:p,Ok:u,Err:o}},Elm.Native.Signal={},Elm.Native.Signal.make=function(t){function e(t,e,n){for(var r=t.kids,i=r.length;i--;)r[i].notify(e,n,t.id)}function n(n,r){var i={id:b.guid(),name:"input-"+n,value:r,parents:[],kids:[]};return i.notify=function(t,n,r){var o=n===i.id;return o&&(i.value=r),e(i,t,o),o},t.inputs.push(i),i}function r(t){return n("constant",t)}function i(e){function r(e){return k.asyncFunction(function(n){t.setTimeout(function(){t.notify(i.id,e)},0),n(k.succeed(b.Tuple0))})}var i=n("mailbox",e);return{signal:i,address:{ctor:"Address",_0:r}}}function o(t){k.perform(t._0)}function a(t,e,n){var r={id:b.guid(),name:"output-"+t,parents:[n],isOutput:!0};return r.notify=function(t,r,i){r&&e(n.value)},n.kids.push(r),r}function u(t,n){var r={id:b.guid(),name:"map"+n.length,value:t(),parents:n,kids:[]},i=n.length,o=0,a=!1;r.notify=function(n,u,l){++o,a=a||u,o===i&&(a&&(r.value=t()),e(r,n,a),a=!1,o=0)};for(var u=i;u--;)n[u].kids.push(r);return r}function l(t,e){function n(){return t(e.value)}return u(n,[e])}function c(t,e,n){function r(){return A2(t,e.value,n.value)}return u(r,[e,n])}function s(t,e,n,r){function i(){return A3(t,e.value,n.value,r.value)}return u(i,[e,n,r])}function f(t,e,n,r,i){function o(){return A4(t,e.value,n.value,r.value,i.value)}return u(o,[e,n,r,i])}function m(t,e,n,r,i,o){function a(){return A5(t,e.value,n.value,r.value,i.value,o.value)}return u(a,[e,n,r,i,o])}function p(t,n,r){var i={id:b.guid(),name:"foldp",parents:[r],kids:[],value:n};return i.notify=function(n,o,a){o&&(i.value=A2(t,r.value,i.value)),e(i,n,o)},r.kids.push(i),i}function h(n){var r={id:b.guid(),name:"timestamp",value:b.Tuple2(t.timer.programStart,n.value),parents:[n],kids:[]};return r.notify=function(t,i,o){i&&(r.value=b.Tuple2(t,n.value)),e(r,t,i)},n.kids.push(r),r}function _(e,r){function i(n){setTimeout(function(){t.notify(o.id,n)},e)}var o=n("delay-input-"+e,r.value);return a("delay-output-"+e,i,r),o}function d(t,n,r){var i={id:b.guid(),name:"merge",value:A2(t,n.value,r.value),parents:[n,r],kids:[]},o={touched:!1,update:!1,value:null},a={touched:!1,update:!1,value:null};return i.notify=function(u,l,c){if(c===n.id&&(o.touched=!0,o.update=l,o.value=n.value),c===r.id&&(a.touched=!0,a.update=l,a.value=r.value),o.touched&&a.touched){var s=!1;o.update&&a.update?(i.value=A2(t,o.value,a.value),s=!0):o.update?(i.value=o.value,s=!0):a.update&&(i.value=a.value,s=!0),o.touched=!1,a.touched=!1,e(i,u,s)}},n.kids.push(i),r.kids.push(i),i}function v(t,n,r){var i=t(r.value),o={id:b.guid(),name:"filterMap",value:"Nothing"===i.ctor?n:i._0,parents:[r],kids:[]};return o.notify=function(n,i,a){var u=!1;if(i){var l=t(r.value);"Just"===l.ctor&&(u=!0,o.value=l._0)}e(o,n,u)},r.kids.push(o),o}function g(t,n){var r={id:b.guid(),name:"sampleOn",value:n.value,parents:[t,n],kids:[]},i=!1,o=!1,a=!1;return r.notify=function(u,l,c){c===t.id&&(o=!0,a=l),c===n.id&&(i=!0),o&&i&&(a&&(r.value=n.value),o=!1,i=!1,e(r,u,a))},t.kids.push(r),n.kids.push(r),r}function A(t){var n={id:b.guid(),name:"dropRepeats",value:t.value,parents:[t],kids:[]};return n.notify=function(r,i,o){var a=!1;i&&!b.eq(n.value,t.value)&&(n.value=t.value,a=!0),e(n,r,a)},t.kids.push(n),n}if(t.Native=t.Native||{},t.Native.Signal=t.Native.Signal||{},t.Native.Signal.values)return t.Native.Signal.values;var k=Elm.Native.Task.make(t),b=Elm.Native.Utils.make(t);return t.Native.Signal.values={input:n,constant:r,mailbox:i,sendMessage:o,output:a,map:F2(l),map2:F3(c),map3:F4(s),map4:F5(f),map5:F6(m),foldp:F3(p),genericMerge:F3(d),filterMap:F3(v),sampleOn:F2(g),dropRepeats:A,timestamp:h,delay:F2(_)}},Elm.Native.Task={},Elm.Native.Task.make=function(t){function e(t){return{tag:"Succeed",value:t}}function n(t){return{tag:"Fail",value:t}}function r(t){return{tag:"Async",asyncFunction:t}}function i(t,e){return{tag:"AndThen",task:t,callback:e}}function o(t,e){return{tag:"Catch",task:t,callback:e}}function a(t){c({task:t},function(){})}function u(e,n){function r(){if(o.shift(),o.length>0){var t=o[0];setTimeout(function(){c(t,r)},0)}}function i(t){var e={task:t};o.push(e),1===o.length&&c(e,r)}var o=[];return p||(p=Elm.Native.Signal.make(t)),p.output("perform-tasks-"+e,i,n),i(n.value),n}function l(t,e){return{status:t,task:e}}function c(t,e){for(var n=l("runnable",t.task);"runnable"===n.status;)n=s(e,t,n.task);"done"===n.status&&(t.task=n.task,e()),"blocked"===n.status&&(t.task=n.task)}function s(t,e,n){var r=n.tag;if("Succeed"===r||"Fail"===r)return l("done",n);if("Async"===r){var i={},o=!0,a=!1;return n.asyncFunction(function(n){i.tag=n.tag,i.value=n.value,o?a=!0:c(e,t)}),o=!1,l(a?"done":"blocked",i)}if("AndThen"===r||"Catch"===r){for(var u=l("runnable",n.task);"runnable"===u.status;)u=s(t,e,u.task);if("done"===u.status){var f=u.task,m=f.tag,p="Succeed"===m&&"AndThen"===r,h="Fail"===m&&"Catch"===r;return p||h?l("runnable",n.callback(f.value)):l("runnable",f)}if("blocked"===u.status)return l("blocked",{tag:r,task:u.task,callback:n.callback})}}function f(t){return r(function(n){setTimeout(function(){n(e(h.Tuple0))},t)})}function m(t){return r(function(n){var r=setTimeout(function(){a(t)},0);n(e(r))})}if(t.Native=t.Native||{},t.Native.Task=t.Native.Task||{},t.Native.Task.values)return t.Native.Task.values;var p,h=(Elm.Result.make(t),Elm.Native.Utils.make(t));return t.Native.Task.values={succeed:e,fail:n,asyncFunction:r,andThen:F2(i),catch_:F2(o),perform:a,performSignal:u,spawn:m,sleep:f}},Elm.Task=Elm.Task||{},Elm.Task.make=function(t){"use strict";if(t.Task=t.Task||{},t.Task.values)return t.Task.values;var e=Elm.Native.Utils.make(t),n=Elm.List.make(t),r=Elm.Maybe.make(t),i=Elm.Native.Task.make(t),o=Elm.Result.make(t),a={},u=i.sleep,l=i.spawn,c=i.catch_,s=i.andThen,f=i.fail,m=F2(function(t,e){return A2(c,e,function(e){return f(t(e))})}),p=i.succeed,h=F2(function(t,e){return A2(s,e,function(e){return p(t(e))})}),_=F3(function(t,e,n){return A2(s,e,function(e){return A2(s,n,function(n){return p(A2(t,e,n))})})}),d=F4(function(t,e,n,r){return A2(s,e,function(e){return A2(s,n,function(n){return A2(s,r,function(r){return p(A3(t,e,n,r))})})})}),v=F5(function(t,e,n,r,i){return A2(s,e,function(e){return A2(s,n,function(n){return A2(s,r,function(r){return A2(s,i,function(i){return p(A4(t,e,n,r,i))})})})})}),g=F6(function(t,e,n,r,i,o){return A2(s,e,function(e){return A2(s,n,function(n){return A2(s,r,function(r){return A2(s,i,function(i){return A2(s,o,function(o){return p(A5(t,e,n,r,i,o))})})})})})}),A=F2(function(t,e){return A2(s,t,function(t){return A2(s,e,function(e){return p(t(e))})})}),k=function(t){var r=t;return"[]"===r.ctor?p(e.list([])):A3(_,F2(function(t,e){
-return A2(n._op["::"],t,e)}),r._0,k(r._1))},b=function(t){return A2(c,A2(h,r.Just,t),function(t){return p(r.Nothing)})},y=F2(function(t,e){var n=e;return"Just"===n.ctor?p(n._0):f(t)}),E=function(t){return A2(c,A2(h,o.Ok,t),function(t){return p(o.Err(t))})},N=function(t){var e=t;return"Ok"===e.ctor?p(e._0):f(e._0)};return t.Task.values={_op:a,succeed:p,fail:f,map:h,map2:_,map3:d,map4:v,map5:g,andMap:A,sequence:k,andThen:s,onError:c,mapError:m,toMaybe:b,fromMaybe:y,toResult:E,fromResult:N,spawn:l,sleep:u}},Elm.Signal=Elm.Signal||{},Elm.Signal.make=function(t){"use strict";if(t.Signal=t.Signal||{},t.Signal.values)return t.Signal.values;var e=Elm.Native.Utils.make(t),n=Elm.Basics.make(t),r=(Elm.Debug.make(t),Elm.List.make(t)),i=Elm.Maybe.make(t),o=Elm.Native.Signal.make(t),a=Elm.Task.make(t),u={},l=F2(function(t,e){var n=t;return A2(a.onError,n._0(e),function(t){return a.succeed({ctor:"_Tuple0"})})}),c=function(t){return{ctor:"Message",_0:t}},s=F2(function(t,e){var n=t;return c(n._0(e))}),f=o.mailbox,m=function(t){return{ctor:"Address",_0:t}},p=F2(function(t,e){var n=t;return m(function(t){return n._0(e(t))})}),h=F2(function(t,e){return{address:t,signal:e}}),_=o.sampleOn,d=o.dropRepeats,v=o.filterMap,g=F3(function(t,e,n){return A3(v,function(e){return t(e)?i.Just(e):i.Nothing},e,n)}),A=F2(function(t,e){return A3(o.genericMerge,n.always,t,e)}),k=function(t){var n=r.reverse(t);return"[]"===n.ctor?e.crashCase("Signal",{start:{line:184,column:3},end:{line:189,column:40}},n)("mergeMany was given an empty list!"):A3(r.foldl,A,n._0,n._1)},b=o.foldp,y=o.map5,E=o.map4,N=o.map3,T=o.map2,F=o.map,x=o.constant;return t.Signal.values={_op:u,merge:A,mergeMany:k,map:F,map2:T,map3:N,map4:E,map5:y,constant:x,dropRepeats:d,filter:g,filterMap:v,sampleOn:_,foldp:b,mailbox:f,send:l,message:s,forwardTo:p,Mailbox:h}},Elm.Native.Lazy={},Elm.Native.Lazy.make=function(t){function e(t){var e,n=!1;return function(r){return n||(e=t(r),n=!0),e}}return t.Native=t.Native||{},t.Native.Lazy=t.Native.Lazy||{},t.Native.Lazy.values?t.Native.Lazy.values:t.Native.Lazy.values={memoize:e}},Elm.Lazy=Elm.Lazy||{},Elm.Lazy.make=function(t){"use strict";if(t.Lazy=t.Lazy||{},t.Lazy.values)return t.Lazy.values;var e=(Elm.Native.Utils.make(t),Elm.Basics.make(t),Elm.Debug.make(t),Elm.List.make(t),Elm.Maybe.make(t),Elm.Native.Lazy.make(t)),n=(Elm.Result.make(t),Elm.Signal.make(t),{}),r=function(t){var e=t;return e._0({ctor:"_Tuple0"})},i=function(t){return{ctor:"Lazy",_0:t}},o=function(t){return i(e.memoize(t))},a=F2(function(t,e){return o(function(n){return t(r(e))})}),u=F3(function(t,e,n){return o(function(i){return A2(t,r(e),r(n))})}),l=F4(function(t,e,n,i){return o(function(o){return A3(t,r(e),r(n),r(i))})}),c=F5(function(t,e,n,i,a){return o(function(o){return A4(t,r(e),r(n),r(i),r(a))})}),s=F6(function(t,e,n,i,a,u){return o(function(o){return A5(t,r(e),r(n),r(i),r(a),r(u))})}),f=F2(function(t,e){return o(function(n){return A2(r,t,r(e))})}),m=F2(function(t,e){return o(function(n){return r(e(r(t)))})});return t.Lazy.values={_op:n,force:r,lazy:o,map:a,map2:u,map3:l,map4:c,map5:s,apply:f,andThen:m}},Elm.Native.String={},Elm.Native.String.make=function(t){function e(t){return 0===t.length}function n(t,e){return t+e}function r(t){var e=t[0];return e?I.Just(G.Tuple2(G.chr(e),t.slice(1))):I.Nothing}function i(t,e){return t+e}function o(t){return U.toArray(t).join("")}function a(t){return t.length}function u(t,e){for(var n=e.split(""),r=n.length;r--;)n[r]=t(G.chr(n[r]));return n.join("")}function l(t,e){return e.split("").map(G.chr).filter(t).join("")}function c(t){return t.split("").reverse().join("")}function s(t,e,n){for(var r=n.length,i=0;r>i;++i)e=A2(t,G.chr(n[i]),e);return e}function f(t,e,n){for(var r=n.length;r--;)e=A2(t,G.chr(n[r]),e);return e}function m(t,e){return U.fromArray(e.split(t))}function p(t,e){return U.toArray(e).join(t)}function h(t,e){for(var n="";t>0;)1&t&&(n+=e),t>>=1,e+=e;return n}function _(t,e,n){return n.slice(t,e)}function d(t,e){return 1>t?"":e.slice(0,t)}function v(t,e){return 1>t?"":e.slice(-t)}function g(t,e){return 1>t?e:e.slice(t)}function A(t,e){return 1>t?e:e.slice(0,-t)}function k(t,e,n){var r=(t-n.length)/2;return h(Math.ceil(r),e)+n+h(0|r,e)}function b(t,e,n){return n+h(t-n.length,e)}function y(t,e,n){return h(t-n.length,e)+n}function E(t){return t.trim()}function N(t){return t.replace(/^\s+/,"")}function T(t){return t.replace(/\s+$/,"")}function F(t){return U.fromArray(t.trim().split(/\s+/g))}function x(t){return U.fromArray(t.split(/\r\n|\r|\n/g))}function w(t){return t.toUpperCase()}function C(t){return t.toLowerCase()}function S(t,e){for(var n=e.length;n--;)if(t(G.chr(e[n])))return!0;return!1}function L(t,e){for(var n=e.length;n--;)if(!t(G.chr(e[n])))return!1;return!0}function R(t,e){return e.indexOf(t)>-1}function D(t,e){return 0===e.indexOf(t)}function M(t,e){return e.length>=t.length&&e.lastIndexOf(t)===e.length-t.length}function O(t,e){for(var n=t.length,r=0,i=[];(r=e.indexOf(t,r))>-1;)i.push(r),r+=n;return U.fromArray(i)}function B(t){var e=t.length;if(0===e)return H.Err("could not convert string '"+t+"' to an Int");var n=0;if("-"===t[0]){if(1===e)return H.Err("could not convert string '"+t+"' to an Int");n=1}for(var r=n;e>r;++r)if(!z.isDigit(t[r]))return H.Err("could not convert string '"+t+"' to an Int");return H.Ok(parseInt(t,10))}function j(t){var e=t.length;if(0===e)return H.Err("could not convert string '"+t+"' to a Float");var n=0;if("-"===t[0]){if(1===e)return H.Err("could not convert string '"+t+"' to a Float");n=1}for(var r=0,i=n;e>i;++i)if(!(z.isDigit(t[i])||"."===t[i]&&(r+=1,1>=r)))return H.Err("could not convert string '"+t+"' to a Float");return H.Ok(parseFloat(t))}function P(t){return U.fromArray(t.split("").map(G.chr))}function J(t){return U.toArray(t).join("")}if(t.Native=t.Native||{},t.Native.String=t.Native.String||{},t.Native.String.values)return t.Native.String.values;if("values"in Elm.Native.String)return t.Native.String.values=Elm.Native.String.values;var z=Elm.Char.make(t),U=Elm.Native.List.make(t),I=Elm.Maybe.make(t),H=Elm.Result.make(t),G=Elm.Native.Utils.make(t);return Elm.Native.String.values={isEmpty:e,cons:F2(n),uncons:r,append:F2(i),concat:o,length:a,map:F2(u),filter:F2(l),reverse:c,foldl:F3(s),foldr:F3(f),split:F2(m),join:F2(p),repeat:F2(h),slice:F3(_),left:F2(d),right:F2(v),dropLeft:F2(g),dropRight:F2(A),pad:F3(k),padLeft:F3(y),padRight:F3(b),trim:E,trimLeft:N,trimRight:T,words:F,lines:x,toUpper:w,toLower:C,any:F2(S),all:F2(L),contains:F2(R),startsWith:F2(D),endsWith:F2(M),indexes:F2(O),toInt:B,toFloat:j,toList:P,fromList:J}},Elm.Native.Char={},Elm.Native.Char.make=function(t){if(t.Native=t.Native||{},t.Native.Char=t.Native.Char||{},t.Native.Char.values)return t.Native.Char.values;var e=Elm.Native.Utils.make(t);return t.Native.Char.values={fromCode:function(t){return e.chr(String.fromCharCode(t))},toCode:function(t){return t.charCodeAt(0)},toUpper:function(t){return e.chr(t.toUpperCase())},toLower:function(t){return e.chr(t.toLowerCase())},toLocaleUpper:function(t){return e.chr(t.toLocaleUpperCase())},toLocaleLower:function(t){return e.chr(t.toLocaleLowerCase())}}},Elm.Char=Elm.Char||{},Elm.Char.make=function(t){"use strict";if(t.Char=t.Char||{},t.Char.values)return t.Char.values;var e=Elm.Native.Utils.make(t),n=(Elm.Basics.make(t),Elm.Native.Char.make(t)),r={},i=n.fromCode,o=n.toCode,a=n.toLocaleLower,u=n.toLocaleUpper,l=n.toLower,c=n.toUpper,s=F3(function(t,n,r){var i=o(r);return e.cmp(i,o(t))>-1&&e.cmp(i,o(n))<1}),f=A2(s,e.chr("A"),e.chr("Z")),m=A2(s,e.chr("a"),e.chr("z")),p=A2(s,e.chr("0"),e.chr("9")),h=A2(s,e.chr("0"),e.chr("7")),_=function(t){return p(t)||A3(s,e.chr("a"),e.chr("f"),t)||A3(s,e.chr("A"),e.chr("F"),t)};return t.Char.values={_op:r,isUpper:f,isLower:m,isDigit:p,isOctDigit:h,isHexDigit:_,toUpper:c,toLower:l,toLocaleUpper:u,toLocaleLower:a,toCode:o,fromCode:i}},Elm.String=Elm.String||{},Elm.String.make=function(t){"use strict";if(t.String=t.String||{},t.String.values)return t.String.values;var e=(Elm.Native.Utils.make(t),Elm.Maybe.make(t),Elm.Native.String.make(t)),n=(Elm.Result.make(t),{}),r=e.fromList,i=e.toList,o=e.toFloat,a=e.toInt,u=e.indexes,l=e.indexes,c=e.endsWith,s=e.startsWith,f=e.contains,m=e.all,p=e.any,h=e.toLower,_=e.toUpper,d=e.lines,v=e.words,g=e.trimRight,A=e.trimLeft,k=e.trim,b=e.padRight,y=e.padLeft,E=e.pad,N=e.dropRight,T=e.dropLeft,F=e.right,x=e.left,w=e.slice,C=e.repeat,S=e.join,L=e.split,R=e.foldr,D=e.foldl,M=e.reverse,O=e.filter,B=e.map,j=e.length,P=e.concat,J=e.append,z=e.uncons,U=e.cons,I=function(t){return A2(U,t,"")},H=e.isEmpty;return t.String.values={_op:n,isEmpty:H,length:j,reverse:M,repeat:C,cons:U,uncons:z,fromChar:I,append:J,concat:P,split:L,join:S,words:v,lines:d,slice:w,left:x,right:F,dropLeft:T,dropRight:N,contains:f,startsWith:s,endsWith:c,indexes:l,indices:u,toInt:a,toFloat:o,toList:i,fromList:r,toUpper:_,toLower:h,pad:E,padLeft:y,padRight:b,trim:k,trimLeft:A,trimRight:g,map:B,filter:O,foldl:D,foldr:R,any:p,all:m}},Elm.Native.Regex={},Elm.Native.Regex.make=function(t){function e(t){return t.replace(/[-\/\\^$*+?.()|[\]{}]/g,"\\$&")}function n(t){return new RegExp(t.source,"gi")}function r(t){return new RegExp(t,"g")}function i(t,e){return null!==e.match(t)}function o(t,e,n){t="All"===t.ctor?1/0:t._0;for(var r,i=[],o=0,a=n,u=e.lastIndex,s=-1;o++<t&&(r=e.exec(a))&&s!==e.lastIndex;){for(var f=r.length-1,m=new Array(f);f>0;){var p=r[f];m[--f]=void 0===p?c.Nothing:c.Just(p)}i.push({match:r[0],submatches:l.fromArray(m),index:r.index,number:o}),s=e.lastIndex}return e.lastIndex=u,l.fromArray(i)}function a(t,e,n,r){function i(e){if(o++>=t)return e;for(var r=arguments.length-3,i=new Array(r);r>0;){var a=arguments[r];i[--r]=void 0===a?c.Nothing:c.Just(a)}return n({match:e,submatches:l.fromArray(i),index:arguments[r-1],number:o})}t="All"===t.ctor?1/0:t._0;var o=0;return r.replace(e,i)}function u(t,e,n){if(t="All"===t.ctor?1/0:t._0,t===1/0)return l.fromArray(n.split(e));for(var r,i=n,o=[],a=e.lastIndex;t--&&(r=e.exec(i));)o.push(i.slice(a,r.index)),a=e.lastIndex;return o.push(i.slice(a)),l.fromArray(o)}if(t.Native=t.Native||{},t.Native.Regex=t.Native.Regex||{},t.Native.Regex.values)return t.Native.Regex.values;if("values"in Elm.Native.Regex)return t.Native.Regex.values=Elm.Native.Regex.values;var l=Elm.Native.List.make(t),c=Elm.Maybe.make(t);return Elm.Native.Regex.values={regex:r,caseInsensitive:n,escape:e,contains:F2(i),find:F3(o),replace:F4(a),split:F3(u)}},Elm.Regex=Elm.Regex||{},Elm.Regex.make=function(t){"use strict";if(t.Regex=t.Regex||{},t.Regex.values)return t.Regex.values;var e=(Elm.Native.Utils.make(t),Elm.Maybe.make(t),Elm.Native.Regex.make(t)),n={},r=e.split,i=e.replace,o=e.find,a=function(t){return{ctor:"AtMost",_0:t}},u={ctor:"All"},l=F4(function(t,e,n,r){return{match:t,submatches:e,index:n,number:r}}),c=e.contains,s=e.caseInsensitive,f=e.regex,m=e.escape;return t.Regex.values={_op:n,regex:f,escape:m,caseInsensitive:s,contains:c,find:o,replace:i,split:r,Match:l,All:u,AtMost:a}},Elm.Combine=Elm.Combine||{},Elm.Combine.make=function(t){"use strict";if(t.Combine=t.Combine||{},t.Combine.values)return t.Combine.values;var e=Elm.Native.Utils.make(t),n=Elm.Basics.make(t),r=(Elm.Debug.make(t),Elm.Lazy.make(t)),i=Elm.List.make(t),o=Elm.Maybe.make(t),a=Elm.Regex.make(t),u=(Elm.Result.make(t),Elm.Signal.make(t),Elm.String.make(t)),l={},c=function(t){var e=t;return"Parser"===e.ctor?e._0:r.force(e._0)},s=F2(function(t,e){return A2(c,t,{input:e,position:0})}),f=function(t){return{ctor:"RecursiveParser",_0:t}},m=function(t){return function(t){return f(r.lazy(t))}(function(e){return c(t({ctor:"_Tuple0"}))})},p=function(t){return{ctor:"Parser",_0:t}},h=function(t){return{ctor:"Fail",_0:t}},_=F2(function(t,e){return p(function(n){var r=A2(c,t,n);return"Done"===r._0.ctor?A2(c,e(r._0._0),r._1):{ctor:"_Tuple2",_0:h(r._0._0),_1:r._1}})}),d=function(t){return p(function(e){return{ctor:"_Tuple2",_0:h(t),_1:e}})},v=F2(function(t,e){return p(function(r){var i=A2(c,t,r),o=i;if("Done"===o._0.ctor)return i;var a=A2(c,e,r),u=a;return"Done"===u._0.ctor?a:{ctor:"_Tuple2",_0:h(A2(n._op["++"],o._0._0,u._0._0)),_1:r}})}),g=function(t){return A3(i.foldr,v,d(e.list([])),t)},A=function(t){return{ctor:"Done",_0:t}},k=F3(function(t,e,n){return p(function(r){var i=A2(c,n,r);return"Done"===i._0.ctor?{ctor:"_Tuple2",_0:A(t(i._0._0)),_1:i._1}:{ctor:"_Tuple2",_0:h(e(i._0._0)),_1:r}})}),b=F2(function(t,e){return A3(k,t,n.identity,e)}),y=k(n.identity),E=function(t){return p(function(e){return{ctor:"_Tuple2",_0:A(t),_1:e}})},N=F2(function(t,e){return A2(_,t,function(t){return A2(_,e,function(e){return E(t(e))})})}),T=F3(function(t,e,r){return A2(N,A2(N,A2(b,n.flip(function(t){return n.always(n.always(t))}),t),r),e)}),F=F2(function(t,e){return A2(v,e,E(t))}),x=function(t){return A2(_,t,n.always(E({ctor:"_Tuple0"})))},w=F2(function(t,e){var n=function(r){return A2(v,A2(_,e,function(e){return A2(_,t,function(t){return n(A2(e,r,t))})}),E(r))};return A2(_,t,n)}),C=F2(function(t,e){var n=function(r){return A2(v,A2(_,e,function(e){return A2(_,A2(_,t,n),function(t){return E(A2(e,r,t))})}),E(r))};return A2(_,t,n)}),S=F2(function(t,n){var r=F2(function(t,o){return e.cmp(t,0)<1?E(i.reverse(o)):A2(_,n,function(e){return A2(r,t-1,A2(i._op["::"],e,o))})});return A2(r,t,e.list([]))}),L=function(t){return p(function(r){if(A2(u.startsWith,t,r.input)){var i=u.length(t),o=A2(u.dropLeft,i,r.input),a=r.position+i;return{ctor:"_Tuple2",_0:A(t),_1:e.update(r,{input:o,position:a})}}return{ctor:"_Tuple2",_0:h(e.list([A2(n._op["++"],"expected ",n.toString(t))])),_1:r}})},R=A2(T,L("("),L(")")),D=A2(T,L("{"),L("}")),M=A2(T,L("["),L("]")),O=function(t){var r=A2(u.startsWith,"^",t)?t:A2(n._op["++"],"^",t);return p(function(t){var i=A3(a.find,a.AtMost(1),a.regex(r),t.input);if("::"===i.ctor&&"[]"===i._1.ctor){var o=i._0,l=u.length(o.match),c=A2(u.dropLeft,l,t.input),s=t.position+l;return{ctor:"_Tuple2",_0:A(o.match),_1:e.update(t,{input:c,position:s})}}return{ctor:"_Tuple2",_0:h(e.list([A2(n._op["++"],"expected input matching Regexp /",A2(n._op["++"],r,"/"))])),_1:t}})},B=function(t){var r=F2(function(r,i){t:for(;;){var o=u.uncons(i.input);if("Just"===o.ctor){var a=o._0._0;if(t(a)){var l=i.position+1,c=A2(u.cons,a,""),s=A2(n._op["++"],r,c),f=e.update(i,{input:o._0._1,position:l});r=s,i=f;continue t}return{ctor:"_Tuple2",_0:r,_1:i}}return{ctor:"_Tuple2",_0:r,_1:i}}});return p(function(t){var e=A2(r,"",t),n=e._0,i=e._1;return{ctor:"_Tuple2",_0:A(n),_1:i}})},j=p(function(t){return e.eq(t.input,"")?{ctor:"_Tuple2",_0:A({ctor:"_Tuple0"}),_1:t}:{ctor:"_Tuple2",_0:h(e.list(["expected end of input"])),_1:t}}),P=function(t){return p(function(e){var n=A2(c,t,e);return"_Tuple2"===n.ctor&&"Done"===n._0.ctor?{ctor:"_Tuple2",_0:A(o.Just(n._0._0)),_1:n._1}:{ctor:"_Tuple2",_0:A(o.Nothing),_1:e}})},J=function(t){var n=F2(function(e,n){for(;;){var r=A2(c,t,n);{if("_Tuple2"!==r.ctor||"Done"!==r._0.ctor)return{ctor:"_Tuple2",_0:i.reverse(e),_1:n};var o=A2(i._op["::"],r._0._0,e),a=r._1;e=o,n=a}}});return p(function(t){var r=A2(n,e.list([]),t),i=r._0,o=r._1;return{ctor:"_Tuple2",_0:A(i),_1:o}})},z=function(t){return A2(N,A2(b,F2(function(t,e){return A2(i._op["::"],t,e)}),t),J(t))},U=function(t){return A2(_,z(x(t)),n.always(E({ctor:"_Tuple0"})))},I=F2(function(t,e){return A2(N,A2(b,F2(function(t,e){return A2(i._op["::"],t,e)}),e),J(A2(N,A2(b,n.flip(n.always),t),e)))}),H=F2(function(t,n){return A2(v,A2(I,t,n),E(e.list([])))}),G=function(t){return A2(_,J(x(t)),n.always(E({ctor:"_Tuple0"})))},q=F2(function(t,e){return{input:t,position:e}});return t.Combine.values={_op:l,parse:s,app:c,rec:m,bimap:k,map:b,mapError:y,andThen:_,andMap:N,fail:d,succeed:E,string:L,regex:O,$while:B,end:j,or:v,choice:g,optional:F,maybe:P,many:J,many1:z,sepBy:H,sepBy1:I,skip:x,skipMany:G,skipMany1:U,chainl:w,chainr:C,count:S,between:T,parens:R,brackets:D,squareBrackets:M,Context:q,Parser:p,RecursiveParser:f,Done:A,Fail:h}},Elm.Combine=Elm.Combine||{},Elm.Combine.Infix=Elm.Combine.Infix||{},Elm.Combine.Infix.make=function(t){"use strict";if(t.Combine=t.Combine||{},t.Combine.Infix=t.Combine.Infix||{},t.Combine.Infix.values)return t.Combine.Infix.values;var e=Elm.Native.Utils.make(t),n=Elm.Basics.make(t),r=Elm.Combine.make(t),i=(Elm.Debug.make(t),Elm.List.make(t),Elm.Maybe.make(t),Elm.Result.make(t),Elm.Signal.make(t),{});return i["<|>"]=r.or,i["*>"]=F2(function(t,e){return A2(r.andMap,A2(r.map,n.flip(n.always),t),e)}),i["<*"]=F2(function(t,e){return A2(r.andMap,A2(r.map,n.always,t),e)}),i["<?>"]=F2(function(t,n){return A2(r.mapError,function(t){return e.list([n])},t)}),i["<$"]=function(t){return r.map(function(e){return t})},i["<*>"]=r.andMap,i["<$>"]=r.map,t.Combine.Infix.values={_op:i}},Elm.Combine=Elm.Combine||{},Elm.Combine.Char=Elm.Combine.Char||{},Elm.Combine.Char.make=function(t){"use strict";if(t.Combine=t.Combine||{},t.Combine.Char=t.Combine.Char||{},t.Combine.Char.values)return t.Combine.Char.values;var e=Elm.Native.Utils.make(t),n=Elm.Basics.make(t),r=Elm.Char.make(t),i=Elm.Combine.make(t),o=Elm.Combine.Infix.make(t),a=(Elm.Debug.make(t),Elm.List.make(t)),u=(Elm.Maybe.make(t),Elm.Result.make(t),Elm.Signal.make(t),Elm.String.make(t)),l={},c=A2(o._op["<?>"],A2(o._op["<$"],e.chr("\n"),i.regex("\r\n")),"expected crlf"),s=function(t){return i.Parser(function(n){var r="could not satisfy predicate",o=u.uncons(n.input);if("Just"===o.ctor){var a=o._0._0;return t(a)?{ctor:"_Tuple2",_0:i.Done(a),_1:e.update(n,{input:o._0._1,position:n.position+1})}:{ctor:"_Tuple2",_0:i.Fail(e.list([r])),_1:n}}return{ctor:"_Tuple2",_0:i.Fail(e.list([r])),_1:n}})},f=function(t){return A2(o._op["<?>"],s(F2(function(t,n){return e.eq(t,n)})(t)),A2(n._op["++"],"expected ",n.toString(t)))},m=A2(o._op["<?>"],s(n.always(!0)),"expected any character"),p=function(t){return A2(o._op["<?>"],s(A2(n.flip,a.member,t)),A2(n._op["++"],"expected one of ",n.toString(t)))},h=function(t){return A2(o._op["<?>"],s(function(e){return n.not(A3(n.flip,a.member,t,e))}),A2(n._op["++"],"expected none of ",n.toString(t)))},_=A2(o._op["<?>"],s(F2(function(t,n){return e.eq(t,n)})(e.chr(" "))),"expected space"),d=A2(o._op["<?>"],s(F2(function(t,n){return e.eq(t,n)})(e.chr("	"))),"expected tab"),v=A2(o._op["<?>"],s(F2(function(t,n){return e.eq(t,n)})(e.chr("\n"))),"expected newline"),g=A2(o._op["<|>"],v,c),A=A2(o._op["<?>"],s(r.isLower),"expected a lowercase character"),k=A2(o._op["<?>"],s(r.isUpper),"expected an uppercase character"),b=A2(o._op["<?>"],s(r.isDigit),"expected a digit"),y=A2(o._op["<?>"],s(r.isOctDigit),"expected an octal digit"),E=A2(o._op["<?>"],s(r.isHexDigit),"expected a hexadecimal digit");return t.Combine.Char.values={_op:l,satisfy:s,$char:f,anyChar:m,oneOf:p,noneOf:h,space:_,tab:d,newline:v,crlf:c,eol:g,lower:A,upper:k,digit:b,octDigit:y,hexDigit:E}},Elm.Combine=Elm.Combine||{},Elm.Combine.Num=Elm.Combine.Num||{},Elm.Combine.Num.make=function(t){"use strict";if(t.Combine=t.Combine||{},t.Combine.Num=t.Combine.Num||{},t.Combine.Num.values)return t.Combine.Num.values;var e=Elm.Native.Utils.make(t),n=Elm.Basics.make(t),r=Elm.Char.make(t),i=Elm.Combine.make(t),o=Elm.Combine.Char.make(t),a=Elm.Combine.Infix.make(t),u=(Elm.Debug.make(t),Elm.List.make(t),Elm.Maybe.make(t),Elm.Result.make(t),Elm.Signal.make(t),Elm.String.make(t)),l={},c=function(){var t=function(t){return r.toCode(t)-r.toCode(e.chr("0"))};return A2(a._op["<$>"],t,o.digit)}(),s=A2(i.optional,1,i.choice(e.list([A2(a._op["<$"],1,i.string("+")),A2(a._op["<$"],-1,i.string("-"))]))),f=F2(function(t,r){var i=t(r);return"Ok"===i.ctor?i._0:e.crashCase("Combine.Num",{start:{line:19,column:3},end:{line:24,column:51}},i)(A2(n._op["++"],"impossible state: ",n.toString(i._0)))}),m=f(u.toInt),p=A2(i.andMap,A2(i.map,F2(function(t,e){return t*e}),s),A2(a._op["<$>"],m,i.regex("(0|[1-9][0-9]*)"))),h=f(u.toFloat),_=A2(i.andMap,A2(i.map,function(t){return F2(function(t,e){return t*e})(n.toFloat(t))},s),A2(a._op["<$>"],h,i.regex("(0|[1-9][0-9]*)(\\.[0-9]+)")));return t.Combine.Num.values={_op:l,sign:s,digit:c,$int:p,$float:_}},Elm.Native.Array={},Elm.Native.Array.make=function(t){function e(t,e){if(0>t||t>=M(e))throw new Error("Index "+t+" is out of range. Check the length of your array first or use getMaybe or getWithDefault.");return n(t,e)}function n(t,e){for(var n=e.height;n>0;n--){for(var r=t>>5*n;e.lengths[r]<=t;)r++;r>0&&(t-=e.lengths[r-1]),e=e.table[r]}return e.table[t]}function r(t,e,n){return 0>t||M(n)<=t?n:i(t,e,n)}function i(t,e,n){if(n=D(n),0===n.height)n.table[t]=e;else{var r=O(t,n);r>0&&(t-=n.lengths[r-1]),n.table[r]=i(t,e,n.table[r])}return n}function o(t,e){if(0>=t)return V;var n=Math.floor(Math.log(t)/Math.log(G));return a(e,n,0,t)}function a(t,e,n,r){if(0===e){for(var i=new Array((r-n)%(G+1)),o=0;o<i.length;o++)i[o]=t(n+o);return{ctor:"_Array",height:0,table:i}}for(var u=Math.pow(G,e),i=new Array(Math.ceil((r-n)/u)),l=new Array(i.length),o=0;o<i.length;o++)i[o]=a(t,e-1,n+o*u,Math.min(n+(o+1)*u,r)),l[o]=M(i[o])+(o>0?l[o-1]:0);return{ctor:"_Array",height:e,table:i,lengths:l}}function u(t){if(t===H.Nil)return V;for(var e=new Array(G),n=[],r=0;"[]"!==t.ctor;)if(e[r]=t._0,t=t._1,r++,r===G){var i={ctor:"_Array",height:0,table:e};l(i,n),e=new Array(G),r=0}if(r>0){var i={ctor:"_Array",height:0,table:e.splice(0,r)};l(i,n)}for(var o=0;o<n.length-1;o++)n[o].table.length>0&&l(n[o],n);var a=n[n.length-1];return a.height>0&&1===a.table.length?a.table[0]:a}function l(t,e){var n=t.height;if(e.length===n){var r={ctor:"_Array",height:n+1,table:[],lengths:[]};e.push(r)}e[n].table.push(t);var i=M(t);e[n].lengths.length>0&&(i+=e[n].lengths[e[n].lengths.length-1]),e[n].lengths.push(i),e[n].table.length===G&&(l(e[n],e),e[n]={ctor:"_Array",height:n+1,table:[],lengths:[]})}function c(t,e){var n=s(t,e);if(null!==n)return n;var r=B(t,e.height);return P(e,r)}function s(t,e){if(0===e.height){if(e.table.length<G){var n={ctor:"_Array",height:0,table:e.table.slice()};return n.table.push(t),n}return null}var r=s(t,L(e));if(null!==r){var n=D(e);return n.table[n.table.length-1]=r,n.lengths[n.lengths.length-1]++,n}if(e.table.length<G){var i=B(t,e.height-1),n=D(e);return n.table.push(i),n.lengths.push(n.lengths[n.lengths.length-1]+M(i)),n}return null}function f(t){return m(H.Nil,t)}function m(t,e){for(var n=e.table.length-1;n>=0;n--)t=0===e.height?H.Cons(e.table[n],t):m(t,e.table[n]);return t}function p(t,e){var n={ctor:"_Array",height:e.height,table:new Array(e.table.length)};e.height>0&&(n.lengths=e.lengths);for(var r=0;r<e.table.length;r++)n.table[r]=0===e.height?t(e.table[r]):p(t,e.table[r]);return n}function h(t,e){return _(t,e,0)}function _(t,e,n){var r={ctor:"_Array",height:e.height,table:new Array(e.table.length)};e.height>0&&(r.lengths=e.lengths);for(var i=0;i<e.table.length;i++)r.table[i]=0===e.height?A2(t,n+i,e.table[i]):_(t,e.table[i],0==i?n:n+e.lengths[i-1]);return r}function d(t,e,n){if(0===n.height)for(var r=0;r<n.table.length;r++)e=A2(t,n.table[r],e);else for(var r=0;r<n.table.length;r++)e=d(t,e,n.table[r]);return e}function v(t,e,n){if(0===n.height)for(var r=n.table.length;r--;)e=A2(t,n.table[r],e);else for(var r=n.table.length;r--;)e=v(t,e,n.table[r]);return e}function g(t,e,n){return 0>t&&(t+=M(n)),0>e&&(e+=M(n)),k(t,A(e,n))}function A(t,e){if(t===M(e))return e;if(0===e.height){var n={ctor:"_Array",height:0};return n.table=e.table.slice(0,t),n}var r=O(t,e),i=A(t-(r>0?e.lengths[r-1]:0),e.table[r]);if(0===r)return i;var n={ctor:"_Array",height:e.height,table:e.table.slice(0,r),lengths:e.lengths.slice(0,r)};return i.table.length>0&&(n.table[r]=i,n.lengths[r]=M(i)+(r>0?n.lengths[r-1]:0)),n}function k(t,e){if(0===t)return e;if(0===e.height){var n={ctor:"_Array",height:0};return n.table=e.table.slice(t,e.table.length+1),n}var r=O(t,e),i=k(t-(r>0?e.lengths[r-1]:0),e.table[r]);if(r===e.table.length-1)return i;var n={ctor:"_Array",height:e.height,table:e.table.slice(r,e.table.length+1),lengths:new Array(e.table.length-r)};n.table[0]=i;for(var o=0,a=0;a<n.table.length;a++)o+=M(n.table[a]),n.lengths[a]=o;return n}function b(t,e){if(0===t.table.length)return e;if(0===e.table.length)return t;var n=y(t,e);if(n[0].table.length+n[1].table.length<=G){if(0===n[0].table.length)return n[1];if(0===n[1].table.length)return n[0];if(n[0].table=n[0].table.concat(n[1].table),n[0].height>0){for(var r=M(n[0]),i=0;i<n[1].lengths.length;i++)n[1].lengths[i]+=r;n[0].lengths=n[0].lengths.concat(n[1].lengths)}return n[0]}if(n[0].height>0){var o=T(t,e);o>q&&(n=S(n[0],n[1],o))}return P(n[0],n[1])}function y(t,e){if(0===t.height&&0===e.height)return[t,e];if(1!==t.height||1!==e.height)if(t.height===e.height){t=D(t),e=D(e);var n=y(L(t),R(e));E(t,n[1]),N(e,n[0])}else if(t.height>e.height){t=D(t);var n=y(L(t),e);E(t,n[0]),e=j(n[1],n[1].height+1)}else{e=D(e);var n=y(t,R(e)),r=0===n[0].table.length?0:1,i=0===r?1:0;N(e,n[r]),t=j(n[i],n[i].height+1)}if(0===t.table.length||0===e.table.length)return[t,e];var o=T(t,e);return q>=o?[t,e]:S(t,e,o)}function E(t,e){var n=t.table.length-1;t.table[n]=e,t.lengths[n]=M(e),t.lengths[n]+=n>0?t.lengths[n-1]:0}function N(t,e){if(e.table.length>0){t.table[0]=e,t.lengths[0]=M(e);for(var n=M(t.table[0]),r=1;r<t.lengths.length;r++)n+=M(t.table[r]),t.lengths[r]=n}else{t.table.shift();for(var r=1;r<t.lengths.length;r++)t.lengths[r]=t.lengths[r]-t.lengths[0];t.lengths.shift()}}function T(t,e){for(var n=0,r=0;r<t.table.length;r++)n+=t.table[r].table.length;for(var r=0;r<e.table.length;r++)n+=e.table[r].table.length;var i=t.table.length+e.table.length;return i-(Math.floor((n-1)/G)+1)}function F(t,e,n){return n<t.length?t[n]:e[n-t.length]}function x(t,e,n,r){n<t.length?t[n]=r:e[n-t.length]=r}function w(t,e,n,r){x(t.table,e.table,n,r);var i=0===n||n===t.lengths.length?0:F(t.lengths,t.lengths,n-1);x(t.lengths,e.lengths,n,i+M(r))}function C(t,e){0>e&&(e=0);var n={ctor:"_Array",height:t,table:new Array(e)};return t>0&&(n.lengths=new Array(e)),n}function S(t,e,n){for(var r=C(t.height,Math.min(G,t.table.length+e.table.length-n)),i=C(t.height,r.table.length-(t.table.length+e.table.length-n)),o=0;F(t.table,e.table,o).table.length%G===0;)x(r.table,i.table,o,F(t.table,e.table,o)),x(r.lengths,i.lengths,o,F(t.lengths,e.lengths,o)),o++;for(var a=o,u=new C(t.height-1,0),l=0;o-a-(u.table.length>0?1:0)<n;){var c=F(t.table,e.table,o),s=Math.min(G-u.table.length,c.table.length);if(u.table=u.table.concat(c.table.slice(l,s)),u.height>0)for(var f=u.lengths.length,m=f;f+s-l>m;m++)u.lengths[m]=M(u.table[m]),u.lengths[m]+=m>0?u.lengths[m-1]:0;l+=s,c.table.length<=s&&(o++,l=0),u.table.length===G&&(w(r,i,a,u),u=C(t.height-1,0),a++)}for(u.table.length>0&&(w(r,i,a,u),a++);o<t.table.length+e.table.length;)w(r,i,a,F(t.table,e.table,o)),o++,a++;return[r,i]}function L(t){return t.table[t.table.length-1]}function R(t){return t.table[0]}function D(t){var e={ctor:"_Array",height:t.height,table:t.table.slice()};return t.height>0&&(e.lengths=t.lengths.slice()),e}function M(t){return 0===t.height?t.table.length:t.lengths[t.lengths.length-1]}function O(t,e){for(var n=t>>5*e.height;e.lengths[n]<=t;)n++;return n}function B(t,e){return 0===e?{ctor:"_Array",height:0,table:[t]}:{ctor:"_Array",height:e,table:[B(t,e-1)],lengths:[1]}}function j(t,e){return e===t.height?t:{ctor:"_Array",height:e,table:[j(t,e-1)],lengths:[M(t)]}}function P(t,e){return{ctor:"_Array",height:t.height+1,table:[t,e],lengths:[M(t),M(t)+M(e)]}}function J(t){var e=new Array(M(t));return z(e,0,t),e}function z(t,e,n){for(var r=0;r<n.table.length;r++)if(0===n.height)t[e+r]=n.table[r];else{var i=0===r?0:n.lengths[r-1];z(t,e+i,n.table[r])}}function U(t){if(0===t.length)return V;var e=Math.floor(Math.log(t.length)/Math.log(G));return I(t,e,0,t.length)}function I(t,e,n,r){if(0===e)return{ctor:"_Array",height:0,table:t.slice(n,r)};for(var i=Math.pow(G,e),o=new Array(Math.ceil((r-n)/i)),a=new Array(o.length),u=0;u<o.length;u++)o[u]=I(t,e-1,n+u*i,Math.min(n+(u+1)*i,r)),a[u]=M(o[u])+(u>0?a[u-1]:0);return{ctor:"_Array",height:e,table:o,lengths:a}}if(t.Native=t.Native||{},t.Native.Array=t.Native.Array||{},t.Native.Array.values)return t.Native.Array.values;if("values"in Elm.Native.Array)return t.Native.Array.values=Elm.Native.Array.values;var H=Elm.Native.List.make(t),G=32,q=2,V={ctor:"_Array",height:0,table:[]};return Elm.Native.Array.values={empty:V,fromList:u,toList:f,initialize:F2(o),append:F2(b),push:F2(c),slice:F3(g),get:F2(e),set:F3(r),map:F2(p),indexedMap:F2(h),foldl:F3(d),foldr:F3(v),length:M,toJSArray:J,fromJSArray:U},t.Native.Array.values=Elm.Native.Array.values},Elm.Array=Elm.Array||{},Elm.Array.make=function(t){"use strict";if(t.Array=t.Array||{},t.Array.values)return t.Array.values;var e=Elm.Native.Utils.make(t),n=Elm.Basics.make(t),r=Elm.List.make(t),i=Elm.Maybe.make(t),o=Elm.Native.Array.make(t),a={},u=o.append,l=o.length,c=function(t){return e.eq(l(t),0)},s=o.slice,f=o.set,m=F2(function(t,n){return e.cmp(0,t)<1&&e.cmp(t,o.length(n))<0?i.Just(A2(o.get,t,n)):i.Nothing}),p=o.push,h=o.empty,_=F2(function(t,e){var n=F2(function(e,n){return t(e)?A2(o.push,e,n):n});return A3(o.foldl,n,o.empty,e)}),d=o.foldr,v=o.foldl,g=o.indexedMap,A=o.map,k=function(t){return A3(r.map2,F2(function(t,e){return{ctor:"_Tuple2",_0:t,_1:e}}),e.range(0,o.length(t)-1),o.toList(t))},b=o.toList,y=o.fromList,E=o.initialize,N=F2(function(t,e){return A2(E,t,n.always(e))});return t.Array.values={_op:a,empty:h,repeat:N,initialize:E,fromList:y,isEmpty:c,length:l,push:p,append:u,get:m,set:f,slice:s,toList:b,toIndexedList:k,map:A,indexedMap:g,filter:_,foldl:v,foldr:d}},Elm.Native.Time={},Elm.Native.Time.make=function(t){function e(e,n){function r(){t.notify(c.id,null)}function i(t,e){return t}function a(e,n){var i=e._0,o=e._1,a=n.isOn,c=n.time;return o?u=t.setTimeout(r,l):a&&clearTimeout(u),{isOn:o,time:i,delta:o&&!a?0:i-c}}var u,l=1e3/e,c=o.input("fps-"+e,null),s=o.timestamp(A3(o.map2,F2(i),o.dropRepeats(n),c)),f={isOn:!1,time:t.timer.programStart,delta:0};return A2(o.map,function(t){return t.delta},A3(o.foldp,F2(a),a(s.value,f),s))}function n(e){function n(){t.notify(i.id,null)}var i=o.input("every-"+e,null),a=A2(o.map,r,o.timestamp(i));return setInterval(n,e),a}function r(t){return t._0}function i(t){var e=Date.parse(t);return isNaN(e)?a.Nothing:a.Just(e)}if(t.Native=t.Native||{},t.Native.Time=t.Native.Time||{},t.Native.Time.values)return t.Native.Time.values;var o=Elm.Native.Signal.make(t),a=Elm.Maybe.make(t);return t.Native.Time.values={fpsWhen:F2(e),every:n,toDate:function(t){return new Date(t)},read:i}},Elm.Time=Elm.Time||{},Elm.Time.make=function(t){"use strict";if(t.Time=t.Time||{},t.Time.values)return t.Time.values;var e=Elm.Native.Utils.make(t),n=Elm.Basics.make(t),r=Elm.Native.Signal.make(t),i=Elm.Native.Time.make(t),o=Elm.Signal.make(t),a={},u=r.delay,l=F2(function(t,r){var i=A2(o.map,n.always(-1),A2(u,t,r)),a=A2(o.map,n.always(1),r),l=A3(o.foldp,F2(function(t,e){return t+e}),0,A2(o.merge,a,i));return A2(o.map,F2(function(t,n){return!e.eq(t,n)})(0),l)}),c=r.timestamp,s=i.every,f=i.fpsWhen,m=function(t){return A2(f,t,o.constant(!0))},p=function(t){return t},h=1,_=1e3*h,d=60*_,v=60*d,g=function(t){return t/v},A=function(t){return t/d},k=function(t){return t/_};return t.Time.values={_op:a,millisecond:h,second:_,minute:d,hour:v,inMilliseconds:p,inSeconds:k,inMinutes:A,inHours:g,fps:m,fpsWhen:f,every:s,timestamp:c,delay:u,since:l}},Elm.Dict=Elm.Dict||{},Elm.Dict.make=function(t){"use strict";if(t.Dict=t.Dict||{},t.Dict.values)return t.Dict.values;var e=Elm.Native.Utils.make(t),n=Elm.Basics.make(t),r=Elm.List.make(t),i=Elm.Maybe.make(t),o=Elm.Native.Debug.make(t),a=Elm.String.make(t),u={},l=F3(function(t,e,n){for(;;){var r=n;if("RBEmpty_elm_builtin"===r.ctor)return e;var i=t,o=A3(t,r._1,r._2,A3(l,t,e,r._4)),a=r._3;t=i,e=o,n=a}}),c=function(t){return A3(l,F3(function(t,e,n){return A2(r._op["::"],t,n)}),e.list([]),t)},s=function(t){return A3(l,F3(function(t,e,n){return A2(r._op["::"],e,n)}),e.list([]),t)},f=function(t){return A3(l,F3(function(t,e,n){return A2(r._op["::"],{ctor:"_Tuple2",_0:t,_1:e},n)}),e.list([]),t)},m=F3(function(t,e,n){for(;;){var r=n;if("RBEmpty_elm_builtin"===r.ctor)return e;var i=t,o=A3(t,r._1,r._2,A3(m,t,e,r._3)),a=r._4;t=i,
-e=o,n=a}}),p=F4(function(t,r,i,u){return o.crash(a.concat(e.list(["Internal red-black tree invariant violated, expected ",t," and got ",n.toString(r),"/",i,"/",u,"\nPlease report this bug to <https://github.com/elm-lang/core/issues>"])))}),h=function(t){var e=t;t:do{if("RBNode_elm_builtin"===e.ctor){if("BBlack"===e._0.ctor)return!0;break t}if("LBBlack"===e._0.ctor)return!0;break t}while(!1);return!1},_={ctor:"Same"},d={ctor:"Remove"},v={ctor:"Insert"},g=F2(function(t,e){for(;;){var n=e;if("RBEmpty_elm_builtin"===n.ctor)return t;var r=A2(g,t+1,n._4),i=n._3;t=r,e=i}}),A=function(t){return A2(g,0,t)},k=F2(function(t,e){t:for(;;){var r=e;if("RBEmpty_elm_builtin"===r.ctor)return i.Nothing;var o=A2(n.compare,t,r._1);switch(o.ctor){case"LT":var a=t,u=r._3;t=a,e=u;continue t;case"EQ":return i.Just(r._2);default:var l=t,c=r._4;t=l,e=c;continue t}}}),b=F2(function(t,e){var n=A2(k,t,e);return"Just"===n.ctor?!0:!1}),y=F3(function(t,e,n){for(;;){var r=n;if("RBEmpty_elm_builtin"===r.ctor)return{ctor:"_Tuple2",_0:t,_1:e};var i=r._1,o=r._2,a=r._4;t=i,e=o,n=a}}),E=function(t){return{ctor:"RBEmpty_elm_builtin",_0:t}},N=F5(function(t,e,n,r,i){return{ctor:"RBNode_elm_builtin",_0:t,_1:e,_2:n,_3:r,_4:i}}),T={ctor:"LBBlack"},F={ctor:"LBlack"},x=E(F),w=function(t){return e.eq(t,x)},C=F2(function(t,e){var n=e;if("RBEmpty_elm_builtin"===n.ctor)return E(F);var r=n._1;return A5(N,n._0,r,A2(t,r,n._2),A2(C,t,n._3),A2(C,t,n._4))}),S={ctor:"NBlack"},L={ctor:"BBlack"},R={ctor:"Black"},D=function(t){var e=t;return"RBNode_elm_builtin"===e.ctor&&"Red"===e._0.ctor?A5(N,R,e._1,e._2,e._3,e._4):t},M=function(t){var n=t;if("RBNode_elm_builtin"===n.ctor){var r=n._0;return e.eq(r,R)||e.eq(r,L)}return!0},O=function(t){var e=t;return"RBEmpty_elm_builtin"===e.ctor?E(F):A5(N,R,e._1,e._2,e._3,e._4)},B={ctor:"Red"},j=function(t){var e=t;switch(e.ctor){case"Black":return L;case"Red":return R;case"NBlack":return B;default:return o.crash("Can't make a double black node more black!")}},P=function(t){var e=t;switch(e.ctor){case"BBlack":return R;case"Black":return B;case"Red":return S;default:return o.crash("Can't make a negative black node less black!")}},J=function(t){var e=t;return"RBNode_elm_builtin"===e.ctor?A5(N,P(e._0),e._1,e._2,e._3,e._4):E(F)},z=function(t){return function(e){return function(n){return function(r){return function(i){return function(o){return function(a){return function(u){return function(l){return function(c){return function(s){return A5(N,P(t),r,i,A5(N,R,e,n,u,l),A5(N,R,o,a,c,s))}}}}}}}}}}},U=function(t){var e=t;return"RBEmpty_elm_builtin"===e.ctor?o.crash("can't make a Leaf red"):A5(N,B,e._1,e._2,e._3,e._4)},I=function(t){var e=t;t:do{e:do{n:do{r:do{i:do{o:do{a:do{if("RBNode_elm_builtin"!==e.ctor)break t;if("RBNode_elm_builtin"===e._3.ctor)if("RBNode_elm_builtin"===e._4.ctor)switch(e._3._0.ctor){case"Red":switch(e._4._0.ctor){case"Red":if("RBNode_elm_builtin"===e._3._3.ctor&&"Red"===e._3._3._0.ctor)break a;if("RBNode_elm_builtin"===e._3._4.ctor&&"Red"===e._3._4._0.ctor)break o;if("RBNode_elm_builtin"===e._4._3.ctor&&"Red"===e._4._3._0.ctor)break i;if("RBNode_elm_builtin"===e._4._4.ctor&&"Red"===e._4._4._0.ctor)break r;break t;case"NBlack":if("RBNode_elm_builtin"===e._3._3.ctor&&"Red"===e._3._3._0.ctor)break a;if("RBNode_elm_builtin"===e._3._4.ctor&&"Red"===e._3._4._0.ctor)break o;if("BBlack"===e._0.ctor&&"RBNode_elm_builtin"===e._4._3.ctor&&"Black"===e._4._3._0.ctor&&"RBNode_elm_builtin"===e._4._4.ctor&&"Black"===e._4._4._0.ctor)break n;break t;default:if("RBNode_elm_builtin"===e._3._3.ctor&&"Red"===e._3._3._0.ctor)break a;if("RBNode_elm_builtin"===e._3._4.ctor&&"Red"===e._3._4._0.ctor)break o;break t}case"NBlack":switch(e._4._0.ctor){case"Red":if("RBNode_elm_builtin"===e._4._3.ctor&&"Red"===e._4._3._0.ctor)break i;if("RBNode_elm_builtin"===e._4._4.ctor&&"Red"===e._4._4._0.ctor)break r;if("BBlack"===e._0.ctor&&"RBNode_elm_builtin"===e._3._3.ctor&&"Black"===e._3._3._0.ctor&&"RBNode_elm_builtin"===e._3._4.ctor&&"Black"===e._3._4._0.ctor)break e;break t;case"NBlack":if("BBlack"===e._0.ctor){if("RBNode_elm_builtin"===e._4._3.ctor&&"Black"===e._4._3._0.ctor&&"RBNode_elm_builtin"===e._4._4.ctor&&"Black"===e._4._4._0.ctor)break n;if("RBNode_elm_builtin"===e._3._3.ctor&&"Black"===e._3._3._0.ctor&&"RBNode_elm_builtin"===e._3._4.ctor&&"Black"===e._3._4._0.ctor)break e;break t}break t;default:if("BBlack"===e._0.ctor&&"RBNode_elm_builtin"===e._3._3.ctor&&"Black"===e._3._3._0.ctor&&"RBNode_elm_builtin"===e._3._4.ctor&&"Black"===e._3._4._0.ctor)break e;break t}default:switch(e._4._0.ctor){case"Red":if("RBNode_elm_builtin"===e._4._3.ctor&&"Red"===e._4._3._0.ctor)break i;if("RBNode_elm_builtin"===e._4._4.ctor&&"Red"===e._4._4._0.ctor)break r;break t;case"NBlack":if("BBlack"===e._0.ctor&&"RBNode_elm_builtin"===e._4._3.ctor&&"Black"===e._4._3._0.ctor&&"RBNode_elm_builtin"===e._4._4.ctor&&"Black"===e._4._4._0.ctor)break n;break t;default:break t}}else switch(e._3._0.ctor){case"Red":if("RBNode_elm_builtin"===e._3._3.ctor&&"Red"===e._3._3._0.ctor)break a;if("RBNode_elm_builtin"===e._3._4.ctor&&"Red"===e._3._4._0.ctor)break o;break t;case"NBlack":if("BBlack"===e._0.ctor&&"RBNode_elm_builtin"===e._3._3.ctor&&"Black"===e._3._3._0.ctor&&"RBNode_elm_builtin"===e._3._4.ctor&&"Black"===e._3._4._0.ctor)break e;break t;default:break t}else{if("RBNode_elm_builtin"!==e._4.ctor)break t;switch(e._4._0.ctor){case"Red":if("RBNode_elm_builtin"===e._4._3.ctor&&"Red"===e._4._3._0.ctor)break i;if("RBNode_elm_builtin"===e._4._4.ctor&&"Red"===e._4._4._0.ctor)break r;break t;case"NBlack":if("BBlack"===e._0.ctor&&"RBNode_elm_builtin"===e._4._3.ctor&&"Black"===e._4._3._0.ctor&&"RBNode_elm_builtin"===e._4._4.ctor&&"Black"===e._4._4._0.ctor)break n;break t;default:break t}}}while(!1);return z(e._0)(e._3._3._1)(e._3._3._2)(e._3._1)(e._3._2)(e._1)(e._2)(e._3._3._3)(e._3._3._4)(e._3._4)(e._4)}while(!1);return z(e._0)(e._3._1)(e._3._2)(e._3._4._1)(e._3._4._2)(e._1)(e._2)(e._3._3)(e._3._4._3)(e._3._4._4)(e._4)}while(!1);return z(e._0)(e._1)(e._2)(e._4._3._1)(e._4._3._2)(e._4._1)(e._4._2)(e._3)(e._4._3._3)(e._4._3._4)(e._4._4)}while(!1);return z(e._0)(e._1)(e._2)(e._4._1)(e._4._2)(e._4._4._1)(e._4._4._2)(e._3)(e._4._3)(e._4._4._3)(e._4._4._4)}while(!1);return A5(N,R,e._4._3._1,e._4._3._2,A5(N,R,e._1,e._2,e._3,e._4._3._3),A5(H,R,e._4._1,e._4._2,e._4._3._4,U(e._4._4)))}while(!1);return A5(N,R,e._3._4._1,e._3._4._2,A5(H,R,e._3._1,e._3._2,U(e._3._3),e._3._4._3),A5(N,R,e._1,e._2,e._3._4._4,e._4))}while(!1);return t},H=F5(function(t,e,n,r,i){var o=A5(N,t,e,n,r,i);return M(o)?I(o):o}),G=F5(function(t,e,n,r,i){return h(r)||h(i)?A5(H,j(t),e,n,J(r),J(i)):A5(N,t,e,n,r,i)}),q=F5(function(t,e,n,r,i){var o=i;return"RBEmpty_elm_builtin"===o.ctor?A3(V,t,r,i):A5(G,t,e,n,r,A5(q,o._0,o._1,o._2,o._3,o._4))}),V=F3(function(t,e,r){var i={ctor:"_Tuple2",_0:e,_1:r};if("RBEmpty_elm_builtin"!==i._0.ctor){if("RBEmpty_elm_builtin"===i._1.ctor){var a=i._1._0,u=i._0._0,l={ctor:"_Tuple3",_0:t,_1:u,_2:a};return"_Tuple3"===l.ctor&&"Black"===l._0.ctor&&"Red"===l._1.ctor&&"LBlack"===l._2.ctor?A5(N,R,i._0._1,i._0._2,i._0._3,i._0._4):A4(p,"Black/Red/LBlack",t,n.toString(u),n.toString(a))}var c=i._0._2,s=i._0._4,f=i._0._1,m=A5(q,i._0._0,f,c,i._0._3,s),h=A3(y,f,c,s),_=h._0,d=h._1;return A5(G,t,_,d,m,r)}if("RBEmpty_elm_builtin"!==i._1.ctor){var v=i._1._0,g=i._0._0,A={ctor:"_Tuple3",_0:t,_1:g,_2:v};return"_Tuple3"===A.ctor&&"Black"===A._0.ctor&&"LBlack"===A._1.ctor&&"Red"===A._2.ctor?A5(N,R,i._1._1,i._1._2,i._1._3,i._1._4):A4(p,"Black/LBlack/Red",t,n.toString(g),n.toString(v))}var k=t;switch(k.ctor){case"Red":return E(F);case"Black":return E(T);default:return o.crash("cannot have bblack or nblack nodes at this point")}}),$=F3(function(t,e,r){var o=function(r){var a=r;if("RBEmpty_elm_builtin"===a.ctor){var u=e(i.Nothing);return"Nothing"===u.ctor?{ctor:"_Tuple2",_0:_,_1:x}:{ctor:"_Tuple2",_0:v,_1:A5(N,B,t,u._0,x,x)}}var l=a._2,c=a._4,s=a._3,f=a._1,m=a._0,p=A2(n.compare,t,f);switch(p.ctor){case"EQ":var h=e(i.Just(l));return"Nothing"===h.ctor?{ctor:"_Tuple2",_0:d,_1:A3(V,m,s,c)}:{ctor:"_Tuple2",_0:_,_1:A5(N,m,f,h._0,s,c)};case"LT":var g=o(s),A=g._0,k=g._1,b=A;switch(b.ctor){case"Same":return{ctor:"_Tuple2",_0:_,_1:A5(N,m,f,l,k,c)};case"Insert":return{ctor:"_Tuple2",_0:v,_1:A5(H,m,f,l,k,c)};default:return{ctor:"_Tuple2",_0:d,_1:A5(G,m,f,l,k,c)}}default:var y=o(c),A=y._0,E=y._1,T=A;switch(T.ctor){case"Same":return{ctor:"_Tuple2",_0:_,_1:A5(N,m,f,l,s,E)};case"Insert":return{ctor:"_Tuple2",_0:v,_1:A5(H,m,f,l,s,E)};default:return{ctor:"_Tuple2",_0:d,_1:A5(G,m,f,l,s,E)}}}},a=o(r),u=a._0,l=a._1,c=u;switch(c.ctor){case"Same":return l;case"Insert":return D(l);default:return O(l)}}),W=F3(function(t,e,r){return A3($,t,n.always(i.Just(e)),r)}),K=F2(function(t,e){return A3(W,t,e,x)}),Y=F2(function(t,e){return A3(m,W,e,t)}),X=function(t){return A3(r.foldl,F2(function(t,e){var n=t;return A3(W,n._0,n._1,e)}),x,t)},Q=F2(function(t,e){var n=F3(function(e,n,r){return A2(t,e,n)?A3(W,e,n,r):r});return A3(m,n,x,e)}),Z=F2(function(t,e){return A2(Q,F2(function(t,n){return A2(b,t,e)}),t)}),tt=F2(function(t,e){var n=F3(function(e,n,r){var i=r,o=i._1,a=i._0;return A2(t,e,n)?{ctor:"_Tuple2",_0:A3(W,e,n,a),_1:o}:{ctor:"_Tuple2",_0:a,_1:A3(W,e,n,o)}});return A3(m,n,{ctor:"_Tuple2",_0:x,_1:x},e)}),et=F2(function(t,e){return A3($,t,n.always(i.Nothing),e)}),nt=F2(function(t,e){return A3(m,F3(function(t,e,n){return A2(et,t,n)}),t,e)});return t.Dict.values={_op:u,empty:x,singleton:K,insert:W,update:$,isEmpty:w,get:k,remove:et,member:b,size:A,filter:Q,partition:tt,foldl:m,foldr:l,map:C,union:Y,intersect:Z,diff:nt,keys:c,values:s,toList:f,fromList:X}},Elm.Native.Json={},Elm.Native.Json.make=function(t){function e(t,e){throw new Error("expecting "+t+" but got "+JSON.stringify(e))}function n(t){return function(n){return null===n?t:void e("null",n)}}function r(t){return"string"==typeof t||t instanceof String?t:void e("a String",t)}function i(t){return"number"==typeof t?t:void e("a Float",t)}function o(t){return"number"!=typeof t&&e("an Int",t),2147483647>t&&t>-2147483647&&(0|t)===t?t:!isFinite(t)||t%1?void e("an Int",t):t}function a(t){return"boolean"==typeof t?t:void e("a Bool",t)}function u(t){return function(n){if(n instanceof Array){for(var r=n.length,i=new Array(r),o=r;o--;)i[o]=t(n[o]);return z.fromJSArray(i)}e("an Array",n)}}function l(t){return function(n){if(n instanceof Array){for(var r=n.length,i=U.Nil,o=r;o--;)i=U.Cons(t(n[o]),i);return i}e("a List",n)}}function c(t){return function(e){try{return I.Just(t(e))}catch(n){return I.Nothing}}}function s(t,n){return function(r){var i=r[t];return void 0!==i?n(i):void e("an object with field '"+t+"'",r)}}function f(t){return function(n){var r="object"==typeof n&&null!==n&&!(n instanceof Array);if(r){var i=U.Nil;for(var o in n){var a=t(n[o]),u=G.Tuple2(o,a);i=U.Cons(u,i)}return i}e("an object",n)}}function m(t,e){return function(n){return t(e(n))}}function p(t,e,n){return function(r){return A2(t,e(r),n(r))}}function h(t,e,n,r){return function(i){return A3(t,e(i),n(i),r(i))}}function _(t,e,n,r,i){return function(o){return A4(t,e(o),n(o),r(o),i(o))}}function d(t,e,n,r,i,o){return function(a){return A5(t,e(a),n(a),r(a),i(a),o(a))}}function v(t,e,n,r,i,o,a){return function(u){return A6(t,e(u),n(u),r(u),i(u),o(u),a(u))}}function g(t,e,n,r,i,o,a,u){return function(l){return A7(t,e(l),n(l),r(l),i(l),o(l),a(l),u(l))}}function A(t,e,n,r,i,o,a,u,l){return function(c){return A8(t,e(c),n(c),r(c),i(c),o(c),a(c),u(c),l(c))}}function k(t,n){return function(r){return r instanceof Array&&1===r.length||e("a Tuple of length 1",r),t(n(r[0]))}}function b(t,n,r){return function(i){return i instanceof Array&&2===i.length||e("a Tuple of length 2",i),A2(t,n(i[0]),r(i[1]))}}function y(t,n,r,i){return function(o){return o instanceof Array&&3===o.length||e("a Tuple of length 3",o),A3(t,n(o[0]),r(o[1]),i(o[2]))}}function E(t,n,r,i,o){return function(a){return a instanceof Array&&4===a.length||e("a Tuple of length 4",a),A4(t,n(a[0]),r(a[1]),i(a[2]),o(a[3]))}}function N(t,n,r,i,o,a){return function(u){return u instanceof Array&&5===u.length||e("a Tuple of length 5",u),A5(t,n(u[0]),r(u[1]),i(u[2]),o(u[3]),a(u[4]))}}function T(t,n,r,i,o,a,u){return function(l){return l instanceof Array&&6===l.length||e("a Tuple of length 6",l),A6(t,n(l[0]),r(l[1]),i(l[2]),o(l[3]),a(l[4]),u(l[5]))}}function F(t,n,r,i,o,a,u,l){return function(c){return c instanceof Array&&7===c.length||e("a Tuple of length 7",c),A7(t,n(c[0]),r(c[1]),i(c[2]),o(c[3]),a(c[4]),u(c[5]),l(c[6]))}}function x(t,n,r,i,o,a,u,l,c){return function(s){return s instanceof Array&&8===s.length||e("a Tuple of length 8",s),A8(t,n(s[0]),r(s[1]),i(s[2]),o(s[3]),a(s[4]),u(s[5]),l(s[6]),c(s[7]))}}function w(t){return t}function C(t,e){try{return H.Ok(t(e))}catch(n){return H.Err(n.message)}}function S(t,e){return function(n){var r=e(t(n));if("Err"===r.ctor)throw new Error("custom decoder failed: "+r._0);return r._0}}function L(t,e){return function(n){var r=t(n);return e(r)(n)}}function R(t){return function(e){throw new Error(t)}}function D(t){return function(e){return t}}function M(t){return function(e){for(var n=[],r=t;"[]"!==r.ctor;){try{return r._0(e)}catch(i){n.push(i.message)}r=r._1}throw new Error("expecting one of the following:\n    "+n.join("\n    "))}}function O(t,e){try{return H.Ok(t(e))}catch(n){return H.Err(n.message)}}function B(t,e){try{return H.Ok(t(JSON.parse(e)))}catch(n){return H.Err(n.message)}}function j(t,e){return JSON.stringify(e,null,t)}function P(t){return t}function J(t){for(var e={};"[]"!==t.ctor;){var n=t._0;e[n._0]=n._1,t=t._1}return e}if(t.Native=t.Native||{},t.Native.Json=t.Native.Json||{},t.Native.Json.values)return t.Native.Json.values;var z=Elm.Native.Array.make(t),U=Elm.Native.List.make(t),I=Elm.Maybe.make(t),H=Elm.Result.make(t),G=Elm.Native.Utils.make(t);return t.Native.Json.values={encode:F2(j),runDecoderString:F2(B),runDecoderValue:F2(C),get:F2(O),oneOf:M,decodeNull:n,decodeInt:o,decodeFloat:i,decodeString:r,decodeBool:a,decodeMaybe:c,decodeList:l,decodeArray:u,decodeField:F2(s),decodeObject1:F2(m),decodeObject2:F3(p),decodeObject3:F4(h),decodeObject4:F5(_),decodeObject5:F6(d),decodeObject6:F7(v),decodeObject7:F8(g),decodeObject8:F9(A),decodeKeyValuePairs:f,decodeTuple1:F2(k),decodeTuple2:F3(b),decodeTuple3:F4(y),decodeTuple4:F5(E),decodeTuple5:F6(N),decodeTuple6:F7(T),decodeTuple7:F8(F),decodeTuple8:F9(x),andThen:F2(L),decodeValue:w,customDecoder:F2(S),fail:R,succeed:D,identity:P,encodeNull:null,encodeArray:z.toJSArray,encodeList:U.toArray,encodeObject:J}},Elm.Json=Elm.Json||{},Elm.Json.Encode=Elm.Json.Encode||{},Elm.Json.Encode.make=function(t){"use strict";if(t.Json=t.Json||{},t.Json.Encode=t.Json.Encode||{},t.Json.Encode.values)return t.Json.Encode.values;var e=(Elm.Native.Utils.make(t),Elm.Array.make(t),Elm.Native.Json.make(t)),n={},r=e.encodeList,i=e.encodeArray,o=e.encodeObject,a=e.encodeNull,u=e.identity,l=e.identity,c=e.identity,s=e.identity,f=e.encode;return t.Json.Encode.values={_op:n,encode:f,string:s,$int:c,$float:l,bool:u,$null:a,list:r,array:i,object:o}},Elm.Json=Elm.Json||{},Elm.Json.Decode=Elm.Json.Decode||{},Elm.Json.Decode.make=function(t){"use strict";if(t.Json=t.Json||{},t.Json.Decode=t.Json.Decode||{},t.Json.Decode.values)return t.Json.Decode.values;var e=(Elm.Native.Utils.make(t),Elm.Array.make(t),Elm.Dict.make(t)),n=(Elm.Json.Encode.make(t),Elm.List.make(t)),r=(Elm.Maybe.make(t),Elm.Native.Json.make(t)),i=(Elm.Result.make(t),{}),o=r.decodeTuple8,a=r.decodeTuple7,u=r.decodeTuple6,l=r.decodeTuple5,c=r.decodeTuple4,s=r.decodeTuple3,f=r.decodeTuple2,m=r.decodeTuple1,p=r.succeed,h=r.fail,_=r.andThen,d=r.customDecoder,v=r.runDecoderValue,g=r.decodeValue,A=r.decodeMaybe,k=r.decodeNull,b=r.decodeArray,y=r.decodeList,E=r.decodeBool,N=r.decodeInt,T=r.decodeFloat,F=r.decodeString,x=r.oneOf,w=r.decodeKeyValuePairs,C=r.decodeObject8,S=r.decodeObject7,L=r.decodeObject6,R=r.decodeObject5,D=r.decodeObject4,M=r.decodeObject3,O=r.decodeObject2,B=r.decodeObject1;i[":="]=r.decodeField;var j=F2(function(t,e){return A3(n.foldr,F2(function(t,e){return A2(i[":="],t,e)}),e,t)}),P=r.runDecoderString,J=r.decodeObject1,z=function(t){return A2(J,e.fromList,w(t))};return t.Json.Decode.values={_op:i,decodeString:P,decodeValue:v,string:F,$int:N,$float:T,bool:E,$null:k,list:y,array:b,tuple1:m,tuple2:f,tuple3:s,tuple4:c,tuple5:l,tuple6:u,tuple7:a,tuple8:o,at:j,object1:B,object2:O,object3:M,object4:D,object5:R,object6:L,object7:S,object8:C,keyValuePairs:w,dict:z,maybe:A,oneOf:x,map:J,fail:h,succeed:p,andThen:_,value:g,customDecoder:d}},Elm.Native.Effects={},Elm.Native.Effects.make=function(t){function e(t,e){for(var r=!1,i=h.length;i--;)if(h[i].address===t){r=!0,h[i].tickMessages=A3(l.foldl,l.cons,h[i].tickMessages,e);break}switch(r||h.push({address:t,tickMessages:e}),p){case s:c(n),p=f;break;case f:p=f;break;case m:p=f}}function n(t){switch(p){case s:throw new Error("Unexpected send callback.\nPlease report this to <https://github.com/evancz/elm-effects/issues>.");case f:return c(n),p=m,void r(t);case m:return void(p=s)}}function r(t){for(var e=h.length;e--;){var n=A3(l.foldl,F2(function(e,n){return l.Cons(e(t),n)}),l.Nil,h[e].tickMessages);o.perform(A2(u.send,h[e].address,n))}h=[]}function i(t,n){return o.asyncFunction(function(r){e(t,n),r(o.succeed(a.Tuple0))})}if(t.Native=t.Native||{},t.Native.Effects=t.Native.Effects||{},t.Native.Effects.values)return t.Native.Effects.values;var o=Elm.Native.Task.make(t),a=Elm.Native.Utils.make(t),u=Elm.Signal.make(t),l=Elm.Native.List.make(t),c="undefined"!=typeof requestAnimationFrame?requestAnimationFrame:function(t){setTimeout(t,1e3/60)},s=0,f=1,m=2,p=s,h=[];return t.Native.Effects.values={requestTickSending:F2(i)}},Elm.Effects=Elm.Effects||{},Elm.Effects.make=function(t){"use strict";if(t.Effects=t.Effects||{},t.Effects.values)return t.Effects.values;var e=Elm.Native.Utils.make(t),n=Elm.Basics.make(t),r=(Elm.Debug.make(t),Elm.List.make(t)),i=(Elm.Maybe.make(t),Elm.Native.Effects.make(t)),o=(Elm.Result.make(t),Elm.Signal.make(t)),a=Elm.Task.make(t),u=(Elm.Time.make(t),{}),l=function(t){return A2(a.map,n.always({ctor:"_Tuple0"}),t)},c=i.requestTickSending,s=F3(function(t,i,u){var c=u,f=c._1,m=c,p=c._0,h=i;switch(h.ctor){case"Task":var _=A2(a.andThen,h._0,function(n){return A2(o.send,t,e.list([n]))});return{ctor:"_Tuple2",_0:A2(a.andThen,p,n.always(l(a.spawn(_)))),_1:f};case"Tick":return{ctor:"_Tuple2",_0:p,_1:A2(r._op["::"],h._0,f)};case"None":return m;default:return A3(r.foldl,s(t),m,h._0)}}),f=F2(function(t,i){var o=A3(s,t,i,{ctor:"_Tuple2",_0:a.succeed({ctor:"_Tuple0"}),_1:e.list([])}),u=o._0,l=o._1;return r.isEmpty(l)?u:A2(a.andThen,u,n.always(A2(c,t,l)))}),m=function(t){return{ctor:"Batch",_0:t}},p=m,h={ctor:"None"},_=h,d=function(t){return{ctor:"Tick",_0:t}},v=d,g=function(t){return{ctor:"Task",_0:t}},A=g,k=F2(function(t,e){var n=e;switch(n.ctor){case"Task":return g(A2(a.map,t,n._0));case"Tick":return d(function(e){return t(n._0(e))});case"None":return h;default:return m(A2(r.map,k(t),n._0))}});return t.Effects.values={_op:u,none:_,task:A,tick:v,map:k,batch:p,toTask:f}},function t(e,n,r){function i(a,u){if(!n[a]){if(!e[a]){var l="function"==typeof require&&require;if(!u&&l)return l(a,!0);if(o)return o(a,!0);var c=new Error("Cannot find module '"+a+"'");throw c.code="MODULE_NOT_FOUND",c}var s=n[a]={exports:{}};e[a][0].call(s.exports,function(t){var n=e[a][1][t];return i(n?n:t)},s,s.exports,t,e,n,r)}return n[a].exports}for(var o="function"==typeof require&&require,a=0;a<r.length;a++)i(r[a]);return i}({1:[function(t,e,n){},{}],2:[function(t,e,n){(function(n){var r="undefined"!=typeof n?n:"undefined"!=typeof window?window:{},i=t("min-document");if("undefined"!=typeof document)e.exports=document;else{var o=r["__GLOBAL_DOCUMENT_CACHE@4"];o||(o=r["__GLOBAL_DOCUMENT_CACHE@4"]=i),e.exports=o}}).call(this,"undefined"!=typeof global?global:"undefined"!=typeof self?self:"undefined"!=typeof window?window:{})},{"min-document":1}],3:[function(t,e,n){"use strict";e.exports=function(t){return"object"==typeof t&&null!==t}},{}],4:[function(t,e,n){function r(t){return"[object Array]"===o.call(t)}var i=Array.isArray,o=Object.prototype.toString;e.exports=i||r},{}],5:[function(t,e,n){function r(t,e,n){for(var r in e){var a=e[r];void 0===a?i(t,r,a,n):l(a)?(i(t,r,a,n),a.hook&&a.hook(t,r,n?n[r]:void 0)):u(a)?o(t,e,n,r,a):t[r]=a}}function i(t,e,n,r){if(r){var i=r[e];if(l(i))i.unhook&&i.unhook(t,e,n);else if("attributes"===e)for(var o in i)t.removeAttribute(o);else if("style"===e)for(var a in i)t.style[a]="";else"string"==typeof i?t[e]="":t[e]=null}}function o(t,e,n,r,i){var o=n?n[r]:void 0;if("attributes"!==r){if(o&&u(o)&&a(o)!==a(i))return void(t[r]=i);u(t[r])||(t[r]={});var l="style"===r?"":void 0;for(var c in i){var s=i[c];t[r][c]=void 0===s?l:s}}else for(var f in i){var m=i[f];void 0===m?t.removeAttribute(f):t.setAttribute(f,m)}}function a(t){return Object.getPrototypeOf?Object.getPrototypeOf(t):t.__proto__?t.__proto__:t.constructor?t.constructor.prototype:void 0}var u=t("is-object"),l=t("../vnode/is-vhook.js");e.exports=r},{"../vnode/is-vhook.js":13,"is-object":3}],6:[function(t,e,n){function r(t,e){var n=e?e.document||i:i,s=e?e.warn:null;if(t=c(t).a,l(t))return t.init();if(u(t))return n.createTextNode(t.text);if(!a(t))return s&&s("Item is not a valid virtual dom node",t),null;var f=null===t.namespace?n.createElement(t.tagName):n.createElementNS(t.namespace,t.tagName),m=t.properties;o(f,m);for(var p=t.children,h=0;h<p.length;h++){var _=r(p[h],e);_&&f.appendChild(_)}return f}var i=t("global/document"),o=t("./apply-properties"),a=t("../vnode/is-vnode.js"),u=t("../vnode/is-vtext.js"),l=t("../vnode/is-widget.js"),c=t("../vnode/handle-thunk.js");e.exports=r},{"../vnode/handle-thunk.js":11,"../vnode/is-vnode.js":14,"../vnode/is-vtext.js":15,"../vnode/is-widget.js":16,"./apply-properties":5,"global/document":2}],7:[function(t,e,n){function r(t,e,n,r){return n&&0!==n.length?(n.sort(a),i(t,e,n,r,0)):{}}function i(t,e,n,r,a){if(r=r||{},t){o(n,a,a)&&(r[a]=t);var l=e.children;if(l)for(var c=t.childNodes,s=0;s<e.children.length;s++){a+=1;var f=l[s]||u,m=a+(f.count||0);o(n,a,m)&&i(c[s],f,n,r,a),a=m}}return r}function o(t,e,n){if(0===t.length)return!1;for(var r,i,o=0,a=t.length-1;a>=o;){if(r=(a+o)/2>>0,i=t[r],o===a)return i>=e&&n>=i;if(e>i)o=r+1;else{if(!(i>n))return!0;a=r-1}}return!1}function a(t,e){return t>e?1:-1}var u={};e.exports=r},{}],8:[function(t,e,n){function r(t,e,n){var r=t.type,c=t.vNode,p=t.patch;switch(r){case h.REMOVE:return i(e,c);case h.INSERT:return o(e,p,n);case h.VTEXT:return a(e,c,p,n);case h.WIDGET:return u(e,c,p,n);case h.VNODE:return l(e,c,p,n);case h.ORDER:return s(e,p),e;case h.PROPS:return m(e,p,c.properties),e;case h.THUNK:return f(e,n.patch(e,p,n));default:return e}}function i(t,e){var n=t.parentNode;return n&&n.removeChild(t),c(t,e),null}function o(t,e,n){var r=_(e,n);return t&&t.appendChild(r),t}function a(t,e,n,r){var i;if(3===t.nodeType)t.replaceData(0,t.length,n.text),i=t;else{var o=t.parentNode;i=_(n,r),o&&i!==t&&o.replaceChild(i,t)}return i}function u(t,e,n,r){var i,o=d(e,n);i=o?n.update(e,t)||t:_(n,r);var a=t.parentNode;return a&&i!==t&&a.replaceChild(i,t),o||c(t,e),i}function l(t,e,n,r){var i=t.parentNode,o=_(n,r);return i&&o!==t&&i.replaceChild(o,t),o}function c(t,e){"function"==typeof e.destroy&&p(e)&&e.destroy(t)}function s(t,e){for(var n,r,i,o=t.childNodes,a={},u=0;u<e.removes.length;u++)r=e.removes[u],n=o[r.from],r.key&&(a[r.key]=n),t.removeChild(n);for(var l=o.length,c=0;c<e.inserts.length;c++)i=e.inserts[c],n=a[i.key],t.insertBefore(n,i.to>=l++?null:o[i.to])}function f(t,e){return t&&e&&t!==e&&t.parentNode&&t.parentNode.replaceChild(e,t),e}var m=t("./apply-properties"),p=t("../vnode/is-widget.js"),h=t("../vnode/vpatch.js"),_=t("./create-element"),d=t("./update-widget");e.exports=r},{"../vnode/is-widget.js":16,"../vnode/vpatch.js":19,"./apply-properties":5,"./create-element":6,"./update-widget":10}],9:[function(t,e,n){function r(t,e){return i(t,e)}function i(t,e,n){var r=a(e);if(0===r.length)return t;var l=c(t,e.a,r),s=t.ownerDocument;n||(n={patch:i},s!==u&&(n.document=s));for(var f=0;f<r.length;f++){var m=r[f];t=o(t,l[m],e[m],n)}return t}function o(t,e,n,r){if(!e)return t;var i;if(l(n))for(var o=0;o<n.length;o++)i=s(n[o],e,r),e===t&&(t=i);else i=s(n,e,r),e===t&&(t=i);return t}function a(t){var e=[];for(var n in t)"a"!==n&&e.push(Number(n));return e}var u=t("global/document"),l=t("x-is-array"),c=t("./dom-index"),s=t("./patch-op");e.exports=r},{"./dom-index":7,"./patch-op":8,"global/document":2,"x-is-array":4}],10:[function(t,e,n){function r(t,e){return i(t)&&i(e)?"name"in t&&"name"in e?t.id===e.id:t.init===e.init:!1}var i=t("../vnode/is-widget.js");e.exports=r},{"../vnode/is-widget.js":16}],11:[function(t,e,n){function r(t,e){var n=t,r=e;return l(e)&&(r=i(e,t)),l(t)&&(n=i(t,null)),{a:n,b:r}}function i(t,e){var n=t.vnode;if(n||(n=t.vnode=t.render(e)),!(o(n)||a(n)||u(n)))throw new Error("thunk did not return a valid node");return n}var o=t("./is-vnode"),a=t("./is-vtext"),u=t("./is-widget"),l=t("./is-thunk");e.exports=r},{"./is-thunk":12,"./is-vnode":14,"./is-vtext":15,"./is-widget":16}],12:[function(t,e,n){function r(t){return t&&"Thunk"===t.type}e.exports=r},{}],13:[function(t,e,n){function r(t){return t&&("function"==typeof t.hook&&!t.hasOwnProperty("hook")||"function"==typeof t.unhook&&!t.hasOwnProperty("unhook"))}e.exports=r},{}],14:[function(t,e,n){function r(t){return t&&"VirtualNode"===t.type&&t.version===i}var i=t("./version");e.exports=r},{"./version":17}],15:[function(t,e,n){function r(t){return t&&"VirtualText"===t.type&&t.version===i}var i=t("./version");e.exports=r},{"./version":17}],16:[function(t,e,n){function r(t){return t&&"Widget"===t.type}e.exports=r},{}],17:[function(t,e,n){e.exports="2"},{}],18:[function(t,e,n){function r(t,e,n,r,i){this.tagName=t,this.properties=e||c,this.children=n||s,this.key=null!=r?String(r):void 0,this.namespace="string"==typeof i?i:null;var f,m=n&&n.length||0,p=0,h=!1,_=!1,d=!1;for(var v in e)if(e.hasOwnProperty(v)){var g=e[v];l(g)&&g.unhook&&(f||(f={}),f[v]=g)}for(var A=0;m>A;A++){var k=n[A];o(k)?(p+=k.count||0,!h&&k.hasWidgets&&(h=!0),!_&&k.hasThunks&&(_=!0),d||!k.hooks&&!k.descendantHooks||(d=!0)):!h&&a(k)?"function"==typeof k.destroy&&(h=!0):!_&&u(k)&&(_=!0)}this.count=m+p,this.hasWidgets=h,this.hasThunks=_,this.hooks=f,this.descendantHooks=d}var i=t("./version"),o=t("./is-vnode"),a=t("./is-widget"),u=t("./is-thunk"),l=t("./is-vhook");e.exports=r;var c={},s=[];r.prototype.version=i,r.prototype.type="VirtualNode"},{"./is-thunk":12,"./is-vhook":13,"./is-vnode":14,"./is-widget":16,"./version":17}],19:[function(t,e,n){function r(t,e,n){this.type=Number(t),this.vNode=e,this.patch=n}var i=t("./version");r.NONE=0,r.VTEXT=1,r.VNODE=2,r.WIDGET=3,r.PROPS=4,r.ORDER=5,r.INSERT=6,r.REMOVE=7,r.THUNK=8,e.exports=r,r.prototype.version=i,r.prototype.type="VirtualPatch"},{"./version":17}],20:[function(t,e,n){function r(t){this.text=String(t)}var i=t("./version");e.exports=r,r.prototype.version=i,r.prototype.type="VirtualText"},{"./version":17}],21:[function(t,e,n){function r(t,e){var n;for(var u in t){u in e||(n=n||{},n[u]=void 0);var l=t[u],c=e[u];if(l!==c)if(o(l)&&o(c))if(i(c)!==i(l))n=n||{},n[u]=c;else if(a(c))n=n||{},n[u]=c;else{var s=r(l,c);s&&(n=n||{},n[u]=s)}else n=n||{},n[u]=c}for(var f in e)f in t||(n=n||{},n[f]=e[f]);return n}function i(t){return Object.getPrototypeOf?Object.getPrototypeOf(t):t.__proto__?t.__proto__:t.constructor?t.constructor.prototype:void 0}var o=t("is-object"),a=t("../vnode/is-vhook");e.exports=r},{"../vnode/is-vhook":13,"is-object":3}],22:[function(t,e,n){function r(t,e){var n={a:t};return i(t,e,n,0),n}function i(t,e,n,r){if(t!==e){var i=n[r],u=!1;if(b(t)||b(e))l(t,e,n,r);else if(null==e)k(t)||(a(t,n,r),i=n[r]),i=_(i,new v(v.REMOVE,t,e));else if(g(e))if(g(t))if(t.tagName===e.tagName&&t.namespace===e.namespace&&t.key===e.key){var c=E(t.properties,e.properties);c&&(i=_(i,new v(v.PROPS,t,c))),i=o(t,e,n,i,r)}else i=_(i,new v(v.VNODE,t,e)),u=!0;else i=_(i,new v(v.VNODE,t,e)),u=!0;else A(e)?A(t)?t.text!==e.text&&(i=_(i,new v(v.VTEXT,t,e))):(i=_(i,new v(v.VTEXT,t,e)),u=!0):k(e)&&(k(t)||(u=!0),i=_(i,new v(v.WIDGET,t,e)));i&&(n[r]=i),u&&a(t,n,r)}}function o(t,e,n,r,o){for(var a=t.children,u=m(a,e.children),l=u.children,c=a.length,s=l.length,f=c>s?c:s,p=0;f>p;p++){var h=a[p],d=l[p];o+=1,h?i(h,d,n,o):d&&(r=_(r,new v(v.INSERT,null,d))),g(h)&&h.count&&(o+=h.count)}return u.moves&&(r=_(r,new v(v.ORDER,t,u.moves))),r}function a(t,e,n){s(t,e,n),u(t,e,n)}function u(t,e,n){if(k(t))"function"==typeof t.destroy&&(e[n]=_(e[n],new v(v.REMOVE,t,null)));else if(g(t)&&(t.hasWidgets||t.hasThunks))for(var r=t.children,i=r.length,o=0;i>o;o++){var a=r[o];n+=1,u(a,e,n),g(a)&&a.count&&(n+=a.count)}else b(t)&&l(t,null,e,n)}function l(t,e,n,i){var o=y(t,e),a=r(o.a,o.b);c(a)&&(n[i]=new v(v.THUNK,null,a))}function c(t){for(var e in t)if("a"!==e)return!0;return!1}function s(t,e,n){if(g(t)){if(t.hooks&&(e[n]=_(e[n],new v(v.PROPS,t,f(t.hooks)))),t.descendantHooks||t.hasThunks)for(var r=t.children,i=r.length,o=0;i>o;o++){var a=r[o];n+=1,s(a,e,n),g(a)&&a.count&&(n+=a.count)}}else b(t)&&l(t,null,e,n)}function f(t){var e={};for(var n in t)e[n]=void 0;return e}function m(t,e){var n=h(e),r=n.keys,i=n.free;if(i.length===e.length)return{children:e,moves:null};var o=h(t),a=o.keys,u=o.free;if(u.length===t.length)return{children:e,moves:null};for(var l=[],c=0,s=i.length,f=0,m=0;m<t.length;m++){var _,d=t[m];d.key?r.hasOwnProperty(d.key)?(_=r[d.key],l.push(e[_])):(_=m-f++,l.push(null)):s>c?(_=i[c++],l.push(e[_])):(_=m-f++,l.push(null))}for(var v=c>=i.length?e.length:i[c],g=0;g<e.length;g++){var A=e[g];A.key?a.hasOwnProperty(A.key)||l.push(A):g>=v&&l.push(A)}for(var k,b=l.slice(),y=0,E=[],N=[],T=0;T<e.length;){var F=e[T];for(k=b[y];null===k&&b.length;)E.push(p(b,y,null)),k=b[y];k&&k.key===F.key?(y++,T++):F.key?(k&&k.key&&r[k.key]!==T+1?(E.push(p(b,y,k.key)),k=b[y],k&&k.key===F.key?y++:N.push({key:F.key,to:T})):N.push({key:F.key,to:T}),T++):k&&k.key&&E.push(p(b,y,k.key))}for(;y<b.length;)k=b[y],E.push(p(b,y,k&&k.key));return E.length!==f||N.length?{children:l,moves:{removes:E,inserts:N}}:{children:l,moves:null}}function p(t,e,n){return t.splice(e,1),{from:e,key:n}}function h(t){for(var e={},n=[],r=t.length,i=0;r>i;i++){var o=t[i];o.key?e[o.key]=i:n.push(i)}return{keys:e,free:n}}function _(t,e){return t?(d(t)?t.push(e):t=[t,e],t):e}var d=t("x-is-array"),v=t("../vnode/vpatch"),g=t("../vnode/is-vnode"),A=t("../vnode/is-vtext"),k=t("../vnode/is-widget"),b=t("../vnode/is-thunk"),y=t("../vnode/handle-thunk"),E=t("./diff-props");e.exports=r},{"../vnode/handle-thunk":11,"../vnode/is-thunk":12,"../vnode/is-vnode":14,"../vnode/is-vtext":15,"../vnode/is-widget":16,"../vnode/vpatch":19,"./diff-props":21,"x-is-array":4}],23:[function(t,e,n){var r=t("virtual-dom/vnode/vnode"),i=t("virtual-dom/vnode/vtext"),o=t("virtual-dom/vtree/diff"),a=t("virtual-dom/vdom/patch"),u=t("virtual-dom/vdom/create-element"),l=t("virtual-dom/vnode/is-vhook");Elm.Native.VirtualDom={},Elm.Native.VirtualDom.make=function(t){function e(t){return new i(t)}function n(t){return F2(function(e,n){return c(t,e,n)})}function c(t,e,n){var i,o,a=s(e);void 0!==a.key&&(i=a.key,a.key=void 0),void 0!==a.namespace&&(o=a.namespace,a.namespace=void 0);var u=("input"===t||"textarea"===t)&&void 0!==a.value&&!l(a.value);return u&&(a.value=d(a.value)),new r(t,a,L.toArray(n),i,o)}function s(t){for(var e={};"[]"!==t.ctor;){var n=t._0;n.key===D?(e.attributes=e.attributes||{},e.attributes[n.value.attrKey]=n.value.attrValue):e[n.key]=n.value,t=t._1}return e}function f(t,e){return{key:t,value:e}}function m(t,e){return{key:D,value:{attrKey:t,attrValue:e}}}function p(t,e,n){return{key:e,value:new h(t,e,n)}}function h(t,e,n){return this instanceof h?(this.namespace=t,this.key=e,void(this.value=n)):new h(t,e,n)}function _(t,e,n,r){function i(t){var i=A2(S.runDecoderValue,n,t);"Ok"===i.ctor&&(e.stopPropagation&&t.stopPropagation(),e.preventDefault&&t.preventDefault(),R.sendMessage(r(i._0)))}return f("on"+t,i)}function d(t){return this instanceof d?void(this.value=t):new d(t);
-}function v(t){this.element=t}function g(t){return new v(t)}function A(t,e,n){return A3(C.newElement,t,e,{ctor:"Custom",type:"evancz/elm-html",render:k,update:b,model:n})}function k(t){var e=C.createNode("div");return e.appendChild(u(t)),e}function b(t,e,n){return y(t.firstChild,e,n),t}function y(t,e,n){var r=o(e,n),i=a(t,r);return i}function E(t,e){function n(){return t(e)}return new F(t,[e],n)}function N(t,e,n){function r(){return A2(t,e,n)}return new F(t,[e,n],r)}function T(t,e,n,r){function i(){return A3(t,e,n,r)}return new F(t,[e,n,r],i)}function F(t,e,n){this.vnode=null,this.key=void 0,this.fn=t,this.args=e,this.thunk=n}function x(t,e){if(t.fn!==e.fn)return!0;for(var n=t.args,r=e.args,i=n.length;i--;)if(n[i]!==r[i])return!0;return!1}function w(t){return null==t||x(this,t)?this.thunk():t.vnode}if(t.Native=t.Native||{},t.Native.VirtualDom=t.Native.VirtualDom||{},t.Native.VirtualDom.values)return t.Native.VirtualDom.values;var C=Elm.Native.Graphics.Element.make(t),S=Elm.Native.Json.make(t),L=Elm.Native.List.make(t),R=Elm.Native.Signal.make(t),D=(Elm.Native.Utils.make(t),"UniqueNameThatOthersAreVeryUnlikelyToUse");return h.prototype.hook=function(t,e,n){n&&"AttributeHook"===n.type&&n.value===this.value&&n.namespace===this.namespace||t.setAttributeNS(this.namespace,e,this.value)},h.prototype.unhook=function(t,e,n){n&&"AttributeHook"===n.type&&n.namespace===this.namespace||t.removeAttributeNS(this.namespace,this.key)},h.prototype.type="AttributeHook",d.prototype.hook=function(t,e){t[e]!==this.value&&(t[e]=this.value)},v.prototype.type="Widget",v.prototype.init=function(){return C.render(this.element)},v.prototype.update=function(t,e){return C.update(e,t.element,this.element)},F.prototype.type="Thunk",F.prototype.render=w,t.Native.VirtualDom.values=Elm.Native.VirtualDom.values={node:n,text:e,on:F4(_),property:F2(f),attribute:F2(m),attributeNS:F3(p),lazy:F2(E),lazy2:F3(N),lazy3:F4(T),toElement:F3(A),fromElement:g,render:u,updateAndReplace:y}}},{"virtual-dom/vdom/create-element":6,"virtual-dom/vdom/patch":9,"virtual-dom/vnode/is-vhook":13,"virtual-dom/vnode/vnode":18,"virtual-dom/vnode/vtext":20,"virtual-dom/vtree/diff":22}]},{},[23]),Elm.VirtualDom=Elm.VirtualDom||{},Elm.VirtualDom.make=function(t){"use strict";if(t.VirtualDom=t.VirtualDom||{},t.VirtualDom.values)return t.VirtualDom.values;var e=(Elm.Native.Utils.make(t),Elm.Basics.make(t),Elm.Debug.make(t),Elm.Graphics.Element.make(t),Elm.Json.Decode.make(t),Elm.List.make(t),Elm.Maybe.make(t),Elm.Native.VirtualDom.make(t)),n=(Elm.Result.make(t),Elm.Signal.make(t),{}),r=e.lazy3,i=e.lazy2,o=e.lazy,a={stopPropagation:!1,preventDefault:!1},u=F2(function(t,e){return{stopPropagation:t,preventDefault:e}}),l=e.on,c=F3(function(t,n,r){return A4(e.on,t,a,n,r)}),s=e.attributeNS,f=e.attribute,m=e.property,p=e.fromElement,h=e.toElement,_=e.text,d=e.node;return t.VirtualDom.values={_op:n,text:_,node:d,toElement:h,fromElement:p,property:m,attribute:f,attributeNS:s,on:c,onWithOptions:l,defaultOptions:a,lazy:o,lazy2:i,lazy3:r,Options:u}},Elm.Html=Elm.Html||{},Elm.Html.make=function(t){"use strict";if(t.Html=t.Html||{},t.Html.values)return t.Html.values;var e=(Elm.Native.Utils.make(t),Elm.Basics.make(t),Elm.Debug.make(t),Elm.Graphics.Element.make(t),Elm.List.make(t),Elm.Maybe.make(t),Elm.Result.make(t),Elm.Signal.make(t),Elm.VirtualDom.make(t)),n={},r=e.fromElement,i=e.toElement,o=e.text,a=e.node,u=a("body"),l=a("section"),c=a("nav"),s=a("article"),f=a("aside"),m=a("h1"),p=a("h2"),h=a("h3"),_=a("h4"),d=a("h5"),v=a("h6"),g=a("header"),A=a("footer"),k=a("address"),b=a("main"),y=a("p"),E=a("hr"),N=a("pre"),T=a("blockquote"),F=a("ol"),x=a("ul"),w=a("li"),C=a("dl"),S=a("dt"),L=a("dd"),R=a("figure"),D=a("figcaption"),M=a("div"),O=a("a"),B=a("em"),j=a("strong"),P=a("small"),J=a("s"),z=a("cite"),U=a("q"),I=a("dfn"),H=a("abbr"),G=a("time"),q=a("code"),V=a("var"),$=a("samp"),W=a("kbd"),K=a("sub"),Y=a("sup"),X=a("i"),Q=a("b"),Z=a("u"),tt=a("mark"),et=a("ruby"),nt=a("rt"),rt=a("rp"),it=a("bdi"),ot=a("bdo"),at=a("span"),ut=a("br"),lt=a("wbr"),ct=a("ins"),st=a("del"),ft=a("img"),mt=a("iframe"),pt=a("embed"),ht=a("object"),_t=a("param"),dt=a("video"),vt=a("audio"),gt=a("source"),At=a("track"),kt=a("canvas"),bt=a("svg"),yt=a("math"),Et=a("table"),Nt=a("caption"),Tt=a("colgroup"),Ft=a("col"),xt=a("tbody"),wt=a("thead"),Ct=a("tfoot"),St=a("tr"),Lt=a("td"),Rt=a("th"),Dt=a("form"),Mt=a("fieldset"),Ot=a("legend"),Bt=a("label"),jt=a("input"),Pt=a("button"),Jt=a("select"),zt=a("datalist"),Ut=a("optgroup"),It=a("option"),Ht=a("textarea"),Gt=a("keygen"),qt=a("output"),Vt=a("progress"),$t=a("meter"),Wt=a("details"),Kt=a("summary"),Yt=a("menuitem"),Xt=a("menu");return t.Html.values={_op:n,node:a,text:o,toElement:i,fromElement:r,body:u,section:l,nav:c,article:s,aside:f,h1:m,h2:p,h3:h,h4:_,h5:d,h6:v,header:g,footer:A,address:k,main$:b,p:y,hr:E,pre:N,blockquote:T,ol:F,ul:x,li:w,dl:C,dt:S,dd:L,figure:R,figcaption:D,div:M,a:O,em:B,strong:j,small:P,s:J,cite:z,q:U,dfn:I,abbr:H,time:G,code:q,$var:V,samp:$,kbd:W,sub:K,sup:Y,i:X,b:Q,u:Z,mark:tt,ruby:et,rt:nt,rp:rt,bdi:it,bdo:ot,span:at,br:ut,wbr:lt,ins:ct,del:st,img:ft,iframe:mt,embed:pt,object:ht,param:_t,video:dt,audio:vt,source:gt,track:At,canvas:kt,svg:bt,math:yt,table:Et,caption:Nt,colgroup:Tt,col:Ft,tbody:xt,thead:wt,tfoot:Ct,tr:St,td:Lt,th:Rt,form:Dt,fieldset:Mt,legend:Ot,label:Bt,input:jt,button:Pt,select:Jt,datalist:zt,optgroup:Ut,option:It,textarea:Ht,keygen:Gt,output:qt,progress:Vt,meter:$t,details:Wt,summary:Kt,menuitem:Yt,menu:Xt}},Elm.Html=Elm.Html||{},Elm.Html.Attributes=Elm.Html.Attributes||{},Elm.Html.Attributes.make=function(t){"use strict";if(t.Html=t.Html||{},t.Html.Attributes=t.Html.Attributes||{},t.Html.Attributes.values)return t.Html.Attributes.values;var e=(Elm.Native.Utils.make(t),Elm.Basics.make(t)),n=(Elm.Debug.make(t),Elm.Html.make(t),Elm.Json.Encode.make(t)),r=Elm.List.make(t),i=(Elm.Maybe.make(t),Elm.Result.make(t),Elm.Signal.make(t),Elm.String.make(t)),o=Elm.VirtualDom.make(t),a={},u=o.attribute,l=function(t){return A2(u,"contextmenu",t)},c=o.property,s=F2(function(t,e){return A2(c,t,n.string(e))}),f=function(t){return A2(s,"className",t)},m=function(t){return A2(s,"id",t)},p=function(t){return A2(s,"title",t)},h=function(t){return A2(s,"accessKey",i.fromChar(t))},_=function(t){return A2(s,"dir",t)},d=function(t){return A2(s,"draggable",t)},v=function(t){return A2(s,"dropzone",t)},g=function(t){return A2(s,"itemprop",t)},A=function(t){return A2(s,"lang",t)},k=function(t){return A2(s,"tabIndex",e.toString(t))},b=function(t){return A2(s,"charset",t)},y=function(t){return A2(s,"content",t)},E=function(t){return A2(s,"httpEquiv",t)},N=function(t){return A2(s,"language",t)},T=function(t){return A2(s,"src",t)},F=function(t){return A2(s,"height",e.toString(t))},x=function(t){return A2(s,"width",e.toString(t))},w=function(t){return A2(s,"alt",t)},C=function(t){return A2(s,"preload",t)},S=function(t){return A2(s,"poster",t)},L=function(t){return A2(s,"kind",t)},R=function(t){return A2(s,"srclang",t)},D=function(t){return A2(s,"sandbox",t)},M=function(t){return A2(s,"srcdoc",t)},O=function(t){return A2(s,"type",t)},B=function(t){return A2(s,"value",t)},j=function(t){return A2(s,"placeholder",t)},P=function(t){return A2(s,"accept",t)},J=function(t){return A2(s,"acceptCharset",t)},z=function(t){return A2(s,"action",t)},U=function(t){return A2(s,"autocomplete",t?"on":"off")},I=function(t){return A2(s,"autosave",t)},H=function(t){return A2(s,"enctype",t)},G=function(t){return A2(s,"formAction",t)},q=function(t){return A2(s,"list",t)},V=function(t){return A2(s,"minLength",e.toString(t))},$=function(t){return A2(s,"maxLength",e.toString(t))},W=function(t){return A2(s,"method",t)},K=function(t){return A2(s,"name",t)},Y=function(t){return A2(s,"pattern",t)},X=function(t){return A2(s,"size",e.toString(t))},Q=function(t){return A2(s,"htmlFor",t)},Z=function(t){return A2(s,"form",t)},tt=function(t){return A2(s,"max",t)},et=function(t){return A2(s,"min",t)},nt=function(t){return A2(s,"step",t)},rt=function(t){return A2(s,"cols",e.toString(t))},it=function(t){return A2(s,"rows",e.toString(t))},ot=function(t){return A2(s,"wrap",t)},at=function(t){return A2(s,"useMap",t)},ut=function(t){return A2(s,"shape",t)},lt=function(t){return A2(s,"coords",t)},ct=function(t){return A2(s,"challenge",t)},st=function(t){return A2(s,"keytype",t)},ft=function(t){return A2(s,"align",t)},mt=function(t){return A2(s,"cite",t)},pt=function(t){return A2(s,"href",t)},ht=function(t){return A2(s,"target",t)},_t=function(t){return A2(s,"download",t)},dt=function(t){return A2(s,"hreflang",t)},vt=function(t){return A2(s,"media",t)},gt=function(t){return A2(s,"ping",t)},At=function(t){return A2(s,"rel",t)},kt=function(t){return A2(s,"datetime",t)},bt=function(t){return A2(s,"pubdate",t)},yt=function(t){return A2(s,"start",e.toString(t))},Et=function(t){return A2(s,"colSpan",e.toString(t))},Nt=function(t){return A2(s,"headers",t)},Tt=function(t){return A2(s,"rowSpan",e.toString(t))},Ft=function(t){return A2(s,"scope",t)},xt=function(t){return A2(s,"manifest",t)},wt=F2(function(t,e){return A2(c,t,n.bool(e))}),Ct=function(t){return A2(wt,"hidden",t)},St=function(t){return A2(wt,"contentEditable",t)},Lt=function(t){return A2(wt,"spellcheck",t)},Rt=function(t){return A2(wt,"async",t)},Dt=function(t){return A2(wt,"defer",t)},Mt=function(t){return A2(wt,"scoped",t)},Ot=function(t){return A2(wt,"autoplay",t)},Bt=function(t){return A2(wt,"controls",t)},jt=function(t){return A2(wt,"loop",t)},Pt=function(t){return A2(wt,"default",t)},Jt=function(t){return A2(wt,"seamless",t)},zt=function(t){return A2(wt,"checked",t)},Ut=function(t){return A2(wt,"selected",t)},It=function(t){return A2(wt,"autofocus",t)},Ht=function(t){return A2(wt,"disabled",t)},Gt=function(t){return A2(wt,"multiple",t)},qt=function(t){return A2(wt,"noValidate",t)},Vt=function(t){return A2(wt,"readOnly",t)},$t=function(t){return A2(wt,"required",t)},Wt=function(t){return A2(wt,"isMap",t)},Kt=function(t){return A2(wt,"download",t)},Yt=function(t){return A2(wt,"reversed",t)},Xt=function(t){return f(A2(i.join," ",A2(r.map,e.fst,A2(r.filter,e.snd,t))))},Qt=function(t){return A2(c,"style",n.object(A2(r.map,function(t){var e=t;return{ctor:"_Tuple2",_0:e._0,_1:n.string(e._1)}},t)))},Zt=function(t){return A2(s,"key",t)};return t.Html.Attributes.values={_op:a,key:Zt,style:Qt,$class:f,classList:Xt,id:m,title:p,hidden:Ct,type$:O,value:B,checked:zt,placeholder:j,selected:Ut,accept:P,acceptCharset:J,action:z,autocomplete:U,autofocus:It,autosave:I,disabled:Ht,enctype:H,formaction:G,list:q,maxlength:$,minlength:V,method:W,multiple:Gt,name:K,novalidate:qt,pattern:Y,readonly:Vt,required:$t,size:X,$for:Q,form:Z,max:tt,min:et,step:nt,cols:rt,rows:it,wrap:ot,href:pt,target:ht,download:Kt,downloadAs:_t,hreflang:dt,media:vt,ping:gt,rel:At,ismap:Wt,usemap:at,shape:ut,coords:lt,src:T,height:F,width:x,alt:w,autoplay:Ot,controls:Bt,loop:jt,preload:C,poster:S,$default:Pt,kind:L,srclang:R,sandbox:D,seamless:Jt,srcdoc:M,reversed:Yt,start:yt,align:ft,colspan:Et,rowspan:Tt,headers:Nt,scope:Ft,async:Rt,charset:b,content:y,defer:Dt,httpEquiv:E,language:N,scoped:Mt,accesskey:h,contenteditable:St,contextmenu:l,dir:_,draggable:d,dropzone:v,itemprop:g,lang:A,spellcheck:Lt,tabindex:k,challenge:ct,keytype:st,cite:mt,datetime:kt,pubdate:bt,manifest:xt,property:c,attribute:u}},Elm.Html=Elm.Html||{},Elm.Html.Events=Elm.Html.Events||{},Elm.Html.Events.make=function(t){"use strict";if(t.Html=t.Html||{},t.Html.Events=t.Html.Events||{},t.Html.Events.values)return t.Html.Events.values;var e=Elm.Native.Utils.make(t),n=(Elm.Basics.make(t),Elm.Debug.make(t),Elm.Html.make(t),Elm.Json.Decode.make(t)),r=(Elm.List.make(t),Elm.Maybe.make(t),Elm.Result.make(t),Elm.Signal.make(t)),i=Elm.VirtualDom.make(t),o={},a=A2(n._op[":="],"keyCode",n.$int),u=A2(n.at,e.list(["target","checked"]),n.bool),l=A2(n.at,e.list(["target","value"]),n.string),c=i.defaultOptions,s=F2(function(t,e){return{stopPropagation:t,preventDefault:e}}),f=i.onWithOptions,m=i.on,p=F3(function(t,e,i){return A3(m,t,n.value,function(t){return A2(r.message,e,i)})}),h=p("click"),_=p("dblclick"),d=p("mousemove"),v=p("mousedown"),g=p("mouseup"),A=p("mouseenter"),k=p("mouseleave"),b=p("mouseover"),y=p("mouseout"),E=p("blur"),N=p("focus"),T=p("submit"),F=F3(function(t,e,n){return A3(m,t,a,function(t){return A2(r.message,e,n(t))})}),x=F("keyup"),w=F("keydown"),C=F("keypress");return t.Html.Events.values={_op:o,onBlur:E,onFocus:N,onSubmit:T,onKeyUp:x,onKeyDown:w,onKeyPress:C,onClick:h,onDoubleClick:_,onMouseMove:d,onMouseDown:v,onMouseUp:g,onMouseEnter:A,onMouseLeave:k,onMouseOver:b,onMouseOut:y,on:m,onWithOptions:f,defaultOptions:c,targetValue:l,targetChecked:u,keyCode:a,Options:s}},Elm.Native=Elm.Native||{},Elm.Native.Markdown=Elm.Native.Markdown||{},Elm.Native.Markdown.make=function(t){"use strict";function e(t){var e=function(e,n){return n||"Just"!==t.defaultHighlighting.ctor||(n=t.defaultHighlighting._0),"undefined"!=typeof hljs&&n&&hljs.listLanguages().indexOf(n)>=0?hljs.highlight(n,e,!0).value:e},n=t.githubFlavored;return"Just"===n.ctor?{highlight:e,gfm:!0,tables:n._0.tables,breaks:n._0.breaks,sanitize:t.sanitize,smartypants:t.smartypants}:{highlight:e,gfm:!1,tables:!1,breaks:!1,sanitize:t.sanitize,smartypants:t.smartypants}}function n(t,e){return new r(t,e)}function r(t,e){this.options=t,this.markdown=e}function i(t,n){return o.markdown(marked(n,e(t)))}if("values"in Elm.Native.Markdown)return Elm.Native.Markdown.values;var o=Elm.Native.Graphics.Element.make(t);return function(){function t(t){this.tokens=[],this.tokens.links={},this.options=t||c.defaults,this.rules=s.normal,this.options.gfm&&(this.options.tables?this.rules=s.tables:this.rules=s.gfm)}function e(t,e){if(this.options=e||c.defaults,this.links=t,this.rules=f.normal,this.renderer=this.options.renderer||new n,this.renderer.options=this.options,!this.links)throw new Error("Tokens array requires a `links` property.");this.options.gfm?this.options.breaks?this.rules=f.breaks:this.rules=f.gfm:this.options.pedantic&&(this.rules=f.pedantic)}function n(t){this.options=t||{}}function r(t){this.tokens=[],this.token=null,this.options=t||c.defaults,this.options.renderer=this.options.renderer||new n,this.renderer=this.options.renderer,this.renderer.options=this.options}function i(t,e){return t.replace(e?/&/g:/&(?!#?\w+;)/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;")}function o(t){return t.replace(/&([#\w]+);/g,function(t,e){return e=e.toLowerCase(),"colon"===e?":":"#"===e.charAt(0)?"x"===e.charAt(1)?String.fromCharCode(parseInt(e.substring(2),16)):String.fromCharCode(+e.substring(1)):""})}function a(t,e){return t=t.source,e=e||"",function n(r,i){return r?(i=i.source||i,i=i.replace(/(^|[^\[])\^/g,"$1"),t=t.replace(r,i),n):new RegExp(t,e)}}function u(){}function l(t){for(var e,n,r=1;r<arguments.length;r++){e=arguments[r];for(n in e)Object.prototype.hasOwnProperty.call(e,n)&&(t[n]=e[n])}return t}function c(e,n,o){if(o||"function"==typeof n){o||(o=n,n=null),n=l({},c.defaults,n||{});var a,u,s=n.highlight,f=0;try{a=t.lex(e,n)}catch(m){return o(m)}u=a.length;var p=function(t){if(t)return n.highlight=s,o(t);var e;try{e=r.parse(a,n)}catch(i){t=i}return n.highlight=s,t?o(t):o(null,e)};if(!s||s.length<3)return p();if(delete n.highlight,!u)return p();for(;f<a.length;f++)!function(t){return"code"!==t.type?--u||p():s(t.text,t.lang,function(e,n){return e?p(e):null==n||n===t.text?--u||p():(t.text=n,t.escaped=!0,void(--u||p()))})}(a[f])}else try{return n&&(n=l({},c.defaults,n)),r.parse(t.lex(e,n),n)}catch(m){if(m.message+="\nPlease report this to https://github.com/chjj/marked.",(n||c.defaults).silent)return"<p>An error occured:</p><pre>"+i(m.message+"",!0)+"</pre>";throw m}}var s={newline:/^\n+/,code:/^( {4}[^\n]+\n*)+/,fences:u,hr:/^( *[-*_]){3,} *(?:\n+|$)/,heading:/^ *(#{1,6}) *([^\n]+?) *#* *(?:\n+|$)/,nptable:u,lheading:/^([^\n]+)\n *(=|-){2,} *(?:\n+|$)/,blockquote:/^( *>[^\n]+(\n(?!def)[^\n]+)*\n*)+/,list:/^( *)(bull) [\s\S]+?(?:hr|def|\n{2,}(?! )(?!\1bull )\n*|\s*$)/,html:/^ *(?:comment|closed|closing) *(?:\n{2,}|\s*$)/,def:/^ *\[([^\]]+)\]: *<?([^\s>]+)>?(?: +["(]([^\n]+)[")])? *(?:\n+|$)/,table:u,paragraph:/^((?:[^\n]+\n?(?!hr|heading|lheading|blockquote|tag|def))+)\n*/,text:/^[^\n]+/};s.bullet=/(?:[*+-]|\d+\.)/,s.item=/^( *)(bull) [^\n]*(?:\n(?!\1bull )[^\n]*)*/,s.item=a(s.item,"gm")(/bull/g,s.bullet)(),s.list=a(s.list)(/bull/g,s.bullet)("hr","\\n+(?=\\1?(?:[-*_] *){3,}(?:\\n+|$))")("def","\\n+(?="+s.def.source+")")(),s.blockquote=a(s.blockquote)("def",s.def)(),s._tag="(?!(?:a|em|strong|small|s|cite|q|dfn|abbr|data|time|code|var|samp|kbd|sub|sup|i|b|u|mark|ruby|rt|rp|bdi|bdo|span|br|wbr|ins|del|img)\\b)\\w+(?!:/|[^\\w\\s@]*@)\\b",s.html=a(s.html)("comment",/<!--[\s\S]*?-->/)("closed",/<(tag)[\s\S]+?<\/\1>/)("closing",/<tag(?:"[^"]*"|'[^']*'|[^'">])*?>/)(/tag/g,s._tag)(),s.paragraph=a(s.paragraph)("hr",s.hr)("heading",s.heading)("lheading",s.lheading)("blockquote",s.blockquote)("tag","<"+s._tag)("def",s.def)(),s.normal=l({},s),s.gfm=l({},s.normal,{fences:/^ *(`{3,}|~{3,}) *(\S+)? *\n([\s\S]+?)\s*\1 *(?:\n+|$)/,paragraph:/^/}),s.gfm.paragraph=a(s.paragraph)("(?!","(?!"+s.gfm.fences.source.replace("\\1","\\2")+"|"+s.list.source.replace("\\1","\\3")+"|")(),s.tables=l({},s.gfm,{nptable:/^ *(\S.*\|.*)\n *([-:]+ *\|[-| :]*)\n((?:.*\|.*(?:\n|$))*)\n*/,table:/^ *\|(.+)\n *\|( *[-:]+[-| :]*)\n((?: *\|.*(?:\n|$))*)\n*/}),t.rules=s,t.lex=function(e,n){var r=new t(n);return r.lex(e)},t.prototype.lex=function(t){return t=t.replace(/\r\n|\r/g,"\n").replace(/\t/g,"    ").replace(/\u00a0/g," ").replace(/\u2424/g,"\n"),this.token(t,!0)},t.prototype.token=function(t,e,n){for(var r,i,o,a,u,l,c,f,m,t=t.replace(/^ +$/gm,"");t;)if((o=this.rules.newline.exec(t))&&(t=t.substring(o[0].length),o[0].length>1&&this.tokens.push({type:"space"})),o=this.rules.code.exec(t))t=t.substring(o[0].length),o=o[0].replace(/^ {4}/gm,""),this.tokens.push({type:"code",text:this.options.pedantic?o:o.replace(/\n+$/,"")});else if(o=this.rules.fences.exec(t))t=t.substring(o[0].length),this.tokens.push({type:"code",lang:o[2],text:o[3]});else if(o=this.rules.heading.exec(t))t=t.substring(o[0].length),this.tokens.push({type:"heading",depth:o[1].length,text:o[2]});else if(e&&(o=this.rules.nptable.exec(t))){for(t=t.substring(o[0].length),l={type:"table",header:o[1].replace(/^ *| *\| *$/g,"").split(/ *\| */),align:o[2].replace(/^ *|\| *$/g,"").split(/ *\| */),cells:o[3].replace(/\n$/,"").split("\n")},f=0;f<l.align.length;f++)/^ *-+: *$/.test(l.align[f])?l.align[f]="right":/^ *:-+: *$/.test(l.align[f])?l.align[f]="center":/^ *:-+ *$/.test(l.align[f])?l.align[f]="left":l.align[f]=null;for(f=0;f<l.cells.length;f++)l.cells[f]=l.cells[f].split(/ *\| */);this.tokens.push(l)}else if(o=this.rules.lheading.exec(t))t=t.substring(o[0].length),this.tokens.push({type:"heading",depth:"="===o[2]?1:2,text:o[1]});else if(o=this.rules.hr.exec(t))t=t.substring(o[0].length),this.tokens.push({type:"hr"});else if(o=this.rules.blockquote.exec(t))t=t.substring(o[0].length),this.tokens.push({type:"blockquote_start"}),o=o[0].replace(/^ *> ?/gm,""),this.token(o,e,!0),this.tokens.push({type:"blockquote_end"});else if(o=this.rules.list.exec(t)){for(t=t.substring(o[0].length),a=o[2],this.tokens.push({type:"list_start",ordered:a.length>1}),o=o[0].match(this.rules.item),r=!1,m=o.length,f=0;m>f;f++)l=o[f],c=l.length,l=l.replace(/^ *([*+-]|\d+\.) +/,""),~l.indexOf("\n ")&&(c-=l.length,l=this.options.pedantic?l.replace(/^ {1,4}/gm,""):l.replace(new RegExp("^ {1,"+c+"}","gm"),"")),this.options.smartLists&&f!==m-1&&(u=s.bullet.exec(o[f+1])[0],a===u||a.length>1&&u.length>1||(t=o.slice(f+1).join("\n")+t,f=m-1)),i=r||/\n\n(?!\s*$)/.test(l),f!==m-1&&(r="\n"===l.charAt(l.length-1),i||(i=r)),this.tokens.push({type:i?"loose_item_start":"list_item_start"}),this.token(l,!1,n),this.tokens.push({type:"list_item_end"});this.tokens.push({type:"list_end"})}else if(o=this.rules.html.exec(t))t=t.substring(o[0].length),this.tokens.push({type:this.options.sanitize?"paragraph":"html",pre:"pre"===o[1]||"script"===o[1]||"style"===o[1],text:o[0]});else if(!n&&e&&(o=this.rules.def.exec(t)))t=t.substring(o[0].length),this.tokens.links[o[1].toLowerCase()]={href:o[2],title:o[3]};else if(e&&(o=this.rules.table.exec(t))){for(t=t.substring(o[0].length),l={type:"table",header:o[1].replace(/^ *| *\| *$/g,"").split(/ *\| */),align:o[2].replace(/^ *|\| *$/g,"").split(/ *\| */),cells:o[3].replace(/(?: *\| *)?\n$/,"").split("\n")},f=0;f<l.align.length;f++)/^ *-+: *$/.test(l.align[f])?l.align[f]="right":/^ *:-+: *$/.test(l.align[f])?l.align[f]="center":/^ *:-+ *$/.test(l.align[f])?l.align[f]="left":l.align[f]=null;for(f=0;f<l.cells.length;f++)l.cells[f]=l.cells[f].replace(/^ *\| *| *\| *$/g,"").split(/ *\| */);this.tokens.push(l)}else if(e&&(o=this.rules.paragraph.exec(t)))t=t.substring(o[0].length),this.tokens.push({type:"paragraph",text:"\n"===o[1].charAt(o[1].length-1)?o[1].slice(0,-1):o[1]});else if(o=this.rules.text.exec(t))t=t.substring(o[0].length),this.tokens.push({type:"text",text:o[0]});else if(t)throw new Error("Infinite loop on byte: "+t.charCodeAt(0));return this.tokens};var f={escape:/^\\([\\`*{}\[\]()#+\-.!_>])/,autolink:/^<([^ >]+(@|:\/)[^ >]+)>/,url:u,tag:/^<!--[\s\S]*?-->|^<\/?\w+(?:"[^"]*"|'[^']*'|[^'">])*?>/,link:/^!?\[(inside)\]\(href\)/,reflink:/^!?\[(inside)\]\s*\[([^\]]*)\]/,nolink:/^!?\[((?:\[[^\]]*\]|[^\[\]])*)\]/,strong:/^__([\s\S]+?)__(?!_)|^\*\*([\s\S]+?)\*\*(?!\*)/,em:/^\b_((?:__|[\s\S])+?)_\b|^\*((?:\*\*|[\s\S])+?)\*(?!\*)/,code:/^(`+)\s*([\s\S]*?[^`])\s*\1(?!`)/,br:/^ {2,}\n(?!\s*$)/,del:u,text:/^[\s\S]+?(?=[\\<!\[_*`]| {2,}\n|$)/};f._inside=/(?:\[[^\]]*\]|[^\[\]]|\](?=[^\[]*\]))*/,f._href=/\s*<?([\s\S]*?)>?(?:\s+['"]([\s\S]*?)['"])?\s*/,f.link=a(f.link)("inside",f._inside)("href",f._href)(),f.reflink=a(f.reflink)("inside",f._inside)(),f.normal=l({},f),f.pedantic=l({},f.normal,{strong:/^__(?=\S)([\s\S]*?\S)__(?!_)|^\*\*(?=\S)([\s\S]*?\S)\*\*(?!\*)/,em:/^_(?=\S)([\s\S]*?\S)_(?!_)|^\*(?=\S)([\s\S]*?\S)\*(?!\*)/}),f.gfm=l({},f.normal,{escape:a(f.escape)("])","~|])")(),url:/^(https?:\/\/[^\s<]+[^<.,:;"')\]\s])/,del:/^~~(?=\S)([\s\S]*?\S)~~/,text:a(f.text)("]|","~]|")("|","|https?://|")()}),f.breaks=l({},f.gfm,{br:a(f.br)("{2,}","*")(),text:a(f.gfm.text)("{2,}","*")()}),e.rules=f,e.output=function(t,n,r){var i=new e(n,r);return i.output(t)},e.prototype.output=function(t){for(var e,n,r,o,a="";t;)if(o=this.rules.escape.exec(t))t=t.substring(o[0].length),a+=o[1];else if(o=this.rules.autolink.exec(t))t=t.substring(o[0].length),"@"===o[2]?(n=":"===o[1].charAt(6)?this.mangle(o[1].substring(7)):this.mangle(o[1]),r=this.mangle("mailto:")+n):(n=i(o[1]),r=n),a+=this.renderer.link(r,null,n);else if(this.inLink||!(o=this.rules.url.exec(t))){if(o=this.rules.tag.exec(t))!this.inLink&&/^<a /i.test(o[0])?this.inLink=!0:this.inLink&&/^<\/a>/i.test(o[0])&&(this.inLink=!1),t=t.substring(o[0].length),a+=this.options.sanitize?i(o[0]):o[0];else if(o=this.rules.link.exec(t))t=t.substring(o[0].length),this.inLink=!0,a+=this.outputLink(o,{href:o[2],title:o[3]}),this.inLink=!1;else if((o=this.rules.reflink.exec(t))||(o=this.rules.nolink.exec(t))){if(t=t.substring(o[0].length),e=(o[2]||o[1]).replace(/\s+/g," "),e=this.links[e.toLowerCase()],!e||!e.href){a+=o[0].charAt(0),t=o[0].substring(1)+t;continue}this.inLink=!0,a+=this.outputLink(o,e),this.inLink=!1}else if(o=this.rules.strong.exec(t))t=t.substring(o[0].length),a+=this.renderer.strong(this.output(o[2]||o[1]));else if(o=this.rules.em.exec(t))t=t.substring(o[0].length),a+=this.renderer.em(this.output(o[2]||o[1]));else if(o=this.rules.code.exec(t))t=t.substring(o[0].length),a+=this.renderer.codespan(i(o[2],!0));else if(o=this.rules.br.exec(t))t=t.substring(o[0].length),a+=this.renderer.br();else if(o=this.rules.del.exec(t))t=t.substring(o[0].length),a+=this.renderer.del(this.output(o[1]));else if(o=this.rules.text.exec(t))t=t.substring(o[0].length),a+=i(this.smartypants(o[0]));else if(t)throw new Error("Infinite loop on byte: "+t.charCodeAt(0))}else t=t.substring(o[0].length),n=i(o[1]),r=n,a+=this.renderer.link(r,null,n);return a},e.prototype.outputLink=function(t,e){var n=i(e.href),r=e.title?i(e.title):null;return"!"!==t[0].charAt(0)?this.renderer.link(n,r,this.output(t[1])):this.renderer.image(n,r,i(t[1]))},e.prototype.smartypants=function(t){return this.options.smartypants?t.replace(/--/g,"—").replace(/(^|[-\u2014\/(\[{"\s])'/g,"$1‘").replace(/'/g,"’").replace(/(^|[-\u2014\/(\[{\u2018\s])"/g,"$1“").replace(/"/g,"”").replace(/\.{3}/g,"…"):t},e.prototype.mangle=function(t){for(var e,n="",r=t.length,i=0;r>i;i++)e=t.charCodeAt(i),Math.random()>.5&&(e="x"+e.toString(16)),n+="&#"+e+";";return n},n.prototype.code=function(t,e,n){if(this.options.highlight){var r=this.options.highlight(t,e);null!=r&&r!==t&&(n=!0,t=r)}return e?'<pre><code class="'+this.options.langPrefix+i(e,!0)+'">'+(n?t:i(t,!0))+"\n</code></pre>\n":"<pre><code>"+(n?t:i(t,!0))+"\n</code></pre>"},n.prototype.blockquote=function(t){return"<blockquote>\n"+t+"</blockquote>\n"},n.prototype.html=function(t){return t},n.prototype.heading=function(t,e,n){return"<h"+e+' id="'+this.options.headerPrefix+n.toLowerCase().replace(/[^\w]+/g,"-")+'">'+t+"</h"+e+">\n"},n.prototype.hr=function(){return this.options.xhtml?"<hr/>\n":"<hr>\n"},n.prototype.list=function(t,e){var n=e?"ol":"ul";return"<"+n+">\n"+t+"</"+n+">\n"},n.prototype.listitem=function(t){return"<li>"+t+"</li>\n"},n.prototype.paragraph=function(t){return"<p>"+t+"</p>\n"},n.prototype.table=function(t,e){return"<table>\n<thead>\n"+t+"</thead>\n<tbody>\n"+e+"</tbody>\n</table>\n"},n.prototype.tablerow=function(t){return"<tr>\n"+t+"</tr>\n"},n.prototype.tablecell=function(t,e){var n=e.header?"th":"td",r=e.align?"<"+n+' style="text-align:'+e.align+'">':"<"+n+">";return r+t+"</"+n+">\n"},n.prototype.strong=function(t){return"<strong>"+t+"</strong>"},n.prototype.em=function(t){return"<em>"+t+"</em>"},n.prototype.codespan=function(t){return"<code>"+t+"</code>"},n.prototype.br=function(){return this.options.xhtml?"<br/>":"<br>"},n.prototype.del=function(t){return"<del>"+t+"</del>"},n.prototype.link=function(t,e,n){if(this.options.sanitize){try{var r=decodeURIComponent(o(t)).replace(/[^\w:]/g,"").toLowerCase()}catch(i){return""}if(0===r.indexOf("javascript:"))return""}var a='<a href="'+t+'"';return e&&(a+=' title="'+e+'"'),a+=">"+n+"</a>"},n.prototype.image=function(t,e,n){var r='<img src="'+t+'" alt="'+n+'"';return e&&(r+=' title="'+e+'"'),r+=this.options.xhtml?"/>":">"},r.parse=function(t,e,n){var i=new r(e,n);return i.parse(t)},r.prototype.parse=function(t){this.inline=new e(t.links,this.options,this.renderer),this.tokens=t.reverse();for(var n="";this.next();)n+=this.tok();return n},r.prototype.next=function(){return this.token=this.tokens.pop()},r.prototype.peek=function(){return this.tokens[this.tokens.length-1]||0},r.prototype.parseText=function(){for(var t=this.token.text;"text"===this.peek().type;)t+="\n"+this.next().text;return this.inline.output(t)},r.prototype.tok=function(){switch(this.token.type){case"space":return"";case"hr":return this.renderer.hr();case"heading":return this.renderer.heading(this.inline.output(this.token.text),this.token.depth,this.token.text);case"code":return this.renderer.code(this.token.text,this.token.lang,this.token.escaped);case"table":var t,e,n,r,i,o="",a="";for(n="",t=0;t<this.token.header.length;t++)r={header:!0,align:this.token.align[t]},n+=this.renderer.tablecell(this.inline.output(this.token.header[t]),{header:!0,align:this.token.align[t]});for(o+=this.renderer.tablerow(n),t=0;t<this.token.cells.length;t++){for(e=this.token.cells[t],n="",i=0;i<e.length;i++)n+=this.renderer.tablecell(this.inline.output(e[i]),{header:!1,align:this.token.align[i]});a+=this.renderer.tablerow(n)}return this.renderer.table(o,a);case"blockquote_start":for(var a="";"blockquote_end"!==this.next().type;)a+=this.tok();return this.renderer.blockquote(a);case"list_start":for(var a="",u=this.token.ordered;"list_end"!==this.next().type;)a+=this.tok();return this.renderer.list(a,u);case"list_item_start":for(var a="";"list_item_end"!==this.next().type;)a+="text"===this.token.type?this.parseText():this.tok();return this.renderer.listitem(a);case"loose_item_start":for(var a="";"list_item_end"!==this.next().type;)a+=this.tok();return this.renderer.listitem(a);case"html":var l=this.token.pre||this.options.pedantic?this.token.text:this.inline.output(this.token.text);return this.renderer.html(l);case"paragraph":return this.renderer.paragraph(this.inline.output(this.token.text));case"text":return this.renderer.paragraph(this.parseText())}},u.exec=u,c.options=c.setOptions=function(t){return l(c.defaults,t),c},c.defaults={gfm:!0,tables:!0,breaks:!1,pedantic:!1,sanitize:!1,smartLists:!1,silent:!1,highlight:null,langPrefix:"lang-",smartypants:!1,headerPrefix:"",renderer:new n,xhtml:!1},c.Parser=r,c.parser=r.parse,c.Renderer=n,c.Lexer=t,c.lexer=t.lex,c.InlineLexer=e,c.inlineLexer=e.output,c.parse=c,"undefined"!=typeof module&&"object"==typeof exports?module.exports=c:"function"==typeof define&&define.amd?define(function(){return c}):this.marked=c}.call(function(){return this||("undefined"!=typeof window?window:global)}()),r.prototype.type="Widget",r.prototype.init=function(){var t=marked(this.markdown,e(this.options)),n=document.createElement("div");return n.innerHTML=t,n},r.prototype.update=function(t,n){if(this.markdown!==t.markdown||this.options!=t.options){var r=marked(this.markdown,e(this.options));n.innerHTML=r}return n},Elm.Native.Markdown.values={toHtmlWith:F2(n),toElementWith:F2(i)}},Elm.Markdown=Elm.Markdown||{},Elm.Markdown.make=function(t){"use strict";if(t.Markdown=t.Markdown||{},t.Markdown.values)return t.Markdown.values;var e=(Elm.Native.Utils.make(t),Elm.Basics.make(t),Elm.Debug.make(t),Elm.Graphics.Element.make(t),Elm.Html.make(t),Elm.List.make(t),Elm.Maybe.make(t)),n=Elm.Native.Markdown.make(t),r=(Elm.Result.make(t),Elm.Signal.make(t),{}),i=n.toElementWith,o=n.toHtmlWith,a={githubFlavored:e.Just({tables:!1,breaks:!1}),defaultHighlighting:e.Nothing,sanitize:!1,smartypants:!1},u=F4(function(t,e,n,r){return{githubFlavored:t,defaultHighlighting:e,sanitize:n,smartypants:r}}),l=function(t){return A2(n.toElementWith,a,t)},c=function(t){return A2(n.toHtmlWith,a,t)};return t.Markdown.values={_op:r,toHtml:c,toElement:l,Options:u,defaultOptions:a,toHtmlWith:o,toElementWith:i}},Elm.StartApp=Elm.StartApp||{},Elm.StartApp.make=function(t){"use strict";if(t.StartApp=t.StartApp||{},t.StartApp.values)return t.StartApp.values;var e=Elm.Native.Utils.make(t),n=Elm.Basics.make(t),r=(Elm.Debug.make(t),Elm.Effects.make(t)),i=(Elm.Html.make(t),Elm.List.make(t)),o=(Elm.Maybe.make(t),Elm.Result.make(t),Elm.Signal.make(t)),a=(Elm.Task.make(t),{}),u=function(t){var a=F2(function(n,i){var o=i,a=A2(t.update,n,o._0),u=a._0,l=a._1;return{ctor:"_Tuple2",_0:u,_1:r.batch(e.list([o._1,l]))}}),u=F2(function(t,e){var n=e;return A3(i.foldl,a,{ctor:"_Tuple2",_0:n._0,_1:r.none},t)}),l=o.mailbox(e.list([])),c=function(t){return e.list([t])},s=A2(o.forwardTo,l.address,c),f=o.mergeMany(A2(i._op["::"],l.signal,A2(i.map,o.map(c),t.inputs))),m=A3(o.foldp,u,t.init,f),p=A2(o.map,n.fst,m);return{html:A2(o.map,t.view(s),p),model:p,tasks:A2(o.map,function(t){return A2(r.toTask,l.address,n.snd(t))},m)}},l=F3(function(t,e,n){return{html:t,model:e,tasks:n}}),c=F4(function(t,e,n,r){return{init:t,update:e,view:n,inputs:r}});return t.StartApp.values={_op:a,start:u,Config:c,App:l}},Elm.AST=Elm.AST||{},Elm.AST.make=function(t){"use strict";if(t.AST=t.AST||{},t.AST.values)return t.AST.values;var e=(Elm.Native.Utils.make(t),Elm.Basics.make(t),Elm.Debug.make(t),Elm.List.make(t),Elm.Maybe.make(t),Elm.Result.make(t),Elm.Signal.make(t),{}),n=function(t){return{ctor:"Error",_0:t}},r=F2(function(t,e){return{ctor:"Call",_0:t,_1:e}}),i=F3(function(t,e,n){return{ctor:"Proc",_0:t,_1:e,_2:n}}),o=F2(function(t,e){return{ctor:"Var",_0:t,_1:e}}),a=function(t){return{ctor:"Custom",_0:t}},u=function(t){return{ctor:"Succeed",_0:t}},l=function(t){
-return{ctor:"DFail",_0:t}},c=function(t){return{ctor:"Map",_0:t}},s=function(t){return{ctor:"OneOf",_0:t}},f=function(t){return{ctor:"JMaybe",_0:t}},m=function(t){return{ctor:"Dict",_0:t}},p={ctor:"KeyValuePairs"},h=function(t){return{ctor:"Object",_0:t}},_=F2(function(t,e){return{ctor:"At",_0:t,_1:e}}),d=F2(function(t,e){return{ctor:"KV",_0:t,_1:e}}),v=function(t){return{ctor:"Tuple",_0:t}},g=function(t){return{ctor:"Arr",_0:t}},A=function(t){return{ctor:"List",_0:t}},k=function(t){return{ctor:"Null",_0:t}},b={ctor:"Bln"},y={ctor:"Flt"},E={ctor:"Itg"},N={ctor:"Strng"},T=function(t){return{ctor:"Str",_0:t}};return t.AST.values={_op:e,Str:T,Strng:N,Itg:E,Flt:y,Bln:b,Null:k,List:A,Arr:g,Tuple:v,KV:d,At:_,Object:h,KeyValuePairs:p,Dict:m,JMaybe:f,OneOf:s,Map:c,DFail:l,Succeed:u,Custom:a,Var:o,Proc:i,Call:r,Error:n}},Elm.Common2=Elm.Common2||{},Elm.Common2.make=function(t){"use strict";if(t.Common2=t.Common2||{},t.Common2.values)return t.Common2.values;var e=Elm.Native.Utils.make(t),n=Elm.Basics.make(t),r=Elm.Combine.make(t),i=Elm.Combine.Char.make(t),o=Elm.Combine.Infix.make(t),a=(Elm.Debug.make(t),Elm.List.make(t),Elm.Maybe.make(t),Elm.Result.make(t),Elm.Signal.make(t),Elm.String.make(t)),u={},l=A3(r.between,i.$char(e.chr("(")),i.$char(e.chr(")")),A2(r.or,A2(o._op["*>"],r.many(i.noneOf(e.list([e.chr("("),e.chr(")")]))),r.rec(function(t){return l})),A2(r.map,a.fromList,r.many(i.noneOf(e.list([e.chr(")")])))))),c=r.regex("[-]?[0-9]+"),s=A2(o._op["<*"],A2(o._op["*>"],i.$char(e.chr('"')),r.$while(F2(function(t,n){return!e.eq(t,n)})(e.chr('"')))),i.$char(e.chr('"'))),f=r.regex("[a-zA-Z\\d\\_\\.\\$]+"),m=A2(r.or,f,l),p=e.list([e.chr(" "),e.chr("	"),e.chr("\n")]),h=r.skipMany1(i.oneOf(p)),_=function(t){return A2(o._op["*>"],A2(o._op["*>"],r.string("<|"),h),t)},d=r.skipMany(i.oneOf(p)),v=A2(o._op["*>"],i.$char(e.chr("(")),d),g=A2(o._op["<*"],d,i.$char(e.chr(")"))),A=function(t){return r.choice(e.list([_(t),A3(r.between,v,g,t),t]))},k=function(t){return A2(o._op["*>"],i.$char(e.chr("[")),r.many(A2(o._op["<*"],A2(o._op["<*"],A2(o._op["*>"],d,t),d),i.oneOf(e.list([e.chr(","),e.chr("]")])))))},b=A2(n._op["++"],e.list([e.chr(","),e.chr("]"),e.chr(")"),e.chr('"')]),p);return t.Common2.values={_op:u,spaceChars:p,spacing:h,possibleSpacing:d,wordDelimiters:b,word:f,string_:s,int_:c,funcApp:_,openBrackets:v,closeBrackets:g,bracketed:A,somethingInBrackets:l,transformFunc:m,listOf:k}},Elm.Parser2=Elm.Parser2||{},Elm.Parser2.make=function(t){"use strict";if(t.Parser2=t.Parser2||{},t.Parser2.values)return t.Parser2.values;var e=Elm.Native.Utils.make(t),n=Elm.AST.make(t),r=Elm.Basics.make(t),i=Elm.Combine.make(t),o=Elm.Combine.Char.make(t),a=Elm.Combine.Infix.make(t),u=Elm.Combine.Num.make(t),l=Elm.Common2.make(t),c=(Elm.Debug.make(t),Elm.List.make(t)),s=(Elm.Maybe.make(t),Elm.Result.make(t)),f=(Elm.Signal.make(t),{}),m=A2(i.andThen,A2(a._op["*>"],A2(a._op["*>"],i.string("null"),l.spacing),A2(i.or,l.string_,l.word)),function(t){return i.succeed(n.Null(t))}),p=A2(i.andThen,l.word,function(t){var r=t;switch(r){case"string":return i.succeed(n.Strng);case"int":return i.succeed(n.Itg);case"float":return i.succeed(n.Flt);case"bool":return i.succeed(n.Bln);default:return i.fail(e.list(["x",t,"y"]))}}),h=A2(i.andThen,l.word,function(t){return i.succeed(A2(n.Call,t,e.list([])))}),_=A2(i.andThen,A2(i.or,i.string("True"),i.string("False")),function(t){return i.succeed(n.Str(t))}),d=A2(i.andThen,l.int_,function(t){return i.succeed(n.Str(t))}),v=A2(i.andThen,l.string_,function(t){return i.succeed(n.Str(t))}),g=A2(i.andThen,A2(a._op["*>"],A2(a._op["*>"],i.string("fail"),l.spacing),v),function(t){return i.succeed(n.DFail(t))}),A=A2(i.andThen,A2(a._op["*>"],A2(a._op["*>"],i.string("succeed"),l.spacing),i.choice(e.list([_,d,v]))),function(t){return i.succeed(n.Succeed(t))}),k=A2(i.andThen,i.string("|>"),function(t){return i.fail(e.list(["I can't yet handle |>"]))}),b=l.bracketed(i.rec(function(t){return i.choice(e.list([k,p,C,y,M,x,E,R,w,F,L,D,S,g,A,T,N]))})),y=A2(i.andThen,A2(a._op["*>"],A2(a._op["*>"],i.string("array"),l.spacing),b),function(t){return i.succeed(n.Arr(t))}),E=A2(i.andThen,A2(a._op["*>"],A2(a._op["*>"],i.string("at"),l.spacing),l.listOf(A2(i.or,v,h))),function(t){return A2(i.andThen,A2(a._op["*>"],l.spacing,b),function(e){return i.succeed(A2(n.At,t,e))})}),N=A2(i.andThen,l.word,function(t){return A2(i.andThen,i.many(A2(a._op["*>"],i.many1(o.oneOf(e.list([e.chr(" "),e.chr("	")]))),A2(i.or,v,b))),function(e){return i.succeed(A2(n.Call,t,e))})}),T=A2(i.andThen,A2(a._op["<*"],A2(a._op["<*"],A2(a._op["*>"],A2(a._op["*>"],i.string("customDecoder"),l.spacing),b),l.spacing),l.transformFunc),function(t){return i.succeed(n.Custom(t))}),F=A2(i.andThen,A2(a._op["*>"],A2(a._op["*>"],i.string("dict"),l.spacing),b),function(t){return i.succeed(n.Dict(t))}),x=A2(i.andMap,A2(i.map,n.KV,A2(a._op["<*"],A2(i.or,v,h),A3(i.between,l.spacing,l.spacing,i.string(":=")))),b),w=A2(i.andThen,A2(a._op["<*"],A2(a._op["<*"],i.string("keyValuePairs"),l.spacing),b),function(t){return i.succeed(n.KeyValuePairs)}),C=A2(i.andThen,A2(a._op["*>"],A2(a._op["*>"],i.string("list"),l.spacing),b),function(t){return i.succeed(n.List(t))}),S=A2(i.andThen,A2(a._op["*>"],A2(a._op["*>"],A2(a._op["*>"],A2(a._op["*>"],i.string("map"),l.spacing),l.transformFunc),l.spacing),b),function(t){return i.succeed(n.Map(t))}),L=A2(i.andThen,A2(a._op["*>"],A2(a._op["*>"],i.string("maybe"),l.spacing),b),function(t){return i.succeed(n.JMaybe(t))}),R=A2(i.andThen,A2(a._op["*>"],i.string("object"),u.digit),function(t){return A2(i.andThen,A2(a._op["*>"],A2(a._op["*>"],l.spacing,l.transformFunc),A2(i.count,t,A2(a._op["*>"],l.spacing,l.bracketed(A2(a._op["*>"],l.possibleSpacing,b))))),function(t){return i.succeed(n.Object(t))})}),D=A2(i.andThen,A2(a._op["*>"],A2(a._op["*>"],i.string("oneOf"),l.spacing),l.listOf(b)),function(t){return i.succeed(n.OneOf(t))}),M=A2(i.andThen,A2(a._op["*>"],i.string("tuple"),u.digit),function(t){return A2(i.andThen,A2(a._op["*>"],A2(a._op["*>"],l.spacing,l.transformFunc),A2(i.count,t,A2(a._op["*>"],l.spacing,b))),function(t){return i.succeed(n.Tuple(t))})}),O=A3(i.between,l.openBrackets,l.closeBrackets,A2(i.andThen,l.word,function(t){return A2(i.andThen,i.many1(A2(a._op["*>"],l.spacing,A2(i.or,v,b))),function(e){return i.succeed(A2(n.Call,t,e))})})),B=A2(i.optional,{ctor:"_Tuple0"},i.skip(A2(a._op["*>"],A2(a._op["<*"],A2(a._op["<*"],l.word,A3(i.between,l.possibleSpacing,l.spacing,o.$char(e.chr(":")))),i.many(o.noneOf(e.list([e.chr("\n")])))),l.spacing))),j=A2(i.andThen,A2(a._op["*>"],B,i.many1(A2(a._op["<*"],l.word,l.spacing))),function(t){return A2(i.andThen,A2(a._op["*>"],A2(a._op["*>"],o.$char(e.chr("=")),l.spacing),b),function(r){var o=t;return"[]"===o.ctor?i.fail(e.list(["Failure parsing Proc"])):i.succeed(A3(n.Proc,o._0,o._1,r))})}),P=i.succeed(e.list([A3(n.Proc,"default",e.list([]),n.Str("empty"))])),J=A2(i.andThen,A2(a._op["<*"],A2(a._op["<*"],b,l.possibleSpacing),i.end),function(t){return i.succeed(e.list([A3(n.Proc,"default",e.list([]),t)]))}),z=A2(i.andThen,j,function(t){return A2(i.andThen,i.many(A2(a._op["*>"],i.many1(o.eol),j)),function(e){return i.succeed(A2(c._op["::"],t,e))})}),U=function(t){var n=A2(i.parse,A2(a._op["<*"],A2(a._op["<*"],A2(a._op["*>"],i.many(l.spacing),i.choice(e.list([z,J,P]))),l.possibleSpacing),i.end),t);return"Done"===n._0.ctor?s.Ok(n._0._0):s.Err(A2(r._op["++"],r.toString(n._0._0),A2(r._op["++"],"Parsing error beginning at: ",r.toString(n._1))))};return t.Parser2.values={_op:f,parseString:U,oneOrMoreProcs:z,singleItem:J,empty:P,pProc:j,parseFunctionSignature:B,pCommand:b,pProblem:k,pStr:v,pNumber:d,pBln:_,pVar:h,pPrimitive:p,pNull:m,pList:C,pArr:y,pTuple:M,pKV:x,pAt:E,pObject:R,pKeyValuePairs:w,pDict:F,pMaybe:L,pOneOf:D,pMap:S,pFail:g,pSucceed:A,pCustom:T,pCall:N,pCallWithParams:O}},Elm.Emit=Elm.Emit||{},Elm.Emit.make=function(t){"use strict";if(t.Emit=t.Emit||{},t.Emit.values)return t.Emit.values;var e=Elm.Native.Utils.make(t),n=Elm.AST.make(t),r=Elm.Array.make(t),i=Elm.Basics.make(t),o=(Elm.Debug.make(t),Elm.Dict.make(t)),a=Elm.Json.Decode.make(t),u=Elm.List.make(t),l=Elm.Maybe.make(t),c=(Elm.Result.make(t),Elm.Signal.make(t),Elm.String.make(t)),s={},f=u.foldl(F2(function(t,n){return A2(i._op["++"],n,A2(i._op["++"]," ",A2(c.filter,F2(function(t,n){return!e.eq(t,n)})(e.chr('"')),i.toString(t))))})),m=F2(function(t,n){var r={ctor:"_Tuple2",_0:t,_1:n};return"_Tuple2"===r.ctor&&"::"===r._0.ctor&&"::"===r._1.ctor?A2(u._op["::"],{ctor:"_Tuple2",_0:r._0._0,_1:r._1._0},A2(m,r._0._1,r._1._1)):e.list([])}),p=F2(function(t,n){var r=n;switch(r.ctor){case"Proc":return e.eq(t,r._0);case"Var":return e.eq(t,r._0);default:return!1}}),h=F2(function(t,e){return A3(a.object2,F2(function(t,e){return t(e)}),t,e)}),_=F2(function(t,c){t:for(;;){var s=F2(function(e,n){var r=F2(function(e,n){return A3(a.object2,F2(function(t,e){return A2(i._op["++"],e,A2(i._op["++"]," ",t))}),A2(_,t,e),n)});return A3(u.foldl,r,a.succeed(e),n)}),h=function(e){return A2(l.withDefault,n.Error("lookup error"),u.head(A2(u.filter,p(e),t)))},d=function(t){e:for(;;){var e=t;switch(e.ctor){case"Str":return l.Just(e._0);case"Call":var n=h(e._0);if("Var"===n.ctor){var r=n._1;t=r;continue e}return l.Nothing;default:return l.Nothing}}},v=c;switch(v.ctor){case"Strng":return a.string;case"Itg":return A2(a.map,i.toString,a.$int);case"Flt":return A2(a.map,i.toString,a.$float);case"Bln":return A2(a.map,i.toString,a.bool);case"Null":return a.$null(v._0);case"List":return A2(a.map,f("List"),a.list(A2(_,t,v._0)));case"Arr":return A2(a.map,function(t){return A2(f,"Array.fromList",r.toList(t))},a.array(A2(_,t,v._0)));case"Tuple":var g=v._0;return A2(a.andThen,a.list(a.value),function(t){if(e.eq(u.length(t),u.length(g))){var r=A2(u.indexedMap,F2(function(t,e){return A2(n.KV,n.Str(i.toString(t)),e)}),g);return A2(a.andThen,A2(s,"Tup",r),a.succeed)}return a.fail(A2(i._op["++"],"Array has wrong length: ",A2(i._op["++"],i.toString(u.length(t)),A2(i._op["++"]," elements vs expected ",i.toString(u.length(g))))))});case"KV":var A=v._0,k=d(A);return"Just"===k.ctor?A2(a._op[":="],k._0,A2(_,t,v._1)):a.fail(A2(i._op["++"],"Key lookup failure for ",i.toString(A)));case"At":var b=A2(u.map,d,v._0),y=A2(u.any,F2(function(t,n){return e.eq(t,n)})(l.Nothing),b);return y===!0?a.fail("something wrong with fields"):A2(a.at,A2(u.map,l.withDefault(""),b),A2(_,t,v._1));case"Object":return A2(s,"Obj",v._0);case"KeyValuePairs":return a.succeed("keyValuePairs");case"Dict":return A2(a.map,function(t){return A2(f,"Dict.fromList",o.toList(t))},a.dict(A2(_,t,v._0)));case"JMaybe":return A2(a.map,i.toString,a.maybe(A2(_,t,v._0)));case"OneOf":return a.oneOf(A2(u.map,_(t),v._0));case"Map":var E=t,N=v._0;t=E,c=N;continue t;case"DFail":return A2(a.map,i.toString,a.succeed(A2(l.withDefault,"Fail error",d(v._0))));case"Succeed":var T=v._0,F=d(T);return"Just"===F.ctor?a.succeed(F._0):a.fail(A2(i._op["++"],"could not eval ",i.toString(T)));case"Call":var x=v._0,w=h(x);switch(w.ctor){case"Proc":var C=A3(u.foldl,F2(function(t,e){var r=t;return A2(u._op["::"],A2(n.Var,r._0,r._1),e)}),t,A2(m,w._1,v._1)),S=C,L=w._2;t=S,c=L;continue t;case"Var":var R=t,D=w._1;t=R,c=D;continue t;default:return a.fail(A2(i._op["++"],"Call lookup failed for ",x))}case"Error":return a.fail(v._0);default:return a.fail(A2(i._op["++"],"Whoops - emit can't yet handle ",i.toString(c)))}}});return t.Emit.values={_op:s,emit:_,andMap:h,filt:p,zip:m,spaceSeparate:f}},Elm.Overlay=Elm.Overlay||{},Elm.Overlay.make=function(t){"use strict";if(t.Overlay=t.Overlay||{},t.Overlay.values)return t.Overlay.values;var e=Elm.Native.Utils.make(t),n=Elm.Basics.make(t),r=(Elm.Debug.make(t),Elm.Html.make(t)),i=Elm.Html.Attributes.make(t),o=Elm.Html.Events.make(t),a=(Elm.List.make(t),Elm.Markdown.make(t)),u=(Elm.Maybe.make(t),Elm.Result.make(t),Elm.Signal.make(t),{}),l=a.toHtml("\n# Elm Json.Decode interpreter\n\nThis online tool aims to support the development of Json decoders. It implements a simple interpreter of the Json.Decode library, and calls `decodeString` with the result and the json value provided. An example is shown below - can you correct the deliberate mistake?\n\nThe Decoders must already compile - this application is only about testing compatability with json data.\n\nA few things to note:\n - `succeed` is not polymorphic; it only supports strings and integers\n - `andThen` is not supported, which is primarily because;\n - there is no interpretation of Elm control flow syntax, e.g. `case`, `if ... then ... else`, ...;\n - `<|` **is interpreted**, but `|>` is not\n - some decoders - e.g. `keyValuePairs`, `value` - make no specific requirements on the Json, and are thus considered always compatible\n\n"),c={ctor:"Close"},s="#60B5CC",f=e.list([{ctor:"_Tuple2",_0:"background-color",_1:s},{ctor:"_Tuple2",_0:"border-top",_1:"3px solid white"},{ctor:"_Tuple2",_0:"padding",_1:"0 15px"},{ctor:"_Tuple2",_0:"transition",_1:"max-height 2s"}]),m=A2(n._op["++"],e.list([{ctor:"_Tuple2",_0:"max-height",_1:"0"},{ctor:"_Tuple2",_0:"transition",_1:"max-height 2s"},{ctor:"_Tuple2",_0:"border-top-width",_1:"0"}]),f),p=F2(function(t,n){return A2(r.div,e.list([i.style(n?f:m)]),e.list([l,A2(r.div,e.list([i.style(e.list([{ctor:"_Tuple2",_0:"margin-bottom",_1:"10px"}]))]),e.list([A2(r.button,e.list([A2(o.onClick,t,c)]),e.list([r.text("Close")]))]))]))});return t.Overlay.values={_op:u,view:p,elmBlue:s,Close:c}},Elm.App=Elm.App||{},Elm.App.make=function(t){"use strict";if(t.App=t.App||{},t.App.values)return t.App.values;var e=Elm.Native.Utils.make(t),n=Elm.AST.make(t),r=Elm.Basics.make(t),i=(Elm.Debug.make(t),Elm.Effects.make(t)),o=Elm.Emit.make(t),a=Elm.Html.make(t),u=Elm.Html.Attributes.make(t),l=Elm.Html.Events.make(t),c=Elm.Json.Decode.make(t),s=Elm.List.make(t),f=(Elm.Maybe.make(t),Elm.Overlay.make(t)),m=Elm.Parser2.make(t),p=(Elm.Result.make(t),Elm.Signal.make(t)),h=(Elm.String.make(t),Elm.Time.make(t),{}),_=F2(function(t,e){return A3(l.on,"input",l.targetValue,function(n){return A2(p.message,t,e(n))})}),d=function(t){return u.style(e.list([{ctor:"_Tuple2",_0:"background-color",_1:t},{ctor:"_Tuple2",_0:"flex-grow",_1:"1"},{ctor:"_Tuple2",_0:"flex-basis",_1:"0"},{ctor:"_Tuple2",_0:"padding",_1:"15px"}]))},v=function(t){return u.style(e.list([{ctor:"_Tuple2",_0:"box-sizing",_1:"border-box"},{ctor:"_Tuple2",_0:"flex-grow",_1:"100"},{ctor:"_Tuple2",_0:"padding",_1:"15px 0"},{ctor:"_Tuple2",_0:"width",_1:"100%"},{ctor:"_Tuple2",_0:"resize",_1:"none"},{ctor:"_Tuple2",_0:"border",_1:"0"},{ctor:"_Tuple2",_0:"background-color",_1:"inherit"},{ctor:"_Tuple2",_0:"color",_1:t},{ctor:"_Tuple2",_0:"font-family",_1:"monospace"},{ctor:"_Tuple2",_0:"font-size",_1:"14px"},{ctor:"_Tuple2",_0:"outline-width",_1:"0"}]))},g=function(t){return u.style(e.list([{ctor:"_Tuple2",_0:"background-color",_1:"rgba(0,0,0,0.3)"},{ctor:"_Tuple2",_0:"margin",_1:"0 -15px"},{ctor:"_Tuple2",_0:"color",_1:t},{ctor:"_Tuple2",_0:"font-weight",_1:"400"},{ctor:"_Tuple2",_0:"padding",_1:"5px 15px"},{ctor:"_Tuple2",_0:"font-size",_1:"18px"}]))},A=F2(function(t,n){return u.style(e.list([{ctor:"_Tuple2",_0:"flex-grow",_1:"1"},{ctor:"_Tuple2",_0:"flex-basis",_1:"0"},{ctor:"_Tuple2",_0:"display",_1:"flex"},{ctor:"_Tuple2",_0:"flex-direction",_1:"column"},{ctor:"_Tuple2",_0:"background-color",_1:t},{ctor:"_Tuple2",_0:"color",_1:n},{ctor:"_Tuple2",_0:"padding",_1:"0 15px 10px 15px"}]))}),k="#f0ad00",b="#f7f7f7",y="#293C4B",E="#7fd13b",N="#60B5CC",T=u.style(e.list([{ctor:"_Tuple2",_0:"background-color",_1:N},{ctor:"_Tuple2",_0:"color",_1:y},{ctor:"_Tuple2",_0:"padding",_1:"5px 15px"},{ctor:"_Tuple2",_0:"display",_1:"flex"},{ctor:"_Tuple2",_0:"align-items",_1:"baseline"},{ctor:"_Tuple2",_0:"justify-content",_1:"space-between"}])),F=u.style(e.list([{ctor:"_Tuple2",_0:"background-color",_1:N},{ctor:"_Tuple2",_0:"padding",_1:"5px 12px"},{ctor:"_Tuple2",_0:"cursor",_1:"pointer"},{ctor:"_Tuple2",_0:"display",_1:"inline-block"},{ctor:"_Tuple2",_0:"margin",_1:"0 10px 5px 10px"},{ctor:"_Tuple2",_0:"border-radius",_1:"5px"}])),x=function(t){var n=t.decodeSuccess?E:e.eq(t.result,"")?k:"red";return A2(a.div,e.list([d(n)]),e.list([A2(a.p,e.list([u.style(e.list([{ctor:"_Tuple2",_0:"margin",_1:"0"}]))]),e.list([a.text(t.result)]))]))},w=function(t){return A2(a.header,e.list([T]),e.list([A2(a.h1,e.list([u.style(e.list([{ctor:"_Tuple2",_0:"margin",_1:"0"},{ctor:"_Tuple2",_0:"font-weight",_1:"400"},{ctor:"_Tuple2",_0:"font-size",_1:"22px"}]))]),e.list([a.text(r.not(t)?"Elm Json.Decode interpreter":"")])),A2(a.p,e.list([]),e.list([a.text("Simon Hampton ("),A2(a.a,e.list([u.href("https://github.com/simonh1000/json-interpreter"),u.style(e.list([{ctor:"_Tuple2",_0:"color",_1:"inherit"}]))]),e.list([a.text("Source: github")])),a.text(")")]))]))},C=F2(function(t,r){var a=function(t){var n=e.update(r,{decoderStr:t,decodeSuccess:!1,result:""}),i=m.parseString(t);return"Ok"===i.ctor?e.update(n,{ast:i._0,parseSuccess:!0}):e.update(n,{ast:e.list([]),parseSuccess:!1,errorMessage:i._0})},u=t;switch(u.ctor){case"Tick":return{ctor:"_Tuple2",_0:a(r.decoderStr),_1:i.none};case"JsonChange":return{ctor:"_Tuple2",_0:e.update(r,{json:u._0}),_1:i.none};case"Decoder":return{ctor:"_Tuple2",_0:a(u._0),_1:i.none};case"ChooseDecoder":var l=function(){var t=A2(c.decodeString,A2(o.emit,r.ast,A2(n.Call,u._0,e.list([]))),r.json);return"Ok"===t.ctor?e.update(r,{decodeSuccess:!0,result:"Success: decoder(s) & json match."}):e.update(r,{decodeSuccess:!1,result:t._0})}();return{ctor:"_Tuple2",_0:l,_1:i.none};default:return{ctor:"_Tuple2",_0:e.update(r,{overlay:!1}),_1:i.none}}}),S=function(t){return{ctor:"OverlayAction",_0:t}},L=function(t){return{ctor:"Tick",_0:t}},R=function(t){return{ctor:"ChooseDecoder",_0:t}},D=F2(function(t,n){var r=function(){var t=n;return"Proc"===t.ctor?t._0:"!!!!!"}();return A2(a.span,e.list([A2(l.onClick,t,R(r)),F]),e.list([a.text(r)]))}),M=F2(function(t,n){return n.parseSuccess?A2(a.div,e.list([d(E)]),e.list([A2(a.div,e.list([u.style(e.list([{ctor:"_Tuple2",_0:"display",_1:"flex"},{ctor:"_Tuple2",_0:"align-items",_1:"baseline"}]))]),e.list([A2(a.h3,e.list([u.style(e.list([{ctor:"_Tuple2",_0:"margin",_1:"0"}]))]),e.list([a.text("Choose entry point")])),A2(a.div,e.list([]),A2(s.map,D(t),n.ast))])),A2(a.div,e.list([u.style(e.list([{ctor:"_Tuple2",_0:"font-size",_1:"10px"}]))]),e.list([a.text(r.toString(n.ast))]))])):A2(a.div,e.list([d(e.eq(n.errorMessage,"")?"#f0ad00":"red")]),e.list([A2(a.p,e.list([]),e.list([a.text(n.errorMessage)]))]))}),O=function(t){return{ctor:"Decoder",_0:t}},B=function(t){return{ctor:"JsonChange",_0:t}},j=F2(function(t,n){return A2(a.div,e.list([u.style(e.list([{ctor:"_Tuple2",_0:"display",_1:"flex"},{ctor:"_Tuple2",_0:"flex-grow",_1:"2"}]))]),e.list([A2(a.div,e.list([A2(A,y,b)]),e.list([A2(a.h2,e.list([g(b)]),e.list([a.text("Json.Decode functions")])),A2(a.textarea,e.list([v("#f7f7f7"),A2(_,t,O)]),e.list([a.text(n.decoderStr)]))])),A2(a.div,e.list([A2(A,b,y)]),e.list([A2(a.h2,e.list([g(y)]),e.list([a.text("Json")])),A2(a.textarea,e.list([v("#3a3432"),A2(_,t,B)]),e.list([a.text(n.json)]))]))]))}),P=F2(function(t,n){return A2(a.div,e.list([u.style(e.list([{ctor:"_Tuple2",_0:"display",_1:"flex"},{ctor:"_Tuple2",_0:"flex-direction",_1:"column"},{ctor:"_Tuple2",_0:"height",_1:"100%"}]))]),e.list([w(n.overlay),A2(f.view,A2(p.forwardTo,t,S),n.overlay),A2(j,t,n),A2(a.footer,e.list([u.style(e.list([{ctor:"_Tuple2",_0:"display",_1:"flex"}]))]),e.list([A2(M,t,n),x(n)]))]))}),J={json:'{"data": [4,5,6,7,8]}',decoderStr:'func = "data" :=\n		tuple5\n			Model\n			int int int int string',result:"",ast:e.list([]),parseSuccess:!1,errorMessage:"",decodeSuccess:!1,overlay:!0},z=F8(function(t,e,n,r,i,o,a,u){return{json:t,decoderStr:e,ast:n,parseSuccess:r,result:i,errorMessage:o,decodeSuccess:a,overlay:u}});return t.App.values={_op:h,init:J,update:C,view:P,Model:z,Tick:L}},Elm.Main=Elm.Main||{},Elm.Main.make=function(t){"use strict";if(t.Main=t.Main||{},t.Main.values)return t.Main.values;var e=Elm.Native.Utils.make(t),n=Elm.App.make(t),r=(Elm.Basics.make(t),Elm.Debug.make(t),Elm.Effects.make(t)),i=(Elm.List.make(t),Elm.Maybe.make(t),Elm.Result.make(t),Elm.Signal.make(t),Elm.StartApp.make(t)),o=(Elm.Task.make(t),{}),a=i.start({init:{ctor:"_Tuple2",_0:n.init,_1:r.tick(n.Tick)},update:n.update,view:n.view,inputs:e.list([])}),u=a.html;Elm.Native.Task.make(t).performSignal("tasks",a.tasks);return t.Main.values={_op:o,main:u}};
+
+(function() {
+'use strict';
+
+function F2(fun)
+{
+  function wrapper(a) { return function(b) { return fun(a,b); }; }
+  wrapper.arity = 2;
+  wrapper.func = fun;
+  return wrapper;
+}
+
+function F3(fun)
+{
+  function wrapper(a) {
+    return function(b) { return function(c) { return fun(a, b, c); }; };
+  }
+  wrapper.arity = 3;
+  wrapper.func = fun;
+  return wrapper;
+}
+
+function F4(fun)
+{
+  function wrapper(a) { return function(b) { return function(c) {
+    return function(d) { return fun(a, b, c, d); }; }; };
+  }
+  wrapper.arity = 4;
+  wrapper.func = fun;
+  return wrapper;
+}
+
+function F5(fun)
+{
+  function wrapper(a) { return function(b) { return function(c) {
+    return function(d) { return function(e) { return fun(a, b, c, d, e); }; }; }; };
+  }
+  wrapper.arity = 5;
+  wrapper.func = fun;
+  return wrapper;
+}
+
+function F6(fun)
+{
+  function wrapper(a) { return function(b) { return function(c) {
+    return function(d) { return function(e) { return function(f) {
+    return fun(a, b, c, d, e, f); }; }; }; }; };
+  }
+  wrapper.arity = 6;
+  wrapper.func = fun;
+  return wrapper;
+}
+
+function F7(fun)
+{
+  function wrapper(a) { return function(b) { return function(c) {
+    return function(d) { return function(e) { return function(f) {
+    return function(g) { return fun(a, b, c, d, e, f, g); }; }; }; }; }; };
+  }
+  wrapper.arity = 7;
+  wrapper.func = fun;
+  return wrapper;
+}
+
+function F8(fun)
+{
+  function wrapper(a) { return function(b) { return function(c) {
+    return function(d) { return function(e) { return function(f) {
+    return function(g) { return function(h) {
+    return fun(a, b, c, d, e, f, g, h); }; }; }; }; }; }; };
+  }
+  wrapper.arity = 8;
+  wrapper.func = fun;
+  return wrapper;
+}
+
+function F9(fun)
+{
+  function wrapper(a) { return function(b) { return function(c) {
+    return function(d) { return function(e) { return function(f) {
+    return function(g) { return function(h) { return function(i) {
+    return fun(a, b, c, d, e, f, g, h, i); }; }; }; }; }; }; }; };
+  }
+  wrapper.arity = 9;
+  wrapper.func = fun;
+  return wrapper;
+}
+
+function A2(fun, a, b)
+{
+  return fun.arity === 2
+    ? fun.func(a, b)
+    : fun(a)(b);
+}
+function A3(fun, a, b, c)
+{
+  return fun.arity === 3
+    ? fun.func(a, b, c)
+    : fun(a)(b)(c);
+}
+function A4(fun, a, b, c, d)
+{
+  return fun.arity === 4
+    ? fun.func(a, b, c, d)
+    : fun(a)(b)(c)(d);
+}
+function A5(fun, a, b, c, d, e)
+{
+  return fun.arity === 5
+    ? fun.func(a, b, c, d, e)
+    : fun(a)(b)(c)(d)(e);
+}
+function A6(fun, a, b, c, d, e, f)
+{
+  return fun.arity === 6
+    ? fun.func(a, b, c, d, e, f)
+    : fun(a)(b)(c)(d)(e)(f);
+}
+function A7(fun, a, b, c, d, e, f, g)
+{
+  return fun.arity === 7
+    ? fun.func(a, b, c, d, e, f, g)
+    : fun(a)(b)(c)(d)(e)(f)(g);
+}
+function A8(fun, a, b, c, d, e, f, g, h)
+{
+  return fun.arity === 8
+    ? fun.func(a, b, c, d, e, f, g, h)
+    : fun(a)(b)(c)(d)(e)(f)(g)(h);
+}
+function A9(fun, a, b, c, d, e, f, g, h, i)
+{
+  return fun.arity === 9
+    ? fun.func(a, b, c, d, e, f, g, h, i)
+    : fun(a)(b)(c)(d)(e)(f)(g)(h)(i);
+}
+
+//import Native.Utils //
+
+var _elm_lang$core$Native_Basics = function() {
+
+function div(a, b)
+{
+	return (a / b) | 0;
+}
+function rem(a, b)
+{
+	return a % b;
+}
+function mod(a, b)
+{
+	if (b === 0)
+	{
+		throw new Error('Cannot perform mod 0. Division by zero error.');
+	}
+	var r = a % b;
+	var m = a === 0 ? 0 : (b > 0 ? (a >= 0 ? r : r + b) : -mod(-a, -b));
+
+	return m === b ? 0 : m;
+}
+function logBase(base, n)
+{
+	return Math.log(n) / Math.log(base);
+}
+function negate(n)
+{
+	return -n;
+}
+function abs(n)
+{
+	return n < 0 ? -n : n;
+}
+
+function min(a, b)
+{
+	return _elm_lang$core$Native_Utils.cmp(a, b) < 0 ? a : b;
+}
+function max(a, b)
+{
+	return _elm_lang$core$Native_Utils.cmp(a, b) > 0 ? a : b;
+}
+function clamp(lo, hi, n)
+{
+	return _elm_lang$core$Native_Utils.cmp(n, lo) < 0
+		? lo
+		: _elm_lang$core$Native_Utils.cmp(n, hi) > 0
+			? hi
+			: n;
+}
+
+var ord = ['LT', 'EQ', 'GT'];
+
+function compare(x, y)
+{
+	return { ctor: ord[_elm_lang$core$Native_Utils.cmp(x, y) + 1] };
+}
+
+function xor(a, b)
+{
+	return a !== b;
+}
+function not(b)
+{
+	return !b;
+}
+function isInfinite(n)
+{
+	return n === Infinity || n === -Infinity;
+}
+
+function truncate(n)
+{
+	return n | 0;
+}
+
+function degrees(d)
+{
+	return d * Math.PI / 180;
+}
+function turns(t)
+{
+	return 2 * Math.PI * t;
+}
+function fromPolar(point)
+{
+	var r = point._0;
+	var t = point._1;
+	return _elm_lang$core$Native_Utils.Tuple2(r * Math.cos(t), r * Math.sin(t));
+}
+function toPolar(point)
+{
+	var x = point._0;
+	var y = point._1;
+	return _elm_lang$core$Native_Utils.Tuple2(Math.sqrt(x * x + y * y), Math.atan2(y, x));
+}
+
+return {
+	div: F2(div),
+	rem: F2(rem),
+	mod: F2(mod),
+
+	pi: Math.PI,
+	e: Math.E,
+	cos: Math.cos,
+	sin: Math.sin,
+	tan: Math.tan,
+	acos: Math.acos,
+	asin: Math.asin,
+	atan: Math.atan,
+	atan2: F2(Math.atan2),
+
+	degrees: degrees,
+	turns: turns,
+	fromPolar: fromPolar,
+	toPolar: toPolar,
+
+	sqrt: Math.sqrt,
+	logBase: F2(logBase),
+	negate: negate,
+	abs: abs,
+	min: F2(min),
+	max: F2(max),
+	clamp: F3(clamp),
+	compare: F2(compare),
+
+	xor: F2(xor),
+	not: not,
+
+	truncate: truncate,
+	ceiling: Math.ceil,
+	floor: Math.floor,
+	round: Math.round,
+	toFloat: function(x) { return x; },
+	isNaN: isNaN,
+	isInfinite: isInfinite
+};
+
+}();
+//import //
+
+var _elm_lang$core$Native_Utils = function() {
+
+// COMPARISONS
+
+function eq(rootX, rootY)
+{
+	var stack = [{ x: rootX, y: rootY }];
+	while (stack.length > 0)
+	{
+		var front = stack.pop();
+		var x = front.x;
+		var y = front.y;
+		if (x === y)
+		{
+			continue;
+		}
+		if (typeof x === 'object')
+		{
+			var c = 0;
+			for (var key in x)
+			{
+				++c;
+				if (!(key in y))
+				{
+					return false;
+				}
+				if (key === 'ctor')
+				{
+					continue;
+				}
+				stack.push({ x: x[key], y: y[key] });
+			}
+			if ('ctor' in x)
+			{
+				stack.push({ x: x.ctor, y: y.ctor});
+			}
+			if (c !== Object.keys(y).length)
+			{
+				return false;
+			}
+		}
+		else if (typeof x === 'function')
+		{
+			throw new Error('Equality error: general function equality is ' +
+							'undecidable, and therefore, unsupported');
+		}
+		else
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
+// Code in Generate/JavaScript.hs, Basics.js, and List.js depends on
+// the particular integer values assigned to LT, EQ, and GT.
+
+var LT = -1, EQ = 0, GT = 1;
+
+function cmp(x, y)
+{
+	var ord;
+	if (typeof x !== 'object')
+	{
+		return x === y ? EQ : x < y ? LT : GT;
+	}
+	else if (x instanceof String)
+	{
+		var a = x.valueOf();
+		var b = y.valueOf();
+		return a === b
+			? EQ
+			: a < b
+				? LT
+				: GT;
+	}
+	else if (x.ctor === '::' || x.ctor === '[]')
+	{
+		while (true)
+		{
+			if (x.ctor === '[]' && y.ctor === '[]')
+			{
+				return EQ;
+			}
+			if (x.ctor !== y.ctor)
+			{
+				return x.ctor === '[]' ? LT : GT;
+			}
+			ord = cmp(x._0, y._0);
+			if (ord !== EQ)
+			{
+				return ord;
+			}
+			x = x._1;
+			y = y._1;
+		}
+	}
+	else if (x.ctor.slice(0, 6) === '_Tuple')
+	{
+		var n = x.ctor.slice(6) - 0;
+		var err = 'cannot compare tuples with more than 6 elements.';
+		if (n === 0) return EQ;
+		if (n >= 1) { ord = cmp(x._0, y._0); if (ord !== EQ) return ord;
+		if (n >= 2) { ord = cmp(x._1, y._1); if (ord !== EQ) return ord;
+		if (n >= 3) { ord = cmp(x._2, y._2); if (ord !== EQ) return ord;
+		if (n >= 4) { ord = cmp(x._3, y._3); if (ord !== EQ) return ord;
+		if (n >= 5) { ord = cmp(x._4, y._4); if (ord !== EQ) return ord;
+		if (n >= 6) { ord = cmp(x._5, y._5); if (ord !== EQ) return ord;
+		if (n >= 7) throw new Error('Comparison error: ' + err); } } } } } }
+		return EQ;
+	}
+	else
+	{
+		throw new Error('Comparison error: comparison is only defined on ints, ' +
+						'floats, times, chars, strings, lists of comparable values, ' +
+						'and tuples of comparable values.');
+	}
+}
+
+
+// COMMON VALUES
+
+var Tuple0 = {
+	ctor: '_Tuple0'
+};
+
+function Tuple2(x, y)
+{
+	return {
+		ctor: '_Tuple2',
+		_0: x,
+		_1: y
+	};
+}
+
+function chr(c)
+{
+	return new String(c);
+}
+
+
+// GUID
+
+var count = 0;
+function guid(_)
+{
+	return count++;
+}
+
+
+// RECORDS
+
+function update(oldRecord, updatedFields)
+{
+	var newRecord = {};
+	for (var key in oldRecord)
+	{
+		var value = (key in updatedFields) ? updatedFields[key] : oldRecord[key];
+		newRecord[key] = value;
+	}
+	return newRecord;
+}
+
+
+//// LIST STUFF ////
+
+var Nil = { ctor: '[]' };
+
+function Cons(hd, tl)
+{
+	return {
+		ctor: '::',
+		_0: hd,
+		_1: tl
+	};
+}
+
+function append(xs, ys)
+{
+	// append Strings
+	if (typeof xs === 'string')
+	{
+		return xs + ys;
+	}
+
+	// append Lists
+	if (xs.ctor === '[]')
+	{
+		return ys;
+	}
+	var root = Cons(xs._0, Nil);
+	var curr = root;
+	xs = xs._1;
+	while (xs.ctor !== '[]')
+	{
+		curr._1 = Cons(xs._0, Nil);
+		xs = xs._1;
+		curr = curr._1;
+	}
+	curr._1 = ys;
+	return root;
+}
+
+
+// CRASHES
+
+function crash(moduleName, region)
+{
+	return function(message) {
+		throw new Error(
+			'Ran into a `Debug.crash` in module `' + moduleName + '` ' + regionToString(region) + '\n'
+			+ 'The message provided by the code author is:\n\n    '
+			+ message
+		);
+	};
+}
+
+function crashCase(moduleName, region, value)
+{
+	return function(message) {
+		throw new Error(
+			'Ran into a `Debug.crash` in module `' + moduleName + '`\n\n'
+			+ 'This was caused by the `case` expression ' + regionToString(region) + '.\n'
+			+ 'One of the branches ended with a crash and the following value got through:\n\n    ' + toString(value) + '\n\n'
+			+ 'The message provided by the code author is:\n\n    '
+			+ message
+		);
+	};
+}
+
+function regionToString(region)
+{
+	if (region.start.line == region.end.line)
+	{
+		return 'on line ' + region.start.line;
+	}
+	return 'between lines ' + region.start.line + ' and ' + region.end.line;
+}
+
+
+// TO STRING
+
+function toString(v)
+{
+	var type = typeof v;
+	if (type === 'function')
+	{
+		var name = v.func ? v.func.name : v.name;
+		return '<function' + (name === '' ? '' : ':') + name + '>';
+	}
+
+	if (type === 'boolean')
+	{
+		return v ? 'True' : 'False';
+	}
+
+	if (type === 'number')
+	{
+		return v + '';
+	}
+
+	if (v instanceof String)
+	{
+		return '\'' + addSlashes(v, true) + '\'';
+	}
+
+	if (type === 'string')
+	{
+		return '"' + addSlashes(v, false) + '"';
+	}
+
+	if (v === null)
+	{
+		return 'null';
+	}
+
+	if (type === 'object' && 'ctor' in v)
+	{
+		var ctorStarter = v.ctor.substring(0, 5);
+
+		if (ctorStarter === '_Tupl')
+		{
+			var output = [];
+			for (var k in v)
+			{
+				if (k === 'ctor') continue;
+				output.push(toString(v[k]));
+			}
+			return '(' + output.join(',') + ')';
+		}
+
+		if (ctorStarter === '_Task')
+		{
+			return '<task>'
+		}
+
+		if (v.ctor === '_Array')
+		{
+			var list = _elm_lang$core$Array$toList(v);
+			return 'Array.fromList ' + toString(list);
+		}
+
+		if (v.ctor === '<decoder>')
+		{
+			return '<decoder>';
+		}
+
+		if (v.ctor === '_Process')
+		{
+			return '<process:' + v.id + '>';
+		}
+
+		if (v.ctor === '::')
+		{
+			var output = '[' + toString(v._0);
+			v = v._1;
+			while (v.ctor === '::')
+			{
+				output += ',' + toString(v._0);
+				v = v._1;
+			}
+			return output + ']';
+		}
+
+		if (v.ctor === '[]')
+		{
+			return '[]';
+		}
+
+		if (v.ctor === 'RBNode_elm_builtin' || v.ctor === 'RBEmpty_elm_builtin' || v.ctor === 'Set_elm_builtin')
+		{
+			var name, list;
+			if (v.ctor === 'Set_elm_builtin')
+			{
+				name = 'Set';
+				list = A2(
+					_elm_lang$core$List$map,
+					function(x) {return x._0; },
+					_elm_lang$core$Dict$toList(v._0)
+				);
+			}
+			else
+			{
+				name = 'Dict';
+				list = _elm_lang$core$Dict$toList(v);
+			}
+			return name + '.fromList ' + toString(list);
+		}
+
+		var output = '';
+		for (var i in v)
+		{
+			if (i === 'ctor') continue;
+			var str = toString(v[i]);
+			var c0 = str[0];
+			var parenless = c0 === '{' || c0 === '(' || c0 === '<' || c0 === '"' || str.indexOf(' ') < 0;
+			output += ' ' + (parenless ? str : '(' + str + ')');
+		}
+		return v.ctor + output;
+	}
+
+	if (type === 'object')
+	{
+		var output = [];
+		for (var k in v)
+		{
+			output.push(k + ' = ' + toString(v[k]));
+		}
+		if (output.length === 0)
+		{
+			return '{}';
+		}
+		return '{ ' + output.join(', ') + ' }';
+	}
+
+	return '<internal structure>';
+}
+
+function addSlashes(str, isChar)
+{
+	var s = str.replace(/\\/g, '\\\\')
+			  .replace(/\n/g, '\\n')
+			  .replace(/\t/g, '\\t')
+			  .replace(/\r/g, '\\r')
+			  .replace(/\v/g, '\\v')
+			  .replace(/\0/g, '\\0');
+	if (isChar)
+	{
+		return s.replace(/\'/g, '\\\'');
+	}
+	else
+	{
+		return s.replace(/\"/g, '\\"');
+	}
+}
+
+
+return {
+	eq: eq,
+	cmp: cmp,
+	Tuple0: Tuple0,
+	Tuple2: Tuple2,
+	chr: chr,
+	update: update,
+	guid: guid,
+
+	append: F2(append),
+
+	crash: crash,
+	crashCase: crashCase,
+
+	toString: toString
+};
+
+}();
+var _elm_lang$core$Basics$uncurry = F2(
+	function (f, _p0) {
+		var _p1 = _p0;
+		return A2(f, _p1._0, _p1._1);
+	});
+var _elm_lang$core$Basics$curry = F3(
+	function (f, a, b) {
+		return f(
+			{ctor: '_Tuple2', _0: a, _1: b});
+	});
+var _elm_lang$core$Basics$flip = F3(
+	function (f, b, a) {
+		return A2(f, a, b);
+	});
+var _elm_lang$core$Basics$snd = function (_p2) {
+	var _p3 = _p2;
+	return _p3._1;
+};
+var _elm_lang$core$Basics$fst = function (_p4) {
+	var _p5 = _p4;
+	return _p5._0;
+};
+var _elm_lang$core$Basics$always = F2(
+	function (a, _p6) {
+		return a;
+	});
+var _elm_lang$core$Basics$identity = function (x) {
+	return x;
+};
+var _elm_lang$core$Basics_ops = _elm_lang$core$Basics_ops || {};
+_elm_lang$core$Basics_ops['<|'] = F2(
+	function (f, x) {
+		return f(x);
+	});
+var _elm_lang$core$Basics_ops = _elm_lang$core$Basics_ops || {};
+_elm_lang$core$Basics_ops['|>'] = F2(
+	function (x, f) {
+		return f(x);
+	});
+var _elm_lang$core$Basics_ops = _elm_lang$core$Basics_ops || {};
+_elm_lang$core$Basics_ops['>>'] = F3(
+	function (f, g, x) {
+		return g(
+			f(x));
+	});
+var _elm_lang$core$Basics_ops = _elm_lang$core$Basics_ops || {};
+_elm_lang$core$Basics_ops['<<'] = F3(
+	function (g, f, x) {
+		return g(
+			f(x));
+	});
+var _elm_lang$core$Basics_ops = _elm_lang$core$Basics_ops || {};
+_elm_lang$core$Basics_ops['++'] = _elm_lang$core$Native_Utils.append;
+var _elm_lang$core$Basics$toString = _elm_lang$core$Native_Utils.toString;
+var _elm_lang$core$Basics$isInfinite = _elm_lang$core$Native_Basics.isInfinite;
+var _elm_lang$core$Basics$isNaN = _elm_lang$core$Native_Basics.isNaN;
+var _elm_lang$core$Basics$toFloat = _elm_lang$core$Native_Basics.toFloat;
+var _elm_lang$core$Basics$ceiling = _elm_lang$core$Native_Basics.ceiling;
+var _elm_lang$core$Basics$floor = _elm_lang$core$Native_Basics.floor;
+var _elm_lang$core$Basics$truncate = _elm_lang$core$Native_Basics.truncate;
+var _elm_lang$core$Basics$round = _elm_lang$core$Native_Basics.round;
+var _elm_lang$core$Basics$not = _elm_lang$core$Native_Basics.not;
+var _elm_lang$core$Basics$xor = _elm_lang$core$Native_Basics.xor;
+var _elm_lang$core$Basics_ops = _elm_lang$core$Basics_ops || {};
+_elm_lang$core$Basics_ops['||'] = _elm_lang$core$Native_Basics.or;
+var _elm_lang$core$Basics_ops = _elm_lang$core$Basics_ops || {};
+_elm_lang$core$Basics_ops['&&'] = _elm_lang$core$Native_Basics.and;
+var _elm_lang$core$Basics$max = _elm_lang$core$Native_Basics.max;
+var _elm_lang$core$Basics$min = _elm_lang$core$Native_Basics.min;
+var _elm_lang$core$Basics$compare = _elm_lang$core$Native_Basics.compare;
+var _elm_lang$core$Basics_ops = _elm_lang$core$Basics_ops || {};
+_elm_lang$core$Basics_ops['>='] = _elm_lang$core$Native_Basics.ge;
+var _elm_lang$core$Basics_ops = _elm_lang$core$Basics_ops || {};
+_elm_lang$core$Basics_ops['<='] = _elm_lang$core$Native_Basics.le;
+var _elm_lang$core$Basics_ops = _elm_lang$core$Basics_ops || {};
+_elm_lang$core$Basics_ops['>'] = _elm_lang$core$Native_Basics.gt;
+var _elm_lang$core$Basics_ops = _elm_lang$core$Basics_ops || {};
+_elm_lang$core$Basics_ops['<'] = _elm_lang$core$Native_Basics.lt;
+var _elm_lang$core$Basics_ops = _elm_lang$core$Basics_ops || {};
+_elm_lang$core$Basics_ops['/='] = _elm_lang$core$Native_Basics.neq;
+var _elm_lang$core$Basics_ops = _elm_lang$core$Basics_ops || {};
+_elm_lang$core$Basics_ops['=='] = _elm_lang$core$Native_Basics.eq;
+var _elm_lang$core$Basics$e = _elm_lang$core$Native_Basics.e;
+var _elm_lang$core$Basics$pi = _elm_lang$core$Native_Basics.pi;
+var _elm_lang$core$Basics$clamp = _elm_lang$core$Native_Basics.clamp;
+var _elm_lang$core$Basics$logBase = _elm_lang$core$Native_Basics.logBase;
+var _elm_lang$core$Basics$abs = _elm_lang$core$Native_Basics.abs;
+var _elm_lang$core$Basics$negate = _elm_lang$core$Native_Basics.negate;
+var _elm_lang$core$Basics$sqrt = _elm_lang$core$Native_Basics.sqrt;
+var _elm_lang$core$Basics$atan2 = _elm_lang$core$Native_Basics.atan2;
+var _elm_lang$core$Basics$atan = _elm_lang$core$Native_Basics.atan;
+var _elm_lang$core$Basics$asin = _elm_lang$core$Native_Basics.asin;
+var _elm_lang$core$Basics$acos = _elm_lang$core$Native_Basics.acos;
+var _elm_lang$core$Basics$tan = _elm_lang$core$Native_Basics.tan;
+var _elm_lang$core$Basics$sin = _elm_lang$core$Native_Basics.sin;
+var _elm_lang$core$Basics$cos = _elm_lang$core$Native_Basics.cos;
+var _elm_lang$core$Basics_ops = _elm_lang$core$Basics_ops || {};
+_elm_lang$core$Basics_ops['^'] = _elm_lang$core$Native_Basics.exp;
+var _elm_lang$core$Basics_ops = _elm_lang$core$Basics_ops || {};
+_elm_lang$core$Basics_ops['%'] = _elm_lang$core$Native_Basics.mod;
+var _elm_lang$core$Basics$rem = _elm_lang$core$Native_Basics.rem;
+var _elm_lang$core$Basics_ops = _elm_lang$core$Basics_ops || {};
+_elm_lang$core$Basics_ops['//'] = _elm_lang$core$Native_Basics.div;
+var _elm_lang$core$Basics_ops = _elm_lang$core$Basics_ops || {};
+_elm_lang$core$Basics_ops['/'] = _elm_lang$core$Native_Basics.floatDiv;
+var _elm_lang$core$Basics_ops = _elm_lang$core$Basics_ops || {};
+_elm_lang$core$Basics_ops['*'] = _elm_lang$core$Native_Basics.mul;
+var _elm_lang$core$Basics_ops = _elm_lang$core$Basics_ops || {};
+_elm_lang$core$Basics_ops['-'] = _elm_lang$core$Native_Basics.sub;
+var _elm_lang$core$Basics_ops = _elm_lang$core$Basics_ops || {};
+_elm_lang$core$Basics_ops['+'] = _elm_lang$core$Native_Basics.add;
+var _elm_lang$core$Basics$toPolar = _elm_lang$core$Native_Basics.toPolar;
+var _elm_lang$core$Basics$fromPolar = _elm_lang$core$Native_Basics.fromPolar;
+var _elm_lang$core$Basics$turns = _elm_lang$core$Native_Basics.turns;
+var _elm_lang$core$Basics$degrees = _elm_lang$core$Native_Basics.degrees;
+var _elm_lang$core$Basics$radians = function (t) {
+	return t;
+};
+var _elm_lang$core$Basics$GT = {ctor: 'GT'};
+var _elm_lang$core$Basics$EQ = {ctor: 'EQ'};
+var _elm_lang$core$Basics$LT = {ctor: 'LT'};
+var _elm_lang$core$Basics$Never = function (a) {
+	return {ctor: 'Never', _0: a};
+};
+
+//import Native.Utils //
+
+var _elm_lang$core$Native_Debug = function() {
+
+function log(tag, value)
+{
+	var msg = tag + ': ' + _elm_lang$core$Native_Utils.toString(value);
+	var process = process || {};
+	if (process.stdout)
+	{
+		process.stdout.write(msg);
+	}
+	else
+	{
+		console.log(msg);
+	}
+	return value;
+}
+
+function crash(message)
+{
+	throw new Error(message);
+}
+
+return {
+	crash: crash,
+	log: F2(log)
+};
+
+}();
+var _elm_lang$core$Debug$crash = _elm_lang$core$Native_Debug.crash;
+var _elm_lang$core$Debug$log = _elm_lang$core$Native_Debug.log;
+
+var _elm_lang$core$Maybe$withDefault = F2(
+	function ($default, maybe) {
+		var _p0 = maybe;
+		if (_p0.ctor === 'Just') {
+			return _p0._0;
+		} else {
+			return $default;
+		}
+	});
+var _elm_lang$core$Maybe$Nothing = {ctor: 'Nothing'};
+var _elm_lang$core$Maybe$oneOf = function (maybes) {
+	oneOf:
+	while (true) {
+		var _p1 = maybes;
+		if (_p1.ctor === '[]') {
+			return _elm_lang$core$Maybe$Nothing;
+		} else {
+			var _p3 = _p1._0;
+			var _p2 = _p3;
+			if (_p2.ctor === 'Nothing') {
+				var _v3 = _p1._1;
+				maybes = _v3;
+				continue oneOf;
+			} else {
+				return _p3;
+			}
+		}
+	}
+};
+var _elm_lang$core$Maybe$andThen = F2(
+	function (maybeValue, callback) {
+		var _p4 = maybeValue;
+		if (_p4.ctor === 'Just') {
+			return callback(_p4._0);
+		} else {
+			return _elm_lang$core$Maybe$Nothing;
+		}
+	});
+var _elm_lang$core$Maybe$Just = function (a) {
+	return {ctor: 'Just', _0: a};
+};
+var _elm_lang$core$Maybe$map = F2(
+	function (f, maybe) {
+		var _p5 = maybe;
+		if (_p5.ctor === 'Just') {
+			return _elm_lang$core$Maybe$Just(
+				f(_p5._0));
+		} else {
+			return _elm_lang$core$Maybe$Nothing;
+		}
+	});
+var _elm_lang$core$Maybe$map2 = F3(
+	function (func, ma, mb) {
+		var _p6 = {ctor: '_Tuple2', _0: ma, _1: mb};
+		if (((_p6.ctor === '_Tuple2') && (_p6._0.ctor === 'Just')) && (_p6._1.ctor === 'Just')) {
+			return _elm_lang$core$Maybe$Just(
+				A2(func, _p6._0._0, _p6._1._0));
+		} else {
+			return _elm_lang$core$Maybe$Nothing;
+		}
+	});
+var _elm_lang$core$Maybe$map3 = F4(
+	function (func, ma, mb, mc) {
+		var _p7 = {ctor: '_Tuple3', _0: ma, _1: mb, _2: mc};
+		if ((((_p7.ctor === '_Tuple3') && (_p7._0.ctor === 'Just')) && (_p7._1.ctor === 'Just')) && (_p7._2.ctor === 'Just')) {
+			return _elm_lang$core$Maybe$Just(
+				A3(func, _p7._0._0, _p7._1._0, _p7._2._0));
+		} else {
+			return _elm_lang$core$Maybe$Nothing;
+		}
+	});
+var _elm_lang$core$Maybe$map4 = F5(
+	function (func, ma, mb, mc, md) {
+		var _p8 = {ctor: '_Tuple4', _0: ma, _1: mb, _2: mc, _3: md};
+		if (((((_p8.ctor === '_Tuple4') && (_p8._0.ctor === 'Just')) && (_p8._1.ctor === 'Just')) && (_p8._2.ctor === 'Just')) && (_p8._3.ctor === 'Just')) {
+			return _elm_lang$core$Maybe$Just(
+				A4(func, _p8._0._0, _p8._1._0, _p8._2._0, _p8._3._0));
+		} else {
+			return _elm_lang$core$Maybe$Nothing;
+		}
+	});
+var _elm_lang$core$Maybe$map5 = F6(
+	function (func, ma, mb, mc, md, me) {
+		var _p9 = {ctor: '_Tuple5', _0: ma, _1: mb, _2: mc, _3: md, _4: me};
+		if ((((((_p9.ctor === '_Tuple5') && (_p9._0.ctor === 'Just')) && (_p9._1.ctor === 'Just')) && (_p9._2.ctor === 'Just')) && (_p9._3.ctor === 'Just')) && (_p9._4.ctor === 'Just')) {
+			return _elm_lang$core$Maybe$Just(
+				A5(func, _p9._0._0, _p9._1._0, _p9._2._0, _p9._3._0, _p9._4._0));
+		} else {
+			return _elm_lang$core$Maybe$Nothing;
+		}
+	});
+
+//import Native.Utils //
+
+var _elm_lang$core$Native_List = function() {
+
+var Nil = { ctor: '[]' };
+
+function Cons(hd, tl)
+{
+	return { ctor: '::', _0: hd, _1: tl };
+}
+
+function fromArray(arr)
+{
+	var out = Nil;
+	for (var i = arr.length; i--; )
+	{
+		out = Cons(arr[i], out);
+	}
+	return out;
+}
+
+function toArray(xs)
+{
+	var out = [];
+	while (xs.ctor !== '[]')
+	{
+		out.push(xs._0);
+		xs = xs._1;
+	}
+	return out;
+}
+
+
+function range(lo, hi)
+{
+	var list = Nil;
+	if (lo <= hi)
+	{
+		do
+		{
+			list = Cons(hi, list);
+		}
+		while (hi-- > lo);
+	}
+	return list;
+}
+
+function foldr(f, b, xs)
+{
+	var arr = toArray(xs);
+	var acc = b;
+	for (var i = arr.length; i--; )
+	{
+		acc = A2(f, arr[i], acc);
+	}
+	return acc;
+}
+
+function map2(f, xs, ys)
+{
+	var arr = [];
+	while (xs.ctor !== '[]' && ys.ctor !== '[]')
+	{
+		arr.push(A2(f, xs._0, ys._0));
+		xs = xs._1;
+		ys = ys._1;
+	}
+	return fromArray(arr);
+}
+
+function map3(f, xs, ys, zs)
+{
+	var arr = [];
+	while (xs.ctor !== '[]' && ys.ctor !== '[]' && zs.ctor !== '[]')
+	{
+		arr.push(A3(f, xs._0, ys._0, zs._0));
+		xs = xs._1;
+		ys = ys._1;
+		zs = zs._1;
+	}
+	return fromArray(arr);
+}
+
+function map4(f, ws, xs, ys, zs)
+{
+	var arr = [];
+	while (   ws.ctor !== '[]'
+		   && xs.ctor !== '[]'
+		   && ys.ctor !== '[]'
+		   && zs.ctor !== '[]')
+	{
+		arr.push(A4(f, ws._0, xs._0, ys._0, zs._0));
+		ws = ws._1;
+		xs = xs._1;
+		ys = ys._1;
+		zs = zs._1;
+	}
+	return fromArray(arr);
+}
+
+function map5(f, vs, ws, xs, ys, zs)
+{
+	var arr = [];
+	while (   vs.ctor !== '[]'
+		   && ws.ctor !== '[]'
+		   && xs.ctor !== '[]'
+		   && ys.ctor !== '[]'
+		   && zs.ctor !== '[]')
+	{
+		arr.push(A5(f, vs._0, ws._0, xs._0, ys._0, zs._0));
+		vs = vs._1;
+		ws = ws._1;
+		xs = xs._1;
+		ys = ys._1;
+		zs = zs._1;
+	}
+	return fromArray(arr);
+}
+
+function sortBy(f, xs)
+{
+	return fromArray(toArray(xs).sort(function(a, b) {
+		return _elm_lang$core$Native_Utils.cmp(f(a), f(b));
+	}));
+}
+
+function sortWith(f, xs)
+{
+	return fromArray(toArray(xs).sort(function(a, b) {
+		var ord = f(a)(b).ctor;
+		return ord === 'EQ' ? 0 : ord === 'LT' ? -1 : 1;
+	}));
+}
+
+return {
+	Nil: Nil,
+	Cons: Cons,
+	cons: F2(Cons),
+	toArray: toArray,
+	fromArray: fromArray,
+	range: range,
+
+	foldr: F3(foldr),
+
+	map2: F3(map2),
+	map3: F4(map3),
+	map4: F5(map4),
+	map5: F6(map5),
+	sortBy: F2(sortBy),
+	sortWith: F2(sortWith)
+};
+
+}();
+var _elm_lang$core$List$sortWith = _elm_lang$core$Native_List.sortWith;
+var _elm_lang$core$List$sortBy = _elm_lang$core$Native_List.sortBy;
+var _elm_lang$core$List$sort = function (xs) {
+	return A2(_elm_lang$core$List$sortBy, _elm_lang$core$Basics$identity, xs);
+};
+var _elm_lang$core$List$drop = F2(
+	function (n, list) {
+		drop:
+		while (true) {
+			if (_elm_lang$core$Native_Utils.cmp(n, 0) < 1) {
+				return list;
+			} else {
+				var _p0 = list;
+				if (_p0.ctor === '[]') {
+					return list;
+				} else {
+					var _v1 = n - 1,
+						_v2 = _p0._1;
+					n = _v1;
+					list = _v2;
+					continue drop;
+				}
+			}
+		}
+	});
+var _elm_lang$core$List$map5 = _elm_lang$core$Native_List.map5;
+var _elm_lang$core$List$map4 = _elm_lang$core$Native_List.map4;
+var _elm_lang$core$List$map3 = _elm_lang$core$Native_List.map3;
+var _elm_lang$core$List$map2 = _elm_lang$core$Native_List.map2;
+var _elm_lang$core$List$any = F2(
+	function (isOkay, list) {
+		any:
+		while (true) {
+			var _p1 = list;
+			if (_p1.ctor === '[]') {
+				return false;
+			} else {
+				if (isOkay(_p1._0)) {
+					return true;
+				} else {
+					var _v4 = isOkay,
+						_v5 = _p1._1;
+					isOkay = _v4;
+					list = _v5;
+					continue any;
+				}
+			}
+		}
+	});
+var _elm_lang$core$List$all = F2(
+	function (isOkay, list) {
+		return _elm_lang$core$Basics$not(
+			A2(
+				_elm_lang$core$List$any,
+				function (_p2) {
+					return _elm_lang$core$Basics$not(
+						isOkay(_p2));
+				},
+				list));
+	});
+var _elm_lang$core$List$foldr = _elm_lang$core$Native_List.foldr;
+var _elm_lang$core$List$foldl = F3(
+	function (func, acc, list) {
+		foldl:
+		while (true) {
+			var _p3 = list;
+			if (_p3.ctor === '[]') {
+				return acc;
+			} else {
+				var _v7 = func,
+					_v8 = A2(func, _p3._0, acc),
+					_v9 = _p3._1;
+				func = _v7;
+				acc = _v8;
+				list = _v9;
+				continue foldl;
+			}
+		}
+	});
+var _elm_lang$core$List$length = function (xs) {
+	return A3(
+		_elm_lang$core$List$foldl,
+		F2(
+			function (_p4, i) {
+				return i + 1;
+			}),
+		0,
+		xs);
+};
+var _elm_lang$core$List$sum = function (numbers) {
+	return A3(
+		_elm_lang$core$List$foldl,
+		F2(
+			function (x, y) {
+				return x + y;
+			}),
+		0,
+		numbers);
+};
+var _elm_lang$core$List$product = function (numbers) {
+	return A3(
+		_elm_lang$core$List$foldl,
+		F2(
+			function (x, y) {
+				return x * y;
+			}),
+		1,
+		numbers);
+};
+var _elm_lang$core$List$maximum = function (list) {
+	var _p5 = list;
+	if (_p5.ctor === '::') {
+		return _elm_lang$core$Maybe$Just(
+			A3(_elm_lang$core$List$foldl, _elm_lang$core$Basics$max, _p5._0, _p5._1));
+	} else {
+		return _elm_lang$core$Maybe$Nothing;
+	}
+};
+var _elm_lang$core$List$minimum = function (list) {
+	var _p6 = list;
+	if (_p6.ctor === '::') {
+		return _elm_lang$core$Maybe$Just(
+			A3(_elm_lang$core$List$foldl, _elm_lang$core$Basics$min, _p6._0, _p6._1));
+	} else {
+		return _elm_lang$core$Maybe$Nothing;
+	}
+};
+var _elm_lang$core$List$indexedMap = F2(
+	function (f, xs) {
+		return A3(
+			_elm_lang$core$List$map2,
+			f,
+			_elm_lang$core$Native_List.range(
+				0,
+				_elm_lang$core$List$length(xs) - 1),
+			xs);
+	});
+var _elm_lang$core$List$member = F2(
+	function (x, xs) {
+		return A2(
+			_elm_lang$core$List$any,
+			function (a) {
+				return _elm_lang$core$Native_Utils.eq(a, x);
+			},
+			xs);
+	});
+var _elm_lang$core$List$isEmpty = function (xs) {
+	var _p7 = xs;
+	if (_p7.ctor === '[]') {
+		return true;
+	} else {
+		return false;
+	}
+};
+var _elm_lang$core$List$tail = function (list) {
+	var _p8 = list;
+	if (_p8.ctor === '::') {
+		return _elm_lang$core$Maybe$Just(_p8._1);
+	} else {
+		return _elm_lang$core$Maybe$Nothing;
+	}
+};
+var _elm_lang$core$List$head = function (list) {
+	var _p9 = list;
+	if (_p9.ctor === '::') {
+		return _elm_lang$core$Maybe$Just(_p9._0);
+	} else {
+		return _elm_lang$core$Maybe$Nothing;
+	}
+};
+var _elm_lang$core$List_ops = _elm_lang$core$List_ops || {};
+_elm_lang$core$List_ops['::'] = _elm_lang$core$Native_List.cons;
+var _elm_lang$core$List$map = F2(
+	function (f, xs) {
+		return A3(
+			_elm_lang$core$List$foldr,
+			F2(
+				function (x, acc) {
+					return A2(
+						_elm_lang$core$List_ops['::'],
+						f(x),
+						acc);
+				}),
+			_elm_lang$core$Native_List.fromArray(
+				[]),
+			xs);
+	});
+var _elm_lang$core$List$filter = F2(
+	function (pred, xs) {
+		var conditionalCons = F2(
+			function (x, xs$) {
+				return pred(x) ? A2(_elm_lang$core$List_ops['::'], x, xs$) : xs$;
+			});
+		return A3(
+			_elm_lang$core$List$foldr,
+			conditionalCons,
+			_elm_lang$core$Native_List.fromArray(
+				[]),
+			xs);
+	});
+var _elm_lang$core$List$maybeCons = F3(
+	function (f, mx, xs) {
+		var _p10 = f(mx);
+		if (_p10.ctor === 'Just') {
+			return A2(_elm_lang$core$List_ops['::'], _p10._0, xs);
+		} else {
+			return xs;
+		}
+	});
+var _elm_lang$core$List$filterMap = F2(
+	function (f, xs) {
+		return A3(
+			_elm_lang$core$List$foldr,
+			_elm_lang$core$List$maybeCons(f),
+			_elm_lang$core$Native_List.fromArray(
+				[]),
+			xs);
+	});
+var _elm_lang$core$List$reverse = function (list) {
+	return A3(
+		_elm_lang$core$List$foldl,
+		F2(
+			function (x, y) {
+				return A2(_elm_lang$core$List_ops['::'], x, y);
+			}),
+		_elm_lang$core$Native_List.fromArray(
+			[]),
+		list);
+};
+var _elm_lang$core$List$scanl = F3(
+	function (f, b, xs) {
+		var scan1 = F2(
+			function (x, accAcc) {
+				var _p11 = accAcc;
+				if (_p11.ctor === '::') {
+					return A2(
+						_elm_lang$core$List_ops['::'],
+						A2(f, x, _p11._0),
+						accAcc);
+				} else {
+					return _elm_lang$core$Native_List.fromArray(
+						[]);
+				}
+			});
+		return _elm_lang$core$List$reverse(
+			A3(
+				_elm_lang$core$List$foldl,
+				scan1,
+				_elm_lang$core$Native_List.fromArray(
+					[b]),
+				xs));
+	});
+var _elm_lang$core$List$append = F2(
+	function (xs, ys) {
+		var _p12 = ys;
+		if (_p12.ctor === '[]') {
+			return xs;
+		} else {
+			return A3(
+				_elm_lang$core$List$foldr,
+				F2(
+					function (x, y) {
+						return A2(_elm_lang$core$List_ops['::'], x, y);
+					}),
+				ys,
+				xs);
+		}
+	});
+var _elm_lang$core$List$concat = function (lists) {
+	return A3(
+		_elm_lang$core$List$foldr,
+		_elm_lang$core$List$append,
+		_elm_lang$core$Native_List.fromArray(
+			[]),
+		lists);
+};
+var _elm_lang$core$List$concatMap = F2(
+	function (f, list) {
+		return _elm_lang$core$List$concat(
+			A2(_elm_lang$core$List$map, f, list));
+	});
+var _elm_lang$core$List$partition = F2(
+	function (pred, list) {
+		var step = F2(
+			function (x, _p13) {
+				var _p14 = _p13;
+				var _p16 = _p14._0;
+				var _p15 = _p14._1;
+				return pred(x) ? {
+					ctor: '_Tuple2',
+					_0: A2(_elm_lang$core$List_ops['::'], x, _p16),
+					_1: _p15
+				} : {
+					ctor: '_Tuple2',
+					_0: _p16,
+					_1: A2(_elm_lang$core$List_ops['::'], x, _p15)
+				};
+			});
+		return A3(
+			_elm_lang$core$List$foldr,
+			step,
+			{
+				ctor: '_Tuple2',
+				_0: _elm_lang$core$Native_List.fromArray(
+					[]),
+				_1: _elm_lang$core$Native_List.fromArray(
+					[])
+			},
+			list);
+	});
+var _elm_lang$core$List$unzip = function (pairs) {
+	var step = F2(
+		function (_p18, _p17) {
+			var _p19 = _p18;
+			var _p20 = _p17;
+			return {
+				ctor: '_Tuple2',
+				_0: A2(_elm_lang$core$List_ops['::'], _p19._0, _p20._0),
+				_1: A2(_elm_lang$core$List_ops['::'], _p19._1, _p20._1)
+			};
+		});
+	return A3(
+		_elm_lang$core$List$foldr,
+		step,
+		{
+			ctor: '_Tuple2',
+			_0: _elm_lang$core$Native_List.fromArray(
+				[]),
+			_1: _elm_lang$core$Native_List.fromArray(
+				[])
+		},
+		pairs);
+};
+var _elm_lang$core$List$intersperse = F2(
+	function (sep, xs) {
+		var _p21 = xs;
+		if (_p21.ctor === '[]') {
+			return _elm_lang$core$Native_List.fromArray(
+				[]);
+		} else {
+			var step = F2(
+				function (x, rest) {
+					return A2(
+						_elm_lang$core$List_ops['::'],
+						sep,
+						A2(_elm_lang$core$List_ops['::'], x, rest));
+				});
+			var spersed = A3(
+				_elm_lang$core$List$foldr,
+				step,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_p21._1);
+			return A2(_elm_lang$core$List_ops['::'], _p21._0, spersed);
+		}
+	});
+var _elm_lang$core$List$take = F2(
+	function (n, list) {
+		if (_elm_lang$core$Native_Utils.cmp(n, 0) < 1) {
+			return _elm_lang$core$Native_List.fromArray(
+				[]);
+		} else {
+			var _p22 = list;
+			if (_p22.ctor === '[]') {
+				return list;
+			} else {
+				return A2(
+					_elm_lang$core$List_ops['::'],
+					_p22._0,
+					A2(_elm_lang$core$List$take, n - 1, _p22._1));
+			}
+		}
+	});
+var _elm_lang$core$List$repeatHelp = F3(
+	function (result, n, value) {
+		repeatHelp:
+		while (true) {
+			if (_elm_lang$core$Native_Utils.cmp(n, 0) < 1) {
+				return result;
+			} else {
+				var _v23 = A2(_elm_lang$core$List_ops['::'], value, result),
+					_v24 = n - 1,
+					_v25 = value;
+				result = _v23;
+				n = _v24;
+				value = _v25;
+				continue repeatHelp;
+			}
+		}
+	});
+var _elm_lang$core$List$repeat = F2(
+	function (n, value) {
+		return A3(
+			_elm_lang$core$List$repeatHelp,
+			_elm_lang$core$Native_List.fromArray(
+				[]),
+			n,
+			value);
+	});
+
+var _elm_lang$core$Result$toMaybe = function (result) {
+	var _p0 = result;
+	if (_p0.ctor === 'Ok') {
+		return _elm_lang$core$Maybe$Just(_p0._0);
+	} else {
+		return _elm_lang$core$Maybe$Nothing;
+	}
+};
+var _elm_lang$core$Result$withDefault = F2(
+	function (def, result) {
+		var _p1 = result;
+		if (_p1.ctor === 'Ok') {
+			return _p1._0;
+		} else {
+			return def;
+		}
+	});
+var _elm_lang$core$Result$Err = function (a) {
+	return {ctor: 'Err', _0: a};
+};
+var _elm_lang$core$Result$andThen = F2(
+	function (result, callback) {
+		var _p2 = result;
+		if (_p2.ctor === 'Ok') {
+			return callback(_p2._0);
+		} else {
+			return _elm_lang$core$Result$Err(_p2._0);
+		}
+	});
+var _elm_lang$core$Result$Ok = function (a) {
+	return {ctor: 'Ok', _0: a};
+};
+var _elm_lang$core$Result$map = F2(
+	function (func, ra) {
+		var _p3 = ra;
+		if (_p3.ctor === 'Ok') {
+			return _elm_lang$core$Result$Ok(
+				func(_p3._0));
+		} else {
+			return _elm_lang$core$Result$Err(_p3._0);
+		}
+	});
+var _elm_lang$core$Result$map2 = F3(
+	function (func, ra, rb) {
+		var _p4 = {ctor: '_Tuple2', _0: ra, _1: rb};
+		if (_p4._0.ctor === 'Ok') {
+			if (_p4._1.ctor === 'Ok') {
+				return _elm_lang$core$Result$Ok(
+					A2(func, _p4._0._0, _p4._1._0));
+			} else {
+				return _elm_lang$core$Result$Err(_p4._1._0);
+			}
+		} else {
+			return _elm_lang$core$Result$Err(_p4._0._0);
+		}
+	});
+var _elm_lang$core$Result$map3 = F4(
+	function (func, ra, rb, rc) {
+		var _p5 = {ctor: '_Tuple3', _0: ra, _1: rb, _2: rc};
+		if (_p5._0.ctor === 'Ok') {
+			if (_p5._1.ctor === 'Ok') {
+				if (_p5._2.ctor === 'Ok') {
+					return _elm_lang$core$Result$Ok(
+						A3(func, _p5._0._0, _p5._1._0, _p5._2._0));
+				} else {
+					return _elm_lang$core$Result$Err(_p5._2._0);
+				}
+			} else {
+				return _elm_lang$core$Result$Err(_p5._1._0);
+			}
+		} else {
+			return _elm_lang$core$Result$Err(_p5._0._0);
+		}
+	});
+var _elm_lang$core$Result$map4 = F5(
+	function (func, ra, rb, rc, rd) {
+		var _p6 = {ctor: '_Tuple4', _0: ra, _1: rb, _2: rc, _3: rd};
+		if (_p6._0.ctor === 'Ok') {
+			if (_p6._1.ctor === 'Ok') {
+				if (_p6._2.ctor === 'Ok') {
+					if (_p6._3.ctor === 'Ok') {
+						return _elm_lang$core$Result$Ok(
+							A4(func, _p6._0._0, _p6._1._0, _p6._2._0, _p6._3._0));
+					} else {
+						return _elm_lang$core$Result$Err(_p6._3._0);
+					}
+				} else {
+					return _elm_lang$core$Result$Err(_p6._2._0);
+				}
+			} else {
+				return _elm_lang$core$Result$Err(_p6._1._0);
+			}
+		} else {
+			return _elm_lang$core$Result$Err(_p6._0._0);
+		}
+	});
+var _elm_lang$core$Result$map5 = F6(
+	function (func, ra, rb, rc, rd, re) {
+		var _p7 = {ctor: '_Tuple5', _0: ra, _1: rb, _2: rc, _3: rd, _4: re};
+		if (_p7._0.ctor === 'Ok') {
+			if (_p7._1.ctor === 'Ok') {
+				if (_p7._2.ctor === 'Ok') {
+					if (_p7._3.ctor === 'Ok') {
+						if (_p7._4.ctor === 'Ok') {
+							return _elm_lang$core$Result$Ok(
+								A5(func, _p7._0._0, _p7._1._0, _p7._2._0, _p7._3._0, _p7._4._0));
+						} else {
+							return _elm_lang$core$Result$Err(_p7._4._0);
+						}
+					} else {
+						return _elm_lang$core$Result$Err(_p7._3._0);
+					}
+				} else {
+					return _elm_lang$core$Result$Err(_p7._2._0);
+				}
+			} else {
+				return _elm_lang$core$Result$Err(_p7._1._0);
+			}
+		} else {
+			return _elm_lang$core$Result$Err(_p7._0._0);
+		}
+	});
+var _elm_lang$core$Result$formatError = F2(
+	function (f, result) {
+		var _p8 = result;
+		if (_p8.ctor === 'Ok') {
+			return _elm_lang$core$Result$Ok(_p8._0);
+		} else {
+			return _elm_lang$core$Result$Err(
+				f(_p8._0));
+		}
+	});
+var _elm_lang$core$Result$fromMaybe = F2(
+	function (err, maybe) {
+		var _p9 = maybe;
+		if (_p9.ctor === 'Just') {
+			return _elm_lang$core$Result$Ok(_p9._0);
+		} else {
+			return _elm_lang$core$Result$Err(err);
+		}
+	});
+
+//import //
+
+var _elm_lang$core$Native_Platform = function() {
+
+
+// PROGRAMS
+
+function addPublicModule(object, name, main)
+{
+	var embed = main ? makeEmbed(name, main) : mainIsUndefined(name);
+
+	object['embed'] = embed;
+
+	object['fullscreen'] = function fullscreen(flags)
+	{
+		return embed(document.body, flags);
+	};
+}
+
+
+// PROGRAM FAIL
+
+function mainIsUndefined(name)
+{
+	return function(domNode)
+	{
+		var message = 'Cannot initialize module `' + name +
+			'` because it has no `main` value!\nWhat should I show on screen?';
+		domNode.innerHTML = errorHtml(message);
+		throw new Error(message);
+	};
+}
+
+function errorHtml(message)
+{
+	return '<div style="padding-left:1em;">'
+		+ '<h2 style="font-weight:normal;"><b>Oops!</b> Something went wrong when starting your Elm program.</h2>'
+		+ '<pre style="padding-left:1em;">' + message + '</pre>'
+		+ '</div>';
+}
+
+
+// PROGRAM SUCCESS
+
+function makeEmbed(moduleName, main)
+{
+	return function embed(rootDomNode, flags)
+	{
+		try
+		{
+			var program = mainToProgram(moduleName, main);
+			return makeEmbedHelp(moduleName, program, rootDomNode, flags);
+		}
+		catch (e)
+		{
+			rootDomNode.innerHTML = errorHtml(e.message);
+			throw e;
+		}
+	};
+}
+
+
+// MAIN TO PROGRAM
+
+function mainToProgram(moduleName, wrappedMain)
+{
+	var main = wrappedMain.main;
+
+	if (typeof main.init === 'undefined')
+	{
+		var emptyBag = batch(_elm_lang$core$Native_List.Nil);
+		var noChange = _elm_lang$core$Native_Utils.Tuple2(
+			_elm_lang$core$Native_Utils.Tuple0,
+			emptyBag
+		);
+
+		return _elm_lang$virtual_dom$VirtualDom$programWithFlags({
+			init: function() { return noChange; },
+			view: function() { return main; },
+			update: F2(function() { return noChange; }),
+			subscriptions: function () { return emptyBag; }
+		});
+	}
+
+	var flags = wrappedMain.flags;
+	var init = flags
+		? initWithFlags(moduleName, main.init, flags)
+		: initWithoutFlags(moduleName, main.init);
+
+	return _elm_lang$virtual_dom$VirtualDom$programWithFlags({
+		init: init,
+		view: main.view,
+		update: main.update,
+		subscriptions: main.subscriptions,
+	});
+}
+
+function initWithoutFlags(moduleName, realInit)
+{
+	return function init(flags)
+	{
+		if (typeof flags !== 'undefined')
+		{
+			throw new Error(
+				'You are giving module `' + moduleName + '` an argument in JavaScript.\n'
+				+ 'This module does not take arguments though! You probably need to change the\n'
+				+ 'initialization code to something like `Elm.' + moduleName + '.fullscreen()`'
+			);
+		}
+		return realInit();
+	};
+}
+
+function initWithFlags(moduleName, realInit, flagDecoder)
+{
+	return function init(flags)
+	{
+		var result = A2(_elm_lang$core$Native_Json.run, flagDecoder, flags);
+		if (result.ctor === 'Err')
+		{
+			throw new Error(
+				'You are trying to initialize module `' + moduleName + '` with an unexpected argument.\n'
+				+ 'When trying to convert it to a usable Elm value, I run into this problem:\n\n'
+				+ result._0
+			);
+		}
+		return realInit(result._0);
+	};
+}
+
+
+// SETUP RUNTIME SYSTEM
+
+function makeEmbedHelp(moduleName, program, rootDomNode, flags)
+{
+	var init = program.init;
+	var update = program.update;
+	var subscriptions = program.subscriptions;
+	var view = program.view;
+	var makeRenderer = program.renderer;
+
+	// ambient state
+	var managers = {};
+	var renderer;
+
+	// init and update state in main process
+	var initApp = _elm_lang$core$Native_Scheduler.nativeBinding(function(callback) {
+		var results = init(flags);
+		var model = results._0;
+		renderer = makeRenderer(rootDomNode, enqueue, view(model));
+		var cmds = results._1;
+		var subs = subscriptions(model);
+		dispatchEffects(managers, cmds, subs);
+		callback(_elm_lang$core$Native_Scheduler.succeed(model));
+	});
+
+	function onMessage(msg, model)
+	{
+		return _elm_lang$core$Native_Scheduler.nativeBinding(function(callback) {
+			var results = A2(update, msg, model);
+			model = results._0;
+			renderer.update(view(model));
+			var cmds = results._1;
+			var subs = subscriptions(model);
+			dispatchEffects(managers, cmds, subs);
+			callback(_elm_lang$core$Native_Scheduler.succeed(model));
+		});
+	}
+
+	var mainProcess = spawnLoop(initApp, onMessage);
+
+	function enqueue(msg)
+	{
+		_elm_lang$core$Native_Scheduler.rawSend(mainProcess, msg);
+	}
+
+	var ports = setupEffects(managers, enqueue);
+
+	return ports ? { ports: ports } : {};
+}
+
+
+// EFFECT MANAGERS
+
+var effectManagers = {};
+
+function setupEffects(managers, callback)
+{
+	var ports;
+
+	// setup all necessary effect managers
+	for (var key in effectManagers)
+	{
+		var manager = effectManagers[key];
+
+		if (manager.isForeign)
+		{
+			ports = ports || {};
+			ports[key] = manager.tag === 'cmd'
+				? setupOutgoingPort(key)
+				: setupIncomingPort(key, callback);
+		}
+
+		managers[key] = makeManager(manager, callback);
+	}
+
+	return ports;
+}
+
+function makeManager(info, callback)
+{
+	var router = {
+		main: callback,
+		self: undefined
+	};
+
+	var tag = info.tag;
+	var onEffects = info.onEffects;
+	var onSelfMsg = info.onSelfMsg;
+
+	function onMessage(msg, state)
+	{
+		if (msg.ctor === 'self')
+		{
+			return A3(onSelfMsg, router, msg._0, state);
+		}
+
+		var fx = msg._0;
+		switch (tag)
+		{
+			case 'cmd':
+				return A3(onEffects, router, fx.cmds, state);
+
+			case 'sub':
+				return A3(onEffects, router, fx.subs, state);
+
+			case 'fx':
+				return A4(onEffects, router, fx.cmds, fx.subs, state);
+		}
+	}
+
+	var process = spawnLoop(info.init, onMessage);
+	router.self = process;
+	return process;
+}
+
+function sendToApp(router, msg)
+{
+	return _elm_lang$core$Native_Scheduler.nativeBinding(function(callback)
+	{
+		router.main(msg);
+		callback(_elm_lang$core$Native_Scheduler.succeed(_elm_lang$core$Native_Utils.Tuple0));
+	});
+}
+
+function sendToSelf(router, msg)
+{
+	return A2(_elm_lang$core$Native_Scheduler.send, router.self, {
+		ctor: 'self',
+		_0: msg
+	});
+}
+
+
+// HELPER for STATEFUL LOOPS
+
+function spawnLoop(init, onMessage)
+{
+	var andThen = _elm_lang$core$Native_Scheduler.andThen;
+
+	function loop(state)
+	{
+		var handleMsg = _elm_lang$core$Native_Scheduler.receive(function(msg) {
+			return onMessage(msg, state);
+		});
+		return A2(andThen, handleMsg, loop);
+	}
+
+	var task = A2(andThen, init, loop);
+
+	return _elm_lang$core$Native_Scheduler.rawSpawn(task);
+}
+
+
+// BAGS
+
+function leaf(home)
+{
+	return function(value)
+	{
+		return {
+			type: 'leaf',
+			home: home,
+			value: value
+		};
+	};
+}
+
+function batch(list)
+{
+	return {
+		type: 'node',
+		branches: list
+	};
+}
+
+function map(tagger, bag)
+{
+	return {
+		type: 'map',
+		tagger: tagger,
+		tree: bag
+	}
+}
+
+
+// PIPE BAGS INTO EFFECT MANAGERS
+
+function dispatchEffects(managers, cmdBag, subBag)
+{
+	var effectsDict = {};
+	gatherEffects(true, cmdBag, effectsDict, null);
+	gatherEffects(false, subBag, effectsDict, null);
+
+	for (var home in managers)
+	{
+		var fx = home in effectsDict
+			? effectsDict[home]
+			: {
+				cmds: _elm_lang$core$Native_List.Nil,
+				subs: _elm_lang$core$Native_List.Nil
+			};
+
+		_elm_lang$core$Native_Scheduler.rawSend(managers[home], { ctor: 'fx', _0: fx });
+	}
+}
+
+function gatherEffects(isCmd, bag, effectsDict, taggers)
+{
+	switch (bag.type)
+	{
+		case 'leaf':
+			var home = bag.home;
+			var effect = toEffect(isCmd, home, taggers, bag.value);
+			effectsDict[home] = insert(isCmd, effect, effectsDict[home]);
+			return;
+
+		case 'node':
+			var list = bag.branches;
+			while (list.ctor !== '[]')
+			{
+				gatherEffects(isCmd, list._0, effectsDict, taggers);
+				list = list._1;
+			}
+			return;
+
+		case 'map':
+			gatherEffects(isCmd, bag.tree, effectsDict, {
+				tagger: bag.tagger,
+				rest: taggers
+			});
+			return;
+	}
+}
+
+function toEffect(isCmd, home, taggers, value)
+{
+	function applyTaggers(x)
+	{
+		while (taggers)
+		{
+			x = taggers.tagger(x);
+			taggers = taggers.rest;
+		}
+		return x;
+	}
+
+	var map = isCmd
+		? effectManagers[home].cmdMap
+		: effectManagers[home].subMap;
+
+	return A2(map, applyTaggers, value)
+}
+
+function insert(isCmd, newEffect, effects)
+{
+	effects = effects || {
+		cmds: _elm_lang$core$Native_List.Nil,
+		subs: _elm_lang$core$Native_List.Nil
+	};
+	if (isCmd)
+	{
+		effects.cmds = _elm_lang$core$Native_List.Cons(newEffect, effects.cmds);
+		return effects;
+	}
+	effects.subs = _elm_lang$core$Native_List.Cons(newEffect, effects.subs);
+	return effects;
+}
+
+
+// PORTS
+
+function checkPortName(name)
+{
+	if (name in effectManagers)
+	{
+		throw new Error('There can only be one port named `' + name + '`, but your program has multiple.');
+	}
+}
+
+
+// OUTGOING PORTS
+
+function outgoingPort(name, converter)
+{
+	checkPortName(name);
+	effectManagers[name] = {
+		tag: 'cmd',
+		cmdMap: outgoingPortMap,
+		converter: converter,
+		isForeign: true
+	};
+	return leaf(name);
+}
+
+var outgoingPortMap = F2(function cmdMap(tagger, value) {
+	return value;
+});
+
+function setupOutgoingPort(name)
+{
+	var subs = [];
+	var converter = effectManagers[name].converter;
+
+	// CREATE MANAGER
+
+	var init = _elm_lang$core$Native_Scheduler.succeed(null);
+
+	function onEffects(router, cmdList, state)
+	{
+		while (cmdList.ctor !== '[]')
+		{
+			var value = converter(cmdList._0);
+			for (var i = 0; i < subs.length; i++)
+			{
+				subs[i](value);
+			}
+			cmdList = cmdList._1;
+		}
+		return init;
+	}
+
+	effectManagers[name].init = init;
+	effectManagers[name].onEffects = F3(onEffects);
+
+	// PUBLIC API
+
+	function subscribe(callback)
+	{
+		subs.push(callback);
+	}
+
+	function unsubscribe(callback)
+	{
+		var index = subs.indexOf(callback);
+		if (index >= 0)
+		{
+			subs.splice(index, 1);
+		}
+	}
+
+	return {
+		subscribe: subscribe,
+		unsubscribe: unsubscribe
+	};
+}
+
+
+// INCOMING PORTS
+
+function incomingPort(name, converter)
+{
+	checkPortName(name);
+	effectManagers[name] = {
+		tag: 'sub',
+		subMap: incomingPortMap,
+		converter: converter,
+		isForeign: true
+	};
+	return leaf(name);
+}
+
+var incomingPortMap = F2(function subMap(tagger, finalTagger)
+{
+	return function(value)
+	{
+		return tagger(finalTagger(value));
+	};
+});
+
+function setupIncomingPort(name, callback)
+{
+	var subs = _elm_lang$core$Native_List.Nil;
+	var converter = effectManagers[name].converter;
+
+	// CREATE MANAGER
+
+	var init = _elm_lang$core$Native_Scheduler.succeed(null);
+
+	function onEffects(router, subList, state)
+	{
+		subs = subList;
+		return init;
+	}
+
+	effectManagers[name].init = init;
+	effectManagers[name].onEffects = F3(onEffects);
+
+	// PUBLIC API
+
+	function send(value)
+	{
+		var result = A2(_elm_lang$core$Json_Decode$decodeValue, converter, value);
+		if (result.ctor === 'Err')
+		{
+			throw new Error('Trying to send an unexpected type of value through port `' + name + '`:\n' + result._0);
+		}
+
+		var value = result._0;
+		var temp = subs;
+		while (temp.ctor !== '[]')
+		{
+			callback(temp._0(value));
+			temp = temp._1;
+		}
+	}
+
+	return { send: send };
+}
+
+return {
+	// routers
+	sendToApp: F2(sendToApp),
+	sendToSelf: F2(sendToSelf),
+
+	// global setup
+	mainToProgram: mainToProgram,
+	effectManagers: effectManagers,
+	outgoingPort: outgoingPort,
+	incomingPort: incomingPort,
+	addPublicModule: addPublicModule,
+
+	// effect bags
+	leaf: leaf,
+	batch: batch,
+	map: F2(map)
+};
+
+}();
+//import Native.Utils //
+
+var _elm_lang$core$Native_Scheduler = function() {
+
+var MAX_STEPS = 10000;
+
+
+// TASKS
+
+function succeed(value)
+{
+	return {
+		ctor: '_Task_succeed',
+		value: value
+	};
+}
+
+function fail(error)
+{
+	return {
+		ctor: '_Task_fail',
+		value: error
+	};
+}
+
+function nativeBinding(callback)
+{
+	return {
+		ctor: '_Task_nativeBinding',
+		callback: callback,
+		cancel: null
+	};
+}
+
+function andThen(task, callback)
+{
+	return {
+		ctor: '_Task_andThen',
+		task: task,
+		callback: callback
+	};
+}
+
+function onError(task, callback)
+{
+	return {
+		ctor: '_Task_onError',
+		task: task,
+		callback: callback
+	};
+}
+
+function receive(callback)
+{
+	return {
+		ctor: '_Task_receive',
+		callback: callback
+	};
+}
+
+
+// PROCESSES
+
+function rawSpawn(task)
+{
+	var process = {
+		ctor: '_Process',
+		id: _elm_lang$core$Native_Utils.guid(),
+		root: task,
+		stack: null,
+		mailbox: []
+	};
+
+	enqueue(process);
+
+	return process;
+}
+
+function spawn(task)
+{
+	return nativeBinding(function(callback) {
+		var process = rawSpawn(task);
+		callback(succeed(process));
+	});
+}
+
+function rawSend(process, msg)
+{
+	process.mailbox.push(msg);
+	enqueue(process);
+}
+
+function send(process, msg)
+{
+	return nativeBinding(function(callback) {
+		rawSend(process, msg);
+		callback(succeed(_elm_lang$core$Native_Utils.Tuple0));
+	});
+}
+
+function kill(process)
+{
+	return nativeBinding(function(callback) {
+		var root = process.root;
+		if (root.ctor === '_Task_nativeBinding' && root.cancel)
+		{
+			root.cancel();
+		}
+
+		process.root = null;
+
+		callback(succeed(_elm_lang$core$Native_Utils.Tuple0));
+	});
+}
+
+function sleep(time)
+{
+	return nativeBinding(function(callback) {
+		var id = setTimeout(function() {
+			callback(succeed(_elm_lang$core$Native_Utils.Tuple0));
+		}, time);
+
+		return function() { clearTimeout(id); };
+	});
+}
+
+
+// STEP PROCESSES
+
+function step(numSteps, process)
+{
+	while (numSteps < MAX_STEPS)
+	{
+		var ctor = process.root.ctor;
+
+		if (ctor === '_Task_succeed')
+		{
+			while (process.stack && process.stack.ctor === '_Task_onError')
+			{
+				process.stack = process.stack.rest;
+			}
+			if (process.stack === null)
+			{
+				break;
+			}
+			process.root = process.stack.callback(process.root.value);
+			process.stack = process.stack.rest;
+			++numSteps;
+			continue;
+		}
+
+		if (ctor === '_Task_fail')
+		{
+			while (process.stack && process.stack.ctor === '_Task_andThen')
+			{
+				process.stack = process.stack.rest;
+			}
+			if (process.stack === null)
+			{
+				break;
+			}
+			process.root = process.stack.callback(process.root.value);
+			process.stack = process.stack.rest;
+			++numSteps;
+			continue;
+		}
+
+		if (ctor === '_Task_andThen')
+		{
+			process.stack = {
+				ctor: '_Task_andThen',
+				callback: process.root.callback,
+				rest: process.stack
+			};
+			process.root = process.root.task;
+			++numSteps;
+			continue;
+		}
+
+		if (ctor === '_Task_onError')
+		{
+			process.stack = {
+				ctor: '_Task_onError',
+				callback: process.root.callback,
+				rest: process.stack
+			};
+			process.root = process.root.task;
+			++numSteps;
+			continue;
+		}
+
+		if (ctor === '_Task_nativeBinding')
+		{
+			process.root.cancel = process.root.callback(function(newRoot) {
+				process.root = newRoot;
+				enqueue(process);
+			});
+
+			break;
+		}
+
+		if (ctor === '_Task_receive')
+		{
+			var mailbox = process.mailbox;
+			if (mailbox.length === 0)
+			{
+				break;
+			}
+
+			process.root = process.root.callback(mailbox.shift());
+			++numSteps;
+			continue;
+		}
+
+		throw new Error(ctor);
+	}
+
+	if (numSteps < MAX_STEPS)
+	{
+		return numSteps + 1;
+	}
+	enqueue(process);
+
+	return numSteps;
+}
+
+
+// WORK QUEUE
+
+var working = false;
+var workQueue = [];
+
+function enqueue(process)
+{
+	workQueue.push(process);
+
+	if (!working)
+	{
+		setTimeout(work, 0);
+		working = true;
+	}
+}
+
+function work()
+{
+	var numSteps = 0;
+	var process;
+	while (numSteps < MAX_STEPS && (process = workQueue.shift()))
+	{
+		numSteps = step(numSteps, process);
+	}
+	if (!process)
+	{
+		working = false;
+		return;
+	}
+	setTimeout(work, 0);
+}
+
+
+return {
+	succeed: succeed,
+	fail: fail,
+	nativeBinding: nativeBinding,
+	andThen: F2(andThen),
+	onError: F2(onError),
+	receive: receive,
+
+	spawn: spawn,
+	kill: kill,
+	sleep: sleep,
+	send: F2(send),
+
+	rawSpawn: rawSpawn,
+	rawSend: rawSend
+};
+
+}();
+var _elm_lang$core$Platform$hack = _elm_lang$core$Native_Scheduler.succeed;
+var _elm_lang$core$Platform$sendToSelf = _elm_lang$core$Native_Platform.sendToSelf;
+var _elm_lang$core$Platform$sendToApp = _elm_lang$core$Native_Platform.sendToApp;
+var _elm_lang$core$Platform$Program = {ctor: 'Program'};
+var _elm_lang$core$Platform$Task = {ctor: 'Task'};
+var _elm_lang$core$Platform$ProcessId = {ctor: 'ProcessId'};
+var _elm_lang$core$Platform$Router = {ctor: 'Router'};
+
+var _elm_lang$core$Platform_Cmd$batch = _elm_lang$core$Native_Platform.batch;
+var _elm_lang$core$Platform_Cmd$none = _elm_lang$core$Platform_Cmd$batch(
+	_elm_lang$core$Native_List.fromArray(
+		[]));
+var _elm_lang$core$Platform_Cmd_ops = _elm_lang$core$Platform_Cmd_ops || {};
+_elm_lang$core$Platform_Cmd_ops['!'] = F2(
+	function (model, commands) {
+		return {
+			ctor: '_Tuple2',
+			_0: model,
+			_1: _elm_lang$core$Platform_Cmd$batch(commands)
+		};
+	});
+var _elm_lang$core$Platform_Cmd$map = _elm_lang$core$Native_Platform.map;
+var _elm_lang$core$Platform_Cmd$Cmd = {ctor: 'Cmd'};
+
+var _elm_lang$core$Platform_Sub$batch = _elm_lang$core$Native_Platform.batch;
+var _elm_lang$core$Platform_Sub$none = _elm_lang$core$Platform_Sub$batch(
+	_elm_lang$core$Native_List.fromArray(
+		[]));
+var _elm_lang$core$Platform_Sub$map = _elm_lang$core$Native_Platform.map;
+var _elm_lang$core$Platform_Sub$Sub = {ctor: 'Sub'};
+
+var _elm_lang$lazy$Native_Lazy = function() {
+
+function memoize(thunk)
+{
+    var value;
+    var isForced = false;
+    return function(tuple0) {
+        if (!isForced) {
+            value = thunk(tuple0);
+            isForced = true;
+        }
+        return value;
+    };
+}
+
+return {
+    memoize: memoize
+};
+
+}();
+
+var _elm_lang$lazy$Lazy$force = function (_p0) {
+	var _p1 = _p0;
+	return _p1._0(
+		{ctor: '_Tuple0'});
+};
+var _elm_lang$lazy$Lazy$Lazy = function (a) {
+	return {ctor: 'Lazy', _0: a};
+};
+var _elm_lang$lazy$Lazy$lazy = function (thunk) {
+	return _elm_lang$lazy$Lazy$Lazy(
+		_elm_lang$lazy$Native_Lazy.memoize(thunk));
+};
+var _elm_lang$lazy$Lazy$map = F2(
+	function (f, a) {
+		return _elm_lang$lazy$Lazy$lazy(
+			function (_p2) {
+				var _p3 = _p2;
+				return f(
+					_elm_lang$lazy$Lazy$force(a));
+			});
+	});
+var _elm_lang$lazy$Lazy$map2 = F3(
+	function (f, a, b) {
+		return _elm_lang$lazy$Lazy$lazy(
+			function (_p4) {
+				var _p5 = _p4;
+				return A2(
+					f,
+					_elm_lang$lazy$Lazy$force(a),
+					_elm_lang$lazy$Lazy$force(b));
+			});
+	});
+var _elm_lang$lazy$Lazy$map3 = F4(
+	function (f, a, b, c) {
+		return _elm_lang$lazy$Lazy$lazy(
+			function (_p6) {
+				var _p7 = _p6;
+				return A3(
+					f,
+					_elm_lang$lazy$Lazy$force(a),
+					_elm_lang$lazy$Lazy$force(b),
+					_elm_lang$lazy$Lazy$force(c));
+			});
+	});
+var _elm_lang$lazy$Lazy$map4 = F5(
+	function (f, a, b, c, d) {
+		return _elm_lang$lazy$Lazy$lazy(
+			function (_p8) {
+				var _p9 = _p8;
+				return A4(
+					f,
+					_elm_lang$lazy$Lazy$force(a),
+					_elm_lang$lazy$Lazy$force(b),
+					_elm_lang$lazy$Lazy$force(c),
+					_elm_lang$lazy$Lazy$force(d));
+			});
+	});
+var _elm_lang$lazy$Lazy$map5 = F6(
+	function (f, a, b, c, d, e) {
+		return _elm_lang$lazy$Lazy$lazy(
+			function (_p10) {
+				var _p11 = _p10;
+				return A5(
+					f,
+					_elm_lang$lazy$Lazy$force(a),
+					_elm_lang$lazy$Lazy$force(b),
+					_elm_lang$lazy$Lazy$force(c),
+					_elm_lang$lazy$Lazy$force(d),
+					_elm_lang$lazy$Lazy$force(e));
+			});
+	});
+var _elm_lang$lazy$Lazy$apply = F2(
+	function (f, x) {
+		return _elm_lang$lazy$Lazy$lazy(
+			function (_p12) {
+				var _p13 = _p12;
+				return A2(
+					_elm_lang$lazy$Lazy$force,
+					f,
+					_elm_lang$lazy$Lazy$force(x));
+			});
+	});
+var _elm_lang$lazy$Lazy$andThen = F2(
+	function (a, callback) {
+		return _elm_lang$lazy$Lazy$lazy(
+			function (_p14) {
+				var _p15 = _p14;
+				return _elm_lang$lazy$Lazy$force(
+					callback(
+						_elm_lang$lazy$Lazy$force(a)));
+			});
+	});
+
+//import Maybe, Native.List, Native.Utils, Result //
+
+var _elm_lang$core$Native_String = function() {
+
+function isEmpty(str)
+{
+	return str.length === 0;
+}
+function cons(chr, str)
+{
+	return chr + str;
+}
+function uncons(str)
+{
+	var hd = str[0];
+	if (hd)
+	{
+		return _elm_lang$core$Maybe$Just(_elm_lang$core$Native_Utils.Tuple2(_elm_lang$core$Native_Utils.chr(hd), str.slice(1)));
+	}
+	return _elm_lang$core$Maybe$Nothing;
+}
+function append(a, b)
+{
+	return a + b;
+}
+function concat(strs)
+{
+	return _elm_lang$core$Native_List.toArray(strs).join('');
+}
+function length(str)
+{
+	return str.length;
+}
+function map(f, str)
+{
+	var out = str.split('');
+	for (var i = out.length; i--; )
+	{
+		out[i] = f(_elm_lang$core$Native_Utils.chr(out[i]));
+	}
+	return out.join('');
+}
+function filter(pred, str)
+{
+	return str.split('').map(_elm_lang$core$Native_Utils.chr).filter(pred).join('');
+}
+function reverse(str)
+{
+	return str.split('').reverse().join('');
+}
+function foldl(f, b, str)
+{
+	var len = str.length;
+	for (var i = 0; i < len; ++i)
+	{
+		b = A2(f, _elm_lang$core$Native_Utils.chr(str[i]), b);
+	}
+	return b;
+}
+function foldr(f, b, str)
+{
+	for (var i = str.length; i--; )
+	{
+		b = A2(f, _elm_lang$core$Native_Utils.chr(str[i]), b);
+	}
+	return b;
+}
+function split(sep, str)
+{
+	return _elm_lang$core$Native_List.fromArray(str.split(sep));
+}
+function join(sep, strs)
+{
+	return _elm_lang$core$Native_List.toArray(strs).join(sep);
+}
+function repeat(n, str)
+{
+	var result = '';
+	while (n > 0)
+	{
+		if (n & 1)
+		{
+			result += str;
+		}
+		n >>= 1, str += str;
+	}
+	return result;
+}
+function slice(start, end, str)
+{
+	return str.slice(start, end);
+}
+function left(n, str)
+{
+	return n < 1 ? '' : str.slice(0, n);
+}
+function right(n, str)
+{
+	return n < 1 ? '' : str.slice(-n);
+}
+function dropLeft(n, str)
+{
+	return n < 1 ? str : str.slice(n);
+}
+function dropRight(n, str)
+{
+	return n < 1 ? str : str.slice(0, -n);
+}
+function pad(n, chr, str)
+{
+	var half = (n - str.length) / 2;
+	return repeat(Math.ceil(half), chr) + str + repeat(half | 0, chr);
+}
+function padRight(n, chr, str)
+{
+	return str + repeat(n - str.length, chr);
+}
+function padLeft(n, chr, str)
+{
+	return repeat(n - str.length, chr) + str;
+}
+
+function trim(str)
+{
+	return str.trim();
+}
+function trimLeft(str)
+{
+	return str.replace(/^\s+/, '');
+}
+function trimRight(str)
+{
+	return str.replace(/\s+$/, '');
+}
+
+function words(str)
+{
+	return _elm_lang$core$Native_List.fromArray(str.trim().split(/\s+/g));
+}
+function lines(str)
+{
+	return _elm_lang$core$Native_List.fromArray(str.split(/\r\n|\r|\n/g));
+}
+
+function toUpper(str)
+{
+	return str.toUpperCase();
+}
+function toLower(str)
+{
+	return str.toLowerCase();
+}
+
+function any(pred, str)
+{
+	for (var i = str.length; i--; )
+	{
+		if (pred(_elm_lang$core$Native_Utils.chr(str[i])))
+		{
+			return true;
+		}
+	}
+	return false;
+}
+function all(pred, str)
+{
+	for (var i = str.length; i--; )
+	{
+		if (!pred(_elm_lang$core$Native_Utils.chr(str[i])))
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
+function contains(sub, str)
+{
+	return str.indexOf(sub) > -1;
+}
+function startsWith(sub, str)
+{
+	return str.indexOf(sub) === 0;
+}
+function endsWith(sub, str)
+{
+	return str.length >= sub.length &&
+		str.lastIndexOf(sub) === str.length - sub.length;
+}
+function indexes(sub, str)
+{
+	var subLen = sub.length;
+	var i = 0;
+	var is = [];
+	while ((i = str.indexOf(sub, i)) > -1)
+	{
+		is.push(i);
+		i = i + subLen;
+	}
+	return _elm_lang$core$Native_List.fromArray(is);
+}
+
+function toInt(s)
+{
+	var len = s.length;
+	if (len === 0)
+	{
+		return _elm_lang$core$Result$Err("could not convert string '" + s + "' to an Int" );
+	}
+	var start = 0;
+	if (s[0] === '-')
+	{
+		if (len === 1)
+		{
+			return _elm_lang$core$Result$Err("could not convert string '" + s + "' to an Int" );
+		}
+		start = 1;
+	}
+	for (var i = start; i < len; ++i)
+	{
+		var c = s[i];
+		if (c < '0' || '9' < c)
+		{
+			return _elm_lang$core$Result$Err("could not convert string '" + s + "' to an Int" );
+		}
+	}
+	return _elm_lang$core$Result$Ok(parseInt(s, 10));
+}
+
+function toFloat(s)
+{
+	var len = s.length;
+	if (len === 0)
+	{
+		return _elm_lang$core$Result$Err("could not convert string '" + s + "' to a Float" );
+	}
+	var start = 0;
+	if (s[0] === '-')
+	{
+		if (len === 1)
+		{
+			return _elm_lang$core$Result$Err("could not convert string '" + s + "' to a Float" );
+		}
+		start = 1;
+	}
+	var dotCount = 0;
+	for (var i = start; i < len; ++i)
+	{
+		var c = s[i];
+		if ('0' <= c && c <= '9')
+		{
+			continue;
+		}
+		if (c === '.')
+		{
+			dotCount += 1;
+			if (dotCount <= 1)
+			{
+				continue;
+			}
+		}
+		return _elm_lang$core$Result$Err("could not convert string '" + s + "' to a Float" );
+	}
+	return _elm_lang$core$Result$Ok(parseFloat(s));
+}
+
+function toList(str)
+{
+	return _elm_lang$core$Native_List.fromArray(str.split('').map(_elm_lang$core$Native_Utils.chr));
+}
+function fromList(chars)
+{
+	return _elm_lang$core$Native_List.toArray(chars).join('');
+}
+
+return {
+	isEmpty: isEmpty,
+	cons: F2(cons),
+	uncons: uncons,
+	append: F2(append),
+	concat: concat,
+	length: length,
+	map: F2(map),
+	filter: F2(filter),
+	reverse: reverse,
+	foldl: F3(foldl),
+	foldr: F3(foldr),
+
+	split: F2(split),
+	join: F2(join),
+	repeat: F2(repeat),
+
+	slice: F3(slice),
+	left: F2(left),
+	right: F2(right),
+	dropLeft: F2(dropLeft),
+	dropRight: F2(dropRight),
+
+	pad: F3(pad),
+	padLeft: F3(padLeft),
+	padRight: F3(padRight),
+
+	trim: trim,
+	trimLeft: trimLeft,
+	trimRight: trimRight,
+
+	words: words,
+	lines: lines,
+
+	toUpper: toUpper,
+	toLower: toLower,
+
+	any: F2(any),
+	all: F2(all),
+
+	contains: F2(contains),
+	startsWith: F2(startsWith),
+	endsWith: F2(endsWith),
+	indexes: F2(indexes),
+
+	toInt: toInt,
+	toFloat: toFloat,
+	toList: toList,
+	fromList: fromList
+};
+
+}();
+//import Native.Utils //
+
+var _elm_lang$core$Native_Char = function() {
+
+return {
+	fromCode: function(c) { return _elm_lang$core$Native_Utils.chr(String.fromCharCode(c)); },
+	toCode: function(c) { return c.charCodeAt(0); },
+	toUpper: function(c) { return _elm_lang$core$Native_Utils.chr(c.toUpperCase()); },
+	toLower: function(c) { return _elm_lang$core$Native_Utils.chr(c.toLowerCase()); },
+	toLocaleUpper: function(c) { return _elm_lang$core$Native_Utils.chr(c.toLocaleUpperCase()); },
+	toLocaleLower: function(c) { return _elm_lang$core$Native_Utils.chr(c.toLocaleLowerCase()); }
+};
+
+}();
+var _elm_lang$core$Char$fromCode = _elm_lang$core$Native_Char.fromCode;
+var _elm_lang$core$Char$toCode = _elm_lang$core$Native_Char.toCode;
+var _elm_lang$core$Char$toLocaleLower = _elm_lang$core$Native_Char.toLocaleLower;
+var _elm_lang$core$Char$toLocaleUpper = _elm_lang$core$Native_Char.toLocaleUpper;
+var _elm_lang$core$Char$toLower = _elm_lang$core$Native_Char.toLower;
+var _elm_lang$core$Char$toUpper = _elm_lang$core$Native_Char.toUpper;
+var _elm_lang$core$Char$isBetween = F3(
+	function (low, high, $char) {
+		var code = _elm_lang$core$Char$toCode($char);
+		return (_elm_lang$core$Native_Utils.cmp(
+			code,
+			_elm_lang$core$Char$toCode(low)) > -1) && (_elm_lang$core$Native_Utils.cmp(
+			code,
+			_elm_lang$core$Char$toCode(high)) < 1);
+	});
+var _elm_lang$core$Char$isUpper = A2(
+	_elm_lang$core$Char$isBetween,
+	_elm_lang$core$Native_Utils.chr('A'),
+	_elm_lang$core$Native_Utils.chr('Z'));
+var _elm_lang$core$Char$isLower = A2(
+	_elm_lang$core$Char$isBetween,
+	_elm_lang$core$Native_Utils.chr('a'),
+	_elm_lang$core$Native_Utils.chr('z'));
+var _elm_lang$core$Char$isDigit = A2(
+	_elm_lang$core$Char$isBetween,
+	_elm_lang$core$Native_Utils.chr('0'),
+	_elm_lang$core$Native_Utils.chr('9'));
+var _elm_lang$core$Char$isOctDigit = A2(
+	_elm_lang$core$Char$isBetween,
+	_elm_lang$core$Native_Utils.chr('0'),
+	_elm_lang$core$Native_Utils.chr('7'));
+var _elm_lang$core$Char$isHexDigit = function ($char) {
+	return _elm_lang$core$Char$isDigit($char) || (A3(
+		_elm_lang$core$Char$isBetween,
+		_elm_lang$core$Native_Utils.chr('a'),
+		_elm_lang$core$Native_Utils.chr('f'),
+		$char) || A3(
+		_elm_lang$core$Char$isBetween,
+		_elm_lang$core$Native_Utils.chr('A'),
+		_elm_lang$core$Native_Utils.chr('F'),
+		$char));
+};
+
+var _elm_lang$core$String$fromList = _elm_lang$core$Native_String.fromList;
+var _elm_lang$core$String$toList = _elm_lang$core$Native_String.toList;
+var _elm_lang$core$String$toFloat = _elm_lang$core$Native_String.toFloat;
+var _elm_lang$core$String$toInt = _elm_lang$core$Native_String.toInt;
+var _elm_lang$core$String$indices = _elm_lang$core$Native_String.indexes;
+var _elm_lang$core$String$indexes = _elm_lang$core$Native_String.indexes;
+var _elm_lang$core$String$endsWith = _elm_lang$core$Native_String.endsWith;
+var _elm_lang$core$String$startsWith = _elm_lang$core$Native_String.startsWith;
+var _elm_lang$core$String$contains = _elm_lang$core$Native_String.contains;
+var _elm_lang$core$String$all = _elm_lang$core$Native_String.all;
+var _elm_lang$core$String$any = _elm_lang$core$Native_String.any;
+var _elm_lang$core$String$toLower = _elm_lang$core$Native_String.toLower;
+var _elm_lang$core$String$toUpper = _elm_lang$core$Native_String.toUpper;
+var _elm_lang$core$String$lines = _elm_lang$core$Native_String.lines;
+var _elm_lang$core$String$words = _elm_lang$core$Native_String.words;
+var _elm_lang$core$String$trimRight = _elm_lang$core$Native_String.trimRight;
+var _elm_lang$core$String$trimLeft = _elm_lang$core$Native_String.trimLeft;
+var _elm_lang$core$String$trim = _elm_lang$core$Native_String.trim;
+var _elm_lang$core$String$padRight = _elm_lang$core$Native_String.padRight;
+var _elm_lang$core$String$padLeft = _elm_lang$core$Native_String.padLeft;
+var _elm_lang$core$String$pad = _elm_lang$core$Native_String.pad;
+var _elm_lang$core$String$dropRight = _elm_lang$core$Native_String.dropRight;
+var _elm_lang$core$String$dropLeft = _elm_lang$core$Native_String.dropLeft;
+var _elm_lang$core$String$right = _elm_lang$core$Native_String.right;
+var _elm_lang$core$String$left = _elm_lang$core$Native_String.left;
+var _elm_lang$core$String$slice = _elm_lang$core$Native_String.slice;
+var _elm_lang$core$String$repeat = _elm_lang$core$Native_String.repeat;
+var _elm_lang$core$String$join = _elm_lang$core$Native_String.join;
+var _elm_lang$core$String$split = _elm_lang$core$Native_String.split;
+var _elm_lang$core$String$foldr = _elm_lang$core$Native_String.foldr;
+var _elm_lang$core$String$foldl = _elm_lang$core$Native_String.foldl;
+var _elm_lang$core$String$reverse = _elm_lang$core$Native_String.reverse;
+var _elm_lang$core$String$filter = _elm_lang$core$Native_String.filter;
+var _elm_lang$core$String$map = _elm_lang$core$Native_String.map;
+var _elm_lang$core$String$length = _elm_lang$core$Native_String.length;
+var _elm_lang$core$String$concat = _elm_lang$core$Native_String.concat;
+var _elm_lang$core$String$append = _elm_lang$core$Native_String.append;
+var _elm_lang$core$String$uncons = _elm_lang$core$Native_String.uncons;
+var _elm_lang$core$String$cons = _elm_lang$core$Native_String.cons;
+var _elm_lang$core$String$fromChar = function ($char) {
+	return A2(_elm_lang$core$String$cons, $char, '');
+};
+var _elm_lang$core$String$isEmpty = _elm_lang$core$Native_String.isEmpty;
+
+//import Maybe, Native.List //
+
+var _elm_lang$core$Native_Regex = function() {
+
+function escape(str)
+{
+	return str.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+}
+function caseInsensitive(re)
+{
+	return new RegExp(re.source, 'gi');
+}
+function regex(raw)
+{
+	return new RegExp(raw, 'g');
+}
+
+function contains(re, string)
+{
+	return string.match(re) !== null;
+}
+
+function find(n, re, str)
+{
+	n = n.ctor === 'All' ? Infinity : n._0;
+	var out = [];
+	var number = 0;
+	var string = str;
+	var lastIndex = re.lastIndex;
+	var prevLastIndex = -1;
+	var result;
+	while (number++ < n && (result = re.exec(string)))
+	{
+		if (prevLastIndex === re.lastIndex) break;
+		var i = result.length - 1;
+		var subs = new Array(i);
+		while (i > 0)
+		{
+			var submatch = result[i];
+			subs[--i] = submatch === undefined
+				? _elm_lang$core$Maybe$Nothing
+				: _elm_lang$core$Maybe$Just(submatch);
+		}
+		out.push({
+			match: result[0],
+			submatches: _elm_lang$core$Native_List.fromArray(subs),
+			index: result.index,
+			number: number
+		});
+		prevLastIndex = re.lastIndex;
+	}
+	re.lastIndex = lastIndex;
+	return _elm_lang$core$Native_List.fromArray(out);
+}
+
+function replace(n, re, replacer, string)
+{
+	n = n.ctor === 'All' ? Infinity : n._0;
+	var count = 0;
+	function jsReplacer(match)
+	{
+		if (count++ >= n)
+		{
+			return match;
+		}
+		var i = arguments.length - 3;
+		var submatches = new Array(i);
+		while (i > 0)
+		{
+			var submatch = arguments[i];
+			submatches[--i] = submatch === undefined
+				? _elm_lang$core$Maybe$Nothing
+				: _elm_lang$core$Maybe$Just(submatch);
+		}
+		return replacer({
+			match: match,
+			submatches: _elm_lang$core$Native_List.fromArray(submatches),
+			index: arguments[i - 1],
+			number: count
+		});
+	}
+	return string.replace(re, jsReplacer);
+}
+
+function split(n, re, str)
+{
+	n = n.ctor === 'All' ? Infinity : n._0;
+	if (n === Infinity)
+	{
+		return _elm_lang$core$Native_List.fromArray(str.split(re));
+	}
+	var string = str;
+	var result;
+	var out = [];
+	var start = re.lastIndex;
+	while (n--)
+	{
+		if (!(result = re.exec(string))) break;
+		out.push(string.slice(start, result.index));
+		start = re.lastIndex;
+	}
+	out.push(string.slice(start));
+	return _elm_lang$core$Native_List.fromArray(out);
+}
+
+return {
+	regex: regex,
+	caseInsensitive: caseInsensitive,
+	escape: escape,
+
+	contains: F2(contains),
+	find: F3(find),
+	replace: F4(replace),
+	split: F3(split)
+};
+
+}();
+
+var _elm_lang$core$Regex$split = _elm_lang$core$Native_Regex.split;
+var _elm_lang$core$Regex$replace = _elm_lang$core$Native_Regex.replace;
+var _elm_lang$core$Regex$find = _elm_lang$core$Native_Regex.find;
+var _elm_lang$core$Regex$contains = _elm_lang$core$Native_Regex.contains;
+var _elm_lang$core$Regex$caseInsensitive = _elm_lang$core$Native_Regex.caseInsensitive;
+var _elm_lang$core$Regex$regex = _elm_lang$core$Native_Regex.regex;
+var _elm_lang$core$Regex$escape = _elm_lang$core$Native_Regex.escape;
+var _elm_lang$core$Regex$Match = F4(
+	function (a, b, c, d) {
+		return {match: a, submatches: b, index: c, number: d};
+	});
+var _elm_lang$core$Regex$Regex = {ctor: 'Regex'};
+var _elm_lang$core$Regex$AtMost = function (a) {
+	return {ctor: 'AtMost', _0: a};
+};
+var _elm_lang$core$Regex$All = {ctor: 'All'};
+
+var _Bogdanp$elm_combine$Combine$app = function (p) {
+	var _p0 = p;
+	if (_p0.ctor === 'Parser') {
+		return _p0._0;
+	} else {
+		return _elm_lang$lazy$Lazy$force(_p0._0);
+	}
+};
+var _Bogdanp$elm_combine$Combine$parse = F2(
+	function (p, input) {
+		return A2(
+			_Bogdanp$elm_combine$Combine$app,
+			p,
+			{input: input, position: 0});
+	});
+var _Bogdanp$elm_combine$Combine$Context = F2(
+	function (a, b) {
+		return {input: a, position: b};
+	});
+var _Bogdanp$elm_combine$Combine$RecursiveParser = function (a) {
+	return {ctor: 'RecursiveParser', _0: a};
+};
+var _Bogdanp$elm_combine$Combine$rec = function (t) {
+	return _Bogdanp$elm_combine$Combine$RecursiveParser(
+		_elm_lang$lazy$Lazy$lazy(
+			function (_p1) {
+				var _p2 = _p1;
+				return _Bogdanp$elm_combine$Combine$app(
+					t(
+						{ctor: '_Tuple0'}));
+			}));
+};
+var _Bogdanp$elm_combine$Combine$Parser = function (a) {
+	return {ctor: 'Parser', _0: a};
+};
+var _Bogdanp$elm_combine$Combine$primitive = _Bogdanp$elm_combine$Combine$Parser;
+var _Bogdanp$elm_combine$Combine$bimap = F3(
+	function (fok, ferr, p) {
+		return _Bogdanp$elm_combine$Combine$Parser(
+			function (cx) {
+				var _p3 = A2(_Bogdanp$elm_combine$Combine$app, p, cx);
+				if (_p3._0.ctor === 'Ok') {
+					return {
+						ctor: '_Tuple2',
+						_0: _elm_lang$core$Result$Ok(
+							fok(_p3._0._0)),
+						_1: _p3._1
+					};
+				} else {
+					return {
+						ctor: '_Tuple2',
+						_0: _elm_lang$core$Result$Err(
+							ferr(_p3._0._0)),
+						_1: _p3._1
+					};
+				}
+			});
+	});
+var _Bogdanp$elm_combine$Combine$map = F2(
+	function (f, p) {
+		return A3(_Bogdanp$elm_combine$Combine$bimap, f, _elm_lang$core$Basics$identity, p);
+	});
+var _Bogdanp$elm_combine$Combine$mapError = _Bogdanp$elm_combine$Combine$bimap(_elm_lang$core$Basics$identity);
+var _Bogdanp$elm_combine$Combine$andThen = F2(
+	function (p, f) {
+		return _Bogdanp$elm_combine$Combine$Parser(
+			function (cx) {
+				var _p4 = A2(_Bogdanp$elm_combine$Combine$app, p, cx);
+				if (_p4._0.ctor === 'Ok') {
+					return A2(
+						_Bogdanp$elm_combine$Combine$app,
+						f(_p4._0._0),
+						_p4._1);
+				} else {
+					return {
+						ctor: '_Tuple2',
+						_0: _elm_lang$core$Result$Err(_p4._0._0),
+						_1: _p4._1
+					};
+				}
+			});
+	});
+var _Bogdanp$elm_combine$Combine$sequence = function (ps) {
+	var accumulate = F3(
+		function (acc, ps, cx) {
+			accumulate:
+			while (true) {
+				var _p5 = ps;
+				if (_p5.ctor === '[]') {
+					return {
+						ctor: '_Tuple2',
+						_0: _elm_lang$core$Result$Ok(
+							_elm_lang$core$List$reverse(acc)),
+						_1: cx
+					};
+				} else {
+					var _p6 = A2(_Bogdanp$elm_combine$Combine$app, _p5._0, cx);
+					if (_p6._0.ctor === 'Ok') {
+						var _v6 = A2(_elm_lang$core$List_ops['::'], _p6._0._0, acc),
+							_v7 = _p5._1,
+							_v8 = _p6._1;
+						acc = _v6;
+						ps = _v7;
+						cx = _v8;
+						continue accumulate;
+					} else {
+						return {
+							ctor: '_Tuple2',
+							_0: _elm_lang$core$Result$Err(_p6._0._0),
+							_1: _p6._1
+						};
+					}
+				}
+			}
+		});
+	return _Bogdanp$elm_combine$Combine$Parser(
+		function (cx) {
+			return A3(
+				accumulate,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				ps,
+				cx);
+		});
+};
+var _Bogdanp$elm_combine$Combine$fail = function (ms) {
+	return _Bogdanp$elm_combine$Combine$Parser(
+		function (cx) {
+			return {
+				ctor: '_Tuple2',
+				_0: _elm_lang$core$Result$Err(ms),
+				_1: cx
+			};
+		});
+};
+var _Bogdanp$elm_combine$Combine$succeed = function (r) {
+	return _Bogdanp$elm_combine$Combine$Parser(
+		function (cx) {
+			return {
+				ctor: '_Tuple2',
+				_0: _elm_lang$core$Result$Ok(r),
+				_1: cx
+			};
+		});
+};
+var _Bogdanp$elm_combine$Combine$andMap = F2(
+	function (lp, rp) {
+		return A2(
+			_Bogdanp$elm_combine$Combine$andThen,
+			lp,
+			function (f) {
+				return A2(
+					_Bogdanp$elm_combine$Combine$andThen,
+					rp,
+					function (x) {
+						return _Bogdanp$elm_combine$Combine$succeed(
+							f(x));
+					});
+			});
+	});
+var _Bogdanp$elm_combine$Combine$between = F3(
+	function (lp, rp, p) {
+		return A2(
+			_Bogdanp$elm_combine$Combine$andMap,
+			A2(
+				_Bogdanp$elm_combine$Combine$andMap,
+				A2(
+					_Bogdanp$elm_combine$Combine$map,
+					_elm_lang$core$Basics$flip(
+						function (_p7) {
+							return _elm_lang$core$Basics$always(
+								_elm_lang$core$Basics$always(_p7));
+						}),
+					lp),
+				p),
+			rp);
+	});
+var _Bogdanp$elm_combine$Combine$skip = function (p) {
+	return A2(
+		_Bogdanp$elm_combine$Combine$andThen,
+		p,
+		_elm_lang$core$Basics$always(
+			_Bogdanp$elm_combine$Combine$succeed(
+				{ctor: '_Tuple0'})));
+};
+var _Bogdanp$elm_combine$Combine$count = F2(
+	function (n, p) {
+		var accumulate = F2(
+			function (x, acc) {
+				return (_elm_lang$core$Native_Utils.cmp(x, 0) < 1) ? _Bogdanp$elm_combine$Combine$succeed(
+					_elm_lang$core$List$reverse(acc)) : A2(
+					_Bogdanp$elm_combine$Combine$andThen,
+					p,
+					function (res) {
+						return A2(
+							accumulate,
+							x - 1,
+							A2(_elm_lang$core$List_ops['::'], res, acc));
+					});
+			});
+		return A2(
+			accumulate,
+			n,
+			_elm_lang$core$Native_List.fromArray(
+				[]));
+	});
+var _Bogdanp$elm_combine$Combine$string = function (s) {
+	return _Bogdanp$elm_combine$Combine$Parser(
+		function (cx) {
+			if (A2(_elm_lang$core$String$startsWith, s, cx.input)) {
+				var len = _elm_lang$core$String$length(s);
+				var rem = A2(_elm_lang$core$String$dropLeft, len, cx.input);
+				var pos = cx.position + len;
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Result$Ok(s),
+					_1: _elm_lang$core$Native_Utils.update(
+						cx,
+						{input: rem, position: pos})
+				};
+			} else {
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Result$Err(
+						_elm_lang$core$Native_List.fromArray(
+							[
+								A2(
+								_elm_lang$core$Basics_ops['++'],
+								'expected ',
+								_elm_lang$core$Basics$toString(s))
+							])),
+					_1: cx
+				};
+			}
+		});
+};
+var _Bogdanp$elm_combine$Combine$parens = A2(
+	_Bogdanp$elm_combine$Combine$between,
+	_Bogdanp$elm_combine$Combine$string('('),
+	_Bogdanp$elm_combine$Combine$string(')'));
+var _Bogdanp$elm_combine$Combine$braces = A2(
+	_Bogdanp$elm_combine$Combine$between,
+	_Bogdanp$elm_combine$Combine$string('{'),
+	_Bogdanp$elm_combine$Combine$string('}'));
+var _Bogdanp$elm_combine$Combine$brackets = A2(
+	_Bogdanp$elm_combine$Combine$between,
+	_Bogdanp$elm_combine$Combine$string('['),
+	_Bogdanp$elm_combine$Combine$string(']'));
+var _Bogdanp$elm_combine$Combine$regex = function (pattern) {
+	var pattern$ = A2(_elm_lang$core$String$startsWith, '^', pattern) ? pattern : A2(_elm_lang$core$Basics_ops['++'], '^', pattern);
+	return _Bogdanp$elm_combine$Combine$Parser(
+		function (cx) {
+			var _p8 = A3(
+				_elm_lang$core$Regex$find,
+				_elm_lang$core$Regex$AtMost(1),
+				_elm_lang$core$Regex$regex(pattern$),
+				cx.input);
+			if ((_p8.ctor === '::') && (_p8._1.ctor === '[]')) {
+				var _p9 = _p8._0;
+				var len = _elm_lang$core$String$length(_p9.match);
+				var rem = A2(_elm_lang$core$String$dropLeft, len, cx.input);
+				var pos = cx.position + len;
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Result$Ok(_p9.match),
+					_1: _elm_lang$core$Native_Utils.update(
+						cx,
+						{input: rem, position: pos})
+				};
+			} else {
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Result$Err(
+						_elm_lang$core$Native_List.fromArray(
+							[
+								A2(
+								_elm_lang$core$Basics_ops['++'],
+								'expected input matching Regexp /',
+								A2(_elm_lang$core$Basics_ops['++'], pattern$, '/'))
+							])),
+					_1: cx
+				};
+			}
+		});
+};
+var _Bogdanp$elm_combine$Combine$while = function (pred) {
+	var accumulate = F2(
+		function (acc, cx) {
+			accumulate:
+			while (true) {
+				var _p10 = _elm_lang$core$String$uncons(cx.input);
+				if (_p10.ctor === 'Just') {
+					var _p11 = _p10._0._0;
+					if (pred(_p11)) {
+						var pos = cx.position + 1;
+						var c = A2(_elm_lang$core$String$cons, _p11, '');
+						var _v11 = A2(_elm_lang$core$Basics_ops['++'], acc, c),
+							_v12 = _elm_lang$core$Native_Utils.update(
+							cx,
+							{input: _p10._0._1, position: pos});
+						acc = _v11;
+						cx = _v12;
+						continue accumulate;
+					} else {
+						return {ctor: '_Tuple2', _0: acc, _1: cx};
+					}
+				} else {
+					return {ctor: '_Tuple2', _0: acc, _1: cx};
+				}
+			}
+		});
+	return _Bogdanp$elm_combine$Combine$Parser(
+		function (cx) {
+			var _p12 = A2(accumulate, '', cx);
+			var res = _p12._0;
+			var cx$ = _p12._1;
+			return {
+				ctor: '_Tuple2',
+				_0: _elm_lang$core$Result$Ok(res),
+				_1: cx$
+			};
+		});
+};
+var _Bogdanp$elm_combine$Combine$end = _Bogdanp$elm_combine$Combine$Parser(
+	function (cx) {
+		return _elm_lang$core$Native_Utils.eq(cx.input, '') ? {
+			ctor: '_Tuple2',
+			_0: _elm_lang$core$Result$Ok(
+				{ctor: '_Tuple0'}),
+			_1: cx
+		} : {
+			ctor: '_Tuple2',
+			_0: _elm_lang$core$Result$Err(
+				_elm_lang$core$Native_List.fromArray(
+					['expected end of input'])),
+			_1: cx
+		};
+	});
+var _Bogdanp$elm_combine$Combine$or = F2(
+	function (lp, rp) {
+		return _Bogdanp$elm_combine$Combine$Parser(
+			function (cx) {
+				var res = A2(_Bogdanp$elm_combine$Combine$app, lp, cx);
+				var _p13 = res;
+				if (_p13._0.ctor === 'Ok') {
+					return res;
+				} else {
+					var res$ = A2(_Bogdanp$elm_combine$Combine$app, rp, cx);
+					var _p14 = res$;
+					if (_p14._0.ctor === 'Ok') {
+						return res$;
+					} else {
+						return {
+							ctor: '_Tuple2',
+							_0: _elm_lang$core$Result$Err(
+								A2(_elm_lang$core$Basics_ops['++'], _p13._0._0, _p14._0._0)),
+							_1: cx
+						};
+					}
+				}
+			});
+	});
+var _Bogdanp$elm_combine$Combine$choice = function (xs) {
+	return A3(
+		_elm_lang$core$List$foldr,
+		_Bogdanp$elm_combine$Combine$or,
+		_Bogdanp$elm_combine$Combine$fail(
+			_elm_lang$core$Native_List.fromArray(
+				[])),
+		xs);
+};
+var _Bogdanp$elm_combine$Combine$optional = F2(
+	function (res, p) {
+		return A2(
+			_Bogdanp$elm_combine$Combine$or,
+			p,
+			_Bogdanp$elm_combine$Combine$succeed(res));
+	});
+var _Bogdanp$elm_combine$Combine$chainl = F2(
+	function (p, op) {
+		var accumulate = function (x) {
+			return A2(
+				_Bogdanp$elm_combine$Combine$or,
+				A2(
+					_Bogdanp$elm_combine$Combine$andThen,
+					op,
+					function (f) {
+						return A2(
+							_Bogdanp$elm_combine$Combine$andThen,
+							p,
+							function (y) {
+								return accumulate(
+									A2(f, x, y));
+							});
+					}),
+				_Bogdanp$elm_combine$Combine$succeed(x));
+		};
+		return A2(_Bogdanp$elm_combine$Combine$andThen, p, accumulate);
+	});
+var _Bogdanp$elm_combine$Combine$chainr = F2(
+	function (p, op) {
+		var accumulate = function (x) {
+			return A2(
+				_Bogdanp$elm_combine$Combine$or,
+				A2(
+					_Bogdanp$elm_combine$Combine$andThen,
+					op,
+					function (f) {
+						return A2(
+							_Bogdanp$elm_combine$Combine$andThen,
+							A2(_Bogdanp$elm_combine$Combine$andThen, p, accumulate),
+							function (y) {
+								return _Bogdanp$elm_combine$Combine$succeed(
+									A2(f, x, y));
+							});
+					}),
+				_Bogdanp$elm_combine$Combine$succeed(x));
+		};
+		return A2(_Bogdanp$elm_combine$Combine$andThen, p, accumulate);
+	});
+var _Bogdanp$elm_combine$Combine$maybe = function (p) {
+	return _Bogdanp$elm_combine$Combine$Parser(
+		function (cx) {
+			var _p15 = A2(_Bogdanp$elm_combine$Combine$app, p, cx);
+			if ((_p15.ctor === '_Tuple2') && (_p15._0.ctor === 'Ok')) {
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Result$Ok(
+						_elm_lang$core$Maybe$Just(_p15._0._0)),
+					_1: _p15._1
+				};
+			} else {
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Result$Ok(_elm_lang$core$Maybe$Nothing),
+					_1: cx
+				};
+			}
+		});
+};
+var _Bogdanp$elm_combine$Combine$many = function (p) {
+	var accumulate = F2(
+		function (acc, cx) {
+			accumulate:
+			while (true) {
+				var _p16 = A2(_Bogdanp$elm_combine$Combine$app, p, cx);
+				if ((_p16.ctor === '_Tuple2') && (_p16._0.ctor === 'Ok')) {
+					var _p17 = _p16._1;
+					if (_elm_lang$core$Native_Utils.eq(cx, _p17)) {
+						return {
+							ctor: '_Tuple2',
+							_0: _elm_lang$core$List$reverse(acc),
+							_1: cx
+						};
+					} else {
+						var _v17 = A2(_elm_lang$core$List_ops['::'], _p16._0._0, acc),
+							_v18 = _p17;
+						acc = _v17;
+						cx = _v18;
+						continue accumulate;
+					}
+				} else {
+					return {
+						ctor: '_Tuple2',
+						_0: _elm_lang$core$List$reverse(acc),
+						_1: cx
+					};
+				}
+			}
+		});
+	return _Bogdanp$elm_combine$Combine$Parser(
+		function (cx) {
+			var _p18 = A2(
+				accumulate,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				cx);
+			var res = _p18._0;
+			var cx$ = _p18._1;
+			return {
+				ctor: '_Tuple2',
+				_0: _elm_lang$core$Result$Ok(res),
+				_1: cx$
+			};
+		});
+};
+var _Bogdanp$elm_combine$Combine$many1 = function (p) {
+	return A2(
+		_Bogdanp$elm_combine$Combine$andMap,
+		A2(
+			_Bogdanp$elm_combine$Combine$map,
+			F2(
+				function (x, y) {
+					return A2(_elm_lang$core$List_ops['::'], x, y);
+				}),
+			p),
+		_Bogdanp$elm_combine$Combine$many(p));
+};
+var _Bogdanp$elm_combine$Combine$skipMany1 = function (p) {
+	return A2(
+		_Bogdanp$elm_combine$Combine$andThen,
+		_Bogdanp$elm_combine$Combine$many1(
+			_Bogdanp$elm_combine$Combine$skip(p)),
+		_elm_lang$core$Basics$always(
+			_Bogdanp$elm_combine$Combine$succeed(
+				{ctor: '_Tuple0'})));
+};
+var _Bogdanp$elm_combine$Combine$sepBy1 = F2(
+	function (sep, p) {
+		return A2(
+			_Bogdanp$elm_combine$Combine$andMap,
+			A2(
+				_Bogdanp$elm_combine$Combine$map,
+				F2(
+					function (x, y) {
+						return A2(_elm_lang$core$List_ops['::'], x, y);
+					}),
+				p),
+			_Bogdanp$elm_combine$Combine$many(
+				A2(
+					_Bogdanp$elm_combine$Combine$andMap,
+					A2(
+						_Bogdanp$elm_combine$Combine$map,
+						_elm_lang$core$Basics$flip(_elm_lang$core$Basics$always),
+						sep),
+					p)));
+	});
+var _Bogdanp$elm_combine$Combine$sepBy = F2(
+	function (sep, p) {
+		return A2(
+			_Bogdanp$elm_combine$Combine$or,
+			A2(_Bogdanp$elm_combine$Combine$sepBy1, sep, p),
+			_Bogdanp$elm_combine$Combine$succeed(
+				_elm_lang$core$Native_List.fromArray(
+					[])));
+	});
+var _Bogdanp$elm_combine$Combine$sepEndBy1 = F2(
+	function (sep, p) {
+		return A2(
+			_Bogdanp$elm_combine$Combine$andMap,
+			A2(
+				_Bogdanp$elm_combine$Combine$map,
+				_elm_lang$core$Basics$always,
+				A2(_Bogdanp$elm_combine$Combine$sepBy1, sep, p)),
+			_Bogdanp$elm_combine$Combine$maybe(sep));
+	});
+var _Bogdanp$elm_combine$Combine$sepEndBy = F2(
+	function (sep, p) {
+		return A2(
+			_Bogdanp$elm_combine$Combine$or,
+			A2(_Bogdanp$elm_combine$Combine$sepEndBy1, sep, p),
+			_Bogdanp$elm_combine$Combine$succeed(
+				_elm_lang$core$Native_List.fromArray(
+					[])));
+	});
+var _Bogdanp$elm_combine$Combine$skipMany = function (p) {
+	return A2(
+		_Bogdanp$elm_combine$Combine$andThen,
+		_Bogdanp$elm_combine$Combine$many(
+			_Bogdanp$elm_combine$Combine$skip(p)),
+		_elm_lang$core$Basics$always(
+			_Bogdanp$elm_combine$Combine$succeed(
+				{ctor: '_Tuple0'})));
+};
+var _Bogdanp$elm_combine$Combine$manyTill = F2(
+	function (p, end) {
+		var accumulate = F2(
+			function (acc, cx) {
+				accumulate:
+				while (true) {
+					var _p19 = A2(_Bogdanp$elm_combine$Combine$app, end, cx);
+					if (_p19._0.ctor === 'Ok') {
+						return {
+							ctor: '_Tuple2',
+							_0: _elm_lang$core$Result$Ok(
+								_elm_lang$core$List$reverse(acc)),
+							_1: _p19._1
+						};
+					} else {
+						var _p20 = A2(_Bogdanp$elm_combine$Combine$app, p, cx);
+						if ((_p20.ctor === '_Tuple2') && (_p20._0.ctor === 'Ok')) {
+							var _v21 = A2(_elm_lang$core$List_ops['::'], _p20._0._0, acc),
+								_v22 = _p20._1;
+							acc = _v21;
+							cx = _v22;
+							continue accumulate;
+						} else {
+							return {
+								ctor: '_Tuple2',
+								_0: _elm_lang$core$Result$Err(_p19._0._0),
+								_1: _p19._1
+							};
+						}
+					}
+				}
+			});
+		return _Bogdanp$elm_combine$Combine$Parser(
+			accumulate(
+				_elm_lang$core$Native_List.fromArray(
+					[])));
+	});
+
+var _Bogdanp$elm_combine$Combine_Infix_ops = _Bogdanp$elm_combine$Combine_Infix_ops || {};
+_Bogdanp$elm_combine$Combine_Infix_ops['<|>'] = _Bogdanp$elm_combine$Combine$or;
+var _Bogdanp$elm_combine$Combine_Infix_ops = _Bogdanp$elm_combine$Combine_Infix_ops || {};
+_Bogdanp$elm_combine$Combine_Infix_ops['*>'] = F2(
+	function (lp, rp) {
+		return A2(
+			_Bogdanp$elm_combine$Combine$andMap,
+			A2(
+				_Bogdanp$elm_combine$Combine$map,
+				_elm_lang$core$Basics$flip(_elm_lang$core$Basics$always),
+				lp),
+			rp);
+	});
+var _Bogdanp$elm_combine$Combine_Infix_ops = _Bogdanp$elm_combine$Combine_Infix_ops || {};
+_Bogdanp$elm_combine$Combine_Infix_ops['<*'] = F2(
+	function (lp, rp) {
+		return A2(
+			_Bogdanp$elm_combine$Combine$andMap,
+			A2(_Bogdanp$elm_combine$Combine$map, _elm_lang$core$Basics$always, lp),
+			rp);
+	});
+var _Bogdanp$elm_combine$Combine_Infix_ops = _Bogdanp$elm_combine$Combine_Infix_ops || {};
+_Bogdanp$elm_combine$Combine_Infix_ops['<?>'] = F2(
+	function (p, m) {
+		return A2(
+			_Bogdanp$elm_combine$Combine$mapError,
+			function (_p0) {
+				return _elm_lang$core$Native_List.fromArray(
+					[m]);
+			},
+			p);
+	});
+var _Bogdanp$elm_combine$Combine_Infix_ops = _Bogdanp$elm_combine$Combine_Infix_ops || {};
+_Bogdanp$elm_combine$Combine_Infix_ops['<$'] = function (res) {
+	return _Bogdanp$elm_combine$Combine$map(
+		function (_p1) {
+			return res;
+		});
+};
+var _Bogdanp$elm_combine$Combine_Infix_ops = _Bogdanp$elm_combine$Combine_Infix_ops || {};
+_Bogdanp$elm_combine$Combine_Infix_ops['<*>'] = _Bogdanp$elm_combine$Combine$andMap;
+var _Bogdanp$elm_combine$Combine_Infix_ops = _Bogdanp$elm_combine$Combine_Infix_ops || {};
+_Bogdanp$elm_combine$Combine_Infix_ops['<$>'] = _Bogdanp$elm_combine$Combine$map;
+
+var _Bogdanp$elm_combine$Combine_Char$crlf = A2(
+	_Bogdanp$elm_combine$Combine_Infix_ops['<?>'],
+	A2(
+		_Bogdanp$elm_combine$Combine_Infix_ops['<$'],
+		_elm_lang$core$Native_Utils.chr('\n'),
+		_Bogdanp$elm_combine$Combine$regex('\r\n')),
+	'expected crlf');
+var _Bogdanp$elm_combine$Combine_Char$satisfy = function (pred) {
+	return _Bogdanp$elm_combine$Combine$primitive(
+		function (cx) {
+			var message = 'could not satisfy predicate';
+			var _p0 = _elm_lang$core$String$uncons(cx.input);
+			if (_p0.ctor === 'Just') {
+				var _p1 = _p0._0._0;
+				return pred(_p1) ? {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Result$Ok(_p1),
+					_1: _elm_lang$core$Native_Utils.update(
+						cx,
+						{input: _p0._0._1, position: cx.position + 1})
+				} : {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Result$Err(
+						_elm_lang$core$Native_List.fromArray(
+							[message])),
+					_1: cx
+				};
+			} else {
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Result$Err(
+						_elm_lang$core$Native_List.fromArray(
+							[message])),
+					_1: cx
+				};
+			}
+		});
+};
+var _Bogdanp$elm_combine$Combine_Char$char = function (c) {
+	return A2(
+		_Bogdanp$elm_combine$Combine_Infix_ops['<?>'],
+		_Bogdanp$elm_combine$Combine_Char$satisfy(
+			F2(
+				function (x, y) {
+					return _elm_lang$core$Native_Utils.eq(x, y);
+				})(c)),
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			'expected ',
+			_elm_lang$core$Basics$toString(c)));
+};
+var _Bogdanp$elm_combine$Combine_Char$anyChar = A2(
+	_Bogdanp$elm_combine$Combine_Infix_ops['<?>'],
+	_Bogdanp$elm_combine$Combine_Char$satisfy(
+		_elm_lang$core$Basics$always(true)),
+	'expected any character');
+var _Bogdanp$elm_combine$Combine_Char$oneOf = function (cs) {
+	return A2(
+		_Bogdanp$elm_combine$Combine_Infix_ops['<?>'],
+		_Bogdanp$elm_combine$Combine_Char$satisfy(
+			A2(_elm_lang$core$Basics$flip, _elm_lang$core$List$member, cs)),
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			'expected one of ',
+			_elm_lang$core$Basics$toString(cs)));
+};
+var _Bogdanp$elm_combine$Combine_Char$noneOf = function (cs) {
+	return A2(
+		_Bogdanp$elm_combine$Combine_Infix_ops['<?>'],
+		_Bogdanp$elm_combine$Combine_Char$satisfy(
+			function (_p2) {
+				return _elm_lang$core$Basics$not(
+					A3(_elm_lang$core$Basics$flip, _elm_lang$core$List$member, cs, _p2));
+			}),
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			'expected none of ',
+			_elm_lang$core$Basics$toString(cs)));
+};
+var _Bogdanp$elm_combine$Combine_Char$space = A2(
+	_Bogdanp$elm_combine$Combine_Infix_ops['<?>'],
+	_Bogdanp$elm_combine$Combine_Char$satisfy(
+		F2(
+			function (x, y) {
+				return _elm_lang$core$Native_Utils.eq(x, y);
+			})(
+			_elm_lang$core$Native_Utils.chr(' '))),
+	'expected space');
+var _Bogdanp$elm_combine$Combine_Char$tab = A2(
+	_Bogdanp$elm_combine$Combine_Infix_ops['<?>'],
+	_Bogdanp$elm_combine$Combine_Char$satisfy(
+		F2(
+			function (x, y) {
+				return _elm_lang$core$Native_Utils.eq(x, y);
+			})(
+			_elm_lang$core$Native_Utils.chr('\t'))),
+	'expected tab');
+var _Bogdanp$elm_combine$Combine_Char$newline = A2(
+	_Bogdanp$elm_combine$Combine_Infix_ops['<?>'],
+	_Bogdanp$elm_combine$Combine_Char$satisfy(
+		F2(
+			function (x, y) {
+				return _elm_lang$core$Native_Utils.eq(x, y);
+			})(
+			_elm_lang$core$Native_Utils.chr('\n'))),
+	'expected newline');
+var _Bogdanp$elm_combine$Combine_Char$eol = A2(_Bogdanp$elm_combine$Combine_Infix_ops['<|>'], _Bogdanp$elm_combine$Combine_Char$newline, _Bogdanp$elm_combine$Combine_Char$crlf);
+var _Bogdanp$elm_combine$Combine_Char$lower = A2(
+	_Bogdanp$elm_combine$Combine_Infix_ops['<?>'],
+	_Bogdanp$elm_combine$Combine_Char$satisfy(_elm_lang$core$Char$isLower),
+	'expected a lowercase character');
+var _Bogdanp$elm_combine$Combine_Char$upper = A2(
+	_Bogdanp$elm_combine$Combine_Infix_ops['<?>'],
+	_Bogdanp$elm_combine$Combine_Char$satisfy(_elm_lang$core$Char$isUpper),
+	'expected an uppercase character');
+var _Bogdanp$elm_combine$Combine_Char$digit = A2(
+	_Bogdanp$elm_combine$Combine_Infix_ops['<?>'],
+	_Bogdanp$elm_combine$Combine_Char$satisfy(_elm_lang$core$Char$isDigit),
+	'expected a digit');
+var _Bogdanp$elm_combine$Combine_Char$octDigit = A2(
+	_Bogdanp$elm_combine$Combine_Infix_ops['<?>'],
+	_Bogdanp$elm_combine$Combine_Char$satisfy(_elm_lang$core$Char$isOctDigit),
+	'expected an octal digit');
+var _Bogdanp$elm_combine$Combine_Char$hexDigit = A2(
+	_Bogdanp$elm_combine$Combine_Infix_ops['<?>'],
+	_Bogdanp$elm_combine$Combine_Char$satisfy(_elm_lang$core$Char$isHexDigit),
+	'expected a hexadecimal digit');
+
+var _Bogdanp$elm_combine$Combine_Num$digit = function () {
+	var toDigit = function (c) {
+		return _elm_lang$core$Char$toCode(c) - _elm_lang$core$Char$toCode(
+			_elm_lang$core$Native_Utils.chr('0'));
+	};
+	return A2(
+		_Bogdanp$elm_combine$Combine_Infix_ops['<?>'],
+		A2(_Bogdanp$elm_combine$Combine_Infix_ops['<$>'], toDigit, _Bogdanp$elm_combine$Combine_Char$digit),
+		'expected a digit');
+}();
+var _Bogdanp$elm_combine$Combine_Num$sign = A2(
+	_Bogdanp$elm_combine$Combine$optional,
+	1,
+	_Bogdanp$elm_combine$Combine$choice(
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(
+				_Bogdanp$elm_combine$Combine_Infix_ops['<$'],
+				1,
+				_Bogdanp$elm_combine$Combine$string('+')),
+				A2(
+				_Bogdanp$elm_combine$Combine_Infix_ops['<$'],
+				-1,
+				_Bogdanp$elm_combine$Combine$string('-'))
+			])));
+var _Bogdanp$elm_combine$Combine_Num$unwrap = F2(
+	function (f, s) {
+		var _p0 = f(s);
+		if (_p0.ctor === 'Ok') {
+			return _p0._0;
+		} else {
+			return _elm_lang$core$Native_Utils.crashCase(
+				'Combine.Num',
+				{
+					start: {line: 19, column: 3},
+					end: {line: 24, column: 73}
+				},
+				_p0)(
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					'impossible state in Combine.Num.unwrap: ',
+					_elm_lang$core$Basics$toString(_p0._0)));
+		}
+	});
+var _Bogdanp$elm_combine$Combine_Num$toInt = _Bogdanp$elm_combine$Combine_Num$unwrap(_elm_lang$core$String$toInt);
+var _Bogdanp$elm_combine$Combine_Num$int = A2(
+	_Bogdanp$elm_combine$Combine_Infix_ops['<?>'],
+	A2(
+		_Bogdanp$elm_combine$Combine$andMap,
+		A2(
+			_Bogdanp$elm_combine$Combine$map,
+			F2(
+				function (x, y) {
+					return x * y;
+				}),
+			_Bogdanp$elm_combine$Combine_Num$sign),
+		A2(
+			_Bogdanp$elm_combine$Combine_Infix_ops['<$>'],
+			_Bogdanp$elm_combine$Combine_Num$toInt,
+			_Bogdanp$elm_combine$Combine$regex('(0|[1-9][0-9]*)'))),
+	'expected an integer');
+var _Bogdanp$elm_combine$Combine_Num$toFloat = _Bogdanp$elm_combine$Combine_Num$unwrap(_elm_lang$core$String$toFloat);
+var _Bogdanp$elm_combine$Combine_Num$float = A2(
+	_Bogdanp$elm_combine$Combine_Infix_ops['<?>'],
+	A2(
+		_Bogdanp$elm_combine$Combine$andMap,
+		A2(
+			_Bogdanp$elm_combine$Combine$map,
+			function (_p2) {
+				return F2(
+					function (x, y) {
+						return x * y;
+					})(
+					_elm_lang$core$Basics$toFloat(_p2));
+			},
+			_Bogdanp$elm_combine$Combine_Num$sign),
+		A2(
+			_Bogdanp$elm_combine$Combine_Infix_ops['<$>'],
+			_Bogdanp$elm_combine$Combine_Num$toFloat,
+			_Bogdanp$elm_combine$Combine$regex('(0|[1-9][0-9]*)(\\.[0-9]+)'))),
+	'expected a float');
+
+//import Native.List //
+
+var _elm_lang$core$Native_Array = function() {
+
+// A RRB-Tree has two distinct data types.
+// Leaf -> "height"  is always 0
+//         "table"   is an array of elements
+// Node -> "height"  is always greater than 0
+//         "table"   is an array of child nodes
+//         "lengths" is an array of accumulated lengths of the child nodes
+
+// M is the maximal table size. 32 seems fast. E is the allowed increase
+// of search steps when concatting to find an index. Lower values will
+// decrease balancing, but will increase search steps.
+var M = 32;
+var E = 2;
+
+// An empty array.
+var empty = {
+	ctor: '_Array',
+	height: 0,
+	table: []
+};
+
+
+function get(i, array)
+{
+	if (i < 0 || i >= length(array))
+	{
+		throw new Error(
+			'Index ' + i + ' is out of range. Check the length of ' +
+			'your array first or use getMaybe or getWithDefault.');
+	}
+	return unsafeGet(i, array);
+}
+
+
+function unsafeGet(i, array)
+{
+	for (var x = array.height; x > 0; x--)
+	{
+		var slot = i >> (x * 5);
+		while (array.lengths[slot] <= i)
+		{
+			slot++;
+		}
+		if (slot > 0)
+		{
+			i -= array.lengths[slot - 1];
+		}
+		array = array.table[slot];
+	}
+	return array.table[i];
+}
+
+
+// Sets the value at the index i. Only the nodes leading to i will get
+// copied and updated.
+function set(i, item, array)
+{
+	if (i < 0 || length(array) <= i)
+	{
+		return array;
+	}
+	return unsafeSet(i, item, array);
+}
+
+
+function unsafeSet(i, item, array)
+{
+	array = nodeCopy(array);
+
+	if (array.height === 0)
+	{
+		array.table[i] = item;
+	}
+	else
+	{
+		var slot = getSlot(i, array);
+		if (slot > 0)
+		{
+			i -= array.lengths[slot - 1];
+		}
+		array.table[slot] = unsafeSet(i, item, array.table[slot]);
+	}
+	return array;
+}
+
+
+function initialize(len, f)
+{
+	if (len <= 0)
+	{
+		return empty;
+	}
+	var h = Math.floor( Math.log(len) / Math.log(M) );
+	return initialize_(f, h, 0, len);
+}
+
+function initialize_(f, h, from, to)
+{
+	if (h === 0)
+	{
+		var table = new Array((to - from) % (M + 1));
+		for (var i = 0; i < table.length; i++)
+		{
+		  table[i] = f(from + i);
+		}
+		return {
+			ctor: '_Array',
+			height: 0,
+			table: table
+		};
+	}
+
+	var step = Math.pow(M, h);
+	var table = new Array(Math.ceil((to - from) / step));
+	var lengths = new Array(table.length);
+	for (var i = 0; i < table.length; i++)
+	{
+		table[i] = initialize_(f, h - 1, from + (i * step), Math.min(from + ((i + 1) * step), to));
+		lengths[i] = length(table[i]) + (i > 0 ? lengths[i-1] : 0);
+	}
+	return {
+		ctor: '_Array',
+		height: h,
+		table: table,
+		lengths: lengths
+	};
+}
+
+function fromList(list)
+{
+	if (list.ctor === '[]')
+	{
+		return empty;
+	}
+
+	// Allocate M sized blocks (table) and write list elements to it.
+	var table = new Array(M);
+	var nodes = [];
+	var i = 0;
+
+	while (list.ctor !== '[]')
+	{
+		table[i] = list._0;
+		list = list._1;
+		i++;
+
+		// table is full, so we can push a leaf containing it into the
+		// next node.
+		if (i === M)
+		{
+			var leaf = {
+				ctor: '_Array',
+				height: 0,
+				table: table
+			};
+			fromListPush(leaf, nodes);
+			table = new Array(M);
+			i = 0;
+		}
+	}
+
+	// Maybe there is something left on the table.
+	if (i > 0)
+	{
+		var leaf = {
+			ctor: '_Array',
+			height: 0,
+			table: table.splice(0, i)
+		};
+		fromListPush(leaf, nodes);
+	}
+
+	// Go through all of the nodes and eventually push them into higher nodes.
+	for (var h = 0; h < nodes.length - 1; h++)
+	{
+		if (nodes[h].table.length > 0)
+		{
+			fromListPush(nodes[h], nodes);
+		}
+	}
+
+	var head = nodes[nodes.length - 1];
+	if (head.height > 0 && head.table.length === 1)
+	{
+		return head.table[0];
+	}
+	else
+	{
+		return head;
+	}
+}
+
+// Push a node into a higher node as a child.
+function fromListPush(toPush, nodes)
+{
+	var h = toPush.height;
+
+	// Maybe the node on this height does not exist.
+	if (nodes.length === h)
+	{
+		var node = {
+			ctor: '_Array',
+			height: h + 1,
+			table: [],
+			lengths: []
+		};
+		nodes.push(node);
+	}
+
+	nodes[h].table.push(toPush);
+	var len = length(toPush);
+	if (nodes[h].lengths.length > 0)
+	{
+		len += nodes[h].lengths[nodes[h].lengths.length - 1];
+	}
+	nodes[h].lengths.push(len);
+
+	if (nodes[h].table.length === M)
+	{
+		fromListPush(nodes[h], nodes);
+		nodes[h] = {
+			ctor: '_Array',
+			height: h + 1,
+			table: [],
+			lengths: []
+		};
+	}
+}
+
+// Pushes an item via push_ to the bottom right of a tree.
+function push(item, a)
+{
+	var pushed = push_(item, a);
+	if (pushed !== null)
+	{
+		return pushed;
+	}
+
+	var newTree = create(item, a.height);
+	return siblise(a, newTree);
+}
+
+// Recursively tries to push an item to the bottom-right most
+// tree possible. If there is no space left for the item,
+// null will be returned.
+function push_(item, a)
+{
+	// Handle resursion stop at leaf level.
+	if (a.height === 0)
+	{
+		if (a.table.length < M)
+		{
+			var newA = {
+				ctor: '_Array',
+				height: 0,
+				table: a.table.slice()
+			};
+			newA.table.push(item);
+			return newA;
+		}
+		else
+		{
+		  return null;
+		}
+	}
+
+	// Recursively push
+	var pushed = push_(item, botRight(a));
+
+	// There was space in the bottom right tree, so the slot will
+	// be updated.
+	if (pushed !== null)
+	{
+		var newA = nodeCopy(a);
+		newA.table[newA.table.length - 1] = pushed;
+		newA.lengths[newA.lengths.length - 1]++;
+		return newA;
+	}
+
+	// When there was no space left, check if there is space left
+	// for a new slot with a tree which contains only the item
+	// at the bottom.
+	if (a.table.length < M)
+	{
+		var newSlot = create(item, a.height - 1);
+		var newA = nodeCopy(a);
+		newA.table.push(newSlot);
+		newA.lengths.push(newA.lengths[newA.lengths.length - 1] + length(newSlot));
+		return newA;
+	}
+	else
+	{
+		return null;
+	}
+}
+
+// Converts an array into a list of elements.
+function toList(a)
+{
+	return toList_(_elm_lang$core$Native_List.Nil, a);
+}
+
+function toList_(list, a)
+{
+	for (var i = a.table.length - 1; i >= 0; i--)
+	{
+		list =
+			a.height === 0
+				? _elm_lang$core$Native_List.Cons(a.table[i], list)
+				: toList_(list, a.table[i]);
+	}
+	return list;
+}
+
+// Maps a function over the elements of an array.
+function map(f, a)
+{
+	var newA = {
+		ctor: '_Array',
+		height: a.height,
+		table: new Array(a.table.length)
+	};
+	if (a.height > 0)
+	{
+		newA.lengths = a.lengths;
+	}
+	for (var i = 0; i < a.table.length; i++)
+	{
+		newA.table[i] =
+			a.height === 0
+				? f(a.table[i])
+				: map(f, a.table[i]);
+	}
+	return newA;
+}
+
+// Maps a function over the elements with their index as first argument.
+function indexedMap(f, a)
+{
+	return indexedMap_(f, a, 0);
+}
+
+function indexedMap_(f, a, from)
+{
+	var newA = {
+		ctor: '_Array',
+		height: a.height,
+		table: new Array(a.table.length)
+	};
+	if (a.height > 0)
+	{
+		newA.lengths = a.lengths;
+	}
+	for (var i = 0; i < a.table.length; i++)
+	{
+		newA.table[i] =
+			a.height === 0
+				? A2(f, from + i, a.table[i])
+				: indexedMap_(f, a.table[i], i == 0 ? from : from + a.lengths[i - 1]);
+	}
+	return newA;
+}
+
+function foldl(f, b, a)
+{
+	if (a.height === 0)
+	{
+		for (var i = 0; i < a.table.length; i++)
+		{
+			b = A2(f, a.table[i], b);
+		}
+	}
+	else
+	{
+		for (var i = 0; i < a.table.length; i++)
+		{
+			b = foldl(f, b, a.table[i]);
+		}
+	}
+	return b;
+}
+
+function foldr(f, b, a)
+{
+	if (a.height === 0)
+	{
+		for (var i = a.table.length; i--; )
+		{
+			b = A2(f, a.table[i], b);
+		}
+	}
+	else
+	{
+		for (var i = a.table.length; i--; )
+		{
+			b = foldr(f, b, a.table[i]);
+		}
+	}
+	return b;
+}
+
+// TODO: currently, it slices the right, then the left. This can be
+// optimized.
+function slice(from, to, a)
+{
+	if (from < 0)
+	{
+		from += length(a);
+	}
+	if (to < 0)
+	{
+		to += length(a);
+	}
+	return sliceLeft(from, sliceRight(to, a));
+}
+
+function sliceRight(to, a)
+{
+	if (to === length(a))
+	{
+		return a;
+	}
+
+	// Handle leaf level.
+	if (a.height === 0)
+	{
+		var newA = { ctor:'_Array', height:0 };
+		newA.table = a.table.slice(0, to);
+		return newA;
+	}
+
+	// Slice the right recursively.
+	var right = getSlot(to, a);
+	var sliced = sliceRight(to - (right > 0 ? a.lengths[right - 1] : 0), a.table[right]);
+
+	// Maybe the a node is not even needed, as sliced contains the whole slice.
+	if (right === 0)
+	{
+		return sliced;
+	}
+
+	// Create new node.
+	var newA = {
+		ctor: '_Array',
+		height: a.height,
+		table: a.table.slice(0, right),
+		lengths: a.lengths.slice(0, right)
+	};
+	if (sliced.table.length > 0)
+	{
+		newA.table[right] = sliced;
+		newA.lengths[right] = length(sliced) + (right > 0 ? newA.lengths[right - 1] : 0);
+	}
+	return newA;
+}
+
+function sliceLeft(from, a)
+{
+	if (from === 0)
+	{
+		return a;
+	}
+
+	// Handle leaf level.
+	if (a.height === 0)
+	{
+		var newA = { ctor:'_Array', height:0 };
+		newA.table = a.table.slice(from, a.table.length + 1);
+		return newA;
+	}
+
+	// Slice the left recursively.
+	var left = getSlot(from, a);
+	var sliced = sliceLeft(from - (left > 0 ? a.lengths[left - 1] : 0), a.table[left]);
+
+	// Maybe the a node is not even needed, as sliced contains the whole slice.
+	if (left === a.table.length - 1)
+	{
+		return sliced;
+	}
+
+	// Create new node.
+	var newA = {
+		ctor: '_Array',
+		height: a.height,
+		table: a.table.slice(left, a.table.length + 1),
+		lengths: new Array(a.table.length - left)
+	};
+	newA.table[0] = sliced;
+	var len = 0;
+	for (var i = 0; i < newA.table.length; i++)
+	{
+		len += length(newA.table[i]);
+		newA.lengths[i] = len;
+	}
+
+	return newA;
+}
+
+// Appends two trees.
+function append(a,b)
+{
+	if (a.table.length === 0)
+	{
+		return b;
+	}
+	if (b.table.length === 0)
+	{
+		return a;
+	}
+
+	var c = append_(a, b);
+
+	// Check if both nodes can be crunshed together.
+	if (c[0].table.length + c[1].table.length <= M)
+	{
+		if (c[0].table.length === 0)
+		{
+			return c[1];
+		}
+		if (c[1].table.length === 0)
+		{
+			return c[0];
+		}
+
+		// Adjust .table and .lengths
+		c[0].table = c[0].table.concat(c[1].table);
+		if (c[0].height > 0)
+		{
+			var len = length(c[0]);
+			for (var i = 0; i < c[1].lengths.length; i++)
+			{
+				c[1].lengths[i] += len;
+			}
+			c[0].lengths = c[0].lengths.concat(c[1].lengths);
+		}
+
+		return c[0];
+	}
+
+	if (c[0].height > 0)
+	{
+		var toRemove = calcToRemove(a, b);
+		if (toRemove > E)
+		{
+			c = shuffle(c[0], c[1], toRemove);
+		}
+	}
+
+	return siblise(c[0], c[1]);
+}
+
+// Returns an array of two nodes; right and left. One node _may_ be empty.
+function append_(a, b)
+{
+	if (a.height === 0 && b.height === 0)
+	{
+		return [a, b];
+	}
+
+	if (a.height !== 1 || b.height !== 1)
+	{
+		if (a.height === b.height)
+		{
+			a = nodeCopy(a);
+			b = nodeCopy(b);
+			var appended = append_(botRight(a), botLeft(b));
+
+			insertRight(a, appended[1]);
+			insertLeft(b, appended[0]);
+		}
+		else if (a.height > b.height)
+		{
+			a = nodeCopy(a);
+			var appended = append_(botRight(a), b);
+
+			insertRight(a, appended[0]);
+			b = parentise(appended[1], appended[1].height + 1);
+		}
+		else
+		{
+			b = nodeCopy(b);
+			var appended = append_(a, botLeft(b));
+
+			var left = appended[0].table.length === 0 ? 0 : 1;
+			var right = left === 0 ? 1 : 0;
+			insertLeft(b, appended[left]);
+			a = parentise(appended[right], appended[right].height + 1);
+		}
+	}
+
+	// Check if balancing is needed and return based on that.
+	if (a.table.length === 0 || b.table.length === 0)
+	{
+		return [a, b];
+	}
+
+	var toRemove = calcToRemove(a, b);
+	if (toRemove <= E)
+	{
+		return [a, b];
+	}
+	return shuffle(a, b, toRemove);
+}
+
+// Helperfunctions for append_. Replaces a child node at the side of the parent.
+function insertRight(parent, node)
+{
+	var index = parent.table.length - 1;
+	parent.table[index] = node;
+	parent.lengths[index] = length(node);
+	parent.lengths[index] += index > 0 ? parent.lengths[index - 1] : 0;
+}
+
+function insertLeft(parent, node)
+{
+	if (node.table.length > 0)
+	{
+		parent.table[0] = node;
+		parent.lengths[0] = length(node);
+
+		var len = length(parent.table[0]);
+		for (var i = 1; i < parent.lengths.length; i++)
+		{
+			len += length(parent.table[i]);
+			parent.lengths[i] = len;
+		}
+	}
+	else
+	{
+		parent.table.shift();
+		for (var i = 1; i < parent.lengths.length; i++)
+		{
+			parent.lengths[i] = parent.lengths[i] - parent.lengths[0];
+		}
+		parent.lengths.shift();
+	}
+}
+
+// Returns the extra search steps for E. Refer to the paper.
+function calcToRemove(a, b)
+{
+	var subLengths = 0;
+	for (var i = 0; i < a.table.length; i++)
+	{
+		subLengths += a.table[i].table.length;
+	}
+	for (var i = 0; i < b.table.length; i++)
+	{
+		subLengths += b.table[i].table.length;
+	}
+
+	var toRemove = a.table.length + b.table.length;
+	return toRemove - (Math.floor((subLengths - 1) / M) + 1);
+}
+
+// get2, set2 and saveSlot are helpers for accessing elements over two arrays.
+function get2(a, b, index)
+{
+	return index < a.length
+		? a[index]
+		: b[index - a.length];
+}
+
+function set2(a, b, index, value)
+{
+	if (index < a.length)
+	{
+		a[index] = value;
+	}
+	else
+	{
+		b[index - a.length] = value;
+	}
+}
+
+function saveSlot(a, b, index, slot)
+{
+	set2(a.table, b.table, index, slot);
+
+	var l = (index === 0 || index === a.lengths.length)
+		? 0
+		: get2(a.lengths, a.lengths, index - 1);
+
+	set2(a.lengths, b.lengths, index, l + length(slot));
+}
+
+// Creates a node or leaf with a given length at their arrays for perfomance.
+// Is only used by shuffle.
+function createNode(h, length)
+{
+	if (length < 0)
+	{
+		length = 0;
+	}
+	var a = {
+		ctor: '_Array',
+		height: h,
+		table: new Array(length)
+	};
+	if (h > 0)
+	{
+		a.lengths = new Array(length);
+	}
+	return a;
+}
+
+// Returns an array of two balanced nodes.
+function shuffle(a, b, toRemove)
+{
+	var newA = createNode(a.height, Math.min(M, a.table.length + b.table.length - toRemove));
+	var newB = createNode(a.height, newA.table.length - (a.table.length + b.table.length - toRemove));
+
+	// Skip the slots with size M. More precise: copy the slot references
+	// to the new node
+	var read = 0;
+	while (get2(a.table, b.table, read).table.length % M === 0)
+	{
+		set2(newA.table, newB.table, read, get2(a.table, b.table, read));
+		set2(newA.lengths, newB.lengths, read, get2(a.lengths, b.lengths, read));
+		read++;
+	}
+
+	// Pulling items from left to right, caching in a slot before writing
+	// it into the new nodes.
+	var write = read;
+	var slot = new createNode(a.height - 1, 0);
+	var from = 0;
+
+	// If the current slot is still containing data, then there will be at
+	// least one more write, so we do not break this loop yet.
+	while (read - write - (slot.table.length > 0 ? 1 : 0) < toRemove)
+	{
+		// Find out the max possible items for copying.
+		var source = get2(a.table, b.table, read);
+		var to = Math.min(M - slot.table.length, source.table.length);
+
+		// Copy and adjust size table.
+		slot.table = slot.table.concat(source.table.slice(from, to));
+		if (slot.height > 0)
+		{
+			var len = slot.lengths.length;
+			for (var i = len; i < len + to - from; i++)
+			{
+				slot.lengths[i] = length(slot.table[i]);
+				slot.lengths[i] += (i > 0 ? slot.lengths[i - 1] : 0);
+			}
+		}
+
+		from += to;
+
+		// Only proceed to next slots[i] if the current one was
+		// fully copied.
+		if (source.table.length <= to)
+		{
+			read++; from = 0;
+		}
+
+		// Only create a new slot if the current one is filled up.
+		if (slot.table.length === M)
+		{
+			saveSlot(newA, newB, write, slot);
+			slot = createNode(a.height - 1, 0);
+			write++;
+		}
+	}
+
+	// Cleanup after the loop. Copy the last slot into the new nodes.
+	if (slot.table.length > 0)
+	{
+		saveSlot(newA, newB, write, slot);
+		write++;
+	}
+
+	// Shift the untouched slots to the left
+	while (read < a.table.length + b.table.length )
+	{
+		saveSlot(newA, newB, write, get2(a.table, b.table, read));
+		read++;
+		write++;
+	}
+
+	return [newA, newB];
+}
+
+// Navigation functions
+function botRight(a)
+{
+	return a.table[a.table.length - 1];
+}
+function botLeft(a)
+{
+	return a.table[0];
+}
+
+// Copies a node for updating. Note that you should not use this if
+// only updating only one of "table" or "lengths" for performance reasons.
+function nodeCopy(a)
+{
+	var newA = {
+		ctor: '_Array',
+		height: a.height,
+		table: a.table.slice()
+	};
+	if (a.height > 0)
+	{
+		newA.lengths = a.lengths.slice();
+	}
+	return newA;
+}
+
+// Returns how many items are in the tree.
+function length(array)
+{
+	if (array.height === 0)
+	{
+		return array.table.length;
+	}
+	else
+	{
+		return array.lengths[array.lengths.length - 1];
+	}
+}
+
+// Calculates in which slot of "table" the item probably is, then
+// find the exact slot via forward searching in  "lengths". Returns the index.
+function getSlot(i, a)
+{
+	var slot = i >> (5 * a.height);
+	while (a.lengths[slot] <= i)
+	{
+		slot++;
+	}
+	return slot;
+}
+
+// Recursively creates a tree with a given height containing
+// only the given item.
+function create(item, h)
+{
+	if (h === 0)
+	{
+		return {
+			ctor: '_Array',
+			height: 0,
+			table: [item]
+		};
+	}
+	return {
+		ctor: '_Array',
+		height: h,
+		table: [create(item, h - 1)],
+		lengths: [1]
+	};
+}
+
+// Recursively creates a tree that contains the given tree.
+function parentise(tree, h)
+{
+	if (h === tree.height)
+	{
+		return tree;
+	}
+
+	return {
+		ctor: '_Array',
+		height: h,
+		table: [parentise(tree, h - 1)],
+		lengths: [length(tree)]
+	};
+}
+
+// Emphasizes blood brotherhood beneath two trees.
+function siblise(a, b)
+{
+	return {
+		ctor: '_Array',
+		height: a.height + 1,
+		table: [a, b],
+		lengths: [length(a), length(a) + length(b)]
+	};
+}
+
+function toJSArray(a)
+{
+	var jsArray = new Array(length(a));
+	toJSArray_(jsArray, 0, a);
+	return jsArray;
+}
+
+function toJSArray_(jsArray, i, a)
+{
+	for (var t = 0; t < a.table.length; t++)
+	{
+		if (a.height === 0)
+		{
+			jsArray[i + t] = a.table[t];
+		}
+		else
+		{
+			var inc = t === 0 ? 0 : a.lengths[t - 1];
+			toJSArray_(jsArray, i + inc, a.table[t]);
+		}
+	}
+}
+
+function fromJSArray(jsArray)
+{
+	if (jsArray.length === 0)
+	{
+		return empty;
+	}
+	var h = Math.floor(Math.log(jsArray.length) / Math.log(M));
+	return fromJSArray_(jsArray, h, 0, jsArray.length);
+}
+
+function fromJSArray_(jsArray, h, from, to)
+{
+	if (h === 0)
+	{
+		return {
+			ctor: '_Array',
+			height: 0,
+			table: jsArray.slice(from, to)
+		};
+	}
+
+	var step = Math.pow(M, h);
+	var table = new Array(Math.ceil((to - from) / step));
+	var lengths = new Array(table.length);
+	for (var i = 0; i < table.length; i++)
+	{
+		table[i] = fromJSArray_(jsArray, h - 1, from + (i * step), Math.min(from + ((i + 1) * step), to));
+		lengths[i] = length(table[i]) + (i > 0 ? lengths[i - 1] : 0);
+	}
+	return {
+		ctor: '_Array',
+		height: h,
+		table: table,
+		lengths: lengths
+	};
+}
+
+return {
+	empty: empty,
+	fromList: fromList,
+	toList: toList,
+	initialize: F2(initialize),
+	append: F2(append),
+	push: F2(push),
+	slice: F3(slice),
+	get: F2(get),
+	set: F3(set),
+	map: F2(map),
+	indexedMap: F2(indexedMap),
+	foldl: F3(foldl),
+	foldr: F3(foldr),
+	length: length,
+
+	toJSArray: toJSArray,
+	fromJSArray: fromJSArray
+};
+
+}();
+var _elm_lang$core$Array$append = _elm_lang$core$Native_Array.append;
+var _elm_lang$core$Array$length = _elm_lang$core$Native_Array.length;
+var _elm_lang$core$Array$isEmpty = function (array) {
+	return _elm_lang$core$Native_Utils.eq(
+		_elm_lang$core$Array$length(array),
+		0);
+};
+var _elm_lang$core$Array$slice = _elm_lang$core$Native_Array.slice;
+var _elm_lang$core$Array$set = _elm_lang$core$Native_Array.set;
+var _elm_lang$core$Array$get = F2(
+	function (i, array) {
+		return ((_elm_lang$core$Native_Utils.cmp(0, i) < 1) && (_elm_lang$core$Native_Utils.cmp(
+			i,
+			_elm_lang$core$Native_Array.length(array)) < 0)) ? _elm_lang$core$Maybe$Just(
+			A2(_elm_lang$core$Native_Array.get, i, array)) : _elm_lang$core$Maybe$Nothing;
+	});
+var _elm_lang$core$Array$push = _elm_lang$core$Native_Array.push;
+var _elm_lang$core$Array$empty = _elm_lang$core$Native_Array.empty;
+var _elm_lang$core$Array$filter = F2(
+	function (isOkay, arr) {
+		var update = F2(
+			function (x, xs) {
+				return isOkay(x) ? A2(_elm_lang$core$Native_Array.push, x, xs) : xs;
+			});
+		return A3(_elm_lang$core$Native_Array.foldl, update, _elm_lang$core$Native_Array.empty, arr);
+	});
+var _elm_lang$core$Array$foldr = _elm_lang$core$Native_Array.foldr;
+var _elm_lang$core$Array$foldl = _elm_lang$core$Native_Array.foldl;
+var _elm_lang$core$Array$indexedMap = _elm_lang$core$Native_Array.indexedMap;
+var _elm_lang$core$Array$map = _elm_lang$core$Native_Array.map;
+var _elm_lang$core$Array$toIndexedList = function (array) {
+	return A3(
+		_elm_lang$core$List$map2,
+		F2(
+			function (v0, v1) {
+				return {ctor: '_Tuple2', _0: v0, _1: v1};
+			}),
+		_elm_lang$core$Native_List.range(
+			0,
+			_elm_lang$core$Native_Array.length(array) - 1),
+		_elm_lang$core$Native_Array.toList(array));
+};
+var _elm_lang$core$Array$toList = _elm_lang$core$Native_Array.toList;
+var _elm_lang$core$Array$fromList = _elm_lang$core$Native_Array.fromList;
+var _elm_lang$core$Array$initialize = _elm_lang$core$Native_Array.initialize;
+var _elm_lang$core$Array$repeat = F2(
+	function (n, e) {
+		return A2(
+			_elm_lang$core$Array$initialize,
+			n,
+			_elm_lang$core$Basics$always(e));
+	});
+var _elm_lang$core$Array$Array = {ctor: 'Array'};
+
+var _elm_lang$core$Task$onError = _elm_lang$core$Native_Scheduler.onError;
+var _elm_lang$core$Task$andThen = _elm_lang$core$Native_Scheduler.andThen;
+var _elm_lang$core$Task$spawnCmd = F2(
+	function (router, _p0) {
+		var _p1 = _p0;
+		return _elm_lang$core$Native_Scheduler.spawn(
+			A2(
+				_elm_lang$core$Task$andThen,
+				_p1._0,
+				_elm_lang$core$Platform$sendToApp(router)));
+	});
+var _elm_lang$core$Task$fail = _elm_lang$core$Native_Scheduler.fail;
+var _elm_lang$core$Task$mapError = F2(
+	function (f, task) {
+		return A2(
+			_elm_lang$core$Task$onError,
+			task,
+			function (err) {
+				return _elm_lang$core$Task$fail(
+					f(err));
+			});
+	});
+var _elm_lang$core$Task$succeed = _elm_lang$core$Native_Scheduler.succeed;
+var _elm_lang$core$Task$map = F2(
+	function (func, taskA) {
+		return A2(
+			_elm_lang$core$Task$andThen,
+			taskA,
+			function (a) {
+				return _elm_lang$core$Task$succeed(
+					func(a));
+			});
+	});
+var _elm_lang$core$Task$map2 = F3(
+	function (func, taskA, taskB) {
+		return A2(
+			_elm_lang$core$Task$andThen,
+			taskA,
+			function (a) {
+				return A2(
+					_elm_lang$core$Task$andThen,
+					taskB,
+					function (b) {
+						return _elm_lang$core$Task$succeed(
+							A2(func, a, b));
+					});
+			});
+	});
+var _elm_lang$core$Task$map3 = F4(
+	function (func, taskA, taskB, taskC) {
+		return A2(
+			_elm_lang$core$Task$andThen,
+			taskA,
+			function (a) {
+				return A2(
+					_elm_lang$core$Task$andThen,
+					taskB,
+					function (b) {
+						return A2(
+							_elm_lang$core$Task$andThen,
+							taskC,
+							function (c) {
+								return _elm_lang$core$Task$succeed(
+									A3(func, a, b, c));
+							});
+					});
+			});
+	});
+var _elm_lang$core$Task$map4 = F5(
+	function (func, taskA, taskB, taskC, taskD) {
+		return A2(
+			_elm_lang$core$Task$andThen,
+			taskA,
+			function (a) {
+				return A2(
+					_elm_lang$core$Task$andThen,
+					taskB,
+					function (b) {
+						return A2(
+							_elm_lang$core$Task$andThen,
+							taskC,
+							function (c) {
+								return A2(
+									_elm_lang$core$Task$andThen,
+									taskD,
+									function (d) {
+										return _elm_lang$core$Task$succeed(
+											A4(func, a, b, c, d));
+									});
+							});
+					});
+			});
+	});
+var _elm_lang$core$Task$map5 = F6(
+	function (func, taskA, taskB, taskC, taskD, taskE) {
+		return A2(
+			_elm_lang$core$Task$andThen,
+			taskA,
+			function (a) {
+				return A2(
+					_elm_lang$core$Task$andThen,
+					taskB,
+					function (b) {
+						return A2(
+							_elm_lang$core$Task$andThen,
+							taskC,
+							function (c) {
+								return A2(
+									_elm_lang$core$Task$andThen,
+									taskD,
+									function (d) {
+										return A2(
+											_elm_lang$core$Task$andThen,
+											taskE,
+											function (e) {
+												return _elm_lang$core$Task$succeed(
+													A5(func, a, b, c, d, e));
+											});
+									});
+							});
+					});
+			});
+	});
+var _elm_lang$core$Task$andMap = F2(
+	function (taskFunc, taskValue) {
+		return A2(
+			_elm_lang$core$Task$andThen,
+			taskFunc,
+			function (func) {
+				return A2(
+					_elm_lang$core$Task$andThen,
+					taskValue,
+					function (value) {
+						return _elm_lang$core$Task$succeed(
+							func(value));
+					});
+			});
+	});
+var _elm_lang$core$Task$sequence = function (tasks) {
+	var _p2 = tasks;
+	if (_p2.ctor === '[]') {
+		return _elm_lang$core$Task$succeed(
+			_elm_lang$core$Native_List.fromArray(
+				[]));
+	} else {
+		return A3(
+			_elm_lang$core$Task$map2,
+			F2(
+				function (x, y) {
+					return A2(_elm_lang$core$List_ops['::'], x, y);
+				}),
+			_p2._0,
+			_elm_lang$core$Task$sequence(_p2._1));
+	}
+};
+var _elm_lang$core$Task$onEffects = F3(
+	function (router, commands, state) {
+		return A2(
+			_elm_lang$core$Task$map,
+			function (_p3) {
+				return {ctor: '_Tuple0'};
+			},
+			_elm_lang$core$Task$sequence(
+				A2(
+					_elm_lang$core$List$map,
+					_elm_lang$core$Task$spawnCmd(router),
+					commands)));
+	});
+var _elm_lang$core$Task$toMaybe = function (task) {
+	return A2(
+		_elm_lang$core$Task$onError,
+		A2(_elm_lang$core$Task$map, _elm_lang$core$Maybe$Just, task),
+		function (_p4) {
+			return _elm_lang$core$Task$succeed(_elm_lang$core$Maybe$Nothing);
+		});
+};
+var _elm_lang$core$Task$fromMaybe = F2(
+	function ($default, maybe) {
+		var _p5 = maybe;
+		if (_p5.ctor === 'Just') {
+			return _elm_lang$core$Task$succeed(_p5._0);
+		} else {
+			return _elm_lang$core$Task$fail($default);
+		}
+	});
+var _elm_lang$core$Task$toResult = function (task) {
+	return A2(
+		_elm_lang$core$Task$onError,
+		A2(_elm_lang$core$Task$map, _elm_lang$core$Result$Ok, task),
+		function (msg) {
+			return _elm_lang$core$Task$succeed(
+				_elm_lang$core$Result$Err(msg));
+		});
+};
+var _elm_lang$core$Task$fromResult = function (result) {
+	var _p6 = result;
+	if (_p6.ctor === 'Ok') {
+		return _elm_lang$core$Task$succeed(_p6._0);
+	} else {
+		return _elm_lang$core$Task$fail(_p6._0);
+	}
+};
+var _elm_lang$core$Task$init = _elm_lang$core$Task$succeed(
+	{ctor: '_Tuple0'});
+var _elm_lang$core$Task$onSelfMsg = F3(
+	function (_p9, _p8, _p7) {
+		return _elm_lang$core$Task$succeed(
+			{ctor: '_Tuple0'});
+	});
+var _elm_lang$core$Task$command = _elm_lang$core$Native_Platform.leaf('Task');
+var _elm_lang$core$Task$T = function (a) {
+	return {ctor: 'T', _0: a};
+};
+var _elm_lang$core$Task$perform = F3(
+	function (onFail, onSuccess, task) {
+		return _elm_lang$core$Task$command(
+			_elm_lang$core$Task$T(
+				A2(
+					_elm_lang$core$Task$onError,
+					A2(_elm_lang$core$Task$map, onSuccess, task),
+					function (x) {
+						return _elm_lang$core$Task$succeed(
+							onFail(x));
+					})));
+	});
+var _elm_lang$core$Task$cmdMap = F2(
+	function (tagger, _p10) {
+		var _p11 = _p10;
+		return _elm_lang$core$Task$T(
+			A2(_elm_lang$core$Task$map, tagger, _p11._0));
+	});
+_elm_lang$core$Native_Platform.effectManagers['Task'] = {pkg: 'elm-lang/core', init: _elm_lang$core$Task$init, onEffects: _elm_lang$core$Task$onEffects, onSelfMsg: _elm_lang$core$Task$onSelfMsg, tag: 'cmd', cmdMap: _elm_lang$core$Task$cmdMap};
+
+var _elm_lang$core$Dict$foldr = F3(
+	function (f, acc, t) {
+		foldr:
+		while (true) {
+			var _p0 = t;
+			if (_p0.ctor === 'RBEmpty_elm_builtin') {
+				return acc;
+			} else {
+				var _v1 = f,
+					_v2 = A3(
+					f,
+					_p0._1,
+					_p0._2,
+					A3(_elm_lang$core$Dict$foldr, f, acc, _p0._4)),
+					_v3 = _p0._3;
+				f = _v1;
+				acc = _v2;
+				t = _v3;
+				continue foldr;
+			}
+		}
+	});
+var _elm_lang$core$Dict$keys = function (dict) {
+	return A3(
+		_elm_lang$core$Dict$foldr,
+		F3(
+			function (key, value, keyList) {
+				return A2(_elm_lang$core$List_ops['::'], key, keyList);
+			}),
+		_elm_lang$core$Native_List.fromArray(
+			[]),
+		dict);
+};
+var _elm_lang$core$Dict$values = function (dict) {
+	return A3(
+		_elm_lang$core$Dict$foldr,
+		F3(
+			function (key, value, valueList) {
+				return A2(_elm_lang$core$List_ops['::'], value, valueList);
+			}),
+		_elm_lang$core$Native_List.fromArray(
+			[]),
+		dict);
+};
+var _elm_lang$core$Dict$toList = function (dict) {
+	return A3(
+		_elm_lang$core$Dict$foldr,
+		F3(
+			function (key, value, list) {
+				return A2(
+					_elm_lang$core$List_ops['::'],
+					{ctor: '_Tuple2', _0: key, _1: value},
+					list);
+			}),
+		_elm_lang$core$Native_List.fromArray(
+			[]),
+		dict);
+};
+var _elm_lang$core$Dict$foldl = F3(
+	function (f, acc, dict) {
+		foldl:
+		while (true) {
+			var _p1 = dict;
+			if (_p1.ctor === 'RBEmpty_elm_builtin') {
+				return acc;
+			} else {
+				var _v5 = f,
+					_v6 = A3(
+					f,
+					_p1._1,
+					_p1._2,
+					A3(_elm_lang$core$Dict$foldl, f, acc, _p1._3)),
+					_v7 = _p1._4;
+				f = _v5;
+				acc = _v6;
+				dict = _v7;
+				continue foldl;
+			}
+		}
+	});
+var _elm_lang$core$Dict$merge = F6(
+	function (leftStep, bothStep, rightStep, leftDict, rightDict, initialResult) {
+		var stepState = F3(
+			function (rKey, rValue, _p2) {
+				var _p3 = _p2;
+				var _p9 = _p3._1;
+				var _p8 = _p3._0;
+				var _p4 = _p8;
+				if (_p4.ctor === '[]') {
+					return {
+						ctor: '_Tuple2',
+						_0: _p8,
+						_1: A3(rightStep, rKey, rValue, _p9)
+					};
+				} else {
+					var _p7 = _p4._1;
+					var _p6 = _p4._0._1;
+					var _p5 = _p4._0._0;
+					return (_elm_lang$core$Native_Utils.cmp(_p5, rKey) < 0) ? {
+						ctor: '_Tuple2',
+						_0: _p7,
+						_1: A3(leftStep, _p5, _p6, _p9)
+					} : ((_elm_lang$core$Native_Utils.cmp(_p5, rKey) > 0) ? {
+						ctor: '_Tuple2',
+						_0: _p8,
+						_1: A3(rightStep, rKey, rValue, _p9)
+					} : {
+						ctor: '_Tuple2',
+						_0: _p7,
+						_1: A4(bothStep, _p5, _p6, rValue, _p9)
+					});
+				}
+			});
+		var _p10 = A3(
+			_elm_lang$core$Dict$foldl,
+			stepState,
+			{
+				ctor: '_Tuple2',
+				_0: _elm_lang$core$Dict$toList(leftDict),
+				_1: initialResult
+			},
+			rightDict);
+		var leftovers = _p10._0;
+		var intermediateResult = _p10._1;
+		return A3(
+			_elm_lang$core$List$foldl,
+			F2(
+				function (_p11, result) {
+					var _p12 = _p11;
+					return A3(leftStep, _p12._0, _p12._1, result);
+				}),
+			intermediateResult,
+			leftovers);
+	});
+var _elm_lang$core$Dict$reportRemBug = F4(
+	function (msg, c, lgot, rgot) {
+		return _elm_lang$core$Native_Debug.crash(
+			_elm_lang$core$String$concat(
+				_elm_lang$core$Native_List.fromArray(
+					[
+						'Internal red-black tree invariant violated, expected ',
+						msg,
+						' and got ',
+						_elm_lang$core$Basics$toString(c),
+						'/',
+						lgot,
+						'/',
+						rgot,
+						'\nPlease report this bug to <https://github.com/elm-lang/core/issues>'
+					])));
+	});
+var _elm_lang$core$Dict$isBBlack = function (dict) {
+	var _p13 = dict;
+	_v11_2:
+	do {
+		if (_p13.ctor === 'RBNode_elm_builtin') {
+			if (_p13._0.ctor === 'BBlack') {
+				return true;
+			} else {
+				break _v11_2;
+			}
+		} else {
+			if (_p13._0.ctor === 'LBBlack') {
+				return true;
+			} else {
+				break _v11_2;
+			}
+		}
+	} while(false);
+	return false;
+};
+var _elm_lang$core$Dict$sizeHelp = F2(
+	function (n, dict) {
+		sizeHelp:
+		while (true) {
+			var _p14 = dict;
+			if (_p14.ctor === 'RBEmpty_elm_builtin') {
+				return n;
+			} else {
+				var _v13 = A2(_elm_lang$core$Dict$sizeHelp, n + 1, _p14._4),
+					_v14 = _p14._3;
+				n = _v13;
+				dict = _v14;
+				continue sizeHelp;
+			}
+		}
+	});
+var _elm_lang$core$Dict$size = function (dict) {
+	return A2(_elm_lang$core$Dict$sizeHelp, 0, dict);
+};
+var _elm_lang$core$Dict$get = F2(
+	function (targetKey, dict) {
+		get:
+		while (true) {
+			var _p15 = dict;
+			if (_p15.ctor === 'RBEmpty_elm_builtin') {
+				return _elm_lang$core$Maybe$Nothing;
+			} else {
+				var _p16 = A2(_elm_lang$core$Basics$compare, targetKey, _p15._1);
+				switch (_p16.ctor) {
+					case 'LT':
+						var _v17 = targetKey,
+							_v18 = _p15._3;
+						targetKey = _v17;
+						dict = _v18;
+						continue get;
+					case 'EQ':
+						return _elm_lang$core$Maybe$Just(_p15._2);
+					default:
+						var _v19 = targetKey,
+							_v20 = _p15._4;
+						targetKey = _v19;
+						dict = _v20;
+						continue get;
+				}
+			}
+		}
+	});
+var _elm_lang$core$Dict$member = F2(
+	function (key, dict) {
+		var _p17 = A2(_elm_lang$core$Dict$get, key, dict);
+		if (_p17.ctor === 'Just') {
+			return true;
+		} else {
+			return false;
+		}
+	});
+var _elm_lang$core$Dict$maxWithDefault = F3(
+	function (k, v, r) {
+		maxWithDefault:
+		while (true) {
+			var _p18 = r;
+			if (_p18.ctor === 'RBEmpty_elm_builtin') {
+				return {ctor: '_Tuple2', _0: k, _1: v};
+			} else {
+				var _v23 = _p18._1,
+					_v24 = _p18._2,
+					_v25 = _p18._4;
+				k = _v23;
+				v = _v24;
+				r = _v25;
+				continue maxWithDefault;
+			}
+		}
+	});
+var _elm_lang$core$Dict$NBlack = {ctor: 'NBlack'};
+var _elm_lang$core$Dict$BBlack = {ctor: 'BBlack'};
+var _elm_lang$core$Dict$Black = {ctor: 'Black'};
+var _elm_lang$core$Dict$blackish = function (t) {
+	var _p19 = t;
+	if (_p19.ctor === 'RBNode_elm_builtin') {
+		var _p20 = _p19._0;
+		return _elm_lang$core$Native_Utils.eq(_p20, _elm_lang$core$Dict$Black) || _elm_lang$core$Native_Utils.eq(_p20, _elm_lang$core$Dict$BBlack);
+	} else {
+		return true;
+	}
+};
+var _elm_lang$core$Dict$Red = {ctor: 'Red'};
+var _elm_lang$core$Dict$moreBlack = function (color) {
+	var _p21 = color;
+	switch (_p21.ctor) {
+		case 'Black':
+			return _elm_lang$core$Dict$BBlack;
+		case 'Red':
+			return _elm_lang$core$Dict$Black;
+		case 'NBlack':
+			return _elm_lang$core$Dict$Red;
+		default:
+			return _elm_lang$core$Native_Debug.crash('Can\'t make a double black node more black!');
+	}
+};
+var _elm_lang$core$Dict$lessBlack = function (color) {
+	var _p22 = color;
+	switch (_p22.ctor) {
+		case 'BBlack':
+			return _elm_lang$core$Dict$Black;
+		case 'Black':
+			return _elm_lang$core$Dict$Red;
+		case 'Red':
+			return _elm_lang$core$Dict$NBlack;
+		default:
+			return _elm_lang$core$Native_Debug.crash('Can\'t make a negative black node less black!');
+	}
+};
+var _elm_lang$core$Dict$LBBlack = {ctor: 'LBBlack'};
+var _elm_lang$core$Dict$LBlack = {ctor: 'LBlack'};
+var _elm_lang$core$Dict$RBEmpty_elm_builtin = function (a) {
+	return {ctor: 'RBEmpty_elm_builtin', _0: a};
+};
+var _elm_lang$core$Dict$empty = _elm_lang$core$Dict$RBEmpty_elm_builtin(_elm_lang$core$Dict$LBlack);
+var _elm_lang$core$Dict$isEmpty = function (dict) {
+	return _elm_lang$core$Native_Utils.eq(dict, _elm_lang$core$Dict$empty);
+};
+var _elm_lang$core$Dict$RBNode_elm_builtin = F5(
+	function (a, b, c, d, e) {
+		return {ctor: 'RBNode_elm_builtin', _0: a, _1: b, _2: c, _3: d, _4: e};
+	});
+var _elm_lang$core$Dict$ensureBlackRoot = function (dict) {
+	var _p23 = dict;
+	if ((_p23.ctor === 'RBNode_elm_builtin') && (_p23._0.ctor === 'Red')) {
+		return A5(_elm_lang$core$Dict$RBNode_elm_builtin, _elm_lang$core$Dict$Black, _p23._1, _p23._2, _p23._3, _p23._4);
+	} else {
+		return dict;
+	}
+};
+var _elm_lang$core$Dict$lessBlackTree = function (dict) {
+	var _p24 = dict;
+	if (_p24.ctor === 'RBNode_elm_builtin') {
+		return A5(
+			_elm_lang$core$Dict$RBNode_elm_builtin,
+			_elm_lang$core$Dict$lessBlack(_p24._0),
+			_p24._1,
+			_p24._2,
+			_p24._3,
+			_p24._4);
+	} else {
+		return _elm_lang$core$Dict$RBEmpty_elm_builtin(_elm_lang$core$Dict$LBlack);
+	}
+};
+var _elm_lang$core$Dict$balancedTree = function (col) {
+	return function (xk) {
+		return function (xv) {
+			return function (yk) {
+				return function (yv) {
+					return function (zk) {
+						return function (zv) {
+							return function (a) {
+								return function (b) {
+									return function (c) {
+										return function (d) {
+											return A5(
+												_elm_lang$core$Dict$RBNode_elm_builtin,
+												_elm_lang$core$Dict$lessBlack(col),
+												yk,
+												yv,
+												A5(_elm_lang$core$Dict$RBNode_elm_builtin, _elm_lang$core$Dict$Black, xk, xv, a, b),
+												A5(_elm_lang$core$Dict$RBNode_elm_builtin, _elm_lang$core$Dict$Black, zk, zv, c, d));
+										};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+};
+var _elm_lang$core$Dict$blacken = function (t) {
+	var _p25 = t;
+	if (_p25.ctor === 'RBEmpty_elm_builtin') {
+		return _elm_lang$core$Dict$RBEmpty_elm_builtin(_elm_lang$core$Dict$LBlack);
+	} else {
+		return A5(_elm_lang$core$Dict$RBNode_elm_builtin, _elm_lang$core$Dict$Black, _p25._1, _p25._2, _p25._3, _p25._4);
+	}
+};
+var _elm_lang$core$Dict$redden = function (t) {
+	var _p26 = t;
+	if (_p26.ctor === 'RBEmpty_elm_builtin') {
+		return _elm_lang$core$Native_Debug.crash('can\'t make a Leaf red');
+	} else {
+		return A5(_elm_lang$core$Dict$RBNode_elm_builtin, _elm_lang$core$Dict$Red, _p26._1, _p26._2, _p26._3, _p26._4);
+	}
+};
+var _elm_lang$core$Dict$balanceHelp = function (tree) {
+	var _p27 = tree;
+	_v33_6:
+	do {
+		_v33_5:
+		do {
+			_v33_4:
+			do {
+				_v33_3:
+				do {
+					_v33_2:
+					do {
+						_v33_1:
+						do {
+							_v33_0:
+							do {
+								if (_p27.ctor === 'RBNode_elm_builtin') {
+									if (_p27._3.ctor === 'RBNode_elm_builtin') {
+										if (_p27._4.ctor === 'RBNode_elm_builtin') {
+											switch (_p27._3._0.ctor) {
+												case 'Red':
+													switch (_p27._4._0.ctor) {
+														case 'Red':
+															if ((_p27._3._3.ctor === 'RBNode_elm_builtin') && (_p27._3._3._0.ctor === 'Red')) {
+																break _v33_0;
+															} else {
+																if ((_p27._3._4.ctor === 'RBNode_elm_builtin') && (_p27._3._4._0.ctor === 'Red')) {
+																	break _v33_1;
+																} else {
+																	if ((_p27._4._3.ctor === 'RBNode_elm_builtin') && (_p27._4._3._0.ctor === 'Red')) {
+																		break _v33_2;
+																	} else {
+																		if ((_p27._4._4.ctor === 'RBNode_elm_builtin') && (_p27._4._4._0.ctor === 'Red')) {
+																			break _v33_3;
+																		} else {
+																			break _v33_6;
+																		}
+																	}
+																}
+															}
+														case 'NBlack':
+															if ((_p27._3._3.ctor === 'RBNode_elm_builtin') && (_p27._3._3._0.ctor === 'Red')) {
+																break _v33_0;
+															} else {
+																if ((_p27._3._4.ctor === 'RBNode_elm_builtin') && (_p27._3._4._0.ctor === 'Red')) {
+																	break _v33_1;
+																} else {
+																	if (((((_p27._0.ctor === 'BBlack') && (_p27._4._3.ctor === 'RBNode_elm_builtin')) && (_p27._4._3._0.ctor === 'Black')) && (_p27._4._4.ctor === 'RBNode_elm_builtin')) && (_p27._4._4._0.ctor === 'Black')) {
+																		break _v33_4;
+																	} else {
+																		break _v33_6;
+																	}
+																}
+															}
+														default:
+															if ((_p27._3._3.ctor === 'RBNode_elm_builtin') && (_p27._3._3._0.ctor === 'Red')) {
+																break _v33_0;
+															} else {
+																if ((_p27._3._4.ctor === 'RBNode_elm_builtin') && (_p27._3._4._0.ctor === 'Red')) {
+																	break _v33_1;
+																} else {
+																	break _v33_6;
+																}
+															}
+													}
+												case 'NBlack':
+													switch (_p27._4._0.ctor) {
+														case 'Red':
+															if ((_p27._4._3.ctor === 'RBNode_elm_builtin') && (_p27._4._3._0.ctor === 'Red')) {
+																break _v33_2;
+															} else {
+																if ((_p27._4._4.ctor === 'RBNode_elm_builtin') && (_p27._4._4._0.ctor === 'Red')) {
+																	break _v33_3;
+																} else {
+																	if (((((_p27._0.ctor === 'BBlack') && (_p27._3._3.ctor === 'RBNode_elm_builtin')) && (_p27._3._3._0.ctor === 'Black')) && (_p27._3._4.ctor === 'RBNode_elm_builtin')) && (_p27._3._4._0.ctor === 'Black')) {
+																		break _v33_5;
+																	} else {
+																		break _v33_6;
+																	}
+																}
+															}
+														case 'NBlack':
+															if (_p27._0.ctor === 'BBlack') {
+																if ((((_p27._4._3.ctor === 'RBNode_elm_builtin') && (_p27._4._3._0.ctor === 'Black')) && (_p27._4._4.ctor === 'RBNode_elm_builtin')) && (_p27._4._4._0.ctor === 'Black')) {
+																	break _v33_4;
+																} else {
+																	if ((((_p27._3._3.ctor === 'RBNode_elm_builtin') && (_p27._3._3._0.ctor === 'Black')) && (_p27._3._4.ctor === 'RBNode_elm_builtin')) && (_p27._3._4._0.ctor === 'Black')) {
+																		break _v33_5;
+																	} else {
+																		break _v33_6;
+																	}
+																}
+															} else {
+																break _v33_6;
+															}
+														default:
+															if (((((_p27._0.ctor === 'BBlack') && (_p27._3._3.ctor === 'RBNode_elm_builtin')) && (_p27._3._3._0.ctor === 'Black')) && (_p27._3._4.ctor === 'RBNode_elm_builtin')) && (_p27._3._4._0.ctor === 'Black')) {
+																break _v33_5;
+															} else {
+																break _v33_6;
+															}
+													}
+												default:
+													switch (_p27._4._0.ctor) {
+														case 'Red':
+															if ((_p27._4._3.ctor === 'RBNode_elm_builtin') && (_p27._4._3._0.ctor === 'Red')) {
+																break _v33_2;
+															} else {
+																if ((_p27._4._4.ctor === 'RBNode_elm_builtin') && (_p27._4._4._0.ctor === 'Red')) {
+																	break _v33_3;
+																} else {
+																	break _v33_6;
+																}
+															}
+														case 'NBlack':
+															if (((((_p27._0.ctor === 'BBlack') && (_p27._4._3.ctor === 'RBNode_elm_builtin')) && (_p27._4._3._0.ctor === 'Black')) && (_p27._4._4.ctor === 'RBNode_elm_builtin')) && (_p27._4._4._0.ctor === 'Black')) {
+																break _v33_4;
+															} else {
+																break _v33_6;
+															}
+														default:
+															break _v33_6;
+													}
+											}
+										} else {
+											switch (_p27._3._0.ctor) {
+												case 'Red':
+													if ((_p27._3._3.ctor === 'RBNode_elm_builtin') && (_p27._3._3._0.ctor === 'Red')) {
+														break _v33_0;
+													} else {
+														if ((_p27._3._4.ctor === 'RBNode_elm_builtin') && (_p27._3._4._0.ctor === 'Red')) {
+															break _v33_1;
+														} else {
+															break _v33_6;
+														}
+													}
+												case 'NBlack':
+													if (((((_p27._0.ctor === 'BBlack') && (_p27._3._3.ctor === 'RBNode_elm_builtin')) && (_p27._3._3._0.ctor === 'Black')) && (_p27._3._4.ctor === 'RBNode_elm_builtin')) && (_p27._3._4._0.ctor === 'Black')) {
+														break _v33_5;
+													} else {
+														break _v33_6;
+													}
+												default:
+													break _v33_6;
+											}
+										}
+									} else {
+										if (_p27._4.ctor === 'RBNode_elm_builtin') {
+											switch (_p27._4._0.ctor) {
+												case 'Red':
+													if ((_p27._4._3.ctor === 'RBNode_elm_builtin') && (_p27._4._3._0.ctor === 'Red')) {
+														break _v33_2;
+													} else {
+														if ((_p27._4._4.ctor === 'RBNode_elm_builtin') && (_p27._4._4._0.ctor === 'Red')) {
+															break _v33_3;
+														} else {
+															break _v33_6;
+														}
+													}
+												case 'NBlack':
+													if (((((_p27._0.ctor === 'BBlack') && (_p27._4._3.ctor === 'RBNode_elm_builtin')) && (_p27._4._3._0.ctor === 'Black')) && (_p27._4._4.ctor === 'RBNode_elm_builtin')) && (_p27._4._4._0.ctor === 'Black')) {
+														break _v33_4;
+													} else {
+														break _v33_6;
+													}
+												default:
+													break _v33_6;
+											}
+										} else {
+											break _v33_6;
+										}
+									}
+								} else {
+									break _v33_6;
+								}
+							} while(false);
+							return _elm_lang$core$Dict$balancedTree(_p27._0)(_p27._3._3._1)(_p27._3._3._2)(_p27._3._1)(_p27._3._2)(_p27._1)(_p27._2)(_p27._3._3._3)(_p27._3._3._4)(_p27._3._4)(_p27._4);
+						} while(false);
+						return _elm_lang$core$Dict$balancedTree(_p27._0)(_p27._3._1)(_p27._3._2)(_p27._3._4._1)(_p27._3._4._2)(_p27._1)(_p27._2)(_p27._3._3)(_p27._3._4._3)(_p27._3._4._4)(_p27._4);
+					} while(false);
+					return _elm_lang$core$Dict$balancedTree(_p27._0)(_p27._1)(_p27._2)(_p27._4._3._1)(_p27._4._3._2)(_p27._4._1)(_p27._4._2)(_p27._3)(_p27._4._3._3)(_p27._4._3._4)(_p27._4._4);
+				} while(false);
+				return _elm_lang$core$Dict$balancedTree(_p27._0)(_p27._1)(_p27._2)(_p27._4._1)(_p27._4._2)(_p27._4._4._1)(_p27._4._4._2)(_p27._3)(_p27._4._3)(_p27._4._4._3)(_p27._4._4._4);
+			} while(false);
+			return A5(
+				_elm_lang$core$Dict$RBNode_elm_builtin,
+				_elm_lang$core$Dict$Black,
+				_p27._4._3._1,
+				_p27._4._3._2,
+				A5(_elm_lang$core$Dict$RBNode_elm_builtin, _elm_lang$core$Dict$Black, _p27._1, _p27._2, _p27._3, _p27._4._3._3),
+				A5(
+					_elm_lang$core$Dict$balance,
+					_elm_lang$core$Dict$Black,
+					_p27._4._1,
+					_p27._4._2,
+					_p27._4._3._4,
+					_elm_lang$core$Dict$redden(_p27._4._4)));
+		} while(false);
+		return A5(
+			_elm_lang$core$Dict$RBNode_elm_builtin,
+			_elm_lang$core$Dict$Black,
+			_p27._3._4._1,
+			_p27._3._4._2,
+			A5(
+				_elm_lang$core$Dict$balance,
+				_elm_lang$core$Dict$Black,
+				_p27._3._1,
+				_p27._3._2,
+				_elm_lang$core$Dict$redden(_p27._3._3),
+				_p27._3._4._3),
+			A5(_elm_lang$core$Dict$RBNode_elm_builtin, _elm_lang$core$Dict$Black, _p27._1, _p27._2, _p27._3._4._4, _p27._4));
+	} while(false);
+	return tree;
+};
+var _elm_lang$core$Dict$balance = F5(
+	function (c, k, v, l, r) {
+		var tree = A5(_elm_lang$core$Dict$RBNode_elm_builtin, c, k, v, l, r);
+		return _elm_lang$core$Dict$blackish(tree) ? _elm_lang$core$Dict$balanceHelp(tree) : tree;
+	});
+var _elm_lang$core$Dict$bubble = F5(
+	function (c, k, v, l, r) {
+		return (_elm_lang$core$Dict$isBBlack(l) || _elm_lang$core$Dict$isBBlack(r)) ? A5(
+			_elm_lang$core$Dict$balance,
+			_elm_lang$core$Dict$moreBlack(c),
+			k,
+			v,
+			_elm_lang$core$Dict$lessBlackTree(l),
+			_elm_lang$core$Dict$lessBlackTree(r)) : A5(_elm_lang$core$Dict$RBNode_elm_builtin, c, k, v, l, r);
+	});
+var _elm_lang$core$Dict$removeMax = F5(
+	function (c, k, v, l, r) {
+		var _p28 = r;
+		if (_p28.ctor === 'RBEmpty_elm_builtin') {
+			return A3(_elm_lang$core$Dict$rem, c, l, r);
+		} else {
+			return A5(
+				_elm_lang$core$Dict$bubble,
+				c,
+				k,
+				v,
+				l,
+				A5(_elm_lang$core$Dict$removeMax, _p28._0, _p28._1, _p28._2, _p28._3, _p28._4));
+		}
+	});
+var _elm_lang$core$Dict$rem = F3(
+	function (c, l, r) {
+		var _p29 = {ctor: '_Tuple2', _0: l, _1: r};
+		if (_p29._0.ctor === 'RBEmpty_elm_builtin') {
+			if (_p29._1.ctor === 'RBEmpty_elm_builtin') {
+				var _p30 = c;
+				switch (_p30.ctor) {
+					case 'Red':
+						return _elm_lang$core$Dict$RBEmpty_elm_builtin(_elm_lang$core$Dict$LBlack);
+					case 'Black':
+						return _elm_lang$core$Dict$RBEmpty_elm_builtin(_elm_lang$core$Dict$LBBlack);
+					default:
+						return _elm_lang$core$Native_Debug.crash('cannot have bblack or nblack nodes at this point');
+				}
+			} else {
+				var _p33 = _p29._1._0;
+				var _p32 = _p29._0._0;
+				var _p31 = {ctor: '_Tuple3', _0: c, _1: _p32, _2: _p33};
+				if ((((_p31.ctor === '_Tuple3') && (_p31._0.ctor === 'Black')) && (_p31._1.ctor === 'LBlack')) && (_p31._2.ctor === 'Red')) {
+					return A5(_elm_lang$core$Dict$RBNode_elm_builtin, _elm_lang$core$Dict$Black, _p29._1._1, _p29._1._2, _p29._1._3, _p29._1._4);
+				} else {
+					return A4(
+						_elm_lang$core$Dict$reportRemBug,
+						'Black/LBlack/Red',
+						c,
+						_elm_lang$core$Basics$toString(_p32),
+						_elm_lang$core$Basics$toString(_p33));
+				}
+			}
+		} else {
+			if (_p29._1.ctor === 'RBEmpty_elm_builtin') {
+				var _p36 = _p29._1._0;
+				var _p35 = _p29._0._0;
+				var _p34 = {ctor: '_Tuple3', _0: c, _1: _p35, _2: _p36};
+				if ((((_p34.ctor === '_Tuple3') && (_p34._0.ctor === 'Black')) && (_p34._1.ctor === 'Red')) && (_p34._2.ctor === 'LBlack')) {
+					return A5(_elm_lang$core$Dict$RBNode_elm_builtin, _elm_lang$core$Dict$Black, _p29._0._1, _p29._0._2, _p29._0._3, _p29._0._4);
+				} else {
+					return A4(
+						_elm_lang$core$Dict$reportRemBug,
+						'Black/Red/LBlack',
+						c,
+						_elm_lang$core$Basics$toString(_p35),
+						_elm_lang$core$Basics$toString(_p36));
+				}
+			} else {
+				var _p40 = _p29._0._2;
+				var _p39 = _p29._0._4;
+				var _p38 = _p29._0._1;
+				var l$ = A5(_elm_lang$core$Dict$removeMax, _p29._0._0, _p38, _p40, _p29._0._3, _p39);
+				var _p37 = A3(_elm_lang$core$Dict$maxWithDefault, _p38, _p40, _p39);
+				var k = _p37._0;
+				var v = _p37._1;
+				return A5(_elm_lang$core$Dict$bubble, c, k, v, l$, r);
+			}
+		}
+	});
+var _elm_lang$core$Dict$map = F2(
+	function (f, dict) {
+		var _p41 = dict;
+		if (_p41.ctor === 'RBEmpty_elm_builtin') {
+			return _elm_lang$core$Dict$RBEmpty_elm_builtin(_elm_lang$core$Dict$LBlack);
+		} else {
+			var _p42 = _p41._1;
+			return A5(
+				_elm_lang$core$Dict$RBNode_elm_builtin,
+				_p41._0,
+				_p42,
+				A2(f, _p42, _p41._2),
+				A2(_elm_lang$core$Dict$map, f, _p41._3),
+				A2(_elm_lang$core$Dict$map, f, _p41._4));
+		}
+	});
+var _elm_lang$core$Dict$Same = {ctor: 'Same'};
+var _elm_lang$core$Dict$Remove = {ctor: 'Remove'};
+var _elm_lang$core$Dict$Insert = {ctor: 'Insert'};
+var _elm_lang$core$Dict$update = F3(
+	function (k, alter, dict) {
+		var up = function (dict) {
+			var _p43 = dict;
+			if (_p43.ctor === 'RBEmpty_elm_builtin') {
+				var _p44 = alter(_elm_lang$core$Maybe$Nothing);
+				if (_p44.ctor === 'Nothing') {
+					return {ctor: '_Tuple2', _0: _elm_lang$core$Dict$Same, _1: _elm_lang$core$Dict$empty};
+				} else {
+					return {
+						ctor: '_Tuple2',
+						_0: _elm_lang$core$Dict$Insert,
+						_1: A5(_elm_lang$core$Dict$RBNode_elm_builtin, _elm_lang$core$Dict$Red, k, _p44._0, _elm_lang$core$Dict$empty, _elm_lang$core$Dict$empty)
+					};
+				}
+			} else {
+				var _p55 = _p43._2;
+				var _p54 = _p43._4;
+				var _p53 = _p43._3;
+				var _p52 = _p43._1;
+				var _p51 = _p43._0;
+				var _p45 = A2(_elm_lang$core$Basics$compare, k, _p52);
+				switch (_p45.ctor) {
+					case 'EQ':
+						var _p46 = alter(
+							_elm_lang$core$Maybe$Just(_p55));
+						if (_p46.ctor === 'Nothing') {
+							return {
+								ctor: '_Tuple2',
+								_0: _elm_lang$core$Dict$Remove,
+								_1: A3(_elm_lang$core$Dict$rem, _p51, _p53, _p54)
+							};
+						} else {
+							return {
+								ctor: '_Tuple2',
+								_0: _elm_lang$core$Dict$Same,
+								_1: A5(_elm_lang$core$Dict$RBNode_elm_builtin, _p51, _p52, _p46._0, _p53, _p54)
+							};
+						}
+					case 'LT':
+						var _p47 = up(_p53);
+						var flag = _p47._0;
+						var newLeft = _p47._1;
+						var _p48 = flag;
+						switch (_p48.ctor) {
+							case 'Same':
+								return {
+									ctor: '_Tuple2',
+									_0: _elm_lang$core$Dict$Same,
+									_1: A5(_elm_lang$core$Dict$RBNode_elm_builtin, _p51, _p52, _p55, newLeft, _p54)
+								};
+							case 'Insert':
+								return {
+									ctor: '_Tuple2',
+									_0: _elm_lang$core$Dict$Insert,
+									_1: A5(_elm_lang$core$Dict$balance, _p51, _p52, _p55, newLeft, _p54)
+								};
+							default:
+								return {
+									ctor: '_Tuple2',
+									_0: _elm_lang$core$Dict$Remove,
+									_1: A5(_elm_lang$core$Dict$bubble, _p51, _p52, _p55, newLeft, _p54)
+								};
+						}
+					default:
+						var _p49 = up(_p54);
+						var flag = _p49._0;
+						var newRight = _p49._1;
+						var _p50 = flag;
+						switch (_p50.ctor) {
+							case 'Same':
+								return {
+									ctor: '_Tuple2',
+									_0: _elm_lang$core$Dict$Same,
+									_1: A5(_elm_lang$core$Dict$RBNode_elm_builtin, _p51, _p52, _p55, _p53, newRight)
+								};
+							case 'Insert':
+								return {
+									ctor: '_Tuple2',
+									_0: _elm_lang$core$Dict$Insert,
+									_1: A5(_elm_lang$core$Dict$balance, _p51, _p52, _p55, _p53, newRight)
+								};
+							default:
+								return {
+									ctor: '_Tuple2',
+									_0: _elm_lang$core$Dict$Remove,
+									_1: A5(_elm_lang$core$Dict$bubble, _p51, _p52, _p55, _p53, newRight)
+								};
+						}
+				}
+			}
+		};
+		var _p56 = up(dict);
+		var flag = _p56._0;
+		var updatedDict = _p56._1;
+		var _p57 = flag;
+		switch (_p57.ctor) {
+			case 'Same':
+				return updatedDict;
+			case 'Insert':
+				return _elm_lang$core$Dict$ensureBlackRoot(updatedDict);
+			default:
+				return _elm_lang$core$Dict$blacken(updatedDict);
+		}
+	});
+var _elm_lang$core$Dict$insert = F3(
+	function (key, value, dict) {
+		return A3(
+			_elm_lang$core$Dict$update,
+			key,
+			_elm_lang$core$Basics$always(
+				_elm_lang$core$Maybe$Just(value)),
+			dict);
+	});
+var _elm_lang$core$Dict$singleton = F2(
+	function (key, value) {
+		return A3(_elm_lang$core$Dict$insert, key, value, _elm_lang$core$Dict$empty);
+	});
+var _elm_lang$core$Dict$union = F2(
+	function (t1, t2) {
+		return A3(_elm_lang$core$Dict$foldl, _elm_lang$core$Dict$insert, t2, t1);
+	});
+var _elm_lang$core$Dict$filter = F2(
+	function (predicate, dictionary) {
+		var add = F3(
+			function (key, value, dict) {
+				return A2(predicate, key, value) ? A3(_elm_lang$core$Dict$insert, key, value, dict) : dict;
+			});
+		return A3(_elm_lang$core$Dict$foldl, add, _elm_lang$core$Dict$empty, dictionary);
+	});
+var _elm_lang$core$Dict$intersect = F2(
+	function (t1, t2) {
+		return A2(
+			_elm_lang$core$Dict$filter,
+			F2(
+				function (k, _p58) {
+					return A2(_elm_lang$core$Dict$member, k, t2);
+				}),
+			t1);
+	});
+var _elm_lang$core$Dict$partition = F2(
+	function (predicate, dict) {
+		var add = F3(
+			function (key, value, _p59) {
+				var _p60 = _p59;
+				var _p62 = _p60._1;
+				var _p61 = _p60._0;
+				return A2(predicate, key, value) ? {
+					ctor: '_Tuple2',
+					_0: A3(_elm_lang$core$Dict$insert, key, value, _p61),
+					_1: _p62
+				} : {
+					ctor: '_Tuple2',
+					_0: _p61,
+					_1: A3(_elm_lang$core$Dict$insert, key, value, _p62)
+				};
+			});
+		return A3(
+			_elm_lang$core$Dict$foldl,
+			add,
+			{ctor: '_Tuple2', _0: _elm_lang$core$Dict$empty, _1: _elm_lang$core$Dict$empty},
+			dict);
+	});
+var _elm_lang$core$Dict$fromList = function (assocs) {
+	return A3(
+		_elm_lang$core$List$foldl,
+		F2(
+			function (_p63, dict) {
+				var _p64 = _p63;
+				return A3(_elm_lang$core$Dict$insert, _p64._0, _p64._1, dict);
+			}),
+		_elm_lang$core$Dict$empty,
+		assocs);
+};
+var _elm_lang$core$Dict$remove = F2(
+	function (key, dict) {
+		return A3(
+			_elm_lang$core$Dict$update,
+			key,
+			_elm_lang$core$Basics$always(_elm_lang$core$Maybe$Nothing),
+			dict);
+	});
+var _elm_lang$core$Dict$diff = F2(
+	function (t1, t2) {
+		return A3(
+			_elm_lang$core$Dict$foldl,
+			F3(
+				function (k, v, t) {
+					return A2(_elm_lang$core$Dict$remove, k, t);
+				}),
+			t1,
+			t2);
+	});
+
+//import Native.Scheduler //
+
+var _elm_lang$core$Native_Time = function() {
+
+var now = _elm_lang$core$Native_Scheduler.nativeBinding(function(callback)
+{
+	callback(_elm_lang$core$Native_Scheduler.succeed(Date.now()));
+});
+
+function setInterval_(interval, task)
+{
+	return _elm_lang$core$Native_Scheduler.nativeBinding(function(callback)
+	{
+		var id = setInterval(function() {
+			_elm_lang$core$Native_Scheduler.rawSpawn(task);
+		}, interval);
+
+		return function() { clearInterval(id); };
+	});
+}
+
+return {
+	now: now,
+	setInterval_: F2(setInterval_)
+};
+
+}();
+var _elm_lang$core$Time$setInterval = _elm_lang$core$Native_Time.setInterval_;
+var _elm_lang$core$Time$spawnHelp = F3(
+	function (router, intervals, processes) {
+		var _p0 = intervals;
+		if (_p0.ctor === '[]') {
+			return _elm_lang$core$Task$succeed(processes);
+		} else {
+			var _p1 = _p0._0;
+			return A2(
+				_elm_lang$core$Task$andThen,
+				_elm_lang$core$Native_Scheduler.spawn(
+					A2(
+						_elm_lang$core$Time$setInterval,
+						_p1,
+						A2(_elm_lang$core$Platform$sendToSelf, router, _p1))),
+				function (id) {
+					return A3(
+						_elm_lang$core$Time$spawnHelp,
+						router,
+						_p0._1,
+						A3(_elm_lang$core$Dict$insert, _p1, id, processes));
+				});
+		}
+	});
+var _elm_lang$core$Time$addMySub = F2(
+	function (_p2, state) {
+		var _p3 = _p2;
+		var _p6 = _p3._1;
+		var _p5 = _p3._0;
+		var _p4 = A2(_elm_lang$core$Dict$get, _p5, state);
+		if (_p4.ctor === 'Nothing') {
+			return A3(
+				_elm_lang$core$Dict$insert,
+				_p5,
+				_elm_lang$core$Native_List.fromArray(
+					[_p6]),
+				state);
+		} else {
+			return A3(
+				_elm_lang$core$Dict$insert,
+				_p5,
+				A2(_elm_lang$core$List_ops['::'], _p6, _p4._0),
+				state);
+		}
+	});
+var _elm_lang$core$Time$inMilliseconds = function (t) {
+	return t;
+};
+var _elm_lang$core$Time$millisecond = 1;
+var _elm_lang$core$Time$second = 1000 * _elm_lang$core$Time$millisecond;
+var _elm_lang$core$Time$minute = 60 * _elm_lang$core$Time$second;
+var _elm_lang$core$Time$hour = 60 * _elm_lang$core$Time$minute;
+var _elm_lang$core$Time$inHours = function (t) {
+	return t / _elm_lang$core$Time$hour;
+};
+var _elm_lang$core$Time$inMinutes = function (t) {
+	return t / _elm_lang$core$Time$minute;
+};
+var _elm_lang$core$Time$inSeconds = function (t) {
+	return t / _elm_lang$core$Time$second;
+};
+var _elm_lang$core$Time$now = _elm_lang$core$Native_Time.now;
+var _elm_lang$core$Time$onSelfMsg = F3(
+	function (router, interval, state) {
+		var _p7 = A2(_elm_lang$core$Dict$get, interval, state.taggers);
+		if (_p7.ctor === 'Nothing') {
+			return _elm_lang$core$Task$succeed(state);
+		} else {
+			return A2(
+				_elm_lang$core$Task$andThen,
+				_elm_lang$core$Time$now,
+				function (time) {
+					return A2(
+						_elm_lang$core$Task$andThen,
+						_elm_lang$core$Task$sequence(
+							A2(
+								_elm_lang$core$List$map,
+								function (tagger) {
+									return A2(
+										_elm_lang$core$Platform$sendToApp,
+										router,
+										tagger(time));
+								},
+								_p7._0)),
+						function (_p8) {
+							return _elm_lang$core$Task$succeed(state);
+						});
+				});
+		}
+	});
+var _elm_lang$core$Time$subscription = _elm_lang$core$Native_Platform.leaf('Time');
+var _elm_lang$core$Time$State = F2(
+	function (a, b) {
+		return {taggers: a, processes: b};
+	});
+var _elm_lang$core$Time$init = _elm_lang$core$Task$succeed(
+	A2(_elm_lang$core$Time$State, _elm_lang$core$Dict$empty, _elm_lang$core$Dict$empty));
+var _elm_lang$core$Time$onEffects = F3(
+	function (router, subs, _p9) {
+		var _p10 = _p9;
+		var rightStep = F3(
+			function (_p12, id, _p11) {
+				var _p13 = _p11;
+				return {
+					ctor: '_Tuple3',
+					_0: _p13._0,
+					_1: _p13._1,
+					_2: A2(
+						_elm_lang$core$Task$andThen,
+						_elm_lang$core$Native_Scheduler.kill(id),
+						function (_p14) {
+							return _p13._2;
+						})
+				};
+			});
+		var bothStep = F4(
+			function (interval, taggers, id, _p15) {
+				var _p16 = _p15;
+				return {
+					ctor: '_Tuple3',
+					_0: _p16._0,
+					_1: A3(_elm_lang$core$Dict$insert, interval, id, _p16._1),
+					_2: _p16._2
+				};
+			});
+		var leftStep = F3(
+			function (interval, taggers, _p17) {
+				var _p18 = _p17;
+				return {
+					ctor: '_Tuple3',
+					_0: A2(_elm_lang$core$List_ops['::'], interval, _p18._0),
+					_1: _p18._1,
+					_2: _p18._2
+				};
+			});
+		var newTaggers = A3(_elm_lang$core$List$foldl, _elm_lang$core$Time$addMySub, _elm_lang$core$Dict$empty, subs);
+		var _p19 = A6(
+			_elm_lang$core$Dict$merge,
+			leftStep,
+			bothStep,
+			rightStep,
+			newTaggers,
+			_p10.processes,
+			{
+				ctor: '_Tuple3',
+				_0: _elm_lang$core$Native_List.fromArray(
+					[]),
+				_1: _elm_lang$core$Dict$empty,
+				_2: _elm_lang$core$Task$succeed(
+					{ctor: '_Tuple0'})
+			});
+		var spawnList = _p19._0;
+		var existingDict = _p19._1;
+		var killTask = _p19._2;
+		return A2(
+			_elm_lang$core$Task$andThen,
+			killTask,
+			function (_p20) {
+				return A2(
+					_elm_lang$core$Task$andThen,
+					A3(_elm_lang$core$Time$spawnHelp, router, spawnList, existingDict),
+					function (newProcesses) {
+						return _elm_lang$core$Task$succeed(
+							A2(_elm_lang$core$Time$State, newTaggers, newProcesses));
+					});
+			});
+	});
+var _elm_lang$core$Time$Every = F2(
+	function (a, b) {
+		return {ctor: 'Every', _0: a, _1: b};
+	});
+var _elm_lang$core$Time$every = F2(
+	function (interval, tagger) {
+		return _elm_lang$core$Time$subscription(
+			A2(_elm_lang$core$Time$Every, interval, tagger));
+	});
+var _elm_lang$core$Time$subMap = F2(
+	function (f, _p21) {
+		var _p22 = _p21;
+		return A2(
+			_elm_lang$core$Time$Every,
+			_p22._0,
+			function (_p23) {
+				return f(
+					_p22._1(_p23));
+			});
+	});
+_elm_lang$core$Native_Platform.effectManagers['Time'] = {pkg: 'elm-lang/core', init: _elm_lang$core$Time$init, onEffects: _elm_lang$core$Time$onEffects, onSelfMsg: _elm_lang$core$Time$onSelfMsg, tag: 'sub', subMap: _elm_lang$core$Time$subMap};
+
+//import Maybe, Native.Array, Native.List, Native.Utils, Result //
+
+var _elm_lang$core$Native_Json = function() {
+
+
+// CORE DECODERS
+
+function succeed(msg)
+{
+	return {
+		ctor: '<decoder>',
+		tag: 'succeed',
+		msg: msg
+	};
+}
+
+function fail(msg)
+{
+	return {
+		ctor: '<decoder>',
+		tag: 'fail',
+		msg: msg
+	};
+}
+
+function decodePrimitive(tag)
+{
+	return {
+		ctor: '<decoder>',
+		tag: tag
+	};
+}
+
+function decodeContainer(tag, decoder)
+{
+	return {
+		ctor: '<decoder>',
+		tag: tag,
+		decoder: decoder
+	};
+}
+
+function decodeNull(value)
+{
+	return {
+		ctor: '<decoder>',
+		tag: 'null',
+		value: value
+	};
+}
+
+function decodeField(field, decoder)
+{
+	return {
+		ctor: '<decoder>',
+		tag: 'field',
+		field: field,
+		decoder: decoder
+	};
+}
+
+function decodeKeyValuePairs(decoder)
+{
+	return {
+		ctor: '<decoder>',
+		tag: 'key-value',
+		decoder: decoder
+	};
+}
+
+function decodeObject(f, decoders)
+{
+	return {
+		ctor: '<decoder>',
+		tag: 'map-many',
+		func: f,
+		decoders: decoders
+	};
+}
+
+function decodeTuple(f, decoders)
+{
+	return {
+		ctor: '<decoder>',
+		tag: 'tuple',
+		func: f,
+		decoders: decoders
+	};
+}
+
+function andThen(decoder, callback)
+{
+	return {
+		ctor: '<decoder>',
+		tag: 'andThen',
+		decoder: decoder,
+		callback: callback
+	};
+}
+
+function customAndThen(decoder, callback)
+{
+	return {
+		ctor: '<decoder>',
+		tag: 'customAndThen',
+		decoder: decoder,
+		callback: callback
+	};
+}
+
+function oneOf(decoders)
+{
+	return {
+		ctor: '<decoder>',
+		tag: 'oneOf',
+		decoders: decoders
+	};
+}
+
+
+// DECODING OBJECTS
+
+function decodeObject1(f, d1)
+{
+	return decodeObject(f, [d1]);
+}
+
+function decodeObject2(f, d1, d2)
+{
+	return decodeObject(f, [d1, d2]);
+}
+
+function decodeObject3(f, d1, d2, d3)
+{
+	return decodeObject(f, [d1, d2, d3]);
+}
+
+function decodeObject4(f, d1, d2, d3, d4)
+{
+	return decodeObject(f, [d1, d2, d3, d4]);
+}
+
+function decodeObject5(f, d1, d2, d3, d4, d5)
+{
+	return decodeObject(f, [d1, d2, d3, d4, d5]);
+}
+
+function decodeObject6(f, d1, d2, d3, d4, d5, d6)
+{
+	return decodeObject(f, [d1, d2, d3, d4, d5, d6]);
+}
+
+function decodeObject7(f, d1, d2, d3, d4, d5, d6, d7)
+{
+	return decodeObject(f, [d1, d2, d3, d4, d5, d6, d7]);
+}
+
+function decodeObject8(f, d1, d2, d3, d4, d5, d6, d7, d8)
+{
+	return decodeObject(f, [d1, d2, d3, d4, d5, d6, d7, d8]);
+}
+
+
+// DECODING TUPLES
+
+function decodeTuple1(f, d1)
+{
+	return decodeTuple(f, [d1]);
+}
+
+function decodeTuple2(f, d1, d2)
+{
+	return decodeTuple(f, [d1, d2]);
+}
+
+function decodeTuple3(f, d1, d2, d3)
+{
+	return decodeTuple(f, [d1, d2, d3]);
+}
+
+function decodeTuple4(f, d1, d2, d3, d4)
+{
+	return decodeTuple(f, [d1, d2, d3, d4]);
+}
+
+function decodeTuple5(f, d1, d2, d3, d4, d5)
+{
+	return decodeTuple(f, [d1, d2, d3, d4, d5]);
+}
+
+function decodeTuple6(f, d1, d2, d3, d4, d5, d6)
+{
+	return decodeTuple(f, [d1, d2, d3, d4, d5, d6]);
+}
+
+function decodeTuple7(f, d1, d2, d3, d4, d5, d6, d7)
+{
+	return decodeTuple(f, [d1, d2, d3, d4, d5, d6, d7]);
+}
+
+function decodeTuple8(f, d1, d2, d3, d4, d5, d6, d7, d8)
+{
+	return decodeTuple(f, [d1, d2, d3, d4, d5, d6, d7, d8]);
+}
+
+
+// DECODE HELPERS
+
+function ok(value)
+{
+	return { tag: 'ok', value: value };
+}
+
+function badPrimitive(type, value)
+{
+	return { tag: 'primitive', type: type, value: value };
+}
+
+function badIndex(index, nestedProblems)
+{
+	return { tag: 'index', index: index, rest: nestedProblems };
+}
+
+function badField(field, nestedProblems)
+{
+	return { tag: 'field', field: field, rest: nestedProblems };
+}
+
+function badOneOf(problems)
+{
+	return { tag: 'oneOf', problems: problems };
+}
+
+var bad = { tag: 'fail' };
+
+function badToString(problem)
+{
+	var context = '_';
+	while (problem)
+	{
+		switch (problem.tag)
+		{
+			case 'primitive':
+				return 'Expecting ' + problem.type
+					+ (context === '_' ? '' : ' at ' + context)
+					+ ' but instead got: ' + jsToString(problem.value);
+
+			case 'index':
+				context += '[' + problem.index + ']';
+				problem = problem.rest;
+				break;
+
+			case 'field':
+				context += '.' + problem.field;
+				problem = problem.rest;
+				break;
+
+			case 'oneOf':
+				var problems = problem.problems;
+				for (var i = 0; i < problems.length; i++)
+				{
+					problems[i] = badToString(problems[i]);
+				}
+				return 'I ran into the following problems'
+					+ (context === '_' ? '' : ' at ' + context)
+					+ ':\n\n' + problems.join('\n');
+
+			case 'fail':
+				return 'I ran into a `fail` decoder'
+					+ (context === '_' ? '' : ' at ' + context);
+		}
+	}
+}
+
+function jsToString(value)
+{
+	return value === undefined
+		? 'undefined'
+		: JSON.stringify(value);
+}
+
+
+// DECODE
+
+function runOnString(decoder, string)
+{
+	var json;
+	try
+	{
+		json = JSON.parse(string);
+	}
+	catch (e)
+	{
+		return _elm_lang$core$Result$Err('Given an invalid JSON: ' + e.message);
+	}
+	return run(decoder, json);
+}
+
+function run(decoder, value)
+{
+	var result = runHelp(decoder, value);
+	return (result.tag === 'ok')
+		? _elm_lang$core$Result$Ok(result.value)
+		: _elm_lang$core$Result$Err(badToString(result));
+}
+
+function runHelp(decoder, value)
+{
+	switch (decoder.tag)
+	{
+		case 'bool':
+			return (typeof value === 'boolean')
+				? ok(value)
+				: badPrimitive('a Bool', value);
+
+		case 'int':
+			var isNotInt =
+				typeof value !== 'number'
+				|| !(-2147483647 < value && value < 2147483647 && (value | 0) === value)
+				|| !(isFinite(value) && !(value % 1));
+
+			return isNotInt
+				? badPrimitive('an Int', value)
+				: ok(value);
+
+		case 'float':
+			return (typeof value === 'number')
+				? ok(value)
+				: badPrimitive('a Float', value);
+
+		case 'string':
+			return (typeof value === 'string')
+				? ok(value)
+				: (value instanceof String)
+					? ok(value + '')
+					: badPrimitive('a String', value);
+
+		case 'null':
+			return (value === null)
+				? ok(decoder.value)
+				: badPrimitive('null', value);
+
+		case 'value':
+			return ok(value);
+
+		case 'list':
+			if (!(value instanceof Array))
+			{
+				return badPrimitive('a List', value);
+			}
+
+			var list = _elm_lang$core$Native_List.Nil;
+			for (var i = value.length; i--; )
+			{
+				var result = runHelp(decoder.decoder, value[i]);
+				if (result.tag !== 'ok')
+				{
+					return badIndex(i, result)
+				}
+				list = _elm_lang$core$Native_List.Cons(result.value, list);
+			}
+			return ok(list);
+
+		case 'array':
+			if (!(value instanceof Array))
+			{
+				return badPrimitive('an Array', value);
+			}
+
+			var len = value.length;
+			var array = new Array(len);
+			for (var i = len; i--; )
+			{
+				var result = runHelp(decoder.decoder, value[i]);
+				if (result.tag !== 'ok')
+				{
+					return badIndex(i, result);
+				}
+				array[i] = result.value;
+			}
+			return ok(_elm_lang$core$Native_Array.fromJSArray(array));
+
+		case 'maybe':
+			var result = runHelp(decoder.decoder, value);
+			return (result.tag === 'ok')
+				? ok(_elm_lang$core$Maybe$Just(result.value))
+				: ok(_elm_lang$core$Maybe$Nothing);
+
+		case 'field':
+			var field = decoder.field;
+			if (typeof value !== 'object' || value === null || !(field in value))
+			{
+				return badPrimitive('an object with a field named `' + field + '`', value);
+			}
+
+			var result = runHelp(decoder.decoder, value[field]);
+			return (result.tag === 'ok')
+				? result
+				: badField(field, result);
+
+		case 'key-value':
+			if (typeof value !== 'object' || value === null || value instanceof Array)
+			{
+				return err('an object', value);
+			}
+
+			var keyValuePairs = _elm_lang$core$Native_List.Nil;
+			for (var key in value)
+			{
+				var result = runHelp(decoder.decoder, value[key]);
+				if (result.tag !== 'ok')
+				{
+					return badField(key, result);
+				}
+				var pair = _elm_lang$core$Native_Utils.Tuple2(key, result.value);
+				keyValuePairs = _elm_lang$core$Native_List.Cons(pair, keyValuePairs);
+			}
+			return ok(keyValuePairs);
+
+		case 'map-many':
+			var answer = decoder.func;
+			var decoders = decoder.decoders;
+			for (var i = 0; i < decoders.length; i++)
+			{
+				var result = runHelp(decoders[i], value);
+				if (result.tag !== 'ok')
+				{
+					return result;
+				}
+				answer = answer(result.value);
+			}
+			return ok(answer);
+
+		case 'tuple':
+			var decoders = decoder.decoders;
+			var len = decoders.length;
+
+			if ( !(value instanceof Array) || value.length !== len )
+			{
+				return badPrimitive('a Tuple with ' + len + ' entries', value);
+			}
+
+			var answer = decoder.func;
+			for (var i = 0; i < len; i++)
+			{
+				var result = runHelp(decoders[i], value[i]);
+				if (result.tag !== 'ok')
+				{
+					return badIndex(i, result);
+				}
+				answer = answer(result.value);
+			}
+			return ok(answer);
+
+		case 'customAndThen':
+			var result = runHelp(decoder.decoder, value);
+			if (result.tag !== 'ok')
+			{
+				return result;
+			}
+			var realResult = decoder.callback(result.value);
+			if (realResult.ctor === 'Err')
+			{
+				return badPrimitive('something custom', value);
+			}
+			return ok(realResult._0);
+
+		case 'andThen':
+			var result = runHelp(decoder.decoder, value);
+			return (result.tag !== 'ok')
+				? result
+				: runHelp(decoder.callback(result.value), value);
+
+		case 'oneOf':
+			var errors = [];
+			var temp = decoder.decoders;
+			while (temp.ctor !== '[]')
+			{
+				var result = runHelp(temp._0, value);
+
+				if (result.tag === 'ok')
+				{
+					return result;
+				}
+
+				errors.push(result);
+
+				temp = temp._1;
+			}
+			return badOneOf(errors);
+
+		case 'fail':
+			return bad;
+
+		case 'succeed':
+			return ok(decoder.msg);
+	}
+}
+
+
+// EQUALITY
+
+function equality(a, b)
+{
+	if (a === b)
+	{
+		return true;
+	}
+
+	if (a.tag !== b.tag)
+	{
+		return false;
+	}
+
+	switch (a.tag)
+	{
+		case 'succeed':
+		case 'fail':
+			return a.msg === b.msg;
+
+		case 'bool':
+		case 'int':
+		case 'float':
+		case 'string':
+		case 'value':
+			return true;
+
+		case 'null':
+			return a.value === b.value;
+
+		case 'list':
+		case 'array':
+		case 'maybe':
+		case 'key-value':
+			return equality(a.decoder, b.decoder);
+
+		case 'field':
+			return a.field === b.field && equality(a.decoder, b.decoder);
+
+		case 'map-many':
+		case 'tuple':
+			if (a.func !== b.func)
+			{
+				return false;
+			}
+			return listEquality(a.decoders, b.decoders);
+
+		case 'andThen':
+		case 'customAndThen':
+			return a.callback === b.callback && equality(a.decoder, b.decoder);
+
+		case 'oneOf':
+			return listEquality(a.decoders, b.decoders);
+	}
+}
+
+function listEquality(aDecoders, bDecoders)
+{
+	var len = aDecoders.length;
+	if (len !== bDecoders.length)
+	{
+		return false;
+	}
+	for (var i = 0; i < len; i++)
+	{
+		if (!equality(aDecoders[i], bDecoders[i]))
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
+
+// ENCODE
+
+function encode(indentLevel, value)
+{
+	return JSON.stringify(value, null, indentLevel);
+}
+
+function identity(value)
+{
+	return value;
+}
+
+function encodeObject(keyValuePairs)
+{
+	var obj = {};
+	while (keyValuePairs.ctor !== '[]')
+	{
+		var pair = keyValuePairs._0;
+		obj[pair._0] = pair._1;
+		keyValuePairs = keyValuePairs._1;
+	}
+	return obj;
+}
+
+return {
+	encode: F2(encode),
+	runOnString: F2(runOnString),
+	run: F2(run),
+
+	decodeNull: decodeNull,
+	decodePrimitive: decodePrimitive,
+	decodeContainer: F2(decodeContainer),
+
+	decodeField: F2(decodeField),
+
+	decodeObject1: F2(decodeObject1),
+	decodeObject2: F3(decodeObject2),
+	decodeObject3: F4(decodeObject3),
+	decodeObject4: F5(decodeObject4),
+	decodeObject5: F6(decodeObject5),
+	decodeObject6: F7(decodeObject6),
+	decodeObject7: F8(decodeObject7),
+	decodeObject8: F9(decodeObject8),
+	decodeKeyValuePairs: decodeKeyValuePairs,
+
+	decodeTuple1: F2(decodeTuple1),
+	decodeTuple2: F3(decodeTuple2),
+	decodeTuple3: F4(decodeTuple3),
+	decodeTuple4: F5(decodeTuple4),
+	decodeTuple5: F6(decodeTuple5),
+	decodeTuple6: F7(decodeTuple6),
+	decodeTuple7: F8(decodeTuple7),
+	decodeTuple8: F9(decodeTuple8),
+
+	andThen: F2(andThen),
+	customAndThen: F2(customAndThen),
+	fail: fail,
+	succeed: succeed,
+	oneOf: oneOf,
+
+	identity: identity,
+	encodeNull: null,
+	encodeArray: _elm_lang$core$Native_Array.toJSArray,
+	encodeList: _elm_lang$core$Native_List.toArray,
+	encodeObject: encodeObject,
+
+	equality: equality
+};
+
+}();
+
+var _elm_lang$core$Json_Encode$list = _elm_lang$core$Native_Json.encodeList;
+var _elm_lang$core$Json_Encode$array = _elm_lang$core$Native_Json.encodeArray;
+var _elm_lang$core$Json_Encode$object = _elm_lang$core$Native_Json.encodeObject;
+var _elm_lang$core$Json_Encode$null = _elm_lang$core$Native_Json.encodeNull;
+var _elm_lang$core$Json_Encode$bool = _elm_lang$core$Native_Json.identity;
+var _elm_lang$core$Json_Encode$float = _elm_lang$core$Native_Json.identity;
+var _elm_lang$core$Json_Encode$int = _elm_lang$core$Native_Json.identity;
+var _elm_lang$core$Json_Encode$string = _elm_lang$core$Native_Json.identity;
+var _elm_lang$core$Json_Encode$encode = _elm_lang$core$Native_Json.encode;
+var _elm_lang$core$Json_Encode$Value = {ctor: 'Value'};
+
+var _elm_lang$core$Json_Decode$tuple8 = _elm_lang$core$Native_Json.decodeTuple8;
+var _elm_lang$core$Json_Decode$tuple7 = _elm_lang$core$Native_Json.decodeTuple7;
+var _elm_lang$core$Json_Decode$tuple6 = _elm_lang$core$Native_Json.decodeTuple6;
+var _elm_lang$core$Json_Decode$tuple5 = _elm_lang$core$Native_Json.decodeTuple5;
+var _elm_lang$core$Json_Decode$tuple4 = _elm_lang$core$Native_Json.decodeTuple4;
+var _elm_lang$core$Json_Decode$tuple3 = _elm_lang$core$Native_Json.decodeTuple3;
+var _elm_lang$core$Json_Decode$tuple2 = _elm_lang$core$Native_Json.decodeTuple2;
+var _elm_lang$core$Json_Decode$tuple1 = _elm_lang$core$Native_Json.decodeTuple1;
+var _elm_lang$core$Json_Decode$succeed = _elm_lang$core$Native_Json.succeed;
+var _elm_lang$core$Json_Decode$fail = _elm_lang$core$Native_Json.fail;
+var _elm_lang$core$Json_Decode$andThen = _elm_lang$core$Native_Json.andThen;
+var _elm_lang$core$Json_Decode$customDecoder = _elm_lang$core$Native_Json.customAndThen;
+var _elm_lang$core$Json_Decode$decodeValue = _elm_lang$core$Native_Json.run;
+var _elm_lang$core$Json_Decode$value = _elm_lang$core$Native_Json.decodePrimitive('value');
+var _elm_lang$core$Json_Decode$maybe = function (decoder) {
+	return A2(_elm_lang$core$Native_Json.decodeContainer, 'maybe', decoder);
+};
+var _elm_lang$core$Json_Decode$null = _elm_lang$core$Native_Json.decodeNull;
+var _elm_lang$core$Json_Decode$array = function (decoder) {
+	return A2(_elm_lang$core$Native_Json.decodeContainer, 'array', decoder);
+};
+var _elm_lang$core$Json_Decode$list = function (decoder) {
+	return A2(_elm_lang$core$Native_Json.decodeContainer, 'list', decoder);
+};
+var _elm_lang$core$Json_Decode$bool = _elm_lang$core$Native_Json.decodePrimitive('bool');
+var _elm_lang$core$Json_Decode$int = _elm_lang$core$Native_Json.decodePrimitive('int');
+var _elm_lang$core$Json_Decode$float = _elm_lang$core$Native_Json.decodePrimitive('float');
+var _elm_lang$core$Json_Decode$string = _elm_lang$core$Native_Json.decodePrimitive('string');
+var _elm_lang$core$Json_Decode$oneOf = _elm_lang$core$Native_Json.oneOf;
+var _elm_lang$core$Json_Decode$keyValuePairs = _elm_lang$core$Native_Json.decodeKeyValuePairs;
+var _elm_lang$core$Json_Decode$object8 = _elm_lang$core$Native_Json.decodeObject8;
+var _elm_lang$core$Json_Decode$object7 = _elm_lang$core$Native_Json.decodeObject7;
+var _elm_lang$core$Json_Decode$object6 = _elm_lang$core$Native_Json.decodeObject6;
+var _elm_lang$core$Json_Decode$object5 = _elm_lang$core$Native_Json.decodeObject5;
+var _elm_lang$core$Json_Decode$object4 = _elm_lang$core$Native_Json.decodeObject4;
+var _elm_lang$core$Json_Decode$object3 = _elm_lang$core$Native_Json.decodeObject3;
+var _elm_lang$core$Json_Decode$object2 = _elm_lang$core$Native_Json.decodeObject2;
+var _elm_lang$core$Json_Decode$object1 = _elm_lang$core$Native_Json.decodeObject1;
+var _elm_lang$core$Json_Decode_ops = _elm_lang$core$Json_Decode_ops || {};
+_elm_lang$core$Json_Decode_ops[':='] = _elm_lang$core$Native_Json.decodeField;
+var _elm_lang$core$Json_Decode$at = F2(
+	function (fields, decoder) {
+		return A3(
+			_elm_lang$core$List$foldr,
+			F2(
+				function (x, y) {
+					return A2(_elm_lang$core$Json_Decode_ops[':='], x, y);
+				}),
+			decoder,
+			fields);
+	});
+var _elm_lang$core$Json_Decode$decodeString = _elm_lang$core$Native_Json.runOnString;
+var _elm_lang$core$Json_Decode$map = _elm_lang$core$Native_Json.decodeObject1;
+var _elm_lang$core$Json_Decode$dict = function (decoder) {
+	return A2(
+		_elm_lang$core$Json_Decode$map,
+		_elm_lang$core$Dict$fromList,
+		_elm_lang$core$Json_Decode$keyValuePairs(decoder));
+};
+var _elm_lang$core$Json_Decode$Decoder = {ctor: 'Decoder'};
+
+//import Native.Json //
+
+var _elm_lang$virtual_dom$Native_VirtualDom = function() {
+
+var STYLE_KEY = 'STYLE';
+var EVENT_KEY = 'EVENT';
+var ATTR_KEY = 'ATTR';
+var ATTR_NS_KEY = 'ATTR_NS';
+
+
+
+////////////  VIRTUAL DOM NODES  ////////////
+
+
+function text(string)
+{
+	return {
+		type: 'text',
+		text: string
+	};
+}
+
+
+function node(tag)
+{
+	return F2(function(factList, kidList) {
+		return nodeHelp(tag, factList, kidList);
+	});
+}
+
+
+function nodeHelp(tag, factList, kidList)
+{
+	var organized = organizeFacts(factList);
+	var namespace = organized.namespace;
+	var facts = organized.facts;
+
+	var children = [];
+	var descendantsCount = 0;
+	while (kidList.ctor !== '[]')
+	{
+		var kid = kidList._0;
+		descendantsCount += (kid.descendantsCount || 0);
+		children.push(kid);
+		kidList = kidList._1;
+	}
+	descendantsCount += children.length;
+
+	return {
+		type: 'node',
+		tag: tag,
+		facts: facts,
+		children: children,
+		namespace: namespace,
+		descendantsCount: descendantsCount
+	};
+}
+
+
+function custom(factList, model, impl)
+{
+	var facts = organizeFacts(factList).facts;
+
+	return {
+		type: 'custom',
+		facts: facts,
+		model: model,
+		impl: impl
+	};
+}
+
+
+function map(tagger, node)
+{
+	return {
+		type: 'tagger',
+		tagger: tagger,
+		node: node,
+		descendantsCount: 1 + (node.descendantsCount || 0)
+	};
+}
+
+
+function thunk(func, args, thunk)
+{
+	return {
+		type: 'thunk',
+		func: func,
+		args: args,
+		thunk: thunk,
+		node: null
+	};
+}
+
+function lazy(fn, a)
+{
+	return thunk(fn, [a], function() {
+		return fn(a);
+	});
+}
+
+function lazy2(fn, a, b)
+{
+	return thunk(fn, [a,b], function() {
+		return A2(fn, a, b);
+	});
+}
+
+function lazy3(fn, a, b, c)
+{
+	return thunk(fn, [a,b,c], function() {
+		return A3(fn, a, b, c);
+	});
+}
+
+
+
+// FACTS
+
+
+function organizeFacts(factList)
+{
+	var namespace, facts = {};
+
+	while (factList.ctor !== '[]')
+	{
+		var entry = factList._0;
+		var key = entry.key;
+
+		if (key === ATTR_KEY || key === ATTR_NS_KEY || key === EVENT_KEY)
+		{
+			var subFacts = facts[key] || {};
+			subFacts[entry.realKey] = entry.value;
+			facts[key] = subFacts;
+		}
+		else if (key === STYLE_KEY)
+		{
+			var styles = facts[key] || {};
+			var styleList = entry.value;
+			while (styleList.ctor !== '[]')
+			{
+				var style = styleList._0;
+				styles[style._0] = style._1;
+				styleList = styleList._1;
+			}
+			facts[key] = styles;
+		}
+		else if (key === 'namespace')
+		{
+			namespace = entry.value;
+		}
+		else
+		{
+			facts[key] = entry.value;
+		}
+		factList = factList._1;
+	}
+
+	return {
+		facts: facts,
+		namespace: namespace
+	};
+}
+
+
+
+////////////  PROPERTIES AND ATTRIBUTES  ////////////
+
+
+function style(value)
+{
+	return {
+		key: STYLE_KEY,
+		value: value
+	};
+}
+
+
+function property(key, value)
+{
+	return {
+		key: key,
+		value: value
+	};
+}
+
+
+function attribute(key, value)
+{
+	return {
+		key: ATTR_KEY,
+		realKey: key,
+		value: value
+	};
+}
+
+
+function attributeNS(namespace, key, value)
+{
+	return {
+		key: ATTR_NS_KEY,
+		realKey: key,
+		value: {
+			value: value,
+			namespace: namespace
+		}
+	};
+}
+
+
+function on(name, options, decoder)
+{
+	return {
+		key: EVENT_KEY,
+		realKey: name,
+		value: {
+			options: options,
+			decoder: decoder
+		}
+	};
+}
+
+
+function equalEvents(a, b)
+{
+	if (!a.options === b.options)
+	{
+		if (a.stopPropagation !== b.stopPropagation || a.preventDefault !== b.preventDefault)
+		{
+			return false;
+		}
+	}
+	return _elm_lang$core$Native_Json.equality(a.decoder, b.decoder);
+}
+
+
+
+////////////  RENDERER  ////////////
+
+
+function renderer(parent, tagger, initialVirtualNode)
+{
+	var eventNode = { tagger: tagger, parent: null };
+
+	var domNode = render(initialVirtualNode, eventNode);
+	parent.appendChild(domNode);
+
+	var state = 'NO_REQUEST';
+	var currentVirtualNode = initialVirtualNode;
+	var nextVirtualNode = initialVirtualNode;
+
+	function registerVirtualNode(vNode)
+	{
+		if (state === 'NO_REQUEST')
+		{
+			rAF(updateIfNeeded);
+		}
+		state = 'PENDING_REQUEST';
+		nextVirtualNode = vNode;
+	}
+
+	function updateIfNeeded()
+	{
+		switch (state)
+		{
+			case 'NO_REQUEST':
+				throw new Error(
+					'Unexpected draw callback.\n' +
+					'Please report this to <https://github.com/elm-lang/core/issues>.'
+				);
+
+			case 'PENDING_REQUEST':
+				rAF(updateIfNeeded);
+				state = 'EXTRA_REQUEST';
+
+				var patches = diff(currentVirtualNode, nextVirtualNode);
+				domNode = applyPatches(domNode, currentVirtualNode, patches, eventNode);
+				currentVirtualNode = nextVirtualNode;
+
+				return;
+
+			case 'EXTRA_REQUEST':
+				state = 'NO_REQUEST';
+				return;
+		}
+	}
+
+	return { update: registerVirtualNode };
+}
+
+
+var rAF =
+	typeof requestAnimationFrame !== 'undefined'
+		? requestAnimationFrame
+		: function(cb) { setTimeout(cb, 1000 / 60); };
+
+
+
+////////////  RENDER  ////////////
+
+
+function render(vNode, eventNode)
+{
+	switch (vNode.type)
+	{
+		case 'thunk':
+			if (!vNode.node)
+			{
+				vNode.node = vNode.thunk();
+			}
+			return render(vNode.node, eventNode);
+
+		case 'tagger':
+			var subEventRoot = {
+				tagger: vNode.tagger,
+				parent: eventNode
+			};
+			var domNode = render(vNode.node, subEventRoot);
+			domNode.elm_event_node_ref = subEventRoot;
+			return domNode;
+
+		case 'text':
+			return document.createTextNode(vNode.text);
+
+		case 'node':
+			var domNode = vNode.namespace
+				? document.createElementNS(vNode.namespace, vNode.tag)
+				: document.createElement(vNode.tag);
+
+			applyFacts(domNode, eventNode, vNode.facts);
+
+			var children = vNode.children;
+
+			for (var i = 0; i < children.length; i++)
+			{
+				domNode.appendChild(render(children[i], eventNode));
+			}
+
+			return domNode;
+
+		case 'custom':
+			var domNode = vNode.impl.render(vNode.model);
+			applyFacts(domNode, eventNode, vNode.facts);
+			return domNode;
+	}
+}
+
+
+
+////////////  APPLY FACTS  ////////////
+
+
+function applyFacts(domNode, eventNode, facts)
+{
+	for (var key in facts)
+	{
+		var value = facts[key];
+
+		switch (key)
+		{
+			case STYLE_KEY:
+				applyStyles(domNode, value);
+				break;
+
+			case EVENT_KEY:
+				applyEvents(domNode, eventNode, value);
+				break;
+
+			case ATTR_KEY:
+				applyAttrs(domNode, value);
+				break;
+
+			case ATTR_NS_KEY:
+				applyAttrsNS(domNode, value);
+				break;
+
+			default:
+				domNode[key] = value;
+				break;
+		}
+	}
+}
+
+function applyStyles(domNode, styles)
+{
+	var domNodeStyle = domNode.style;
+
+	for (var key in styles)
+	{
+		domNodeStyle[key] = styles[key];
+	}
+}
+
+function applyEvents(domNode, eventNode, events)
+{
+	var allHandlers = domNode.elm_handlers || {};
+
+	for (var key in events)
+	{
+		var handler = allHandlers[key];
+		var value = events[key];
+
+		if (typeof value === 'undefined')
+		{
+			domNode.removeEventListener(key, handler);
+		}
+		else if (typeof handler === 'undefined')
+		{
+			var handler = makeEventHandler(eventNode, value);
+			domNode.addEventListener(key, handler);
+			allHandlers[key] = handler;
+		}
+		else
+		{
+			handler.info = value;
+		}
+	}
+
+	domNode.elm_handlers = allHandlers;
+}
+
+function makeEventHandler(eventNode, info)
+{
+	function eventHandler(event)
+	{
+		var info = eventHandler.info;
+
+		var value = A2(_elm_lang$core$Native_Json.run, info.decoder, event);
+
+		if (value.ctor === 'Ok')
+		{
+			var options = info.options;
+			if (options.stopPropagation)
+			{
+				event.stopPropagation();
+			}
+			if (options.preventDefault)
+			{
+				event.preventDefault();
+			}
+
+			var message = value._0;
+
+			var currentEventNode = eventNode;
+			while (currentEventNode)
+			{
+				var tagger = currentEventNode.tagger;
+				if (typeof tagger === 'function')
+				{
+					message = tagger(message);
+				}
+				else
+				{
+					for (var i = tagger.length; i--; )
+					{
+						message = tagger[i](message);
+					}
+				}
+				currentEventNode = currentEventNode.parent;
+			}
+		}
+	};
+
+	eventHandler.info = info;
+
+	return eventHandler;
+}
+
+function applyAttrs(domNode, attrs)
+{
+	for (var key in attrs)
+	{
+		var value = attrs[key];
+		if (typeof value === 'undefined')
+		{
+			domNode.removeAttribute(key);
+		}
+		else
+		{
+			domNode.setAttribute(key, value);
+		}
+	}
+}
+
+function applyAttrsNS(domNode, nsAttrs)
+{
+	for (var key in nsAttrs)
+	{
+		var pair = nsAttrs[key];
+		var namespace = pair.namespace;
+		var value = pair.value;
+
+		if (typeof value === 'undefined')
+		{
+			domNode.removeAttributeNS(namespace, key);
+		}
+		else
+		{
+			domNode.setAttributeNS(namespace, key, value);
+		}
+	}
+}
+
+
+
+////////////  DIFF  ////////////
+
+
+function diff(a, b)
+{
+	var patches = [];
+	diffHelp(a, b, patches, 0);
+	return patches;
+}
+
+
+function makePatch(type, index, data)
+{
+	return {
+		index: index,
+		type: type,
+		data: data,
+		domNode: null,
+		eventNode: null
+	};
+}
+
+
+function diffHelp(a, b, patches, index)
+{
+	if (a === b)
+	{
+		return;
+	}
+
+	var aType = a.type;
+	var bType = b.type;
+
+	// Bail if you run into different types of nodes. Implies that the
+	// structure has changed significantly and it's not worth a diff.
+	if (aType !== bType)
+	{
+		patches.push(makePatch('p-redraw', index, b));
+		return;
+	}
+
+	// Now we know that both nodes are the same type.
+	switch (bType)
+	{
+		case 'thunk':
+			var aArgs = a.args;
+			var bArgs = b.args;
+			var i = aArgs.length;
+			var same = a.func === b.func && i === bArgs.length;
+			while (same && i--)
+			{
+				same = aArgs[i] === bArgs[i];
+			}
+			if (same)
+			{
+				b.node = a.node;
+				return;
+			}
+			b.node = b.thunk();
+			var subPatches = [];
+			diffHelp(a.node, b.node, subPatches, 0);
+			if (subPatches.length > 0)
+			{
+				patches.push(makePatch('p-thunk', index, subPatches));
+			}
+			return;
+
+		case 'tagger':
+			// gather nested taggers
+			var aTaggers = a.tagger;
+			var bTaggers = b.tagger;
+			var nesting = false;
+
+			var aSubNode = a.node;
+			while (aSubNode.type === 'tagger')
+			{
+				nesting = true;
+
+				typeof aTaggers !== 'object'
+					? aTaggers = [aTaggers, aSubNode.tagger]
+					: aTaggers.push(aSubNode.tagger);
+
+				aSubNode = aSubNode.node;
+			}
+
+			var bSubNode = b.node;
+			while (bSubNode.type === 'tagger')
+			{
+				nesting = true;
+
+				typeof bTaggers !== 'object'
+					? bTaggers = [bTaggers, bSubNode.tagger]
+					: bTaggers.push(bSubNode.tagger);
+
+				bSubNode = bSubNode.node;
+			}
+
+			// Just bail if different numbers of taggers. This implies the
+			// structure of the virtual DOM has changed.
+			if (nesting && aTaggers.length !== bTaggers.length)
+			{
+				patches.push(makePatch('p-redraw', index, b));
+				return;
+			}
+
+			// check if taggers are "the same"
+			if (nesting ? !pairwiseRefEqual(aTaggers, bTaggers) : aTaggers !== bTaggers)
+			{
+				patches.push(makePatch('p-tagger', index, bTaggers));
+			}
+
+			// diff everything below the taggers
+			diffHelp(aSubNode, bSubNode, patches, index + 1);
+			return;
+
+		case 'text':
+			if (a.text !== b.text)
+			{
+				patches.push(makePatch('p-text', index, b.text));
+				return;
+			}
+
+			return;
+
+		case 'node':
+			// Bail if obvious indicators have changed. Implies more serious
+			// structural changes such that it's not worth it to diff.
+			if (a.tag !== b.tag || a.namespace !== b.namespace)
+			{
+				patches.push(makePatch('p-redraw', index, b));
+				return;
+			}
+
+			var factsDiff = diffFacts(a.facts, b.facts);
+
+			if (typeof factsDiff !== 'undefined')
+			{
+				patches.push(makePatch('p-facts', index, factsDiff));
+			}
+
+			diffChildren(a, b, patches, index);
+			return;
+
+		case 'custom':
+			if (a.impl !== b.impl)
+			{
+				patches.push(makePatch('p-redraw', index, b));
+				return;
+			}
+
+			var factsDiff = diffFacts(a.facts, b.facts);
+			if (typeof factsDiff !== 'undefined')
+			{
+				patches.push(makePatch('p-facts', index, factsDiff));
+			}
+
+			var patch = b.impl.diff(a,b);
+			if (patch)
+			{
+				patches.push(makePatch('p-custom', index, patch));
+				return;
+			}
+
+			return;
+	}
+}
+
+
+// assumes the incoming arrays are the same length
+function pairwiseRefEqual(as, bs)
+{
+	for (var i = 0; i < as.length; i++)
+	{
+		if (as[i] !== bs[i])
+		{
+			return false;
+		}
+	}
+
+	return true;
+}
+
+
+// TODO Instead of creating a new diff object, it's possible to just test if
+// there *is* a diff. During the actual patch, do the diff again and make the
+// modifications directly. This way, there's no new allocations. Worth it?
+function diffFacts(a, b, category)
+{
+	var diff;
+
+	// add new stuff
+	for (var bKey in b)
+	{
+		if (!(bKey in a))
+		{
+			diff = diff || {};
+			diff[bKey] = b[bKey];
+		}
+	}
+
+	// look for changes and removals
+	for (var aKey in a)
+	{
+		if (aKey === STYLE_KEY || aKey === EVENT_KEY || aKey === ATTR_KEY || aKey === ATTR_NS_KEY)
+		{
+			var subDiff = diffFacts(a[aKey], b[aKey] || {}, aKey);
+			if (subDiff)
+			{
+				diff = diff || {};
+				diff[aKey] = subDiff;
+			}
+			continue;
+		}
+
+		// remove if not in the new facts
+		if (!(aKey in b))
+		{
+			diff = diff || {};
+			diff[aKey] =
+				(typeof category === 'undefined')
+					? (typeof a[aKey] === 'string' ? '' : null)
+					:
+				(category === STYLE_KEY)
+					? ''
+					:
+				(category === EVENT_KEY)
+					? null
+					:
+				(category === ATTR_KEY)
+					? undefined
+					:
+				{ namespace: a[aKey].namespace, value: undefined };
+
+			continue;
+		}
+
+		var aValue = a[aKey];
+		var bValue = b[aKey];
+
+		// reference equal, so don't worry about it
+		if (aValue === bValue || (category === EVENT_KEY && equalEvents(aValue, bValue)))
+		{
+			continue;
+		}
+
+		diff = diff || {};
+		diff[aKey] = bValue;
+	}
+
+	return diff;
+}
+
+
+function diffChildren(aParent, bParent, patches, rootIndex)
+{
+	var aChildren = aParent.children;
+	var bChildren = bParent.children;
+
+	var aLen = aChildren.length;
+	var bLen = bChildren.length;
+
+	// FIGURE OUT IF THERE ARE INSERTS OR REMOVALS
+
+	if (aLen > bLen)
+	{
+		patches.push(makePatch('p-remove', rootIndex, aLen - bLen));
+	}
+	else if (aLen < bLen)
+	{
+		patches.push(makePatch('p-insert', rootIndex, bChildren.slice(aLen)));
+	}
+
+	// PAIRWISE DIFF EVERYTHING ELSE
+
+	var index = rootIndex;
+	var minLen = aLen < bLen ? aLen : bLen;
+	for (var i = 0; i < minLen; i++)
+	{
+		index++;
+		var aChild = aChildren[i];
+		diffHelp(aChild, bChildren[i], patches, index);
+		index += aChild.descendantsCount || 0;
+	}
+}
+
+
+
+////////////  ADD DOM NODES  ////////////
+//
+// Each DOM node has an "index" assigned in order of traversal. It is important
+// to minimize our crawl over the actual DOM, so these indexes (along with the
+// descendantsCount of virtual nodes) let us skip touching entire subtrees of
+// the DOM if we know there are no patches there.
+
+
+function addDomNodes(domNode, vNode, patches, eventNode)
+{
+	addDomNodesHelp(domNode, vNode, patches, 0, 0, vNode.descendantsCount, eventNode);
+}
+
+
+// assumes `patches` is non-empty and indexes increase monotonically.
+function addDomNodesHelp(domNode, vNode, patches, i, low, high, eventNode)
+{
+	var patch = patches[i];
+	var index = patch.index;
+
+	while (index === low)
+	{
+		var patchType = patch.type;
+
+		if (patchType === 'p-thunk')
+		{
+			addDomNodes(domNode, vNode.node, patch.data, eventNode);
+		}
+		else
+		{
+			patch.domNode = domNode;
+			patch.eventNode = eventNode;
+		}
+
+		i++;
+
+		if (!(patch = patches[i]) || (index = patch.index) > high)
+		{
+			return i;
+		}
+	}
+
+	switch (vNode.type)
+	{
+		case 'tagger':
+			return addDomNodesHelp(domNode, vNode.node, patches, i, low + 1, high, domNode.elm_event_node_ref);
+
+		case 'node':
+			var vChildren = vNode.children;
+			var childNodes = domNode.childNodes;
+			for (var j = 0; j < vChildren.length; j++)
+			{
+				low++;
+				var vChild = vChildren[j];
+				var nextLow = low + (vChild.descendantsCount || 0);
+				if (low <= index && index <= nextLow)
+				{
+					i = addDomNodesHelp(childNodes[j], vChild, patches, i, low, nextLow, eventNode);
+					if (!(patch = patches[i]) || (index = patch.index) > high)
+					{
+						return i;
+					}
+				}
+				low = nextLow;
+			}
+			return i;
+
+		case 'text':
+		case 'thunk':
+			throw new Error('should never traverse `text` or `thunk` nodes like this');
+	}
+}
+
+
+
+////////////  APPLY PATCHES  ////////////
+
+
+function applyPatches(rootDomNode, oldVirtualNode, patches, eventNode)
+{
+	if (patches.length === 0)
+	{
+		return rootDomNode;
+	}
+
+	addDomNodes(rootDomNode, oldVirtualNode, patches, eventNode);
+	return applyPatchesHelp(rootDomNode, patches);
+}
+
+function applyPatchesHelp(rootDomNode, patches)
+{
+	for (var i = 0; i < patches.length; i++)
+	{
+		var patch = patches[i];
+		var localDomNode = patch.domNode
+		var newNode = applyPatch(localDomNode, patch);
+		if (localDomNode === rootDomNode)
+		{
+			rootDomNode = newNode;
+		}
+	}
+	return rootDomNode;
+}
+
+function applyPatch(domNode, patch)
+{
+	switch (patch.type)
+	{
+		case 'p-redraw':
+			return redraw(domNode, patch.data, patch.eventNode);
+
+		case 'p-facts':
+			applyFacts(domNode, patch.eventNode, patch.data);
+			return domNode;
+
+		case 'p-text':
+			domNode.replaceData(0, domNode.length, patch.data);
+			return domNode;
+
+		case 'p-thunk':
+			return applyPatchesHelp(domNode, patch.data);
+
+		case 'p-tagger':
+			domNode.elm_event_node_ref.tagger = patch.data;
+			return domNode;
+
+		case 'p-remove':
+			var i = patch.data;
+			while (i--)
+			{
+				domNode.removeChild(domNode.lastChild);
+			}
+			return domNode;
+
+		case 'p-insert':
+			var newNodes = patch.data;
+			for (var i = 0; i < newNodes.length; i++)
+			{
+				domNode.appendChild(render(newNodes[i], patch.eventNode));
+			}
+			return domNode;
+
+		case 'p-custom':
+			var impl = patch.data;
+			return impl.applyPatch(domNode, impl.data);
+
+		default:
+			throw new Error('Ran into an unknown patch!');
+	}
+}
+
+
+function redraw(domNode, vNode, eventNode)
+{
+	var parentNode = domNode.parentNode;
+	var newNode = render(vNode, eventNode);
+
+	var ref = domNode.elm_event_node_ref
+	if (typeof ref !== 'undefined')
+	{
+		newNode.elm_event_node_ref = ref;
+	}
+
+	if (parentNode && newNode !== domNode)
+	{
+		parentNode.replaceChild(newNode, domNode);
+	}
+	return newNode;
+}
+
+
+
+////////////  PROGRAMS  ////////////
+
+
+function programWithFlags(details)
+{
+	return {
+		init: details.init,
+		update: details.update,
+		subscriptions: details.subscriptions,
+		view: details.view,
+		renderer: renderer
+	};
+}
+
+
+return {
+	node: node,
+	text: text,
+
+	custom: custom,
+
+	map: F2(map),
+
+	on: F3(on),
+	style: style,
+	property: F2(property),
+	attribute: F2(attribute),
+	attributeNS: F3(attributeNS),
+
+	lazy: F2(lazy),
+	lazy2: F3(lazy2),
+	lazy3: F4(lazy3),
+
+	programWithFlags: programWithFlags
+};
+
+}();
+var _elm_lang$virtual_dom$VirtualDom$programWithFlags = _elm_lang$virtual_dom$Native_VirtualDom.programWithFlags;
+var _elm_lang$virtual_dom$VirtualDom$lazy3 = _elm_lang$virtual_dom$Native_VirtualDom.lazy3;
+var _elm_lang$virtual_dom$VirtualDom$lazy2 = _elm_lang$virtual_dom$Native_VirtualDom.lazy2;
+var _elm_lang$virtual_dom$VirtualDom$lazy = _elm_lang$virtual_dom$Native_VirtualDom.lazy;
+var _elm_lang$virtual_dom$VirtualDom$defaultOptions = {stopPropagation: false, preventDefault: false};
+var _elm_lang$virtual_dom$VirtualDom$onWithOptions = _elm_lang$virtual_dom$Native_VirtualDom.on;
+var _elm_lang$virtual_dom$VirtualDom$on = F2(
+	function (eventName, decoder) {
+		return A3(_elm_lang$virtual_dom$VirtualDom$onWithOptions, eventName, _elm_lang$virtual_dom$VirtualDom$defaultOptions, decoder);
+	});
+var _elm_lang$virtual_dom$VirtualDom$style = _elm_lang$virtual_dom$Native_VirtualDom.style;
+var _elm_lang$virtual_dom$VirtualDom$attributeNS = _elm_lang$virtual_dom$Native_VirtualDom.attributeNS;
+var _elm_lang$virtual_dom$VirtualDom$attribute = _elm_lang$virtual_dom$Native_VirtualDom.attribute;
+var _elm_lang$virtual_dom$VirtualDom$property = _elm_lang$virtual_dom$Native_VirtualDom.property;
+var _elm_lang$virtual_dom$VirtualDom$map = _elm_lang$virtual_dom$Native_VirtualDom.map;
+var _elm_lang$virtual_dom$VirtualDom$text = _elm_lang$virtual_dom$Native_VirtualDom.text;
+var _elm_lang$virtual_dom$VirtualDom$node = _elm_lang$virtual_dom$Native_VirtualDom.node;
+var _elm_lang$virtual_dom$VirtualDom$Options = F2(
+	function (a, b) {
+		return {stopPropagation: a, preventDefault: b};
+	});
+var _elm_lang$virtual_dom$VirtualDom$Node = {ctor: 'Node'};
+var _elm_lang$virtual_dom$VirtualDom$Property = {ctor: 'Property'};
+
+var _elm_lang$html$Html$text = _elm_lang$virtual_dom$VirtualDom$text;
+var _elm_lang$html$Html$node = _elm_lang$virtual_dom$VirtualDom$node;
+var _elm_lang$html$Html$body = _elm_lang$html$Html$node('body');
+var _elm_lang$html$Html$section = _elm_lang$html$Html$node('section');
+var _elm_lang$html$Html$nav = _elm_lang$html$Html$node('nav');
+var _elm_lang$html$Html$article = _elm_lang$html$Html$node('article');
+var _elm_lang$html$Html$aside = _elm_lang$html$Html$node('aside');
+var _elm_lang$html$Html$h1 = _elm_lang$html$Html$node('h1');
+var _elm_lang$html$Html$h2 = _elm_lang$html$Html$node('h2');
+var _elm_lang$html$Html$h3 = _elm_lang$html$Html$node('h3');
+var _elm_lang$html$Html$h4 = _elm_lang$html$Html$node('h4');
+var _elm_lang$html$Html$h5 = _elm_lang$html$Html$node('h5');
+var _elm_lang$html$Html$h6 = _elm_lang$html$Html$node('h6');
+var _elm_lang$html$Html$header = _elm_lang$html$Html$node('header');
+var _elm_lang$html$Html$footer = _elm_lang$html$Html$node('footer');
+var _elm_lang$html$Html$address = _elm_lang$html$Html$node('address');
+var _elm_lang$html$Html$main$ = _elm_lang$html$Html$node('main');
+var _elm_lang$html$Html$p = _elm_lang$html$Html$node('p');
+var _elm_lang$html$Html$hr = _elm_lang$html$Html$node('hr');
+var _elm_lang$html$Html$pre = _elm_lang$html$Html$node('pre');
+var _elm_lang$html$Html$blockquote = _elm_lang$html$Html$node('blockquote');
+var _elm_lang$html$Html$ol = _elm_lang$html$Html$node('ol');
+var _elm_lang$html$Html$ul = _elm_lang$html$Html$node('ul');
+var _elm_lang$html$Html$li = _elm_lang$html$Html$node('li');
+var _elm_lang$html$Html$dl = _elm_lang$html$Html$node('dl');
+var _elm_lang$html$Html$dt = _elm_lang$html$Html$node('dt');
+var _elm_lang$html$Html$dd = _elm_lang$html$Html$node('dd');
+var _elm_lang$html$Html$figure = _elm_lang$html$Html$node('figure');
+var _elm_lang$html$Html$figcaption = _elm_lang$html$Html$node('figcaption');
+var _elm_lang$html$Html$div = _elm_lang$html$Html$node('div');
+var _elm_lang$html$Html$a = _elm_lang$html$Html$node('a');
+var _elm_lang$html$Html$em = _elm_lang$html$Html$node('em');
+var _elm_lang$html$Html$strong = _elm_lang$html$Html$node('strong');
+var _elm_lang$html$Html$small = _elm_lang$html$Html$node('small');
+var _elm_lang$html$Html$s = _elm_lang$html$Html$node('s');
+var _elm_lang$html$Html$cite = _elm_lang$html$Html$node('cite');
+var _elm_lang$html$Html$q = _elm_lang$html$Html$node('q');
+var _elm_lang$html$Html$dfn = _elm_lang$html$Html$node('dfn');
+var _elm_lang$html$Html$abbr = _elm_lang$html$Html$node('abbr');
+var _elm_lang$html$Html$time = _elm_lang$html$Html$node('time');
+var _elm_lang$html$Html$code = _elm_lang$html$Html$node('code');
+var _elm_lang$html$Html$var = _elm_lang$html$Html$node('var');
+var _elm_lang$html$Html$samp = _elm_lang$html$Html$node('samp');
+var _elm_lang$html$Html$kbd = _elm_lang$html$Html$node('kbd');
+var _elm_lang$html$Html$sub = _elm_lang$html$Html$node('sub');
+var _elm_lang$html$Html$sup = _elm_lang$html$Html$node('sup');
+var _elm_lang$html$Html$i = _elm_lang$html$Html$node('i');
+var _elm_lang$html$Html$b = _elm_lang$html$Html$node('b');
+var _elm_lang$html$Html$u = _elm_lang$html$Html$node('u');
+var _elm_lang$html$Html$mark = _elm_lang$html$Html$node('mark');
+var _elm_lang$html$Html$ruby = _elm_lang$html$Html$node('ruby');
+var _elm_lang$html$Html$rt = _elm_lang$html$Html$node('rt');
+var _elm_lang$html$Html$rp = _elm_lang$html$Html$node('rp');
+var _elm_lang$html$Html$bdi = _elm_lang$html$Html$node('bdi');
+var _elm_lang$html$Html$bdo = _elm_lang$html$Html$node('bdo');
+var _elm_lang$html$Html$span = _elm_lang$html$Html$node('span');
+var _elm_lang$html$Html$br = _elm_lang$html$Html$node('br');
+var _elm_lang$html$Html$wbr = _elm_lang$html$Html$node('wbr');
+var _elm_lang$html$Html$ins = _elm_lang$html$Html$node('ins');
+var _elm_lang$html$Html$del = _elm_lang$html$Html$node('del');
+var _elm_lang$html$Html$img = _elm_lang$html$Html$node('img');
+var _elm_lang$html$Html$iframe = _elm_lang$html$Html$node('iframe');
+var _elm_lang$html$Html$embed = _elm_lang$html$Html$node('embed');
+var _elm_lang$html$Html$object = _elm_lang$html$Html$node('object');
+var _elm_lang$html$Html$param = _elm_lang$html$Html$node('param');
+var _elm_lang$html$Html$video = _elm_lang$html$Html$node('video');
+var _elm_lang$html$Html$audio = _elm_lang$html$Html$node('audio');
+var _elm_lang$html$Html$source = _elm_lang$html$Html$node('source');
+var _elm_lang$html$Html$track = _elm_lang$html$Html$node('track');
+var _elm_lang$html$Html$canvas = _elm_lang$html$Html$node('canvas');
+var _elm_lang$html$Html$svg = _elm_lang$html$Html$node('svg');
+var _elm_lang$html$Html$math = _elm_lang$html$Html$node('math');
+var _elm_lang$html$Html$table = _elm_lang$html$Html$node('table');
+var _elm_lang$html$Html$caption = _elm_lang$html$Html$node('caption');
+var _elm_lang$html$Html$colgroup = _elm_lang$html$Html$node('colgroup');
+var _elm_lang$html$Html$col = _elm_lang$html$Html$node('col');
+var _elm_lang$html$Html$tbody = _elm_lang$html$Html$node('tbody');
+var _elm_lang$html$Html$thead = _elm_lang$html$Html$node('thead');
+var _elm_lang$html$Html$tfoot = _elm_lang$html$Html$node('tfoot');
+var _elm_lang$html$Html$tr = _elm_lang$html$Html$node('tr');
+var _elm_lang$html$Html$td = _elm_lang$html$Html$node('td');
+var _elm_lang$html$Html$th = _elm_lang$html$Html$node('th');
+var _elm_lang$html$Html$form = _elm_lang$html$Html$node('form');
+var _elm_lang$html$Html$fieldset = _elm_lang$html$Html$node('fieldset');
+var _elm_lang$html$Html$legend = _elm_lang$html$Html$node('legend');
+var _elm_lang$html$Html$label = _elm_lang$html$Html$node('label');
+var _elm_lang$html$Html$input = _elm_lang$html$Html$node('input');
+var _elm_lang$html$Html$button = _elm_lang$html$Html$node('button');
+var _elm_lang$html$Html$select = _elm_lang$html$Html$node('select');
+var _elm_lang$html$Html$datalist = _elm_lang$html$Html$node('datalist');
+var _elm_lang$html$Html$optgroup = _elm_lang$html$Html$node('optgroup');
+var _elm_lang$html$Html$option = _elm_lang$html$Html$node('option');
+var _elm_lang$html$Html$textarea = _elm_lang$html$Html$node('textarea');
+var _elm_lang$html$Html$keygen = _elm_lang$html$Html$node('keygen');
+var _elm_lang$html$Html$output = _elm_lang$html$Html$node('output');
+var _elm_lang$html$Html$progress = _elm_lang$html$Html$node('progress');
+var _elm_lang$html$Html$meter = _elm_lang$html$Html$node('meter');
+var _elm_lang$html$Html$details = _elm_lang$html$Html$node('details');
+var _elm_lang$html$Html$summary = _elm_lang$html$Html$node('summary');
+var _elm_lang$html$Html$menuitem = _elm_lang$html$Html$node('menuitem');
+var _elm_lang$html$Html$menu = _elm_lang$html$Html$node('menu');
+
+var _elm_lang$html$Html_App$programWithFlags = _elm_lang$virtual_dom$VirtualDom$programWithFlags;
+var _elm_lang$html$Html_App$program = function (app) {
+	return _elm_lang$html$Html_App$programWithFlags(
+		_elm_lang$core$Native_Utils.update(
+			app,
+			{
+				init: function (_p0) {
+					return app.init;
+				}
+			}));
+};
+var _elm_lang$html$Html_App$beginnerProgram = function (_p1) {
+	var _p2 = _p1;
+	return _elm_lang$html$Html_App$programWithFlags(
+		{
+			init: function (_p3) {
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_p2.model,
+					_elm_lang$core$Native_List.fromArray(
+						[]));
+			},
+			update: F2(
+				function (msg, model) {
+					return A2(
+						_elm_lang$core$Platform_Cmd_ops['!'],
+						A2(_p2.update, msg, model),
+						_elm_lang$core$Native_List.fromArray(
+							[]));
+				}),
+			view: _p2.view,
+			subscriptions: function (_p4) {
+				return _elm_lang$core$Platform_Sub$none;
+			}
+		});
+};
+var _elm_lang$html$Html_App$map = _elm_lang$virtual_dom$VirtualDom$map;
+
+var _elm_lang$html$Html_Attributes$attribute = _elm_lang$virtual_dom$VirtualDom$attribute;
+var _elm_lang$html$Html_Attributes$contextmenu = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$attribute, 'contextmenu', value);
+};
+var _elm_lang$html$Html_Attributes$property = _elm_lang$virtual_dom$VirtualDom$property;
+var _elm_lang$html$Html_Attributes$stringProperty = F2(
+	function (name, string) {
+		return A2(
+			_elm_lang$html$Html_Attributes$property,
+			name,
+			_elm_lang$core$Json_Encode$string(string));
+	});
+var _elm_lang$html$Html_Attributes$class = function (name) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'className', name);
+};
+var _elm_lang$html$Html_Attributes$id = function (name) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'id', name);
+};
+var _elm_lang$html$Html_Attributes$title = function (name) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'title', name);
+};
+var _elm_lang$html$Html_Attributes$accesskey = function ($char) {
+	return A2(
+		_elm_lang$html$Html_Attributes$stringProperty,
+		'accessKey',
+		_elm_lang$core$String$fromChar($char));
+};
+var _elm_lang$html$Html_Attributes$dir = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'dir', value);
+};
+var _elm_lang$html$Html_Attributes$draggable = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'draggable', value);
+};
+var _elm_lang$html$Html_Attributes$dropzone = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'dropzone', value);
+};
+var _elm_lang$html$Html_Attributes$itemprop = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'itemprop', value);
+};
+var _elm_lang$html$Html_Attributes$lang = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'lang', value);
+};
+var _elm_lang$html$Html_Attributes$tabindex = function (n) {
+	return A2(
+		_elm_lang$html$Html_Attributes$stringProperty,
+		'tabIndex',
+		_elm_lang$core$Basics$toString(n));
+};
+var _elm_lang$html$Html_Attributes$charset = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'charset', value);
+};
+var _elm_lang$html$Html_Attributes$content = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'content', value);
+};
+var _elm_lang$html$Html_Attributes$httpEquiv = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'httpEquiv', value);
+};
+var _elm_lang$html$Html_Attributes$language = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'language', value);
+};
+var _elm_lang$html$Html_Attributes$src = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'src', value);
+};
+var _elm_lang$html$Html_Attributes$height = function (value) {
+	return A2(
+		_elm_lang$html$Html_Attributes$stringProperty,
+		'height',
+		_elm_lang$core$Basics$toString(value));
+};
+var _elm_lang$html$Html_Attributes$width = function (value) {
+	return A2(
+		_elm_lang$html$Html_Attributes$stringProperty,
+		'width',
+		_elm_lang$core$Basics$toString(value));
+};
+var _elm_lang$html$Html_Attributes$alt = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'alt', value);
+};
+var _elm_lang$html$Html_Attributes$preload = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'preload', value);
+};
+var _elm_lang$html$Html_Attributes$poster = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'poster', value);
+};
+var _elm_lang$html$Html_Attributes$kind = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'kind', value);
+};
+var _elm_lang$html$Html_Attributes$srclang = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'srclang', value);
+};
+var _elm_lang$html$Html_Attributes$sandbox = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'sandbox', value);
+};
+var _elm_lang$html$Html_Attributes$srcdoc = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'srcdoc', value);
+};
+var _elm_lang$html$Html_Attributes$type$ = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'type', value);
+};
+var _elm_lang$html$Html_Attributes$value = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'value', value);
+};
+var _elm_lang$html$Html_Attributes$placeholder = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'placeholder', value);
+};
+var _elm_lang$html$Html_Attributes$accept = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'accept', value);
+};
+var _elm_lang$html$Html_Attributes$acceptCharset = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'acceptCharset', value);
+};
+var _elm_lang$html$Html_Attributes$action = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'action', value);
+};
+var _elm_lang$html$Html_Attributes$autocomplete = function (bool) {
+	return A2(
+		_elm_lang$html$Html_Attributes$stringProperty,
+		'autocomplete',
+		bool ? 'on' : 'off');
+};
+var _elm_lang$html$Html_Attributes$autosave = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'autosave', value);
+};
+var _elm_lang$html$Html_Attributes$enctype = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'enctype', value);
+};
+var _elm_lang$html$Html_Attributes$formaction = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'formAction', value);
+};
+var _elm_lang$html$Html_Attributes$list = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'list', value);
+};
+var _elm_lang$html$Html_Attributes$minlength = function (n) {
+	return A2(
+		_elm_lang$html$Html_Attributes$stringProperty,
+		'minLength',
+		_elm_lang$core$Basics$toString(n));
+};
+var _elm_lang$html$Html_Attributes$maxlength = function (n) {
+	return A2(
+		_elm_lang$html$Html_Attributes$stringProperty,
+		'maxLength',
+		_elm_lang$core$Basics$toString(n));
+};
+var _elm_lang$html$Html_Attributes$method = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'method', value);
+};
+var _elm_lang$html$Html_Attributes$name = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'name', value);
+};
+var _elm_lang$html$Html_Attributes$pattern = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'pattern', value);
+};
+var _elm_lang$html$Html_Attributes$size = function (n) {
+	return A2(
+		_elm_lang$html$Html_Attributes$stringProperty,
+		'size',
+		_elm_lang$core$Basics$toString(n));
+};
+var _elm_lang$html$Html_Attributes$for = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'htmlFor', value);
+};
+var _elm_lang$html$Html_Attributes$form = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'form', value);
+};
+var _elm_lang$html$Html_Attributes$max = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'max', value);
+};
+var _elm_lang$html$Html_Attributes$min = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'min', value);
+};
+var _elm_lang$html$Html_Attributes$step = function (n) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'step', n);
+};
+var _elm_lang$html$Html_Attributes$cols = function (n) {
+	return A2(
+		_elm_lang$html$Html_Attributes$stringProperty,
+		'cols',
+		_elm_lang$core$Basics$toString(n));
+};
+var _elm_lang$html$Html_Attributes$rows = function (n) {
+	return A2(
+		_elm_lang$html$Html_Attributes$stringProperty,
+		'rows',
+		_elm_lang$core$Basics$toString(n));
+};
+var _elm_lang$html$Html_Attributes$wrap = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'wrap', value);
+};
+var _elm_lang$html$Html_Attributes$usemap = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'useMap', value);
+};
+var _elm_lang$html$Html_Attributes$shape = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'shape', value);
+};
+var _elm_lang$html$Html_Attributes$coords = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'coords', value);
+};
+var _elm_lang$html$Html_Attributes$challenge = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'challenge', value);
+};
+var _elm_lang$html$Html_Attributes$keytype = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'keytype', value);
+};
+var _elm_lang$html$Html_Attributes$align = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'align', value);
+};
+var _elm_lang$html$Html_Attributes$cite = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'cite', value);
+};
+var _elm_lang$html$Html_Attributes$href = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'href', value);
+};
+var _elm_lang$html$Html_Attributes$target = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'target', value);
+};
+var _elm_lang$html$Html_Attributes$downloadAs = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'download', value);
+};
+var _elm_lang$html$Html_Attributes$hreflang = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'hreflang', value);
+};
+var _elm_lang$html$Html_Attributes$media = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'media', value);
+};
+var _elm_lang$html$Html_Attributes$ping = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'ping', value);
+};
+var _elm_lang$html$Html_Attributes$rel = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'rel', value);
+};
+var _elm_lang$html$Html_Attributes$datetime = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'datetime', value);
+};
+var _elm_lang$html$Html_Attributes$pubdate = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'pubdate', value);
+};
+var _elm_lang$html$Html_Attributes$start = function (n) {
+	return A2(
+		_elm_lang$html$Html_Attributes$stringProperty,
+		'start',
+		_elm_lang$core$Basics$toString(n));
+};
+var _elm_lang$html$Html_Attributes$colspan = function (n) {
+	return A2(
+		_elm_lang$html$Html_Attributes$stringProperty,
+		'colSpan',
+		_elm_lang$core$Basics$toString(n));
+};
+var _elm_lang$html$Html_Attributes$headers = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'headers', value);
+};
+var _elm_lang$html$Html_Attributes$rowspan = function (n) {
+	return A2(
+		_elm_lang$html$Html_Attributes$stringProperty,
+		'rowSpan',
+		_elm_lang$core$Basics$toString(n));
+};
+var _elm_lang$html$Html_Attributes$scope = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'scope', value);
+};
+var _elm_lang$html$Html_Attributes$manifest = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'manifest', value);
+};
+var _elm_lang$html$Html_Attributes$boolProperty = F2(
+	function (name, bool) {
+		return A2(
+			_elm_lang$html$Html_Attributes$property,
+			name,
+			_elm_lang$core$Json_Encode$bool(bool));
+	});
+var _elm_lang$html$Html_Attributes$hidden = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'hidden', bool);
+};
+var _elm_lang$html$Html_Attributes$contenteditable = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'contentEditable', bool);
+};
+var _elm_lang$html$Html_Attributes$spellcheck = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'spellcheck', bool);
+};
+var _elm_lang$html$Html_Attributes$async = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'async', bool);
+};
+var _elm_lang$html$Html_Attributes$defer = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'defer', bool);
+};
+var _elm_lang$html$Html_Attributes$scoped = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'scoped', bool);
+};
+var _elm_lang$html$Html_Attributes$autoplay = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'autoplay', bool);
+};
+var _elm_lang$html$Html_Attributes$controls = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'controls', bool);
+};
+var _elm_lang$html$Html_Attributes$loop = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'loop', bool);
+};
+var _elm_lang$html$Html_Attributes$default = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'default', bool);
+};
+var _elm_lang$html$Html_Attributes$seamless = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'seamless', bool);
+};
+var _elm_lang$html$Html_Attributes$checked = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'checked', bool);
+};
+var _elm_lang$html$Html_Attributes$selected = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'selected', bool);
+};
+var _elm_lang$html$Html_Attributes$autofocus = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'autofocus', bool);
+};
+var _elm_lang$html$Html_Attributes$disabled = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'disabled', bool);
+};
+var _elm_lang$html$Html_Attributes$multiple = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'multiple', bool);
+};
+var _elm_lang$html$Html_Attributes$novalidate = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'noValidate', bool);
+};
+var _elm_lang$html$Html_Attributes$readonly = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'readOnly', bool);
+};
+var _elm_lang$html$Html_Attributes$required = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'required', bool);
+};
+var _elm_lang$html$Html_Attributes$ismap = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'isMap', value);
+};
+var _elm_lang$html$Html_Attributes$download = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'download', bool);
+};
+var _elm_lang$html$Html_Attributes$reversed = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'reversed', bool);
+};
+var _elm_lang$html$Html_Attributes$classList = function (list) {
+	return _elm_lang$html$Html_Attributes$class(
+		A2(
+			_elm_lang$core$String$join,
+			' ',
+			A2(
+				_elm_lang$core$List$map,
+				_elm_lang$core$Basics$fst,
+				A2(_elm_lang$core$List$filter, _elm_lang$core$Basics$snd, list))));
+};
+var _elm_lang$html$Html_Attributes$style = _elm_lang$virtual_dom$VirtualDom$style;
+
+var _elm_lang$html$Html_Events$keyCode = A2(_elm_lang$core$Json_Decode_ops[':='], 'keyCode', _elm_lang$core$Json_Decode$int);
+var _elm_lang$html$Html_Events$targetChecked = A2(
+	_elm_lang$core$Json_Decode$at,
+	_elm_lang$core$Native_List.fromArray(
+		['target', 'checked']),
+	_elm_lang$core$Json_Decode$bool);
+var _elm_lang$html$Html_Events$targetValue = A2(
+	_elm_lang$core$Json_Decode$at,
+	_elm_lang$core$Native_List.fromArray(
+		['target', 'value']),
+	_elm_lang$core$Json_Decode$string);
+var _elm_lang$html$Html_Events$defaultOptions = _elm_lang$virtual_dom$VirtualDom$defaultOptions;
+var _elm_lang$html$Html_Events$onWithOptions = _elm_lang$virtual_dom$VirtualDom$onWithOptions;
+var _elm_lang$html$Html_Events$on = _elm_lang$virtual_dom$VirtualDom$on;
+var _elm_lang$html$Html_Events$onFocus = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'focus',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onBlur = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'blur',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onSubmitOptions = _elm_lang$core$Native_Utils.update(
+	_elm_lang$html$Html_Events$defaultOptions,
+	{preventDefault: true});
+var _elm_lang$html$Html_Events$onSubmit = function (msg) {
+	return A3(
+		_elm_lang$html$Html_Events$onWithOptions,
+		'submit',
+		_elm_lang$html$Html_Events$onSubmitOptions,
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onCheck = function (tagger) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'change',
+		A2(_elm_lang$core$Json_Decode$map, tagger, _elm_lang$html$Html_Events$targetChecked));
+};
+var _elm_lang$html$Html_Events$onInput = function (tagger) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'input',
+		A2(_elm_lang$core$Json_Decode$map, tagger, _elm_lang$html$Html_Events$targetValue));
+};
+var _elm_lang$html$Html_Events$onMouseOut = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'mouseout',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onMouseOver = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'mouseover',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onMouseLeave = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'mouseleave',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onMouseEnter = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'mouseenter',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onMouseUp = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'mouseup',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onMouseDown = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'mousedown',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onDoubleClick = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'dblclick',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onClick = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'click',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$Options = F2(
+	function (a, b) {
+		return {stopPropagation: a, preventDefault: b};
+	});
+
+var _evancz$elm_markdown$Native_Markdown = function() {
+
+
+// VIRTUAL-DOM WIDGETS
+
+function toHtml(options, factList, rawMarkdown)
+{
+	var model = {
+		options: options,
+		markdown: rawMarkdown
+	};
+	return _elm_lang$virtual_dom$Native_VirtualDom.custom(factList, model, implementation);
+}
+
+
+// WIDGET IMPLEMENTATION
+
+var implementation = {
+	render: render,
+	diff: diff
+};
+
+function render(model)
+{
+	var html = marked(model.markdown, formatOptions(model.options));
+	var div = document.createElement('div');
+	div.innerHTML = html;
+	return div;
+}
+
+function diff(a, b)
+{
+	if (a.markdown === b.markdown && a.options === b.options)
+	{
+		return null;
+	}
+
+	return {
+		applyPatch: applyPatch,
+		data: marked(b.markdown, formatOptions(b.options))
+	};
+}
+
+function applyPatch(domNode, data)
+{
+	domNode.innerHTML = data;
+	return domNode;
+}
+
+
+// ACTUAL MARKDOWN PARSER
+
+var marked = function() {
+	// catch the `marked` object regardless of the outer environment.
+	// (ex. a CommonJS module compatible environment.)
+	// note that this depends on marked's implementation of environment detection.
+	var module = {};
+	var exports = module.exports = {};
+
+	/**
+	 * marked - a markdown parser
+	 * Copyright (c) 2011-2014, Christopher Jeffrey. (MIT Licensed)
+	 * https://github.com/chjj/marked
+	 */
+	(function(){var block={newline:/^\n+/,code:/^( {4}[^\n]+\n*)+/,fences:noop,hr:/^( *[-*_]){3,} *(?:\n+|$)/,heading:/^ *(#{1,6}) *([^\n]+?) *#* *(?:\n+|$)/,nptable:noop,lheading:/^([^\n]+)\n *(=|-){2,} *(?:\n+|$)/,blockquote:/^( *>[^\n]+(\n(?!def)[^\n]+)*\n*)+/,list:/^( *)(bull) [\s\S]+?(?:hr|def|\n{2,}(?! )(?!\1bull )\n*|\s*$)/,html:/^ *(?:comment|closed|closing) *(?:\n{2,}|\s*$)/,def:/^ *\[([^\]]+)\]: *<?([^\s>]+)>?(?: +["(]([^\n]+)[")])? *(?:\n+|$)/,table:noop,paragraph:/^((?:[^\n]+\n?(?!hr|heading|lheading|blockquote|tag|def))+)\n*/,text:/^[^\n]+/};block.bullet=/(?:[*+-]|\d+\.)/;block.item=/^( *)(bull) [^\n]*(?:\n(?!\1bull )[^\n]*)*/;block.item=replace(block.item,"gm")(/bull/g,block.bullet)();block.list=replace(block.list)(/bull/g,block.bullet)("hr","\\n+(?=\\1?(?:[-*_] *){3,}(?:\\n+|$))")("def","\\n+(?="+block.def.source+")")();block.blockquote=replace(block.blockquote)("def",block.def)();block._tag="(?!(?:"+"a|em|strong|small|s|cite|q|dfn|abbr|data|time|code"+"|var|samp|kbd|sub|sup|i|b|u|mark|ruby|rt|rp|bdi|bdo"+"|span|br|wbr|ins|del|img)\\b)\\w+(?!:/|[^\\w\\s@]*@)\\b";block.html=replace(block.html)("comment",/<!--[\s\S]*?-->/)("closed",/<(tag)[\s\S]+?<\/\1>/)("closing",/<tag(?:"[^"]*"|'[^']*'|[^'">])*?>/)(/tag/g,block._tag)();block.paragraph=replace(block.paragraph)("hr",block.hr)("heading",block.heading)("lheading",block.lheading)("blockquote",block.blockquote)("tag","<"+block._tag)("def",block.def)();block.normal=merge({},block);block.gfm=merge({},block.normal,{fences:/^ *(`{3,}|~{3,}) *(\S+)? *\n([\s\S]+?)\s*\1 *(?:\n+|$)/,paragraph:/^/});block.gfm.paragraph=replace(block.paragraph)("(?!","(?!"+block.gfm.fences.source.replace("\\1","\\2")+"|"+block.list.source.replace("\\1","\\3")+"|")();block.tables=merge({},block.gfm,{nptable:/^ *(\S.*\|.*)\n *([-:]+ *\|[-| :]*)\n((?:.*\|.*(?:\n|$))*)\n*/,table:/^ *\|(.+)\n *\|( *[-:]+[-| :]*)\n((?: *\|.*(?:\n|$))*)\n*/});function Lexer(options){this.tokens=[];this.tokens.links={};this.options=options||marked.defaults;this.rules=block.normal;if(this.options.gfm){if(this.options.tables){this.rules=block.tables}else{this.rules=block.gfm}}}Lexer.rules=block;Lexer.lex=function(src,options){var lexer=new Lexer(options);return lexer.lex(src)};Lexer.prototype.lex=function(src){src=src.replace(/\r\n|\r/g,"\n").replace(/\t/g,"    ").replace(/\u00a0/g," ").replace(/\u2424/g,"\n");return this.token(src,true)};Lexer.prototype.token=function(src,top,bq){var src=src.replace(/^ +$/gm,""),next,loose,cap,bull,b,item,space,i,l;while(src){if(cap=this.rules.newline.exec(src)){src=src.substring(cap[0].length);if(cap[0].length>1){this.tokens.push({type:"space"})}}if(cap=this.rules.code.exec(src)){src=src.substring(cap[0].length);cap=cap[0].replace(/^ {4}/gm,"");this.tokens.push({type:"code",text:!this.options.pedantic?cap.replace(/\n+$/,""):cap});continue}if(cap=this.rules.fences.exec(src)){src=src.substring(cap[0].length);this.tokens.push({type:"code",lang:cap[2],text:cap[3]});continue}if(cap=this.rules.heading.exec(src)){src=src.substring(cap[0].length);this.tokens.push({type:"heading",depth:cap[1].length,text:cap[2]});continue}if(top&&(cap=this.rules.nptable.exec(src))){src=src.substring(cap[0].length);item={type:"table",header:cap[1].replace(/^ *| *\| *$/g,"").split(/ *\| */),align:cap[2].replace(/^ *|\| *$/g,"").split(/ *\| */),cells:cap[3].replace(/\n$/,"").split("\n")};for(i=0;i<item.align.length;i++){if(/^ *-+: *$/.test(item.align[i])){item.align[i]="right"}else if(/^ *:-+: *$/.test(item.align[i])){item.align[i]="center"}else if(/^ *:-+ *$/.test(item.align[i])){item.align[i]="left"}else{item.align[i]=null}}for(i=0;i<item.cells.length;i++){item.cells[i]=item.cells[i].split(/ *\| */)}this.tokens.push(item);continue}if(cap=this.rules.lheading.exec(src)){src=src.substring(cap[0].length);this.tokens.push({type:"heading",depth:cap[2]==="="?1:2,text:cap[1]});continue}if(cap=this.rules.hr.exec(src)){src=src.substring(cap[0].length);this.tokens.push({type:"hr"});continue}if(cap=this.rules.blockquote.exec(src)){src=src.substring(cap[0].length);this.tokens.push({type:"blockquote_start"});cap=cap[0].replace(/^ *> ?/gm,"");this.token(cap,top,true);this.tokens.push({type:"blockquote_end"});continue}if(cap=this.rules.list.exec(src)){src=src.substring(cap[0].length);bull=cap[2];this.tokens.push({type:"list_start",ordered:bull.length>1});cap=cap[0].match(this.rules.item);next=false;l=cap.length;i=0;for(;i<l;i++){item=cap[i];space=item.length;item=item.replace(/^ *([*+-]|\d+\.) +/,"");if(~item.indexOf("\n ")){space-=item.length;item=!this.options.pedantic?item.replace(new RegExp("^ {1,"+space+"}","gm"),""):item.replace(/^ {1,4}/gm,"")}if(this.options.smartLists&&i!==l-1){b=block.bullet.exec(cap[i+1])[0];if(bull!==b&&!(bull.length>1&&b.length>1)){src=cap.slice(i+1).join("\n")+src;i=l-1}}loose=next||/\n\n(?!\s*$)/.test(item);if(i!==l-1){next=item.charAt(item.length-1)==="\n";if(!loose)loose=next}this.tokens.push({type:loose?"loose_item_start":"list_item_start"});this.token(item,false,bq);this.tokens.push({type:"list_item_end"})}this.tokens.push({type:"list_end"});continue}if(cap=this.rules.html.exec(src)){src=src.substring(cap[0].length);this.tokens.push({type:this.options.sanitize?"paragraph":"html",pre:cap[1]==="pre"||cap[1]==="script"||cap[1]==="style",text:cap[0]});continue}if(!bq&&top&&(cap=this.rules.def.exec(src))){src=src.substring(cap[0].length);this.tokens.links[cap[1].toLowerCase()]={href:cap[2],title:cap[3]};continue}if(top&&(cap=this.rules.table.exec(src))){src=src.substring(cap[0].length);item={type:"table",header:cap[1].replace(/^ *| *\| *$/g,"").split(/ *\| */),align:cap[2].replace(/^ *|\| *$/g,"").split(/ *\| */),cells:cap[3].replace(/(?: *\| *)?\n$/,"").split("\n")};for(i=0;i<item.align.length;i++){if(/^ *-+: *$/.test(item.align[i])){item.align[i]="right"}else if(/^ *:-+: *$/.test(item.align[i])){item.align[i]="center"}else if(/^ *:-+ *$/.test(item.align[i])){item.align[i]="left"}else{item.align[i]=null}}for(i=0;i<item.cells.length;i++){item.cells[i]=item.cells[i].replace(/^ *\| *| *\| *$/g,"").split(/ *\| */)}this.tokens.push(item);continue}if(top&&(cap=this.rules.paragraph.exec(src))){src=src.substring(cap[0].length);this.tokens.push({type:"paragraph",text:cap[1].charAt(cap[1].length-1)==="\n"?cap[1].slice(0,-1):cap[1]});continue}if(cap=this.rules.text.exec(src)){src=src.substring(cap[0].length);this.tokens.push({type:"text",text:cap[0]});continue}if(src){throw new Error("Infinite loop on byte: "+src.charCodeAt(0))}}return this.tokens};var inline={escape:/^\\([\\`*{}\[\]()#+\-.!_>])/,autolink:/^<([^ >]+(@|:\/)[^ >]+)>/,url:noop,tag:/^<!--[\s\S]*?-->|^<\/?\w+(?:"[^"]*"|'[^']*'|[^'">])*?>/,link:/^!?\[(inside)\]\(href\)/,reflink:/^!?\[(inside)\]\s*\[([^\]]*)\]/,nolink:/^!?\[((?:\[[^\]]*\]|[^\[\]])*)\]/,strong:/^__([\s\S]+?)__(?!_)|^\*\*([\s\S]+?)\*\*(?!\*)/,em:/^\b_((?:__|[\s\S])+?)_\b|^\*((?:\*\*|[\s\S])+?)\*(?!\*)/,code:/^(`+)\s*([\s\S]*?[^`])\s*\1(?!`)/,br:/^ {2,}\n(?!\s*$)/,del:noop,text:/^[\s\S]+?(?=[\\<!\[_*`]| {2,}\n|$)/};inline._inside=/(?:\[[^\]]*\]|[^\[\]]|\](?=[^\[]*\]))*/;inline._href=/\s*<?([\s\S]*?)>?(?:\s+['"]([\s\S]*?)['"])?\s*/;inline.link=replace(inline.link)("inside",inline._inside)("href",inline._href)();inline.reflink=replace(inline.reflink)("inside",inline._inside)();inline.normal=merge({},inline);inline.pedantic=merge({},inline.normal,{strong:/^__(?=\S)([\s\S]*?\S)__(?!_)|^\*\*(?=\S)([\s\S]*?\S)\*\*(?!\*)/,em:/^_(?=\S)([\s\S]*?\S)_(?!_)|^\*(?=\S)([\s\S]*?\S)\*(?!\*)/});inline.gfm=merge({},inline.normal,{escape:replace(inline.escape)("])","~|])")(),url:/^(https?:\/\/[^\s<]+[^<.,:;"')\]\s])/,del:/^~~(?=\S)([\s\S]*?\S)~~/,text:replace(inline.text)("]|","~]|")("|","|https?://|")()});inline.breaks=merge({},inline.gfm,{br:replace(inline.br)("{2,}","*")(),text:replace(inline.gfm.text)("{2,}","*")()});function InlineLexer(links,options){this.options=options||marked.defaults;this.links=links;this.rules=inline.normal;this.renderer=this.options.renderer||new Renderer;this.renderer.options=this.options;if(!this.links){throw new Error("Tokens array requires a `links` property.")}if(this.options.gfm){if(this.options.breaks){this.rules=inline.breaks}else{this.rules=inline.gfm}}else if(this.options.pedantic){this.rules=inline.pedantic}}InlineLexer.rules=inline;InlineLexer.output=function(src,links,options){var inline=new InlineLexer(links,options);return inline.output(src)};InlineLexer.prototype.output=function(src){var out="",link,text,href,cap;while(src){if(cap=this.rules.escape.exec(src)){src=src.substring(cap[0].length);out+=cap[1];continue}if(cap=this.rules.autolink.exec(src)){src=src.substring(cap[0].length);if(cap[2]==="@"){text=cap[1].charAt(6)===":"?this.mangle(cap[1].substring(7)):this.mangle(cap[1]);href=this.mangle("mailto:")+text}else{text=escape(cap[1]);href=text}out+=this.renderer.link(href,null,text);continue}if(!this.inLink&&(cap=this.rules.url.exec(src))){src=src.substring(cap[0].length);text=escape(cap[1]);href=text;out+=this.renderer.link(href,null,text);continue}if(cap=this.rules.tag.exec(src)){if(!this.inLink&&/^<a /i.test(cap[0])){this.inLink=true}else if(this.inLink&&/^<\/a>/i.test(cap[0])){this.inLink=false}src=src.substring(cap[0].length);out+=this.options.sanitize?escape(cap[0]):cap[0];continue}if(cap=this.rules.link.exec(src)){src=src.substring(cap[0].length);this.inLink=true;out+=this.outputLink(cap,{href:cap[2],title:cap[3]});this.inLink=false;continue}if((cap=this.rules.reflink.exec(src))||(cap=this.rules.nolink.exec(src))){src=src.substring(cap[0].length);link=(cap[2]||cap[1]).replace(/\s+/g," ");link=this.links[link.toLowerCase()];if(!link||!link.href){out+=cap[0].charAt(0);src=cap[0].substring(1)+src;continue}this.inLink=true;out+=this.outputLink(cap,link);this.inLink=false;continue}if(cap=this.rules.strong.exec(src)){src=src.substring(cap[0].length);out+=this.renderer.strong(this.output(cap[2]||cap[1]));continue}if(cap=this.rules.em.exec(src)){src=src.substring(cap[0].length);out+=this.renderer.em(this.output(cap[2]||cap[1]));continue}if(cap=this.rules.code.exec(src)){src=src.substring(cap[0].length);out+=this.renderer.codespan(escape(cap[2],true));continue}if(cap=this.rules.br.exec(src)){src=src.substring(cap[0].length);out+=this.renderer.br();continue}if(cap=this.rules.del.exec(src)){src=src.substring(cap[0].length);out+=this.renderer.del(this.output(cap[1]));continue}if(cap=this.rules.text.exec(src)){src=src.substring(cap[0].length);out+=escape(this.smartypants(cap[0]));continue}if(src){throw new Error("Infinite loop on byte: "+src.charCodeAt(0))}}return out};InlineLexer.prototype.outputLink=function(cap,link){var href=escape(link.href),title=link.title?escape(link.title):null;return cap[0].charAt(0)!=="!"?this.renderer.link(href,title,this.output(cap[1])):this.renderer.image(href,title,escape(cap[1]))};InlineLexer.prototype.smartypants=function(text){if(!this.options.smartypants)return text;return text.replace(/--/g,"—").replace(/(^|[-\u2014/(\[{"\s])'/g,"$1‘").replace(/'/g,"’").replace(/(^|[-\u2014/(\[{\u2018\s])"/g,"$1“").replace(/"/g,"”").replace(/\.{3}/g,"…")};InlineLexer.prototype.mangle=function(text){var out="",l=text.length,i=0,ch;for(;i<l;i++){ch=text.charCodeAt(i);if(Math.random()>.5){ch="x"+ch.toString(16)}out+="&#"+ch+";"}return out};function Renderer(options){this.options=options||{}}Renderer.prototype.code=function(code,lang,escaped){if(this.options.highlight){var out=this.options.highlight(code,lang);if(out!=null&&out!==code){escaped=true;code=out}}if(!lang){return"<pre><code>"+(escaped?code:escape(code,true))+"\n</code></pre>"}return'<pre><code class="'+this.options.langPrefix+escape(lang,true)+'">'+(escaped?code:escape(code,true))+"\n</code></pre>\n"};Renderer.prototype.blockquote=function(quote){return"<blockquote>\n"+quote+"</blockquote>\n"};Renderer.prototype.html=function(html){return html};Renderer.prototype.heading=function(text,level,raw){return"<h"+level+' id="'+this.options.headerPrefix+raw.toLowerCase().replace(/[^\w]+/g,"-")+'">'+text+"</h"+level+">\n"};Renderer.prototype.hr=function(){return this.options.xhtml?"<hr/>\n":"<hr>\n"};Renderer.prototype.list=function(body,ordered){var type=ordered?"ol":"ul";return"<"+type+">\n"+body+"</"+type+">\n"};Renderer.prototype.listitem=function(text){return"<li>"+text+"</li>\n"};Renderer.prototype.paragraph=function(text){return"<p>"+text+"</p>\n"};Renderer.prototype.table=function(header,body){return"<table>\n"+"<thead>\n"+header+"</thead>\n"+"<tbody>\n"+body+"</tbody>\n"+"</table>\n"};Renderer.prototype.tablerow=function(content){return"<tr>\n"+content+"</tr>\n"};Renderer.prototype.tablecell=function(content,flags){var type=flags.header?"th":"td";var tag=flags.align?"<"+type+' style="text-align:'+flags.align+'">':"<"+type+">";return tag+content+"</"+type+">\n"};Renderer.prototype.strong=function(text){return"<strong>"+text+"</strong>"};Renderer.prototype.em=function(text){return"<em>"+text+"</em>"};Renderer.prototype.codespan=function(text){return"<code>"+text+"</code>"};Renderer.prototype.br=function(){return this.options.xhtml?"<br/>":"<br>"};Renderer.prototype.del=function(text){return"<del>"+text+"</del>"};Renderer.prototype.link=function(href,title,text){if(this.options.sanitize){try{var prot=decodeURIComponent(unescape(href)).replace(/[^\w:]/g,"").toLowerCase()}catch(e){return""}if(prot.indexOf("javascript:")===0){return""}}var out='<a href="'+href+'"';if(title){out+=' title="'+title+'"'}out+=">"+text+"</a>";return out};Renderer.prototype.image=function(href,title,text){var out='<img src="'+href+'" alt="'+text+'"';if(title){out+=' title="'+title+'"'}out+=this.options.xhtml?"/>":">";return out};function Parser(options){this.tokens=[];this.token=null;this.options=options||marked.defaults;this.options.renderer=this.options.renderer||new Renderer;this.renderer=this.options.renderer;this.renderer.options=this.options}Parser.parse=function(src,options,renderer){var parser=new Parser(options,renderer);return parser.parse(src)};Parser.prototype.parse=function(src){this.inline=new InlineLexer(src.links,this.options,this.renderer);this.tokens=src.reverse();var out="";while(this.next()){out+=this.tok()}return out};Parser.prototype.next=function(){return this.token=this.tokens.pop()};Parser.prototype.peek=function(){return this.tokens[this.tokens.length-1]||0};Parser.prototype.parseText=function(){var body=this.token.text;while(this.peek().type==="text"){body+="\n"+this.next().text}return this.inline.output(body)};Parser.prototype.tok=function(){switch(this.token.type){case"space":{return""}case"hr":{return this.renderer.hr()}case"heading":{return this.renderer.heading(this.inline.output(this.token.text),this.token.depth,this.token.text)}case"code":{return this.renderer.code(this.token.text,this.token.lang,this.token.escaped)}case"table":{var header="",body="",i,row,cell,flags,j;cell="";for(i=0;i<this.token.header.length;i++){flags={header:true,align:this.token.align[i]};cell+=this.renderer.tablecell(this.inline.output(this.token.header[i]),{header:true,align:this.token.align[i]})}header+=this.renderer.tablerow(cell);for(i=0;i<this.token.cells.length;i++){row=this.token.cells[i];cell="";for(j=0;j<row.length;j++){cell+=this.renderer.tablecell(this.inline.output(row[j]),{header:false,align:this.token.align[j]})}body+=this.renderer.tablerow(cell)}return this.renderer.table(header,body)}case"blockquote_start":{var body="";while(this.next().type!=="blockquote_end"){body+=this.tok()}return this.renderer.blockquote(body)}case"list_start":{var body="",ordered=this.token.ordered;while(this.next().type!=="list_end"){body+=this.tok()}return this.renderer.list(body,ordered)}case"list_item_start":{var body="";while(this.next().type!=="list_item_end"){body+=this.token.type==="text"?this.parseText():this.tok()}return this.renderer.listitem(body)}case"loose_item_start":{var body="";while(this.next().type!=="list_item_end"){body+=this.tok()}return this.renderer.listitem(body)}case"html":{var html=!this.token.pre&&!this.options.pedantic?this.inline.output(this.token.text):this.token.text;return this.renderer.html(html)}case"paragraph":{return this.renderer.paragraph(this.inline.output(this.token.text))}case"text":{return this.renderer.paragraph(this.parseText())}}};function escape(html,encode){return html.replace(!encode?/&(?!#?\w+;)/g:/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;")}function unescape(html){return html.replace(/&([#\w]+);/g,function(_,n){n=n.toLowerCase();if(n==="colon")return":";if(n.charAt(0)==="#"){return n.charAt(1)==="x"?String.fromCharCode(parseInt(n.substring(2),16)):String.fromCharCode(+n.substring(1))}return""})}function replace(regex,opt){regex=regex.source;opt=opt||"";return function self(name,val){if(!name)return new RegExp(regex,opt);val=val.source||val;val=val.replace(/(^|[^\[])\^/g,"$1");regex=regex.replace(name,val);return self}}function noop(){}noop.exec=noop;function merge(obj){var i=1,target,key;for(;i<arguments.length;i++){target=arguments[i];for(key in target){if(Object.prototype.hasOwnProperty.call(target,key)){obj[key]=target[key]}}}return obj}function marked(src,opt,callback){if(callback||typeof opt==="function"){if(!callback){callback=opt;opt=null}opt=merge({},marked.defaults,opt||{});var highlight=opt.highlight,tokens,pending,i=0;try{tokens=Lexer.lex(src,opt)}catch(e){return callback(e)}pending=tokens.length;var done=function(err){if(err){opt.highlight=highlight;return callback(err)}var out;try{out=Parser.parse(tokens,opt)}catch(e){err=e}opt.highlight=highlight;return err?callback(err):callback(null,out)};if(!highlight||highlight.length<3){return done()}delete opt.highlight;if(!pending)return done();for(;i<tokens.length;i++){(function(token){if(token.type!=="code"){return--pending||done()}return highlight(token.text,token.lang,function(err,code){if(err)return done(err);if(code==null||code===token.text){return--pending||done()}token.text=code;token.escaped=true;--pending||done()})})(tokens[i])}return}try{if(opt)opt=merge({},marked.defaults,opt);return Parser.parse(Lexer.lex(src,opt),opt)}catch(e){e.message+="\nPlease report this to https://github.com/chjj/marked.";if((opt||marked.defaults).silent){return"<p>An error occured:</p><pre>"+escape(e.message+"",true)+"</pre>"}throw e}}marked.options=marked.setOptions=function(opt){merge(marked.defaults,opt);return marked};marked.defaults={gfm:true,tables:true,breaks:false,pedantic:false,sanitize:false,smartLists:false,silent:false,highlight:null,langPrefix:"lang-",smartypants:false,headerPrefix:"",renderer:new Renderer,xhtml:false};marked.Parser=Parser;marked.parser=Parser.parse;marked.Renderer=Renderer;marked.Lexer=Lexer;marked.lexer=Lexer.lex;marked.InlineLexer=InlineLexer;marked.inlineLexer=InlineLexer.output;marked.parse=marked;if(typeof module!=="undefined"&&typeof exports==="object"){module.exports=marked}else if(typeof define==="function"&&define.amd){define(function(){return marked})}else{this.marked=marked}}).call(function(){return this||(typeof window!=="undefined"?window:global)}());
+
+	return module.exports;
+}();
+
+
+// FORMAT OPTIONS FOR MARKED IMPLEMENTATION
+
+function formatOptions(options)
+{
+	function toHighlight(code, lang)
+	{
+		if (!lang && options.defaultHighlighting.ctor === 'Just')
+		{
+			lang = options.defaultHighlighting._0;
+		}
+
+		if (typeof hljs !== 'undefined' && lang && hljs.listLanguages().indexOf(lang) >= 0)
+		{
+			return hljs.highlight(lang, code, true).value;
+		}
+
+		return code;
+	}
+
+	var gfm = options.githubFlavored;
+	if (gfm.ctor === 'Just')
+	{
+		return {
+			highlight: toHighlight,
+			gfm: true,
+			tables: gfm._0.tables,
+			breaks: gfm._0.breaks,
+			sanitize: options.sanitize,
+			smartypants: options.smartypants
+		};
+	}
+
+	return {
+		highlight: toHighlight,
+		gfm: false,
+		tables: false,
+		breaks: false,
+		sanitize: options.sanitize,
+		smartypants: options.smartypants
+	};
+}
+
+
+// EXPORTS
+
+return {
+	toHtml: F3(toHtml)
+};
+
+}();
+
+var _evancz$elm_markdown$Markdown$toHtmlWith = _evancz$elm_markdown$Native_Markdown.toHtml;
+var _evancz$elm_markdown$Markdown$defaultOptions = {
+	githubFlavored: _elm_lang$core$Maybe$Just(
+		{tables: false, breaks: false}),
+	defaultHighlighting: _elm_lang$core$Maybe$Nothing,
+	sanitize: false,
+	smartypants: false
+};
+var _evancz$elm_markdown$Markdown$toHtml = F2(
+	function (attrs, string) {
+		return A3(_evancz$elm_markdown$Native_Markdown.toHtml, _evancz$elm_markdown$Markdown$defaultOptions, attrs, string);
+	});
+var _evancz$elm_markdown$Markdown$Options = F4(
+	function (a, b, c, d) {
+		return {githubFlavored: a, defaultHighlighting: b, sanitize: c, smartypants: d};
+	});
+
+var _user$project$AST$Error = function (a) {
+	return {ctor: 'Error', _0: a};
+};
+var _user$project$AST$Call = F2(
+	function (a, b) {
+		return {ctor: 'Call', _0: a, _1: b};
+	});
+var _user$project$AST$Proc = F3(
+	function (a, b, c) {
+		return {ctor: 'Proc', _0: a, _1: b, _2: c};
+	});
+var _user$project$AST$Var = F2(
+	function (a, b) {
+		return {ctor: 'Var', _0: a, _1: b};
+	});
+var _user$project$AST$Custom = function (a) {
+	return {ctor: 'Custom', _0: a};
+};
+var _user$project$AST$Succeed = function (a) {
+	return {ctor: 'Succeed', _0: a};
+};
+var _user$project$AST$DFail = function (a) {
+	return {ctor: 'DFail', _0: a};
+};
+var _user$project$AST$Map = function (a) {
+	return {ctor: 'Map', _0: a};
+};
+var _user$project$AST$OneOf = function (a) {
+	return {ctor: 'OneOf', _0: a};
+};
+var _user$project$AST$JMaybe = function (a) {
+	return {ctor: 'JMaybe', _0: a};
+};
+var _user$project$AST$Dict = function (a) {
+	return {ctor: 'Dict', _0: a};
+};
+var _user$project$AST$KeyValuePairs = {ctor: 'KeyValuePairs'};
+var _user$project$AST$Object = function (a) {
+	return {ctor: 'Object', _0: a};
+};
+var _user$project$AST$At = F2(
+	function (a, b) {
+		return {ctor: 'At', _0: a, _1: b};
+	});
+var _user$project$AST$KV = F2(
+	function (a, b) {
+		return {ctor: 'KV', _0: a, _1: b};
+	});
+var _user$project$AST$Tuple = function (a) {
+	return {ctor: 'Tuple', _0: a};
+};
+var _user$project$AST$Arr = function (a) {
+	return {ctor: 'Arr', _0: a};
+};
+var _user$project$AST$List = function (a) {
+	return {ctor: 'List', _0: a};
+};
+var _user$project$AST$Null = function (a) {
+	return {ctor: 'Null', _0: a};
+};
+var _user$project$AST$Bln = {ctor: 'Bln'};
+var _user$project$AST$Flt = {ctor: 'Flt'};
+var _user$project$AST$Itg = {ctor: 'Itg'};
+var _user$project$AST$Strng = {ctor: 'Strng'};
+var _user$project$AST$Str = function (a) {
+	return {ctor: 'Str', _0: a};
+};
+
+var _user$project$Common$somethingInBrackets = A3(
+	_Bogdanp$elm_combine$Combine$between,
+	_Bogdanp$elm_combine$Combine_Char$char(
+		_elm_lang$core$Native_Utils.chr('(')),
+	_Bogdanp$elm_combine$Combine_Char$char(
+		_elm_lang$core$Native_Utils.chr(')')),
+	A2(
+		_Bogdanp$elm_combine$Combine$or,
+		A2(
+			_Bogdanp$elm_combine$Combine_Infix_ops['*>'],
+			_Bogdanp$elm_combine$Combine$many(
+				_Bogdanp$elm_combine$Combine_Char$noneOf(
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$core$Native_Utils.chr('('),
+							_elm_lang$core$Native_Utils.chr(')')
+						]))),
+			_Bogdanp$elm_combine$Combine$rec(
+				function (_p0) {
+					var _p1 = _p0;
+					return _user$project$Common$somethingInBrackets;
+				})),
+		A2(
+			_Bogdanp$elm_combine$Combine$map,
+			_elm_lang$core$String$fromList,
+			_Bogdanp$elm_combine$Combine$many(
+				_Bogdanp$elm_combine$Combine_Char$noneOf(
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$core$Native_Utils.chr(')')
+						]))))));
+var _user$project$Common$int_ = _Bogdanp$elm_combine$Combine$regex('[-]?[0-9]+');
+var _user$project$Common$string_ = A2(
+	_Bogdanp$elm_combine$Combine_Infix_ops['<*'],
+	A2(
+		_Bogdanp$elm_combine$Combine_Infix_ops['*>'],
+		_Bogdanp$elm_combine$Combine_Char$char(
+			_elm_lang$core$Native_Utils.chr('\"')),
+		_Bogdanp$elm_combine$Combine$while(
+			F2(
+				function (x, y) {
+					return !_elm_lang$core$Native_Utils.eq(x, y);
+				})(
+				_elm_lang$core$Native_Utils.chr('\"')))),
+	_Bogdanp$elm_combine$Combine_Char$char(
+		_elm_lang$core$Native_Utils.chr('\"')));
+var _user$project$Common$word = _Bogdanp$elm_combine$Combine$regex('[a-zA-Z\\d\\_\\.\\$]+');
+var _user$project$Common$transformFunc = A2(_Bogdanp$elm_combine$Combine$or, _user$project$Common$word, _user$project$Common$somethingInBrackets);
+var _user$project$Common$spaceChars = _elm_lang$core$Native_List.fromArray(
+	[
+		_elm_lang$core$Native_Utils.chr(' '),
+		_elm_lang$core$Native_Utils.chr('\t'),
+		_elm_lang$core$Native_Utils.chr('\n')
+	]);
+var _user$project$Common$spacing = _Bogdanp$elm_combine$Combine$skipMany1(
+	_Bogdanp$elm_combine$Combine_Char$oneOf(_user$project$Common$spaceChars));
+var _user$project$Common$funcApp = function (parser) {
+	return A2(
+		_Bogdanp$elm_combine$Combine_Infix_ops['*>'],
+		A2(
+			_Bogdanp$elm_combine$Combine_Infix_ops['*>'],
+			_Bogdanp$elm_combine$Combine$string('<|'),
+			_user$project$Common$spacing),
+		parser);
+};
+var _user$project$Common$possibleSpacing = _Bogdanp$elm_combine$Combine$skipMany(
+	_Bogdanp$elm_combine$Combine_Char$oneOf(_user$project$Common$spaceChars));
+var _user$project$Common$openBrackets = A2(
+	_Bogdanp$elm_combine$Combine_Infix_ops['*>'],
+	_Bogdanp$elm_combine$Combine_Char$char(
+		_elm_lang$core$Native_Utils.chr('(')),
+	_user$project$Common$possibleSpacing);
+var _user$project$Common$closeBrackets = A2(
+	_Bogdanp$elm_combine$Combine_Infix_ops['<*'],
+	_user$project$Common$possibleSpacing,
+	_Bogdanp$elm_combine$Combine_Char$char(
+		_elm_lang$core$Native_Utils.chr(')')));
+var _user$project$Common$bracketed = function (parser) {
+	return _Bogdanp$elm_combine$Combine$choice(
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_user$project$Common$funcApp(parser),
+				A3(_Bogdanp$elm_combine$Combine$between, _user$project$Common$openBrackets, _user$project$Common$closeBrackets, parser),
+				parser
+			]));
+};
+var _user$project$Common$listOf = function (dec) {
+	return A2(
+		_Bogdanp$elm_combine$Combine_Infix_ops['*>'],
+		_Bogdanp$elm_combine$Combine_Char$char(
+			_elm_lang$core$Native_Utils.chr('[')),
+		_Bogdanp$elm_combine$Combine$many(
+			A2(
+				_Bogdanp$elm_combine$Combine_Infix_ops['<*'],
+				A2(
+					_Bogdanp$elm_combine$Combine_Infix_ops['<*'],
+					A2(_Bogdanp$elm_combine$Combine_Infix_ops['*>'], _user$project$Common$possibleSpacing, dec),
+					_user$project$Common$possibleSpacing),
+				_Bogdanp$elm_combine$Combine_Char$oneOf(
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$core$Native_Utils.chr(','),
+							_elm_lang$core$Native_Utils.chr(']')
+						])))));
+};
+var _user$project$Common$wordDelimiters = A2(
+	_elm_lang$core$Basics_ops['++'],
+	_elm_lang$core$Native_List.fromArray(
+		[
+			_elm_lang$core$Native_Utils.chr(','),
+			_elm_lang$core$Native_Utils.chr(']'),
+			_elm_lang$core$Native_Utils.chr(')'),
+			_elm_lang$core$Native_Utils.chr('\"')
+		]),
+	_user$project$Common$spaceChars);
+
+var _user$project$Parser2$pNull = A2(
+	_Bogdanp$elm_combine$Combine$andThen,
+	A2(
+		_Bogdanp$elm_combine$Combine_Infix_ops['*>'],
+		A2(
+			_Bogdanp$elm_combine$Combine_Infix_ops['*>'],
+			_Bogdanp$elm_combine$Combine$string('null'),
+			_user$project$Common$spacing),
+		A2(_Bogdanp$elm_combine$Combine$or, _user$project$Common$string_, _user$project$Common$word)),
+	function (_p0) {
+		return _Bogdanp$elm_combine$Combine$succeed(
+			_user$project$AST$Null(_p0));
+	});
+var _user$project$Parser2$pPrimitive = A2(
+	_Bogdanp$elm_combine$Combine$andThen,
+	_user$project$Common$word,
+	function (p) {
+		var _p1 = p;
+		switch (_p1) {
+			case 'string':
+				return _Bogdanp$elm_combine$Combine$succeed(_user$project$AST$Strng);
+			case 'int':
+				return _Bogdanp$elm_combine$Combine$succeed(_user$project$AST$Itg);
+			case 'float':
+				return _Bogdanp$elm_combine$Combine$succeed(_user$project$AST$Flt);
+			case 'bool':
+				return _Bogdanp$elm_combine$Combine$succeed(_user$project$AST$Bln);
+			default:
+				return _Bogdanp$elm_combine$Combine$fail(
+					_elm_lang$core$Native_List.fromArray(
+						['x', p, 'y']));
+		}
+	});
+var _user$project$Parser2$pVar = A2(
+	_Bogdanp$elm_combine$Combine$andThen,
+	_user$project$Common$word,
+	function (w) {
+		return _Bogdanp$elm_combine$Combine$succeed(
+			A2(
+				_user$project$AST$Call,
+				w,
+				_elm_lang$core$Native_List.fromArray(
+					[])));
+	});
+var _user$project$Parser2$pBln = A2(
+	_Bogdanp$elm_combine$Combine$andThen,
+	A2(
+		_Bogdanp$elm_combine$Combine$or,
+		_Bogdanp$elm_combine$Combine$string('True'),
+		_Bogdanp$elm_combine$Combine$string('False')),
+	function (_p2) {
+		return _Bogdanp$elm_combine$Combine$succeed(
+			_user$project$AST$Str(_p2));
+	});
+var _user$project$Parser2$pNumber = A2(
+	_Bogdanp$elm_combine$Combine$andThen,
+	_user$project$Common$int_,
+	function (_p3) {
+		return _Bogdanp$elm_combine$Combine$succeed(
+			_user$project$AST$Str(_p3));
+	});
+var _user$project$Parser2$pStr = A2(
+	_Bogdanp$elm_combine$Combine$andThen,
+	_user$project$Common$string_,
+	function (_p4) {
+		return _Bogdanp$elm_combine$Combine$succeed(
+			_user$project$AST$Str(_p4));
+	});
+var _user$project$Parser2$pFail = A2(
+	_Bogdanp$elm_combine$Combine$andThen,
+	A2(
+		_Bogdanp$elm_combine$Combine_Infix_ops['*>'],
+		A2(
+			_Bogdanp$elm_combine$Combine_Infix_ops['*>'],
+			_Bogdanp$elm_combine$Combine$string('fail'),
+			_user$project$Common$spacing),
+		_user$project$Parser2$pStr),
+	function (_p5) {
+		return _Bogdanp$elm_combine$Combine$succeed(
+			_user$project$AST$DFail(_p5));
+	});
+var _user$project$Parser2$pSucceed = A2(
+	_Bogdanp$elm_combine$Combine$andThen,
+	A2(
+		_Bogdanp$elm_combine$Combine_Infix_ops['*>'],
+		A2(
+			_Bogdanp$elm_combine$Combine_Infix_ops['*>'],
+			_Bogdanp$elm_combine$Combine$string('succeed'),
+			_user$project$Common$spacing),
+		_Bogdanp$elm_combine$Combine$choice(
+			_elm_lang$core$Native_List.fromArray(
+				[_user$project$Parser2$pBln, _user$project$Parser2$pNumber, _user$project$Parser2$pStr]))),
+	function (_p6) {
+		return _Bogdanp$elm_combine$Combine$succeed(
+			_user$project$AST$Succeed(_p6));
+	});
+var _user$project$Parser2$pProblem = A2(
+	_Bogdanp$elm_combine$Combine$andThen,
+	_Bogdanp$elm_combine$Combine$string('|>'),
+	function (_p7) {
+		return _Bogdanp$elm_combine$Combine$fail(
+			_elm_lang$core$Native_List.fromArray(
+				['I can\'t yet handle |>']));
+	});
+var _user$project$Parser2$pCommand = _user$project$Common$bracketed(
+	_Bogdanp$elm_combine$Combine$rec(
+		function (_p8) {
+			var _p9 = _p8;
+			return _Bogdanp$elm_combine$Combine$choice(
+				_elm_lang$core$Native_List.fromArray(
+					[_user$project$Parser2$pProblem, _user$project$Parser2$pPrimitive, _user$project$Parser2$pList, _user$project$Parser2$pArr, _user$project$Parser2$pTuple, _user$project$Parser2$pKV, _user$project$Parser2$pAt, _user$project$Parser2$pObject, _user$project$Parser2$pKeyValuePairs, _user$project$Parser2$pDict, _user$project$Parser2$pMaybe, _user$project$Parser2$pOneOf, _user$project$Parser2$pMap, _user$project$Parser2$pFail, _user$project$Parser2$pSucceed, _user$project$Parser2$pCustom, _user$project$Parser2$pCall]));
+		}));
+var _user$project$Parser2$pArr = A2(
+	_Bogdanp$elm_combine$Combine$andThen,
+	A2(
+		_Bogdanp$elm_combine$Combine_Infix_ops['*>'],
+		A2(
+			_Bogdanp$elm_combine$Combine_Infix_ops['*>'],
+			_Bogdanp$elm_combine$Combine$string('array'),
+			_user$project$Common$spacing),
+		_user$project$Parser2$pCommand),
+	function (_p10) {
+		return _Bogdanp$elm_combine$Combine$succeed(
+			_user$project$AST$Arr(_p10));
+	});
+var _user$project$Parser2$pAt = A2(
+	_Bogdanp$elm_combine$Combine$andThen,
+	A2(
+		_Bogdanp$elm_combine$Combine_Infix_ops['*>'],
+		A2(
+			_Bogdanp$elm_combine$Combine_Infix_ops['*>'],
+			_Bogdanp$elm_combine$Combine$string('at'),
+			_user$project$Common$spacing),
+		_user$project$Common$listOf(
+			A2(_Bogdanp$elm_combine$Combine$or, _user$project$Parser2$pStr, _user$project$Parser2$pVar))),
+	function (lst) {
+		return A2(
+			_Bogdanp$elm_combine$Combine$andThen,
+			A2(_Bogdanp$elm_combine$Combine_Infix_ops['*>'], _user$project$Common$spacing, _user$project$Parser2$pCommand),
+			function (dec) {
+				return _Bogdanp$elm_combine$Combine$succeed(
+					A2(_user$project$AST$At, lst, dec));
+			});
+	});
+var _user$project$Parser2$pCall = A2(
+	_Bogdanp$elm_combine$Combine$andThen,
+	_user$project$Common$word,
+	function (proc) {
+		return A2(
+			_Bogdanp$elm_combine$Combine$andThen,
+			_Bogdanp$elm_combine$Combine$many(
+				A2(
+					_Bogdanp$elm_combine$Combine_Infix_ops['*>'],
+					_Bogdanp$elm_combine$Combine$many1(
+						_Bogdanp$elm_combine$Combine_Char$oneOf(
+							_elm_lang$core$Native_List.fromArray(
+								[
+									_elm_lang$core$Native_Utils.chr(' '),
+									_elm_lang$core$Native_Utils.chr('\t')
+								]))),
+					A2(_Bogdanp$elm_combine$Combine$or, _user$project$Parser2$pStr, _user$project$Parser2$pCommand))),
+			function (args) {
+				return _Bogdanp$elm_combine$Combine$succeed(
+					A2(_user$project$AST$Call, proc, args));
+			});
+	});
+var _user$project$Parser2$pCustom = A2(
+	_Bogdanp$elm_combine$Combine$andThen,
+	A2(
+		_Bogdanp$elm_combine$Combine_Infix_ops['<*'],
+		A2(
+			_Bogdanp$elm_combine$Combine_Infix_ops['<*'],
+			A2(
+				_Bogdanp$elm_combine$Combine_Infix_ops['*>'],
+				A2(
+					_Bogdanp$elm_combine$Combine_Infix_ops['*>'],
+					_Bogdanp$elm_combine$Combine$string('customDecoder'),
+					_user$project$Common$spacing),
+				_user$project$Parser2$pCommand),
+			_user$project$Common$spacing),
+		_user$project$Common$transformFunc),
+	function (dec) {
+		return _Bogdanp$elm_combine$Combine$succeed(
+			_user$project$AST$Custom(dec));
+	});
+var _user$project$Parser2$pDict = A2(
+	_Bogdanp$elm_combine$Combine$andThen,
+	A2(
+		_Bogdanp$elm_combine$Combine_Infix_ops['*>'],
+		A2(
+			_Bogdanp$elm_combine$Combine_Infix_ops['*>'],
+			_Bogdanp$elm_combine$Combine$string('dict'),
+			_user$project$Common$spacing),
+		_user$project$Parser2$pCommand),
+	function (_p11) {
+		return _Bogdanp$elm_combine$Combine$succeed(
+			_user$project$AST$Dict(_p11));
+	});
+var _user$project$Parser2$pKV = A2(
+	_Bogdanp$elm_combine$Combine$andMap,
+	A2(
+		_Bogdanp$elm_combine$Combine$map,
+		_user$project$AST$KV,
+		A2(
+			_Bogdanp$elm_combine$Combine_Infix_ops['<*'],
+			A2(_Bogdanp$elm_combine$Combine$or, _user$project$Parser2$pStr, _user$project$Parser2$pVar),
+			A3(
+				_Bogdanp$elm_combine$Combine$between,
+				_user$project$Common$spacing,
+				_user$project$Common$spacing,
+				_Bogdanp$elm_combine$Combine$string(':=')))),
+	_user$project$Parser2$pCommand);
+var _user$project$Parser2$pKeyValuePairs = A2(
+	_Bogdanp$elm_combine$Combine$andThen,
+	A2(
+		_Bogdanp$elm_combine$Combine_Infix_ops['<*'],
+		A2(
+			_Bogdanp$elm_combine$Combine_Infix_ops['<*'],
+			_Bogdanp$elm_combine$Combine$string('keyValuePairs'),
+			_user$project$Common$spacing),
+		_user$project$Parser2$pCommand),
+	function (_p12) {
+		return _Bogdanp$elm_combine$Combine$succeed(_user$project$AST$KeyValuePairs);
+	});
+var _user$project$Parser2$pList = A2(
+	_Bogdanp$elm_combine$Combine$andThen,
+	A2(
+		_Bogdanp$elm_combine$Combine_Infix_ops['*>'],
+		A2(
+			_Bogdanp$elm_combine$Combine_Infix_ops['*>'],
+			_Bogdanp$elm_combine$Combine$string('list'),
+			_user$project$Common$spacing),
+		_user$project$Parser2$pCommand),
+	function (_p13) {
+		return _Bogdanp$elm_combine$Combine$succeed(
+			_user$project$AST$List(_p13));
+	});
+var _user$project$Parser2$pMap = A2(
+	_Bogdanp$elm_combine$Combine$andThen,
+	A2(
+		_Bogdanp$elm_combine$Combine_Infix_ops['*>'],
+		A2(
+			_Bogdanp$elm_combine$Combine_Infix_ops['*>'],
+			A2(
+				_Bogdanp$elm_combine$Combine_Infix_ops['*>'],
+				A2(
+					_Bogdanp$elm_combine$Combine_Infix_ops['*>'],
+					_Bogdanp$elm_combine$Combine$string('map'),
+					_user$project$Common$spacing),
+				_user$project$Common$transformFunc),
+			_user$project$Common$spacing),
+		_user$project$Parser2$pCommand),
+	function (_p14) {
+		return _Bogdanp$elm_combine$Combine$succeed(
+			_user$project$AST$Map(_p14));
+	});
+var _user$project$Parser2$pMaybe = A2(
+	_Bogdanp$elm_combine$Combine$andThen,
+	A2(
+		_Bogdanp$elm_combine$Combine_Infix_ops['*>'],
+		A2(
+			_Bogdanp$elm_combine$Combine_Infix_ops['*>'],
+			_Bogdanp$elm_combine$Combine$string('maybe'),
+			_user$project$Common$spacing),
+		_user$project$Parser2$pCommand),
+	function (_p15) {
+		return _Bogdanp$elm_combine$Combine$succeed(
+			_user$project$AST$JMaybe(_p15));
+	});
+var _user$project$Parser2$pObject = A2(
+	_Bogdanp$elm_combine$Combine$andThen,
+	A2(
+		_Bogdanp$elm_combine$Combine_Infix_ops['*>'],
+		_Bogdanp$elm_combine$Combine$string('object'),
+		_Bogdanp$elm_combine$Combine_Num$digit),
+	function (n) {
+		return A2(
+			_Bogdanp$elm_combine$Combine$andThen,
+			A2(
+				_Bogdanp$elm_combine$Combine_Infix_ops['*>'],
+				A2(_Bogdanp$elm_combine$Combine_Infix_ops['*>'], _user$project$Common$spacing, _user$project$Common$transformFunc),
+				A2(
+					_Bogdanp$elm_combine$Combine$count,
+					n,
+					A2(
+						_Bogdanp$elm_combine$Combine_Infix_ops['*>'],
+						_user$project$Common$spacing,
+						_user$project$Common$bracketed(
+							A2(_Bogdanp$elm_combine$Combine_Infix_ops['*>'], _user$project$Common$possibleSpacing, _user$project$Parser2$pCommand))))),
+			function (_p16) {
+				return _Bogdanp$elm_combine$Combine$succeed(
+					_user$project$AST$Object(_p16));
+			});
+	});
+var _user$project$Parser2$pOneOf = A2(
+	_Bogdanp$elm_combine$Combine$andThen,
+	A2(
+		_Bogdanp$elm_combine$Combine_Infix_ops['*>'],
+		A2(
+			_Bogdanp$elm_combine$Combine_Infix_ops['*>'],
+			_Bogdanp$elm_combine$Combine$string('oneOf'),
+			_user$project$Common$spacing),
+		_user$project$Common$listOf(_user$project$Parser2$pCommand)),
+	function (_p17) {
+		return _Bogdanp$elm_combine$Combine$succeed(
+			_user$project$AST$OneOf(_p17));
+	});
+var _user$project$Parser2$pTuple = A2(
+	_Bogdanp$elm_combine$Combine$andThen,
+	A2(
+		_Bogdanp$elm_combine$Combine_Infix_ops['*>'],
+		_Bogdanp$elm_combine$Combine$string('tuple'),
+		_Bogdanp$elm_combine$Combine_Num$digit),
+	function (n) {
+		return A2(
+			_Bogdanp$elm_combine$Combine$andThen,
+			A2(
+				_Bogdanp$elm_combine$Combine_Infix_ops['*>'],
+				A2(_Bogdanp$elm_combine$Combine_Infix_ops['*>'], _user$project$Common$spacing, _user$project$Common$transformFunc),
+				A2(
+					_Bogdanp$elm_combine$Combine$count,
+					n,
+					A2(_Bogdanp$elm_combine$Combine_Infix_ops['*>'], _user$project$Common$spacing, _user$project$Parser2$pCommand))),
+			function (_p18) {
+				return _Bogdanp$elm_combine$Combine$succeed(
+					_user$project$AST$Tuple(_p18));
+			});
+	});
+var _user$project$Parser2$pCallWithParams = A3(
+	_Bogdanp$elm_combine$Combine$between,
+	_user$project$Common$openBrackets,
+	_user$project$Common$closeBrackets,
+	A2(
+		_Bogdanp$elm_combine$Combine$andThen,
+		_user$project$Common$word,
+		function (proc) {
+			return A2(
+				_Bogdanp$elm_combine$Combine$andThen,
+				_Bogdanp$elm_combine$Combine$many1(
+					A2(
+						_Bogdanp$elm_combine$Combine_Infix_ops['*>'],
+						_user$project$Common$spacing,
+						A2(_Bogdanp$elm_combine$Combine$or, _user$project$Parser2$pStr, _user$project$Parser2$pCommand))),
+				function (args) {
+					return _Bogdanp$elm_combine$Combine$succeed(
+						A2(_user$project$AST$Call, proc, args));
+				});
+		}));
+var _user$project$Parser2$parseFunctionSignature = A2(
+	_Bogdanp$elm_combine$Combine$optional,
+	{ctor: '_Tuple0'},
+	_Bogdanp$elm_combine$Combine$skip(
+		A2(
+			_Bogdanp$elm_combine$Combine_Infix_ops['*>'],
+			A2(
+				_Bogdanp$elm_combine$Combine_Infix_ops['<*'],
+				A2(
+					_Bogdanp$elm_combine$Combine_Infix_ops['<*'],
+					_user$project$Common$word,
+					A3(
+						_Bogdanp$elm_combine$Combine$between,
+						_user$project$Common$possibleSpacing,
+						_user$project$Common$spacing,
+						_Bogdanp$elm_combine$Combine_Char$char(
+							_elm_lang$core$Native_Utils.chr(':')))),
+				_Bogdanp$elm_combine$Combine$many(
+					_Bogdanp$elm_combine$Combine_Char$noneOf(
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$core$Native_Utils.chr('\n')
+							])))),
+			_user$project$Common$spacing)));
+var _user$project$Parser2$pProc = A2(
+	_Bogdanp$elm_combine$Combine$andThen,
+	A2(
+		_Bogdanp$elm_combine$Combine_Infix_ops['*>'],
+		_user$project$Parser2$parseFunctionSignature,
+		_Bogdanp$elm_combine$Combine$many1(
+			A2(_Bogdanp$elm_combine$Combine_Infix_ops['<*'], _user$project$Common$word, _user$project$Common$spacing))),
+	function (ps) {
+		return A2(
+			_Bogdanp$elm_combine$Combine$andThen,
+			A2(
+				_Bogdanp$elm_combine$Combine_Infix_ops['*>'],
+				A2(
+					_Bogdanp$elm_combine$Combine_Infix_ops['*>'],
+					_Bogdanp$elm_combine$Combine_Char$char(
+						_elm_lang$core$Native_Utils.chr('=')),
+					_user$project$Common$spacing),
+				_user$project$Parser2$pCommand),
+			function (decoder) {
+				var _p19 = ps;
+				if (_p19.ctor === '[]') {
+					return _Bogdanp$elm_combine$Combine$fail(
+						_elm_lang$core$Native_List.fromArray(
+							['Failure parsing Proc']));
+				} else {
+					return _Bogdanp$elm_combine$Combine$succeed(
+						A3(_user$project$AST$Proc, _p19._0, _p19._1, decoder));
+				}
+			});
+	});
+var _user$project$Parser2$empty = _Bogdanp$elm_combine$Combine$succeed(
+	_elm_lang$core$Native_List.fromArray(
+		[
+			A3(
+			_user$project$AST$Proc,
+			'default',
+			_elm_lang$core$Native_List.fromArray(
+				[]),
+			_user$project$AST$Str('empty'))
+		]));
+var _user$project$Parser2$singleItem = A2(
+	_Bogdanp$elm_combine$Combine$andThen,
+	A2(
+		_Bogdanp$elm_combine$Combine_Infix_ops['<*'],
+		A2(_Bogdanp$elm_combine$Combine_Infix_ops['<*'], _user$project$Parser2$pCommand, _user$project$Common$possibleSpacing),
+		_Bogdanp$elm_combine$Combine$end),
+	function (item) {
+		return _Bogdanp$elm_combine$Combine$succeed(
+			_elm_lang$core$Native_List.fromArray(
+				[
+					A3(
+					_user$project$AST$Proc,
+					'default',
+					_elm_lang$core$Native_List.fromArray(
+						[]),
+					item)
+				]));
+	});
+var _user$project$Parser2$oneOrMoreProcs = A2(
+	_Bogdanp$elm_combine$Combine$andThen,
+	_user$project$Parser2$pProc,
+	function (p1) {
+		return A2(
+			_Bogdanp$elm_combine$Combine$andThen,
+			_Bogdanp$elm_combine$Combine$many(
+				A2(
+					_Bogdanp$elm_combine$Combine_Infix_ops['*>'],
+					_Bogdanp$elm_combine$Combine$many1(_Bogdanp$elm_combine$Combine_Char$eol),
+					_user$project$Parser2$pProc)),
+			function (ps) {
+				return _Bogdanp$elm_combine$Combine$succeed(
+					A2(_elm_lang$core$List_ops['::'], p1, ps));
+			});
+	});
+var _user$project$Parser2$parseString = function (s) {
+	var _p20 = A2(
+		_Bogdanp$elm_combine$Combine$parse,
+		A2(
+			_Bogdanp$elm_combine$Combine_Infix_ops['<*'],
+			A2(
+				_Bogdanp$elm_combine$Combine_Infix_ops['<*'],
+				A2(
+					_Bogdanp$elm_combine$Combine_Infix_ops['*>'],
+					_Bogdanp$elm_combine$Combine$many(_user$project$Common$spacing),
+					_Bogdanp$elm_combine$Combine$choice(
+						_elm_lang$core$Native_List.fromArray(
+							[_user$project$Parser2$oneOrMoreProcs, _user$project$Parser2$singleItem, _user$project$Parser2$empty]))),
+				_user$project$Common$possibleSpacing),
+			_Bogdanp$elm_combine$Combine$end),
+		s);
+	if (_p20._0.ctor === 'Ok') {
+		return _elm_lang$core$Result$Ok(_p20._0._0);
+	} else {
+		return _elm_lang$core$Result$Err(
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				_elm_lang$core$Basics$toString(_p20._0._0),
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					'Parsing error beginning at: ',
+					_elm_lang$core$Basics$toString(_p20._1))));
+	}
+};
+
+var _user$project$Emit$spaceSeparate = _elm_lang$core$List$foldl(
+	F2(
+		function (i, acc) {
+			return A2(
+				_elm_lang$core$Basics_ops['++'],
+				acc,
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					' ',
+					A2(
+						_elm_lang$core$String$filter,
+						F2(
+							function (x, y) {
+								return !_elm_lang$core$Native_Utils.eq(x, y);
+							})(
+							_elm_lang$core$Native_Utils.chr('\"')),
+						_elm_lang$core$Basics$toString(i))));
+		}));
+var _user$project$Emit$zip = F2(
+	function (l1, l2) {
+		var _p0 = {ctor: '_Tuple2', _0: l1, _1: l2};
+		if (((_p0.ctor === '_Tuple2') && (_p0._0.ctor === '::')) && (_p0._1.ctor === '::')) {
+			return A2(
+				_elm_lang$core$List_ops['::'],
+				{ctor: '_Tuple2', _0: _p0._0._0, _1: _p0._1._0},
+				A2(_user$project$Emit$zip, _p0._0._1, _p0._1._1));
+		} else {
+			return _elm_lang$core$Native_List.fromArray(
+				[]);
+		}
+	});
+var _user$project$Emit$filt = F2(
+	function (n, f) {
+		var _p1 = f;
+		switch (_p1.ctor) {
+			case 'Proc':
+				return _elm_lang$core$Native_Utils.eq(n, _p1._0);
+			case 'Var':
+				return _elm_lang$core$Native_Utils.eq(n, _p1._0);
+			default:
+				return false;
+		}
+	});
+var _user$project$Emit$andMap = F2(
+	function (decFun, decA) {
+		return A3(
+			_elm_lang$core$Json_Decode$object2,
+			F2(
+				function (f, a) {
+					return f(a);
+				}),
+			decFun,
+			decA);
+	});
+var _user$project$Emit$emit = F2(
+	function (env, com) {
+		emit:
+		while (true) {
+			var iterateStructure = F2(
+				function (prefix, coms) {
+					var go = F2(
+						function (com, acc) {
+							return A3(
+								_elm_lang$core$Json_Decode$object2,
+								F2(
+									function (a, b) {
+										return A2(
+											_elm_lang$core$Basics_ops['++'],
+											b,
+											A2(_elm_lang$core$Basics_ops['++'], ' ', a));
+									}),
+								A2(_user$project$Emit$emit, env, com),
+								acc);
+						});
+					return A3(
+						_elm_lang$core$List$foldl,
+						go,
+						_elm_lang$core$Json_Decode$succeed(prefix),
+						coms);
+				});
+			var lookup = function (n) {
+				return A2(
+					_elm_lang$core$Maybe$withDefault,
+					_user$project$AST$Error('lookup error'),
+					_elm_lang$core$List$head(
+						A2(
+							_elm_lang$core$List$filter,
+							_user$project$Emit$filt(n),
+							env)));
+			};
+			var $eval = function (ast) {
+				$eval:
+				while (true) {
+					var _p2 = ast;
+					switch (_p2.ctor) {
+						case 'Str':
+							return _elm_lang$core$Maybe$Just(_p2._0);
+						case 'Call':
+							var _p3 = lookup(_p2._0);
+							if (_p3.ctor === 'Var') {
+								var _v4 = _p3._1;
+								ast = _v4;
+								continue $eval;
+							} else {
+								return _elm_lang$core$Maybe$Nothing;
+							}
+						default:
+							return _elm_lang$core$Maybe$Nothing;
+					}
+				}
+			};
+			var _p4 = com;
+			switch (_p4.ctor) {
+				case 'Strng':
+					return _elm_lang$core$Json_Decode$string;
+				case 'Itg':
+					return A2(_elm_lang$core$Json_Decode$map, _elm_lang$core$Basics$toString, _elm_lang$core$Json_Decode$int);
+				case 'Flt':
+					return A2(_elm_lang$core$Json_Decode$map, _elm_lang$core$Basics$toString, _elm_lang$core$Json_Decode$float);
+				case 'Bln':
+					return A2(_elm_lang$core$Json_Decode$map, _elm_lang$core$Basics$toString, _elm_lang$core$Json_Decode$bool);
+				case 'Null':
+					return _elm_lang$core$Json_Decode$null(_p4._0);
+				case 'List':
+					return A2(
+						_elm_lang$core$Json_Decode$map,
+						_user$project$Emit$spaceSeparate('List'),
+						_elm_lang$core$Json_Decode$list(
+							A2(_user$project$Emit$emit, env, _p4._0)));
+				case 'Arr':
+					return A2(
+						_elm_lang$core$Json_Decode$map,
+						function (_p5) {
+							return A2(
+								_user$project$Emit$spaceSeparate,
+								'Array.fromList',
+								_elm_lang$core$Array$toList(_p5));
+						},
+						_elm_lang$core$Json_Decode$array(
+							A2(_user$project$Emit$emit, env, _p4._0)));
+				case 'Tuple':
+					var _p6 = _p4._0;
+					return A2(
+						_elm_lang$core$Json_Decode$andThen,
+						_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$value),
+						function (vs) {
+							if (_elm_lang$core$Native_Utils.eq(
+								_elm_lang$core$List$length(vs),
+								_elm_lang$core$List$length(_p6))) {
+								var objRep = A2(
+									_elm_lang$core$List$indexedMap,
+									F2(
+										function (i, com) {
+											return A2(
+												_user$project$AST$KV,
+												_user$project$AST$Str(
+													_elm_lang$core$Basics$toString(i)),
+												com);
+										}),
+									_p6);
+								return A2(
+									_elm_lang$core$Json_Decode$andThen,
+									A2(iterateStructure, 'Tup', objRep),
+									_elm_lang$core$Json_Decode$succeed);
+							} else {
+								return _elm_lang$core$Json_Decode$fail(
+									A2(
+										_elm_lang$core$Basics_ops['++'],
+										'Array has wrong length: ',
+										A2(
+											_elm_lang$core$Basics_ops['++'],
+											_elm_lang$core$Basics$toString(
+												_elm_lang$core$List$length(vs)),
+											A2(
+												_elm_lang$core$Basics_ops['++'],
+												' elements vs expected ',
+												_elm_lang$core$Basics$toString(
+													_elm_lang$core$List$length(_p6))))));
+							}
+						});
+				case 'KV':
+					var _p8 = _p4._0;
+					var _p7 = $eval(_p8);
+					if (_p7.ctor === 'Just') {
+						return A2(
+							_elm_lang$core$Json_Decode_ops[':='],
+							_p7._0,
+							A2(_user$project$Emit$emit, env, _p4._1));
+					} else {
+						return _elm_lang$core$Json_Decode$fail(
+							A2(
+								_elm_lang$core$Basics_ops['++'],
+								'Key lookup failure for ',
+								_elm_lang$core$Basics$toString(_p8)));
+					}
+				case 'At':
+					var fields = A2(_elm_lang$core$List$map, $eval, _p4._0);
+					var _p9 = A2(
+						_elm_lang$core$List$any,
+						F2(
+							function (x, y) {
+								return _elm_lang$core$Native_Utils.eq(x, y);
+							})(_elm_lang$core$Maybe$Nothing),
+						fields);
+					if (_p9 === true) {
+						return _elm_lang$core$Json_Decode$fail('something wrong with fields');
+					} else {
+						return A2(
+							_elm_lang$core$Json_Decode$at,
+							A2(
+								_elm_lang$core$List$map,
+								_elm_lang$core$Maybe$withDefault(''),
+								fields),
+							A2(_user$project$Emit$emit, env, _p4._1));
+					}
+				case 'Object':
+					return A2(iterateStructure, 'Obj', _p4._0);
+				case 'KeyValuePairs':
+					return _elm_lang$core$Json_Decode$succeed('keyValuePairs');
+				case 'Dict':
+					return A2(
+						_elm_lang$core$Json_Decode$map,
+						function (_p10) {
+							return A2(
+								_user$project$Emit$spaceSeparate,
+								'Dict.fromList',
+								_elm_lang$core$Dict$toList(_p10));
+						},
+						_elm_lang$core$Json_Decode$dict(
+							A2(_user$project$Emit$emit, env, _p4._0)));
+				case 'JMaybe':
+					return A2(
+						_elm_lang$core$Json_Decode$map,
+						_elm_lang$core$Basics$toString,
+						_elm_lang$core$Json_Decode$maybe(
+							A2(_user$project$Emit$emit, env, _p4._0)));
+				case 'OneOf':
+					return _elm_lang$core$Json_Decode$oneOf(
+						A2(
+							_elm_lang$core$List$map,
+							_user$project$Emit$emit(env),
+							_p4._0));
+				case 'Map':
+					var _v8 = env,
+						_v9 = _p4._0;
+					env = _v8;
+					com = _v9;
+					continue emit;
+				case 'DFail':
+					return A2(
+						_elm_lang$core$Json_Decode$map,
+						_elm_lang$core$Basics$toString,
+						_elm_lang$core$Json_Decode$succeed(
+							A2(
+								_elm_lang$core$Maybe$withDefault,
+								'Fail error',
+								$eval(_p4._0))));
+				case 'Succeed':
+					var _p12 = _p4._0;
+					var _p11 = $eval(_p12);
+					if (_p11.ctor === 'Just') {
+						return _elm_lang$core$Json_Decode$succeed(_p11._0);
+					} else {
+						return _elm_lang$core$Json_Decode$fail(
+							A2(
+								_elm_lang$core$Basics_ops['++'],
+								'could not eval ',
+								_elm_lang$core$Basics$toString(_p12)));
+					}
+				case 'Call':
+					var _p16 = _p4._0;
+					var _p13 = lookup(_p16);
+					switch (_p13.ctor) {
+						case 'Proc':
+							var env$ = A3(
+								_elm_lang$core$List$foldl,
+								F2(
+									function (_p14, acc) {
+										var _p15 = _p14;
+										return A2(
+											_elm_lang$core$List_ops['::'],
+											A2(_user$project$AST$Var, _p15._0, _p15._1),
+											acc);
+									}),
+								env,
+								A2(_user$project$Emit$zip, _p13._1, _p4._1));
+							var _v13 = env$,
+								_v14 = _p13._2;
+							env = _v13;
+							com = _v14;
+							continue emit;
+						case 'Var':
+							var _v15 = env,
+								_v16 = _p13._1;
+							env = _v15;
+							com = _v16;
+							continue emit;
+						default:
+							return _elm_lang$core$Json_Decode$fail(
+								A2(_elm_lang$core$Basics_ops['++'], 'Call lookup failed for ', _p16));
+					}
+				case 'Error':
+					return _elm_lang$core$Json_Decode$fail(_p4._0);
+				default:
+					return _elm_lang$core$Json_Decode$fail(
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							'Whoops - emit can\'t yet handle ',
+							_elm_lang$core$Basics$toString(com)));
+			}
+		}
+	});
+
+var _user$project$Overlay$content = A2(
+	_evancz$elm_markdown$Markdown$toHtml,
+	_elm_lang$core$Native_List.fromArray(
+		[]),
+	'\n# Elm Json.Decode interpreter\n\nThis online tool aims to support the development of Json decoders. It implements a simple interpreter of the Json.Decode library, and calls `decodeString` with the result and the json value provided. An example is shown below - can you correct the deliberate mistake?\n\nThe Decoders must already compile - this application is only about testing compatability with json data.\n\nA few things to note:\n - `succeed` is not fully polymorphic;\n - `andThen` is not supported, which is primarily because;\n - there is no interpretation of Elm control flow syntax, e.g. `case`, `if ... then ... else`, ...;\n - `<|` **is interpreted**, but `|>` is not\n - some decoders - e.g. `keyValuePairs`, `value` - make no specific requirements on the Json, and are thus considered always compatible\n\n');
+var _user$project$Overlay$update = F2(
+	function (msg, model) {
+		var _p0 = msg;
+		return false;
+	});
+var _user$project$Overlay$init = true;
+var _user$project$Overlay$elmBlue = '#60B5CC';
+var _user$project$Overlay$overlayOpen = _elm_lang$core$Native_List.fromArray(
+	[
+		{ctor: '_Tuple2', _0: 'background-color', _1: _user$project$Overlay$elmBlue},
+		{ctor: '_Tuple2', _0: 'border-top', _1: '3px solid white'},
+		{ctor: '_Tuple2', _0: 'padding', _1: '0 15px'},
+		{ctor: '_Tuple2', _0: 'transition', _1: 'max-height 2s'}
+	]);
+var _user$project$Overlay$overlayClosed = A2(
+	_elm_lang$core$Basics_ops['++'],
+	_elm_lang$core$Native_List.fromArray(
+		[
+			{ctor: '_Tuple2', _0: 'max-height', _1: '0'},
+			{ctor: '_Tuple2', _0: 'transition', _1: 'max-height 2s'},
+			{ctor: '_Tuple2', _0: 'border-top-width', _1: '0'}
+		]),
+	_user$project$Overlay$overlayOpen);
+var _user$project$Overlay$Close = {ctor: 'Close'};
+var _user$project$Overlay$view = function (m) {
+	return A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Attributes$style(
+				m ? _user$project$Overlay$overlayOpen : _user$project$Overlay$overlayClosed)
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_user$project$Overlay$content,
+				A2(
+				_elm_lang$html$Html$div,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$style(
+						_elm_lang$core$Native_List.fromArray(
+							[
+								{ctor: '_Tuple2', _0: 'margin-bottom', _1: '10px'}
+							]))
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						A2(
+						_elm_lang$html$Html$button,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Events$onClick(_user$project$Overlay$Close)
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html$text('Close')
+							]))
+					]))
+			]));
+};
+
+var _user$project$App$footerStyles = function (c) {
+	return _elm_lang$html$Html_Attributes$style(
+		_elm_lang$core$Native_List.fromArray(
+			[
+				{ctor: '_Tuple2', _0: 'background-color', _1: c},
+				{ctor: '_Tuple2', _0: 'flex-grow', _1: '1'},
+				{ctor: '_Tuple2', _0: 'flex-basis', _1: '0'},
+				{ctor: '_Tuple2', _0: 'padding', _1: '15px'}
+			]));
+};
+var _user$project$App$textareaStyles = function (col) {
+	return _elm_lang$html$Html_Attributes$style(
+		_elm_lang$core$Native_List.fromArray(
+			[
+				{ctor: '_Tuple2', _0: 'box-sizing', _1: 'border-box'},
+				{ctor: '_Tuple2', _0: 'flex-grow', _1: '100'},
+				{ctor: '_Tuple2', _0: 'padding', _1: '15px 0'},
+				{ctor: '_Tuple2', _0: 'width', _1: '100%'},
+				{ctor: '_Tuple2', _0: 'resize', _1: 'none'},
+				{ctor: '_Tuple2', _0: 'border', _1: '0'},
+				{ctor: '_Tuple2', _0: 'background-color', _1: 'inherit'},
+				{ctor: '_Tuple2', _0: 'color', _1: col},
+				{ctor: '_Tuple2', _0: 'font-family', _1: 'monospace'},
+				{ctor: '_Tuple2', _0: 'font-size', _1: '14px'},
+				{ctor: '_Tuple2', _0: 'outline-width', _1: '0'}
+			]));
+};
+var _user$project$App$h2Styles = function (col) {
+	return _elm_lang$html$Html_Attributes$style(
+		_elm_lang$core$Native_List.fromArray(
+			[
+				{ctor: '_Tuple2', _0: 'background-color', _1: 'rgba(0,0,0,0.3)'},
+				{ctor: '_Tuple2', _0: 'margin', _1: '0 -15px'},
+				{ctor: '_Tuple2', _0: 'color', _1: col},
+				{ctor: '_Tuple2', _0: 'font-weight', _1: '400'},
+				{ctor: '_Tuple2', _0: 'padding', _1: '5px 15px'},
+				{ctor: '_Tuple2', _0: 'font-size', _1: '18px'}
+			]));
+};
+var _user$project$App$containerStyle = F2(
+	function (bkgCol, col) {
+		return _elm_lang$html$Html_Attributes$style(
+			_elm_lang$core$Native_List.fromArray(
+				[
+					{ctor: '_Tuple2', _0: 'flex-grow', _1: '1'},
+					{ctor: '_Tuple2', _0: 'flex-basis', _1: '0'},
+					{ctor: '_Tuple2', _0: 'display', _1: 'flex'},
+					{ctor: '_Tuple2', _0: 'flex-direction', _1: 'column'},
+					{ctor: '_Tuple2', _0: 'background-color', _1: bkgCol},
+					{ctor: '_Tuple2', _0: 'color', _1: col},
+					{ctor: '_Tuple2', _0: 'padding', _1: '0 15px 10px 15px'}
+				]));
+	});
+var _user$project$App$elmRed = '#FF1965';
+var _user$project$App$elmOrange = '#f0ad00';
+var _user$project$App$elmPale = '#f7f7f7';
+var _user$project$App$elmGrey = '#293C4B';
+var _user$project$App$elmGreen = '#7fd13b';
+var _user$project$App$elmBlue = '#60B5CC';
+var _user$project$App$navbarStyles = _elm_lang$html$Html_Attributes$style(
+	_elm_lang$core$Native_List.fromArray(
+		[
+			{ctor: '_Tuple2', _0: 'background-color', _1: _user$project$App$elmBlue},
+			{ctor: '_Tuple2', _0: 'color', _1: _user$project$App$elmGrey},
+			{ctor: '_Tuple2', _0: 'padding', _1: '5px 15px'},
+			{ctor: '_Tuple2', _0: 'display', _1: 'flex'},
+			{ctor: '_Tuple2', _0: 'align-items', _1: 'baseline'},
+			{ctor: '_Tuple2', _0: 'justify-content', _1: 'space-between'}
+		]));
+var _user$project$App$fakeButton = _elm_lang$html$Html_Attributes$style(
+	_elm_lang$core$Native_List.fromArray(
+		[
+			{ctor: '_Tuple2', _0: 'background-color', _1: _user$project$App$elmBlue},
+			{ctor: '_Tuple2', _0: 'padding', _1: '5px 12px'},
+			{ctor: '_Tuple2', _0: 'cursor', _1: 'pointer'},
+			{ctor: '_Tuple2', _0: 'display', _1: 'inline-block'},
+			{ctor: '_Tuple2', _0: 'margin', _1: '0 10px 5px 10px'},
+			{ctor: '_Tuple2', _0: 'border-radius', _1: '5px'}
+		]));
+var _user$project$App$escapeText = function (str) {
+	return _elm_lang$core$String$fromList(
+		A3(
+			_elm_lang$core$List$foldr,
+			F2(
+				function (c, acc) {
+					return _elm_lang$core$Native_Utils.eq(
+						c,
+						_elm_lang$core$Native_Utils.chr('\"')) ? A2(
+						_elm_lang$core$List_ops['::'],
+						_elm_lang$core$Native_Utils.chr('\\'),
+						A2(
+							_elm_lang$core$List_ops['::'],
+							_elm_lang$core$Native_Utils.chr('\"'),
+							acc)) : A2(_elm_lang$core$List_ops['::'], c, acc);
+				}),
+			_elm_lang$core$Native_List.fromArray(
+				[]),
+			_elm_lang$core$String$toList(str)));
+};
+var _user$project$App$decodeResult = function (model) {
+	var col = model.decodeSuccess ? _user$project$App$elmGreen : (_elm_lang$core$Native_Utils.eq(model.result, '') ? _user$project$App$elmOrange : _user$project$App$elmRed);
+	return A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_user$project$App$footerStyles(col)
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(
+				_elm_lang$html$Html$p,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$style(
+						_elm_lang$core$Native_List.fromArray(
+							[
+								{ctor: '_Tuple2', _0: 'margin', _1: '0'}
+							]))
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text(model.result)
+					]))
+			]));
+};
+var _user$project$App$navbar = function (m) {
+	return A2(
+		_elm_lang$html$Html$header,
+		_elm_lang$core$Native_List.fromArray(
+			[_user$project$App$navbarStyles]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(
+				_elm_lang$html$Html$h1,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$style(
+						_elm_lang$core$Native_List.fromArray(
+							[
+								{ctor: '_Tuple2', _0: 'margin', _1: '0'},
+								{ctor: '_Tuple2', _0: 'font-weight', _1: '400'},
+								{ctor: '_Tuple2', _0: 'font-size', _1: '22px'}
+							]))
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text(
+						_elm_lang$core$Basics$not(m) ? 'Elm Json.Decode interpreter' : '')
+					])),
+				A2(
+				_elm_lang$html$Html$p,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$style(
+						_elm_lang$core$Native_List.fromArray(
+							[
+								{ctor: '_Tuple2', _0: 'margin', _1: '0'}
+							]))
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text('Simon Hampton ('),
+						A2(
+						_elm_lang$html$Html$a,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$href('https://github.com/simonh1000/json-interpreter'),
+								_elm_lang$html$Html_Attributes$style(
+								_elm_lang$core$Native_List.fromArray(
+									[
+										{ctor: '_Tuple2', _0: 'color', _1: 'inherit'}
+									]))
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html$text('Source: github')
+							])),
+						_elm_lang$html$Html$text(')')
+					]))
+			]));
+};
+var _user$project$App$update = F2(
+	function (action, model) {
+		var parse = function (str) {
+			var newModel = _elm_lang$core$Native_Utils.update(
+				model,
+				{decoderStr: str, decodeSuccess: false, result: ''});
+			var _p0 = _user$project$Parser2$parseString(str);
+			if (_p0.ctor === 'Ok') {
+				return _elm_lang$core$Native_Utils.update(
+					newModel,
+					{ast: _p0._0, parseSuccess: true});
+			} else {
+				return _elm_lang$core$Native_Utils.update(
+					newModel,
+					{
+						ast: _elm_lang$core$Native_List.fromArray(
+							[]),
+						parseSuccess: false,
+						errorMessage: _p0._0
+					});
+			}
+		};
+		var _p1 = action;
+		switch (_p1.ctor) {
+			case 'Tick':
+				return {
+					ctor: '_Tuple2',
+					_0: parse(model.decoderStr),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'JsonChange':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{json: _p1._0}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'Decoder':
+				return {
+					ctor: '_Tuple2',
+					_0: parse(_p1._0),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'ChooseDecoder':
+				var newModel = function () {
+					var _p2 = A2(
+						_elm_lang$core$Json_Decode$decodeString,
+						A2(
+							_user$project$Emit$emit,
+							model.ast,
+							A2(
+								_user$project$AST$Call,
+								_p1._0,
+								_elm_lang$core$Native_List.fromArray(
+									[]))),
+						model.json);
+					if (_p2.ctor === 'Ok') {
+						return _elm_lang$core$Native_Utils.update(
+							model,
+							{decodeSuccess: true, result: 'Success: decoder(s) & json match.'});
+					} else {
+						return _elm_lang$core$Native_Utils.update(
+							model,
+							{decodeSuccess: false, result: _p2._0});
+					}
+				}();
+				return {ctor: '_Tuple2', _0: newModel, _1: _elm_lang$core$Platform_Cmd$none};
+			default:
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{
+							overlay: A2(_user$project$Overlay$update, _p1._0, model.overlay)
+						}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+		}
+	});
+var _user$project$App$init = {
+	json: '{\"data\": [4,5,6,7,8]}',
+	decoderStr: 'func = \"data\" :=\n\t\ttuple5\n\t\t\tModel\n\t\t\tint int int int string',
+	result: '',
+	ast: _elm_lang$core$Native_List.fromArray(
+		[]),
+	parseSuccess: false,
+	errorMessage: '',
+	decodeSuccess: false,
+	overlay: _user$project$Overlay$init
+};
+var _user$project$App$Model = F8(
+	function (a, b, c, d, e, f, g, h) {
+		return {json: a, decoderStr: b, ast: c, parseSuccess: d, result: e, errorMessage: f, decodeSuccess: g, overlay: h};
+	});
+var _user$project$App$OverlayMsg = function (a) {
+	return {ctor: 'OverlayMsg', _0: a};
+};
+var _user$project$App$Tick = function (a) {
+	return {ctor: 'Tick', _0: a};
+};
+var _user$project$App$ChooseDecoder = function (a) {
+	return {ctor: 'ChooseDecoder', _0: a};
+};
+var _user$project$App$decoderButton = function (func) {
+	var n = function () {
+		var _p3 = func;
+		if (_p3.ctor === 'Proc') {
+			return _p3._0;
+		} else {
+			return '!!!!!';
+		}
+	}();
+	return A2(
+		_elm_lang$html$Html$span,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Events$onClick(
+				_user$project$App$ChooseDecoder(n)),
+				_user$project$App$fakeButton
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html$text(n)
+			]));
+};
+var _user$project$App$parseResult = function (model) {
+	return model.parseSuccess ? A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_user$project$App$footerStyles(_user$project$App$elmGreen)
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(
+				_elm_lang$html$Html$div,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$style(
+						_elm_lang$core$Native_List.fromArray(
+							[
+								{ctor: '_Tuple2', _0: 'display', _1: 'flex'},
+								{ctor: '_Tuple2', _0: 'align-items', _1: 'baseline'}
+							]))
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						A2(
+						_elm_lang$html$Html$h3,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$style(
+								_elm_lang$core$Native_List.fromArray(
+									[
+										{ctor: '_Tuple2', _0: 'margin', _1: '0'}
+									]))
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html$text('Choose entry point')
+							])),
+						A2(
+						_elm_lang$html$Html$div,
+						_elm_lang$core$Native_List.fromArray(
+							[]),
+						A2(_elm_lang$core$List$map, _user$project$App$decoderButton, model.ast))
+					])),
+				A2(
+				_elm_lang$html$Html$div,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$style(
+						_elm_lang$core$Native_List.fromArray(
+							[
+								{ctor: '_Tuple2', _0: 'font-size', _1: '10px'}
+							]))
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text(
+						_elm_lang$core$Basics$toString(model.ast))
+					]))
+			])) : A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				(!_elm_lang$core$Native_Utils.eq(model.errorMessage, '')) ? _user$project$App$footerStyles(_user$project$App$elmRed) : _user$project$App$footerStyles('#f0ad00')
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(
+				_elm_lang$html$Html$p,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text(model.errorMessage)
+					]))
+			]));
+};
+var _user$project$App$Decoder = function (a) {
+	return {ctor: 'Decoder', _0: a};
+};
+var _user$project$App$JsonChange = function (a) {
+	return {ctor: 'JsonChange', _0: a};
+};
+var _user$project$App$mainSection = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Attributes$style(
+				_elm_lang$core$Native_List.fromArray(
+					[
+						{ctor: '_Tuple2', _0: 'display', _1: 'flex'},
+						{ctor: '_Tuple2', _0: 'flex-grow', _1: '2'}
+					]))
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(
+				_elm_lang$html$Html$div,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						A2(_user$project$App$containerStyle, _user$project$App$elmGrey, _user$project$App$elmPale)
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						A2(
+						_elm_lang$html$Html$h2,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_user$project$App$h2Styles(_user$project$App$elmPale)
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html$text('Json.Decode functions')
+							])),
+						A2(
+						_elm_lang$html$Html$textarea,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_user$project$App$textareaStyles('#f7f7f7'),
+								_elm_lang$html$Html_Events$onInput(_user$project$App$Decoder)
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html$text(model.decoderStr)
+							]))
+					])),
+				A2(
+				_elm_lang$html$Html$div,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						A2(_user$project$App$containerStyle, _user$project$App$elmPale, _user$project$App$elmGrey)
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						A2(
+						_elm_lang$html$Html$h2,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_user$project$App$h2Styles(_user$project$App$elmGrey)
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html$text('Json')
+							])),
+						A2(
+						_elm_lang$html$Html$textarea,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_user$project$App$textareaStyles('#3a3432'),
+								_elm_lang$html$Html_Events$onInput(_user$project$App$JsonChange)
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html$text(model.json)
+							]))
+					]))
+			]));
+};
+var _user$project$App$view = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Attributes$style(
+				_elm_lang$core$Native_List.fromArray(
+					[
+						{ctor: '_Tuple2', _0: 'display', _1: 'flex'},
+						{ctor: '_Tuple2', _0: 'flex-direction', _1: 'column'},
+						{ctor: '_Tuple2', _0: 'width', _1: '100vw'},
+						{ctor: '_Tuple2', _0: 'minHeight', _1: '100vh'}
+					]))
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_user$project$App$navbar(model.overlay),
+				A2(
+				_elm_lang$html$Html_App$map,
+				_user$project$App$OverlayMsg,
+				_user$project$Overlay$view(model.overlay)),
+				_user$project$App$mainSection(model),
+				A2(
+				_elm_lang$html$Html$footer,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$style(
+						_elm_lang$core$Native_List.fromArray(
+							[
+								{ctor: '_Tuple2', _0: 'display', _1: 'flex'}
+							]))
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_user$project$App$parseResult(model),
+						_user$project$App$decodeResult(model)
+					]))
+			]));
+};
+
+var _user$project$Main$main = {
+	main: _elm_lang$html$Html_App$program(
+		{
+			init: {
+				ctor: '_Tuple2',
+				_0: _user$project$App$init,
+				_1: A3(_elm_lang$core$Task$perform, _user$project$App$Tick, _user$project$App$Tick, _elm_lang$core$Time$now)
+			},
+			update: _user$project$App$update,
+			view: _user$project$App$view,
+			subscriptions: function (_p0) {
+				return _elm_lang$core$Platform_Sub$none;
+			}
+		})
+};
+
+var Elm = {};
+Elm['Main'] = Elm['Main'] || {};
+_elm_lang$core$Native_Platform.addPublicModule(Elm['Main'], 'Main', typeof _user$project$Main$main === 'undefined' ? null : _user$project$Main$main);
+
+if (typeof define === "function" && define['amd'])
+{
+  define([], function() { return Elm; });
+  return;
+}
+
+if (typeof module === "object")
+{
+  module['exports'] = Elm;
+  return;
+}
+
+var globalElm = this['Elm'];
+if (typeof globalElm === "undefined")
+{
+  this['Elm'] = Elm;
+  return;
+}
+
+for (var publicModule in Elm)
+{
+  if (publicModule in globalElm)
+  {
+    throw new Error('There are two Elm modules called `' + publicModule + '` on this page! Rename one of them.');
+  }
+  globalElm[publicModule] = Elm[publicModule];
+}
+
+}).call(this);
+
