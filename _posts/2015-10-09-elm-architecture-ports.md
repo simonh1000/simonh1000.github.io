@@ -18,7 +18,7 @@ To start with I'm going to use Javascript externally from Elm to load a map, and
     <div id="map"></div>
 </div>
 
-<script type="text/javascript" src="/js/elm.js"></script>
+<script type="text/javascript" src="/js/gmaps.js"></script>
 <script src="//maps.googleapis.com/maps/api/js"></script>
 <script type="text/javascript">
     var div = document.getElementById('elm');
