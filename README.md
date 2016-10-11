@@ -1,5 +1,8 @@
 # [simonh1000.github.io](http://simonh1000.github.io/)
 
-Start development with `bundle exec jekyll serve`
-Then commit and push
-bundle exec jekyll serve --drafts
+## Development with drafts
+
+`bundle exec jekyll serve --drafts`
+
+## Production build
+`bundle exec jekyll serve`
