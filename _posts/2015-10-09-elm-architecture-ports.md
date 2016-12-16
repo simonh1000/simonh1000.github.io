@@ -1,5 +1,5 @@
 ---
-title: Elm Architecture and ports (Google Maps quick and dirty)
+title: Google Maps with Elm (0.16) and ports
 layout: post
 category: elm
 ---
@@ -19,7 +19,7 @@ To start with I'm going to use Javascript externally from Elm to load a map, and
 </div>
 
 <script type="text/javascript" src="/js/gmaps.js"></script>
-<script src="//maps.googleapis.com/maps/api/js"></script>
+<script src="//maps.googleapis.com/maps/api/js?key=AIzaSyBQ7rfAz9CP20XeFm54Yq72Lkv6aSY7QUg"></script>
 <script type="text/javascript">
     var div = document.getElementById('elm');
     var mapDiv = document.getElementById('map');
