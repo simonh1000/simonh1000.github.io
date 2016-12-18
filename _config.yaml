@@ -1,7 +1,7 @@
 name: "Simon Hampton"
-description: "Portfolio and blog"
+description: "Functional Fullstack Freelancer working in Elm, Elixir, Javascript and Haskell"
 
-url: "http://simonh1000.github.io"
+url: "https://simonh1000.github.io"
 
 permalink: /:year/:month/:title/
 

@@ -1,21 +1,26 @@
 
+.navbar-brand:before {
+    content: "Simon Hampton";
+    font-weight: 800;
+}
+
 .banner {
-    height: calc(100% - 52px);  // ??
-    padding: 25px 15px 30px 15px;
-    position: relative;
+    height: calc(100vh - 52px);  // ??
+    padding: 25px 15px 0px 15px;
+    // position: relative;
+    display: flex;
+    flex-direction: column;
+    // justify-content:
 
     h1 {
-        color: $darkorange;
-        margin: 0 0 20px 0;
+        display: none;
     }
-    // .list-container {
-    // }
-
     ul {
-        height: calc(100% - 100px);
+        flex-grow: 1;
+        flex-shrink: 1;
         display: flex;
         flex-direction: column;
-        justify-content: space-around;
+        justify-content: space-between;
 
         list-style: none;
         padding-left: 1.2em;
@@ -34,10 +39,10 @@
         }
     }
     .contact-button {
-        position: absolute;
-        bottom: 20px;
+        padding: 20px 0;
     }
     .btn-primary {
+        font-weight: 800;
         border-color: $darkblue;
         background-color: inherit;
         color: $darkblue;
@@ -90,8 +95,18 @@
 }
 
 @media (min-width: 768px) {
+
+    .navbar-brand:before {
+        content: "Functional Fullstack Freelancer"
+        // content: "Simon Hampton"
+    }
     .banner {
-        padding-bottom: 50px;
+        h1 {
+            display: block;
+            color: $darkorange;
+            margin: 0 0 20px 0;
+        }
+        // padding-bottom: 50px;
         padding-left: 150px;
         .list-container {
         }
@@ -100,10 +115,10 @@
             font-size: 1.6em;
         }
         .contact-button {
-            bottom: 30px;
+            padding-bottom: 30px;
         }
     }
-    
+
     $carousel-large: 600px;
     #portfolio {
         .item {
