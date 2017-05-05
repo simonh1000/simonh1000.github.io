@@ -4,13 +4,13 @@ layout: post
 tags: Elm
 ---
 
-Storing binary data on S3 is a typical front-end need, and often needs to be implemented with authorisation to ensure that only designated users can upload. To do that, uploads need to 'signed' with a secret key. There are several possible approaches:
+Storing binary data on S3 is a typical front-end need, and often has be implemented with authorisation to ensure that only designated users can upload. To do that, uploads need to be 'signed' with a secret key. There are several possible approaches:
 
  - Embed the secret key in the client software and calculate the signature client side. This is an obvious security risk, which can be mitigated by using a so-called IAM user in AWS that has the rights to upload files, but not to read any.
 
- - Require that the authorised users upload to our server, and then forward files from there with a signature to S3. That is obviously inefficient.
+ - Require that the authorised users upload to our server, and then forward signed files from there to S3. That is obviously inefficient.
 
- - Have the client request a signatures from the server using the secret key, and let the client use that to upload directly to S3.
+ - Have the client request a signature from the server, and let the client use that to upload directly to S3.
 
 This blog focuses on the latter.
 
