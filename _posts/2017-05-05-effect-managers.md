@@ -4,7 +4,7 @@ layout: post
 tags: Elm
 ---
 
-It started with a casual remark from a colleague: "How about debouncing that?" I had a drop down menu that, on a single click needed to navigate to a new page and remove the dropdown, while a double click should make the menu item editable. A quick look on packages.elm-lang.org led to 6 debouncing libraries (!), all based on storing `Msg`s in the model. But which Msg - this is multi page App - and where?
+It started with a casual remark from a colleague: "How about debouncing that?" I had a drop down menu that, on a single click needed to navigate to a new page and remove the dropdown, while a double click should make the menu item editable. The trouble was that the second clikc was never detected as Elm had already cleared away the menu. A quick look on packages.elm-lang.org led to 6 debouncing libraries (!), all based on storing `Msg`s in the model. But which Msg - this is multi page App - and where?
 
 Not impossible, but I have my model in one file, which is imported throughout the app by the update/view files that also host my `Msg` definitions. Maybe factoring Msgs into separate files that can be widely imported is a good pattern - I can see some benefits - but it had not been necessary before in my larger projects. Was a major refactoring in order just to enable debouncing?
 
