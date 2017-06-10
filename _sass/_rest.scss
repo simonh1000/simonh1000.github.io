@@ -11,16 +11,19 @@ html, body, #elm {
 }
 .container {
     max-width: 970px;
-    p img {
-        float: right;
-        padding-left: 30px;
-    }
     h2 {
         clear: both;
     }
     .date-container {
         padding: 10px 0;
         text-align: right;
+    }
+    p img {
+        float: right;
+        padding-left: 30px;
+    }
+    img {
+        max-width: 100%;
     }
 }
 #blog {
@@ -33,6 +36,9 @@ html, body, #elm {
     ul {
         list-style-type: none;
         padding: 0;
+    }
+    img {
+        max-width: 180px;
     }
 }
 #elm {
