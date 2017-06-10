@@ -4,7 +4,7 @@ layout: post
 tags: Elm
 ---
 
-<img style="max-width: 50%" src="/images/elmeuropelogo.png" alt="Elm Europe logo">So, hundreds of European Elmers meet in [Paris](https://elmeurope.org/) and what is the result? A lot of energy, confidence, much fun and - for me at least - ever more enthusiasm to get back to my Elm code as it prepares for production. There was a lot to be learned in the conference talks, and even more from the conversations in the sunny garden of the Parisian technical college hosting us.
+![Elm Europe](/images/elmeuropelogo.png)So, hundreds of European Elmers meet in [Paris](https://elmeurope.org/) and what is the result? A lot of energy, confidence, much fun and - for me at least - ever more enthusiasm to get back to my Elm code as it prepares for production. There was a lot to be learned in the conference talks, and even more from the conversations in the sunny garden of the Parisian technical college hosting us.
 
 Funnily enough the strengths and weaknesses of the conference echoed my impressions of the first Elm Conf (in the US, and thus only seen online) last Autumn. In other words, a barnstorming presentation from Richard Feldman; some hints at exciting new pistes for Elm together with some useful presentations of libraries. But we missed an update on the language itself, and it would have been good to have some technical presentations of production grade deployments.
 
