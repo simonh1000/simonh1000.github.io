@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: #333;
+            color: white;
+        }
+        .main {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .inner {
+            min-height: 50%;
+            max-height: 80%;
+            width: 80%;
+            position: relative;
+        }
+        .original {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .overlay {
+            position: absolute;
+            background-color: #333;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            transition: 0.5s bottom ease-in-out; 
+            overflow: hidden;
+        }
+        .buttons {
+            display: flex;
+            align-items: center;
+            justify-content: space-between
+        }
+        button {
+            padding: 30px;
+            color: white;
+            font-size: 30px;
+        }
+        #yes {
+            background-color: rgb(14, 104, 14);
+            width:30%;
+        }
+        .no {
+            background-color: rgb(145, 23, 23);
+            width: 60%;
+        }
+        .center {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="inner">
+            <div class="overlay">
+
+                <p>This talk is about e-privacy. Please confirm you wish to continue.</p>
+
+                <div class="buttons">
+                    <button id="yes" class="yes center">Ok</button>
+                    <button class="no center">Not Ok</button>
+                </div>
+
+            </div>
+
+            <div class="original">
+                <h2>Ok, onwards...</h2>
+                <h4>Annoying wasn't it!</h4>
+            </div>
+        </div>
+    </div>
+    <script>
+            var button = document.getElementById("yes");
+            var overlay = document.getElementsByClassName("overlay");
+            button.addEventListener('click', function() {
+                // debugger;
+                overlay[0].style.bottom = "100%";
+            });
+        </script>
+    </body>
+</html>
