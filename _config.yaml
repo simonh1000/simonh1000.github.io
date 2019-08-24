@@ -1,4 +1,4 @@
-name: "Simon Hampton"
+title: "Simon Hampton"
 description: "Functional Fullstack Freelancer working in Elm, Elixir, Javascript and Haskell"
 
 url: "https://simonh1000.github.io"
@@ -14,4 +14,4 @@ defaults:
   layout: "default"
 
 sass:
-    sass_dir: _sass
+  sass_dir: _sass

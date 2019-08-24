@@ -2,3 +2,4 @@ _site
 _drafts
 unused
 .DS_Store
+.bundle
