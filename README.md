@@ -1,5 +1,10 @@
 # [simonh1000.github.io](http://simonh1000.github.io/)
 
+## Install on MacOS
+
+```
+bundle install
+```
 ## Install on Ubuntu 19.04
 
 ```
