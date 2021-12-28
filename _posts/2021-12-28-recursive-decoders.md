@@ -4,7 +4,7 @@ layout: post
 tags: Elm
 ---
 
-Here's a technique for using a single event handler for a portion of the DOM, which uses an event's "datatset" to keep track of what was clicked. We use this in production code to render clickable, user-declared html.
+Here's a technique for using a single event handler for a portion of the DOM, which uses an event's "dataset" to keep track of what was clicked. We use this in production code to render clickable, user-declared html.
 
 And here is an example of the finished result:
 
