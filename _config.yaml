@@ -10,6 +10,8 @@ github: [Repository metadata]
 safe: true
 lsi: false
 
+exclude: ["unused"]
+
 defaults:
   layout: "default"
 
