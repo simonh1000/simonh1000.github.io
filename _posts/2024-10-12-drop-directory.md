@@ -8,6 +8,8 @@ In 2018, Elm got support for [Files](https://github.com/elm/file) from HTML `dro
 
 But the Web platform has not stood still and you can now drop directories on to your browser window. Unfortunately support for this is still pending, but there is a work around.
 
+<iframe src="https://ellie-app.com/embed/svNNvWGgq95a1" style="width:100%; height:400px; border:0; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+
 ## Prior Art
 
 I have previously been able to write an Elm Decoder that could read a list of Files dropped onto a webpage. It's not pretty, but it works:
@@ -33,7 +35,7 @@ In order to process a dropped directory, you need to be able to call [`webkitGet
 
 In this trick we modify the Javascript event prototype. Here's the code:
 
-```js
+```javascript
 // 1) create a new field in a 'drop' event
 Object.defineProperty(Event.prototype, "fileTree", {
   configurable: false,
