@@ -102,6 +102,6 @@ decEntry =
         (Decode.field "file" File.decoder)
 ```
 
-Notice how we attach a `"drop"` event handler that accesses the `"fileTree"` field, but doesn't actually decode any data. That's enough to trigger the async Javacript code thus results in the subsequent `"fileTree"` event, which we do decode.
+Notice how we attach a `"drop"` event handler that accesses the `"fileTree"` field, but doesn't actually decode any data. That's enough to trigger the async Javacript code that results in the subsequent `"fileTree"` event, which we do decode.
 
 The full source code is at https://github.com/simonh1000/elm-drop-directory
